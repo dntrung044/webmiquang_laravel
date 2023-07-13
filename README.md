@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Project Name - README</title>
-  <style>
-    /* CSS styles for README.md */
-    /* ... */
-  </style>
+  <meta charset="UTF-8">  
 </head>
 <body>
   <h1>Project Name</h1>
