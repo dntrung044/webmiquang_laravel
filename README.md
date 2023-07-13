@@ -4,7 +4,7 @@
   <meta charset="UTF-8">  
 </head>
 <body>
-  <h1>Project Name</h1>
+  <h1>Các chức năng chính</h1>
 
   <h2>Người dùng</h2>
   <ul>
