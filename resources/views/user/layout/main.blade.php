@@ -12,10 +12,14 @@
     <div id="preloader" style="display: none;">
         <div data-loader="circle-side" style="display: none;"></div>
     </div>
+
     <!-- header -->
     @include('User.layout.header')
+
     <!-- main -->
     @yield('content')
+
+    <!-- user-bot -->
     @if (!empty(Auth::user()))
         <div id="user-bot">
             <div class="information">
@@ -57,9 +61,9 @@
                 </div>
 
                 {{-- <div class="type-area">
-				<a href="" class="typing">Đằng xuất</a>
+                    <a href="" class="typing">Đằng xuất</a>
 
-			</div> --}}
+                </div> --}}
                 <div style="align-items: center; margin-left: 6em; margin-top: 0.5em; margin-bottom: 1em">
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
@@ -83,8 +87,28 @@
     <!-- footer-->
     @include('User.layout.footer')
 
-    @include('User.layout.script')
 
+    {{-- popup_wrapper --}}
+    {{-- <div class="popup_wrapper" style="opacity: 1;">
+            <div class="popup_content" style="width: 1050px;">
+                <span class="popup_close"><i class="icon_close" style="color: var(--primary-color);"></i></span>
+                <div class="content">
+                    <div style="margin: 5px; text-align: center;">
+                        <h4 style="color: var(--main-color);">Video demo website</h4>
+                        <p style="color: var(--primary-color);">(Nếu như <b style="color: var(--main-color);">Video không có sẵn</b> vui lòng ấn vào <b style="color: var(--main-color);"> Xem trên YouTube</b> )</p>
+                    </div>
+                    <iframe width="1050" height="515"
+                        src="https://www.youtube.com/embed/Pq8wDdkO_zs"
+                        title="Video website demo" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+
+                </div>
+            </div>
+        </div> --}}
+    <!-- layout-->
+    @include('User.layout.script')
     @yield('script')
 </body>
 

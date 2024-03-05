@@ -28,15 +28,15 @@
 
 
     //loader
-    jQuery(window).on('beforeunload', function() {
-        "use strict";
-        // Show preloader
+    // jQuery(window).on('beforeunload', function() {
+    //     "use strict";
+    //     // Show preloader
 
-        if (jQuery.browser && !jQuery.browser.safari) jQuery('#page_preloader').css({ display: 'block', opacity: 0 }).animate({ opacity: 0.8 }, 300);
-    });
+    //     if (jQuery.browser && !jQuery.browser.safari) jQuery('#page_preloader').css({ display: 'block', opacity: 0 }).animate({ opacity: 0.8 }, 300);
+    // });
 
 
-    jQuery('#page_preloader').animate({ opacity: 0 }, 500, function() { jQuery(this).css({ display: 'none' }); });
+    // jQuery('#page_preloader').animate({ opacity: 0 }, 500, function() { jQuery(this).css({ display: 'none' }); });
 
     //for sticky
     $(window).scroll(function() {

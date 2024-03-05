@@ -35,22 +35,259 @@ class BlogController extends Controller
     // Trang chi tiết
     public function detail($id = '', $slug = '')
     {
-        $comment_number = 7;
-        $blog = $this->blogService->show($id); 
+        $blog = $this->blogService->show($id);
+        #Increase views
         $blog->view = $blog->view + 1;
         $blog->save();
 
         $blognew = $this->blogService->blognew();
-        $countComment = PostComment::where('post_id', $id)->where('active', 1)->count(); 
-        $list_comment = PostComment::where('post_id',$id)->orderby('id', 'DESC')->take($comment_number)->get(); 
+        $countComment = PostComment::where('post_id', $id)->where('active', 1)->count();
+        // $countReplyComment = PostCommentReply::where('post_id', $id)->where('active', 1)->count();
+        // $countTotalComments = $countComment + $countReplyComment;
+
+
         return view('user.blog.detail', [
             'title' => 'Chi tiết bài viết - Mì Quảng Bà Mua',
             'blog' => $blog,
             'blognew' => $blognew,
             'countTotalComments' => $countComment,
-            'comments' => $list_comment,
         ]);
-    }  
+    }
+
+    public function load_Comment(Request $request)
+    {
+        $data = $request->all();
+        $comment_number = 4;
+        if ($data['id'] > 0) {
+            $list_comment = PostComment::where('post_id', $data['post_id'])->where('id', '<', $data['id'])->orderby('id', 'DESC')->take($comment_number)->get();
+        } else {
+            $list_comment = PostComment::where('post_id', $data['post_id'])->orderby('id', 'DESC')->take($comment_number)->get();
+        }
+
+        $output_comment = '';
+        if (!$list_comment->isEmpty()) {
+            foreach ($list_comment as $key => $comment) {
+                $last_id = $comment->id;
+                $output_comment .=
+                    ' <li style="margin-top: 30px;">
+                    <div class="comment">
+                        <div class="comment-img">
+                            <img src="https://rvs-comment-module.vercel.app/Assets/User Avatar-3.png" alt="">
+                        </div>
+                        <div class="comment-content comment_right">
+                            <div class="comment-details">
+                                <h6 class="comment-name">' . $comment->user->name . '</h6>
+                                <span class="comment-log">' . $comment->created_at->locale('vi_VN')->diffForHumans() . '</span>
+
+                                <div class="media-option">
+                                    <a class="ripple-grow" href="javascript://" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        <svg class="ripple-icon" width="28" height="28" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 24 24">
+                                            <g fill="currentColor"></g>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="comment-desc">
+                                <p>' . $comment->content . '</p>
+                            </div>
+
+
+                            <details class="media-option">
+                                <summary role="button_dropdown">
+                                    <a class="ripple-grow button_dropdown" id="dropdown" data-id_dropdown="' . $comment->id . '">
+                                        <svg class="ripple-icon" width="28" height="28" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 24 24">
+                                            <g fill="currentColor">
+                                                <circle cx="5" cy="12" r="2"></circle>
+                                                <circle cx="12" cy="12" r="2"></circle>
+                                                <circle cx="19" cy="12" r="2"></circle>
+                                            </g>
+                                        </svg>
+                                    </a>
+                                </summary>
+                                <ul class="ul_dropdown">
+
+                                    <li class="li_dropdown">
+                                        <a href="#" class="a_dropdown">Chỉnh sửa</a>
+                                    </li>
+                                    <li class="li_dropdown">
+                                        <a href="#" class="a_dropdown">Xóa</a>
+                                    </li>
+                                    <li class="li_dropdown">
+                                        <a href="#" class="a_dropdown">Báo cáo</a>
+                                    </li>
+                                    <li class="li_dropdown">
+                                        <a href="#" class="a_dropdown">Ẩn</a>
+                                    </li>
+                                </ul>
+                            </details>
+
+                        </div>
+                    </div>
+                    <div class="media-comment-footer">
+                    <form method="POST" role="form">
+                        ' . csrf_field() . '
+                        <button type="button" data-id="' . $comment->id . '"
+                        class="media-footer-option like" id="like-comment"
+                            style="text-decoration: none;">
+                            <span class="icon-bubble-content">
+                                <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z"></path>
+                                </svg>
+                            </span>
+                            <span class="media-footer-option-text">' . $comment->number_like . '</span>
+                        </button>
+                    </form>
+                    <button class="media-footer-option repply btn-show-reply-form" id="load-more-reply"
+                        href="#" data-id="' . $comment->id . '" style="text-decoration: none;" onclick="show_reply()">
+                        <span class="icon-bubble-content">
+                            <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M14.046 2.242l-4.148-.01h-.002c-4.374 0-7.8 3.427-7.8 7.802 0 4.098 3.186 7.206 7.465 7.37v3.828c0 .108.044.286.12.403.142.225.384.347.632.347.138 0 .277-.038.402-.118.264-.168 6.473-4.14 8.088-5.506 1.902-1.61 3.04-3.97 3.043-6.312v-.017c-.006-4.367-3.43-7.787-7.8-7.788zm3.787 12.972c-1.134.96-4.862 3.405-6.772 4.643V16.67c0-.414-.335-.75-.75-.75h-.396c-3.66 0-6.318-2.476-6.318-5.886 0-3.534 2.768-6.302 6.3-6.302l4.147.01h.002c3.532 0 6.3 2.766 6.302 6.296-.003 1.91-.942 3.844-2.514 5.176z"></path>
+                            </svg>
+                        </span>
+                        <span class="media-footer-option-text"> ' . $comment->replies->count() . ' </span> &nbsp;Phản hồi
+                    </button>
+                    </div>
+
+
+                    <ul class="replied-to" id="show-list-reply" style="display: none;">
+                        <div id="show-data-replies"></div>
+                        <li>
+                            <div style="display: none; margin-left: 0.4em; margin-top: 20px;"
+                                class="formReply form-reply-' . $comment->id . '">
+                                <div class="avatar">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY8hbZTR2VET1LTE9Sj7EwoE8ZDHV-HQxpTAiYFb41gqz1K9pJJ4N9dL6rVF8PjBwOqU0&usqp=CAU" alt="">
+                                </div>
+                                <div class="comment_right clearfix" style="width: 85%;">
+                                    <form method="POST" role="form">
+                                    ' . csrf_field() . '
+                                        <div class="form-group">
+                                            <textarea class="form-control content-reply-' . $comment->id . '" rows="3"  placeholder="Nội dung trả lời..."></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="button" data-id="' . $comment->id . '" class="btn_1 mb-3 btn-reply" id="btn-reply">Trả lời</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>';
+            }
+
+            $output_comment .= '
+            <div id ="load_more">
+                <button type="button" name="load_more_button" class="btn btn-primary form-control" data-id="' . $last_id . '"
+                id="load_more_button">xem thêm
+                </button>
+            </div>';
+        } else {
+            $output_comment .= '
+            <div id ="load_more">
+                <button type="button" name="load_more_button" class="btn btn-default form-control">
+                    không còn bình luận nào
+                </button>
+            </div>
+            ';
+        }
+
+        echo $output_comment;
+    }
+
+    public function load_Reply(Request $request)
+    {
+        $id = $request->comment_id;
+        $reply_number = 4;
+        if ($id > 0) {
+            $list_reply = PostCommentReply::where('comment_id', $id)->where('id', '<', $id)->orderby('id', 'DESC')->take($reply_number)->get();
+        } else {
+            $list_reply = PostCommentReply::where('comment_id', $id)->orderby('id', 'DESC')->take($reply_number)->get();
+        }
+
+        $output_reply = '';
+        if (!$list_reply->isEmpty()) {
+            foreach ($list_reply as $reply) {
+                $last_id = $reply->id;
+                $output_reply .=
+                    '<li>
+                    <div class="comment" style="margin-top: 18px;">
+                        <div class="comment-img">
+                            <img src="https://rvs-comment-module.vercel.app/Assets/User Avatar-2.png" alt="">
+                        </div>
+                        <div class="comment-content comment_right" style="width: 85%;">
+                            <div class="comment-details">
+                                <h6 class="comment-name">' . $reply->user->name . '</h6>
+                                <span class="comment-log">' . $reply->created_at->locale('vi_VN')->diffForHumans() . '</span>
+                            </div>
+                            <div class="comment-desc">
+                                <p>' . $reply->content . '</p>
+                            </div>
+                            <div class="media-option">
+                                <a class="ripple-grow" href="javascript://" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <svg class="ripple-icon" width="28" height="28"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                        viewBox="0 0 24 24">
+                                        <g fill="currentColor">
+                                            <circle cx="5" cy="12" r="2"></circle>
+                                            <circle cx="12" cy="12" r="2"></circle>
+                                            <circle cx="19" cy="12" r="2"></circle>
+                                        </g>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media-comment-footer">
+                        <form method="POST" role="form">
+                            ' . csrf_field() . '
+                            <button type="button" data-id="' . $reply->id . '" class="media-footer-option like" id="like-reply" style="text-decoration: none;">
+                                <span class="icon-bubble-content">
+                                    <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                        viewBox="0 0 24 24">
+                                        <path fill="currentColor"
+                                            d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z">
+                                        </path>
+                                    </svg>
+                                </span>
+                                <span class="media-footer-option-text">' . $reply->number_like . '</span>
+                            </button>
+                        </form>
+                        <a class="media-footer-option repply btn-show-reply-form" href="#" data-id="' . $reply->comment_id . '"
+                        style="text-decoration: none;">
+                        <span class="icon-bubble-content">
+                            <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M14.046 2.242l-4.148-.01h-.002c-4.374 0-7.8 3.427-7.8 7.802 0 4.098 3.186 7.206 7.465 7.37v3.828c0 .108.044.286.12.403.142.225.384.347.632.347.138 0 .277-.038.402-.118.264-.168 6.473-4.14 8.088-5.506 1.902-1.61 3.04-3.97 3.043-6.312v-.017c-.006-4.367-3.43-7.787-7.8-7.788zm3.787 12.972c-1.134.96-4.862 3.405-6.772 4.643V16.67c0-.414-.335-.75-.75-.75h-.396c-3.66 0-6.318-2.476-6.318-5.886 0-3.534 2.768-6.302 6.3-6.302l4.147.01h.002c3.532 0 6.3 2.766 6.302 6.296-.003 1.91-.942 3.844-2.514 5.176z"></path>
+                            </svg>
+                        </span>
+                    </a>
+                    </div>
+                </li>';
+            }
+
+
+            $output_reply .= '
+            <div id ="load_more">
+                <button style="width: 12em;margin-left: 5.8em;" type="button" name="load_more_button" class="btn btn-primary form-control" data-id="' . $last_id . '"
+                id="load_more_button">Hiện thêm phản hồi
+                </button>
+            </div>';
+        } else {
+            $output_reply .= '
+            <div id ="load_more">
+                <button type="button" name="load_more_button" class="btn btn-default form-control">
+                    không còn phản hồi nào
+                </button>
+            </div>
+            ';
+        }
+
+        echo $output_reply;
+    }
+
 
     public function showComment()
     {
@@ -95,175 +332,123 @@ class BlogController extends Controller
         $blogs  = Post::where('active', 1)
             ->where('name', 'LIKE', '%' . $search . '%')
             // ->OrWhere('description', 'LIKE', '%' .$search. '%')
-            ->paginate(6); 
+            ->paginate(6);
+
         $blognew = $this->blogService->blognew();
         $blogCategories = PostCategory::where('active', 1)->get();
         $title = 'Tin tức - Mì Quảng Bà Mua';
 
         return view('user.blog.list', compact('blogs', 'title', 'blognew', 'blogCategories'));
-    } 
-
-    public function latest_comment(Request $request)
-    { 
-        $post_id = $request->blog_id;  
-        $blog = $this->blogService->show( $post_id ); 
-        $comments = PostComment::where('post_id', $post_id)->orderBy('id', 'DESC')->get();
-        $comment_compoment = view('user.blog.compoments.comment_compoment', compact('comments', 'blog'))->render();
-        
-        return response()->json([
-            'success' => 'Bình luận mới nhất!', 
-            'comment_compoment' => $comment_compoment,
-            'code' => 200
-        ]);   
     }
 
-    public function popular_comment(Request $request)
-    { 
-        $post_id = $request->blog_id;  
-        $blog = $this->blogService->show( $post_id );  
-        $comments = PostComment::where('post_id', $post_id)->orderBy('number_like', 'DESC')->get();
-        $comment_compoment = view('user.blog.compoments.comment_compoment', compact('comments', 'blog'))->render();
-        
-        return response()->json([
-            'success' => 'Bình luận nổi bậc nhất!', 
-            'comment_compoment' => $comment_compoment,
-            'code' => 200
-        ]);   
-    }
-    
-    public function load_comment(Request $request)
-    { 
-        $post_id = $request->blog_id;
-        $last_id = $request->last_id;
-        $currentCount = $request->currentCount; 
-              
-        $blog = $this->blogService->show( $post_id ); 
-        $comments  = PostComment::where('post_id',$post_id)->where('id', '<', $last_id)->orderby('id', 'DESC')->limit($currentCount)->get();
-
-        $comment_compoment = view('user.blog.compoments.comment_compoment', compact('comments', 'blog'))->render();
-        
-        return response()->json([   
-            'success' => 'Xem thêm bình luận!',
-            'comment_compoment' => $comment_compoment,  
-            'comments' => $comments,
-            'code' => 200
-        ]);   
-    }
-
-    public function load_reply(Request $request)
-    { 
-        $comment_id = $request->comment_id;
-        $last_id = $request->last_id;
-        $currentCount = $request->currentCount;  
-   
-        $comments  = PostComment::where('id', $comment_id)
-                    ->where('active', 1) 
-                    ->firstOrFail(); 
-        
-        // PostComment::where('comment_id',$comment_id)
-        //             ->where('id', '<', $last_id)
-        //             ->orderby('id', 'DESC')
-        //             ->limit($currentCount)->get(); 
-        foreach ($comments as $key => $comment) {
-            $replies = $comment->replies->where('id', '<', $last_id)
-            ->orderby('id', 'DESC')
-            ->limit($currentCount)->get(); 
-        }
-        $reply_compoment = view('user.blog.compoments.reply_compoment', compact('replies'))->render();
-        
-        return response()->json([   
-            'success' => 'Xem thêm bình luận!',
-            'reply_compoment' => $reply_compoment,  
-            'replies' => $replies,
-            'code' => 200
-        ]);   
-    }
-
-    public function add_Comment(Request $request)
+    //Bình luận
+    public function postComment($post_id, BlogRequest $request)
     {
         $validation = Validator::make($request->all(), [
             'content' => 'required',
         ], [
             'content.required' => 'Vui lòng nhập nội dung bình luận'
-        ]); 
-        if ($validation->fails()) { 
+        ]);
+
+
+        if ($validation->fails()) {
+            // foreach($validation->messages()->getMessages() as $field_name => $messages)
+            // {
+            //     $error_array[] = $messages;
+            // }
             return response()->json(['error' => $validation->errors()->first()]);
-        } 
-        else {
-            $comment = new PostComment();  
-            $comment->user_id =  Auth::id();
-            $comment->post_id = $request->post_id;
-            $comment->content = $request->content;
-            $comment->reply_id =  $request->reply_id ? $request->reply_id : 0;
-            $comment->active = 1;
-            $comment->save(); 
+        } else {
+            $user_id = Auth::id();
+            $data = [
+                'user_id' => $user_id,
+                'post_id' => $post_id,
+                'content' => $request->content,
+                'active' => 1,
+                // 'reply_id' => $request->reply_id ? $request->reply_id : 0,
+            ];
+
+            $comment = PostComment::create($data);
+            // if($comment)  {
+            //     $comments = PostComment::where([
+            //         ['post_id', $post_id],
+            //         ['reply_id', 0],
+            //     ])->orderBy('id', 'DESC')->get();
+
+            //     return view('user.blog.listcomment',[
+            //         'comments' => $comments,
+            //     ]);
+            return response()->json(['data' => $comment]);
+            // }
         }
 
-        $blog = $this->blogService->show( $request->post_id ); 
-        $comments = $blog->comments; 
-        $comment_compoment = view('user.blog.compoments.comment_compoment', compact('comments', 'blog'))->render();
+        return response()->json(['error' => $validation->errors()->first()]);
+    }
 
-        return response()->json([
-            'success' => 'Bình luận bài viết thành công!', 
-            'comment_compoment' => $comment_compoment, 
-            'code' => 200
-        ]); 
-    } 
-
-    public function add_Reply(Request $request)
+    public function postReply(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'content' => 'required',
+            'content_reply' => 'required',
         ], [
-            'content.required' => 'Vui lòng nhập nội dung trả lời!'
+            'content_reply.required' => 'Vui lòng nhập nội dung trả lời'
         ]);
-        if ($validation->fails()) { 
-            return response()->json(['error' => $validation->errors()->first()]);
-        } 
-        else {
-            $reply = new PostCommentReply();  
-            $reply->user_id =  Auth::id();
-            $reply->comment_id = $request->id;
-            $reply->content = $request->content; 
-            $reply->active = 1; 
-            $reply->save();    
-        } 
-       
-        $blog = $this->blogService->show( $request->post_id ); 
-        $comments = $blog->comments;  
-        $comment = $this->blogService->show_comment( $request->id ); 
-        $replies = $comment->replies; 
-        $comment_compoment = view('user.blog.compoments.comment_compoment', compact('comments', 'blog','replies'))->render();
 
-        return response()->json([
-            'success' => 'Trả lời bình luận thành công!', 
-            'comment_compoment' => $comment_compoment,
-            'code' => 200]); 
-    } 
+
+        if ($validation->fails()) {
+            // foreach($validation->messages()->getMessages() as $field_name => $messages)
+            // {
+            //     $error_array[] = $messages;
+            // }
+            return response()->json(['error' => $validation->errors()->first()]);
+        } else {
+            $data = [
+                'user_id' => Auth::id(),
+                'comment_id' => $request->comment_id,
+                'content' => $request->content_reply,
+                'active' => 1,
+                // 'reply_id' => $request->reply_id ? $request->reply_id : 0,
+            ];
+
+            $reply = PostCommentReply::create($data);
+            return response()->json(['data' => $reply]);
+        }
+
+        return response()->json(['error' => $validation->errors()->first()]);
+    }
 
     public function postCommentLike(Request $request)
     {
-        $id = $request->id_comment;  
-        $user = Auth::user();
-        $comment = PostComment::find($id);
+        $id = $request->comment_like_id;
+        $validation = Validator::make($request->all(), [
+            'comment_like_id' => 'required',
+        ], [
+            'comment_like_id.required' => "ID trong"
+        ]);
 
-        $likeComment = $user->likedComments()->where('comment_id', $id)->count();
-        if ($likeComment == 0) {
-            $user->likedComments()->attach($id);
-            $comment->number_like +=  1;
-            $comment->save(); 
+        if ($validation->fails()) {
+            // foreach($validation->messages()->getMessages() as $field_name => $messages)
+            // {
+            //     $error_array[] = $messages;
+            // }
+            return response()->json(['error' => $validation->errors()->first()]);
         } else {
-            $user->likedComments()->detach($id);
-            $comment->number_like -=  1;
-            $comment->save();
-        } 
 
-        return response()->json([
-            'success' => 'Cập nhập thích bình luận thành công!',  
-            'commentLiked' => $likeComment,
-            'likeCount' => $comment->number_like,
-            'code' => 200
-        ]); 
+            $user = Auth::user();
+            $comment = PostComment::find($id);
+            $likeComment = $user->likedComments()->where('comment_id', $id)->count();
+            if ($likeComment == 0) {
+                $user->likedComments()->attach($id);
+                $comment->number_like +=  1;
+                $comment->save();
+            } else {
+                $user->likedComments()->detach($id);
+                $comment->number_like -=  1;
+                $comment->save();
+            }
+
+            return response()->json(['data' => $user]);
+        }
+
+        return response()->json(['error' => $validation->errors()->first()]);
     }
 
     public function postReplyLike(Request $request)

@@ -1,7 +1,6 @@
 <head>
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Xác nhận đăng ký</title>
     <style media="all" type="text/css">
         @media only screen and (max-width: 480px) {
             table[class=body] h1 {
@@ -62,8 +61,7 @@
                 font-size: 11px !important;
             }
         }
-    </style>
-    <style type="text/css">
+
         @font-face {
             font-family: 'Open Sans';
             font-style: normal;
@@ -116,10 +114,10 @@
                                         <td align="left" class="align-left"
                                             style="box-sizing: border-box; padding: 0; font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 16px; vertical-align: top; text-align: left;"
                                             valign="top"><span class="sg-image"
-                                                data-imagelibrary="%7B%22width%22%3A123%2C%22height%22%3A%2222%22%2C%22alt_text%22%3A%22SendGrid%22%2C%22alignment%22%3A%22%22%2C%22border%22%3A0%2C%22src%22%3A%22https%3A//uiux.s3.amazonaws.com/2016-logos/email-logo%25402x.png%22%2C%22link%22%3A%22https%3A//sendgrid.com%22%2C%22classes%22%3A%7B%22sg-image%22%3A1%7D%7D"><a
-                                                    href="https://sendgrid.com?utm_campaign=website&amp;utm_source=sendgrid.com&amp;utm_medium=email"
+                                                data-imagelibrary="{{ asset('teamplate/img/logo1.png') }}"><a
+                                                    href=""
                                                     style="box-sizing: border-box; color: #348eda; font-weight: 400; text-decoration: none;"
-                                                    target="_blank"><img alt="SendGrid" height="22"
+                                                    target="_blank"><img alt="logo" height="22"
                                                         src="https://uiux.s3.amazonaws.com/2016-logos/email-logo%402x.png"
                                                         style="max-width: 100%; border-style: none; width: 123px; height: 22px;"
                                                         width="123"></a></span></td>
@@ -145,14 +143,18 @@
                                                     <tr>
                                                         <td style="box-sizing: border-box; padding: 0; font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 16px; vertical-align: top;"
                                                             valign="top">
-                                                            <p style="margin: 0; margin-bottom: 30px; font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: 300; line-height: 1.5; font-size: 24px; color: #294661 !important;">
-                                                                Xin chào {{ $user->name}}!
+                                                            <p
+                                                                style="margin: 0; margin-bottom: 30px; font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: 300; line-height: 1.5; font-size: 24px; color: #294661 !important;">
+                                                                Xin chào {{ $user->name }}!
                                                             </p>
-                                                            <h2 style="margin: 0; margin-bottom: 30px; color: #294661; font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 300;">
-                                                                Cảm ơn vì đăng ký với chúng tôi. Vui lòng xác nhận địa chỉ email của bạn đã đăng ký tài khoản từ chúng tôi.
+                                                            <h2
+                                                                style="margin: 0; margin-bottom: 30px; color: #294661; font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 300;">
+                                                                Vui lòng xác nhận địa chỉ email của bạn đã đăng ký tài khoản từ chúng tôi. Để có thể kích hoạt cá chức năng bên nhà hàng.
                                                             </h2>
-                                                            <h2 style="margin: 0; margin-bottom: 30px; font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: 300; line-height: 1.5; font-size: 24px; color: #294661 !important;">
-                                                              Để kích hoạt tài khoản của bạn, vui lòng nhấp vào nút bấm bên dưới!
+                                                            <h2
+                                                                style="margin: 0; margin-bottom: 30px; font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: 300; line-height: 1.5; font-size: 24px; color: #294661 !important;">
+                                                                Để kích hoạt tài khoản của bạn, vui lòng nhấp vào nút
+                                                                bấm bên dưới!
                                                             </h2>
                                                         </td>
                                                     </tr>
@@ -172,10 +174,14 @@
                                                                                 style="box-sizing: border-box; border-spacing: 0; mso-table-rspace: 0pt; mso-table-lspace: 0pt; width: auto; border-collapse: separate !important;">
                                                                                 <tbody>
                                                                                     <tr>
-                                                                                        <td align="center" bgcolor="#348eda" style="box-sizing: border-box; padding: 0; font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 16px; vertical-align: top; background-color: #348eda; border-radius: 2px; text-align: center;" valign="top">
-                                                                                            <a href="{{ route('register.verify', ['id' => $user->id, 'token' => $user->remember_token ]) }}"
-                                                                                                style="box-sizing: border-box; border-color: #348eda; font-weight: 400; text-decoration: none; display: inline-block; margin: 0; color: #ffffff; background-color: #348eda; border: solid 1px #348eda; border-radius: 2px; cursor: pointer; font-size: 14px; padding: 12px 45px;" target="_blank">
-                                                                                                Xác nhận địa chỉ email
+                                                                                        <td align="center" bgcolor="#348eda"
+                                                                                            style="box-sizing: border-box; padding: 0; font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 16px; vertical-align: top; background-color: #348eda; border-radius: 2px; text-align: center;"
+                                                                                            valign="top">
+{{------------------------------------------------------------------------------------------ Xác nhận --}}
+                                                                                            <a href="{{ route('register.verify', ['id' => $user->id, 'token' => $user->remember_token]) }}"
+                                                                                                style="box-sizing: border-box; border-color: #348eda; font-weight: 400; text-decoration: none; display: inline-block; margin: 0; color: #ffffff; background-color: #348eda; border: solid 1px #348eda; border-radius: 2px; cursor: pointer; font-size: 14px; padding: 12px 45px;"
+                                                                                                target="_blank">
+                                                                                                Xác nhận
                                                                                             </a>
                                                                                         </td>
                                                                                     </tr>
@@ -204,46 +210,45 @@
                                         <td align="center" class="align-center"
                                             style="box-sizing: border-box; font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; vertical-align: top; font-size: 12px; text-align: center; padding: 20px 0;"
                                             valign="top">
-                                            <span class="sg-image" data-imagelibrary="%7B%22width%22%3A89%2C%22height%22%3A%2216%22%2C%22alt_text%22%3A%22SendGrid%22%2C%22alignment%22%3A%22center%22%2C%22border%22%3A0%2C%22src%22%3A%22https%3A//uiux.s3.amazonaws.com/2016-logos/email-logo%25402x.png%22%2C%22link%22%3A%22https%3A//sendgrid.com%22%2C%22classes%22%3A%7B%22sg-image%22%3A1%7D%7D"
+                                            <span class="sg-image"
+                                                data-imagelibrary="{{ asset('teamplate/img/logo1.png') }}"
                                                 style="float: none; display: block; text-align: center;">
-                                                <a href="https://id.com?utm_campaign=website&amp;utm_source=id.com&amp;utm_medium=email" style="box-sizing: border-box; color: #348eda; font-weight: 400; text-decoration: none; font-size: 12px;" target="_blank">
-                                                    <img alt="SendGrid" height="16" src="https://uiux.s3.amazonaws.com/2016-logos/email-logo%402x.png"
-                                                        style="max-width: 100%; border-style: none; font-size: 12px; width: 89px; height: 16px;" width="89">
+                                                <a href="#"
+                                                    style="box-sizing: border-box; color: #348eda; font-weight: 400; text-decoration: none; font-size: 12px;"
+                                                    target="_blank">
+                                                    <img alt="logo" height="16"
+                                                        src="{{ asset('teamplate/img/logo1.png') }}"
+                                                        style="max-width: 100%; border-style: none; font-size: 12px; width: 89px; height: 16px;"
+                                                        width="89">
                                                 </a>
                                             </span>
 
-                                            <p class="tagline" style="color: #294661; font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 400; margin-bottom: 5px; margin: 10px 0 20px;">
-                                            from mixi with love
+                                            <p class="tagline"
+                                                style="color: #294661; font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 400; margin-bottom: 5px; margin: 10px 0 20px;">
+                                                from Trung with love
+                                            </p>
+
+                                            <p
+                                                style="margin: 0; color: #294661; font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: 300; font-size: 12px; margin-bottom: 5px;">
+                                                © Địa chỉ Ngũ Hành Sơn, Đà Nẵng
                                             </p>
 
                                             <p style="margin: 0; color: #294661; font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: 300; font-size: 12px; margin-bottom: 5px;">
-                                                © Địa chỉ
-                                            </p>
-
-                                            <p style="margin: 0; color: #294661; font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: 300; font-size: 12px; margin-bottom: 5px;">
-                                                <a href="https://id.com/blog/?utm_campaign=website&amp;utm_medium=email&amp;utm_source=sendgrid.com"
+                                                <a href="#"
                                                     style="box-sizing: border-box; color: #348eda; font-weight: 400; text-decoration: none; font-size: 12px; padding: 0 5px;"
                                                     target="_blank">Blog
                                                 </a>
-                                                <a
-                                                    href="https://github.com/id?utm_campaign=website&amp;utm_source=sendgrid.com&amp;utm_medium=email"
+                                                <a href="#"
                                                     style="box-sizing: border-box; color: #348eda; font-weight: 400; text-decoration: none; font-size: 12px; padding: 0 5px;"
                                                     target="_blank">GitHub
                                                 </a>
-                                                <a
-                                                    href="https://twitter.com/id?utm_campaign=website&amp;utm_source=sendgrid.com&amp;utm_medium=email"
+                                                <a href="#"
                                                     style="box-sizing: border-box; color: #348eda; font-weight: 400; text-decoration: none; font-size: 12px; padding: 0 5px;"
                                                     target="_blank">Twitter
                                                 </a>
-                                                <a
-                                                    href="https://www.facebook.com/id?utm_campaign=website&amp;utm_source=sendgrid.com&amp;utm_medium=email"
+                                                <a href="#"
                                                     style="box-sizing: border-box; color: #348eda; font-weight: 400; text-decoration: none; font-size: 12px; padding: 0 5px;"
                                                     target="_blank">Facebook
-                                                </a>
-                                                <a
-                                                    href="https://www.linkedin.com/id?utm_campaign=website&amp;utm_source=sendgrid.com&amp;utm_medium=email"
-                                                    style="box-sizing: border-box; color: #348eda; font-weight: 400; text-decoration: none; font-size: 12px; padding: 0 5px;"
-                                                    target="_blank">LinkedIn
                                                 </a>
                                             </p>
                                         </td>

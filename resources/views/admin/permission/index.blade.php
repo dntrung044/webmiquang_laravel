@@ -9,12 +9,10 @@
                         class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                         <h3 class="fw-bold mb-0"> {{ $title }}</h3>
                         <div class="col-auto d-flex w-sm-100">
-                            <button type="button" class="btn btn-dark btn-set-task w-sm-100" data-bs-toggle="modal"
-                                data-bs-target="#add_modal">
+                            <button type="button" class="btn btn-dark btn-set-task w-sm-100" data-bs-toggle="modal" data-bs-target="#add_modal">
                                 <i class="icofont-plus-circle me-2 fs-6"></i> Thêm quyền mới
                             </button>
-                            <button type="button" class="btn btn-outline-secondary ml-2" data-bs-toggle="modal"
-                                data-bs-target="#add_function_modal">
+                            <button type="button" class="btn btn-outline-secondary ml-2" data-bs-toggle="modal" data-bs-target="#add_function_modal">
                                 <i class="icofont-plus-circle me-2 fs-6"></i>Thêm danh mục
                             </button>
                         </div>
@@ -25,7 +23,6 @@
                 <div class="col-sm-12">
                     <div class="card mb-3">
                         <div id="success_message"></div>
-
                         <div class="card-body">
                             <table id="myProjectTable" class="table table-hover align-middle mb-0" style="width: 100%;">
                                 <thead>
@@ -38,27 +35,24 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($permissions as $key => $permissionItem)
-                                        <tr>
-                                            <td class="fw-bold text-secondary">
-                                                <label class="fancy-checkbox">
-                                                    <input type="checkbox" class="check" value="{{ $permissionItem->id }}">
-                                                    <span>{{ $permissionItem->id }}</span>
-                                                </label>
-                                            </td>
-                                            <td>{{ $permissionItem->name }} ( {{ $permissionItem->description }} )</td>
-                                            <td>{{ $permissionItem->key_code }}</td>
-                                            <td>
-                                                <button type="button" value="{{ $permissionItem->id }}"
-                                                    class="btn btn-outline-secondary btn_edit">
-                                                    <i class="icofont-edit text-success"></i>Sửa
-                                                </button>
+                                    <tr>
+                                        <td class="fw-bold text-secondary">
+                                            <label class="fancy-checkbox">
+                                                <span>{{  $permissionItem->id }}</span>
+                                            </label>
+                                        </td>
+                                        <td>{{ $permissionItem->name }} ( {{ $permissionItem->display_name  }} )</td>
+                                        <td>{{  $permissionItem->key_code }}</td>
+                                        <td>
+                                            <button type="button" value="{{  $permissionItem->id }}" class="btn btn-outline-secondary btn_edit">
+                                                <i class="icofont-edit text-success"></i>Sửa
+                                            </button>
 
-                                                <button type="button" value="{{ $permissionItem->id }}"
-                                                    class="btn btn-outline-secondary btn_delete">
-                                                    <i class="icofont-ui-delete text-danger"></i>Xóa
-                                                </button>
-                                            </td>
-                                        </tr>
+                                            <button type="button" value="{{  $permissionItem->id }}" class="btn btn-outline-secondary btn_delete">
+                                                <i class="icofont-ui-delete text-danger"></i>Xóa
+                                            </button>
+                                        </td>
+                                    </tr>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -93,23 +87,22 @@
                         $.each(response.ListPermissionCats, function(key, item) {
                             $('.ListPermissionCat').append(
                                 '<tr>\
-                                        <td  class="fw-bold text-secondary">\
-                                            <label class="fancy-checkbox">\
-                                                <span>#' + item.id + '</span>\
-                                            </label>\
-                                        </td>\
-                                        <td>' + item.name + '</td>\
-                                        <td>' + item.parent_id + '</td>\
-                                        <td>\
-                                            <button type="button" value="' + item.id + '" class="btn btn-outline-secondary btn_edit"><i class="icofont-edit text-success"></i></button>\
-                                            <button type="button" value="' + item.id + '" class="btn btn-outline-secondary btn_delete"><i class="icofont-ui-delete text-danger"></i></button>\
-                                        </td>\
-                                    \</tr>');
+                                    <td  class="fw-bold text-secondary">\
+                                        <label class="fancy-checkbox">\
+                                            <span>#' + item.id + '</span>\
+                                        </label>\
+                                    </td>\
+                                    <td>' + item.name + '</td>\
+                                    <td>' + item.parent_id + '</td>\
+                                    <td>\
+                                        <button type="button" value="' + item.id + '" class="btn btn-outline-secondary btn_edit"><i class="icofont-edit text-success"></i></button>\
+                                        <button type="button" value="' + item.id + '" class="btn btn-outline-secondary btn_delete"><i class="icofont-ui-delete text-danger"></i></button>\
+                                    </td>\
+                                \</tr>');
                         });
                     }
                 });
             }
-
             function showSelectFunction() {
                 $.ajax({
                     type: "GET",
@@ -119,25 +112,24 @@
                         // console.log(response.datalist);
                         $('.selectFunction').html("");
                         $('.selectFunction').append(
-                            '<option selected="" value="0">Danh mục lớn</option>');
+                           '<option selected="" value="0">Danh mục lớn</option>');
                         $.each(response.functions, function(key, item) {
 
                             $('.selectFunction').append(
-                                ' <option  value="' + item.name + '">--Chức năng của ' +
-                                item.name + '--</option>');
+                           ' <option  value="' + item.name + '">--Chức năng của ' + item.name + '--</option>' );
                         });
                     }
                 });
             }
 
-            $(document).on('click', '.add_data_function', function(e) {
+            $(document).on('click', '#add_data_function', function(e) {
                 e.preventDefault();
                 $(this).text('Đang tạo danh mục..');
 
                 var data = {
-                    'name': $('.name_function').val(),
-                    'description': $('.description_function').val(),
-                    'parent_id': $('.parent_id_function').val(),
+                    'name' : $('.name_function').val(),
+                    'description' : $('.description_function').val(),
+                    'parent_id' : $('.parent_id_function').val(),
 
                 }
 
@@ -153,15 +145,14 @@
                             $('#save_msgList_function').html("");
                             $('#save_msgList_function').addClass('alert alert-danger');
                             $.each(response.errors, function(key, err_value) {
-                                $('#save_msgList_function').append('<li>' + err_value +
-                                    '</li>');
+                                $('#save_msgList_function').append('<li>' + err_value + '</li>');
                             });
-                            $('.add_data_function').text('Tạo danh mục');
+                            $('#add_data_function').text('Tạo danh mục');
                         } else {
                             $('#save_msgList_function').html("");
                             $('#save_msgList_function').addClass('alert alert-success');
                             $('#save_msgList_function').text(response.message);
-                            $('.add_data_function').text('Tạo danh mục');
+                            $('#add_data_function').text('Tạo danh mục');
                             $('.name_function').text('');
 
                             ShowListPermissionCat();
@@ -172,30 +163,27 @@
 
             });
 
-            $('.chilrent-all').click(function() {
-                $('.functions').prop('checked', this.checked);
+            $('#function-all').click(function () {
+                $('.checkbox_functions').prop('checked', this.checked);
             });
 
-            $(document).on('click', '.add_data', function(e) {
+            $(document).on('click', '#add_data', function(e) {
                 e.preventDefault();
-
                 $(this).text('Đang tạo..');
 
-                // var checkboxValues = [];
-                // $('.functions:checked').map(function() {
-                //             checkboxValues.push($(this).val());
-                // });
-                var checkboxValues = $.map($('.functions:checked'), function(c) {
-                    return c.value;
+                var name = $('.name').val();
+                var description = $('.description').val();
+                var functions = [];
+
+                $('input.checkbox_functions:checked').each(function() {
+                    functions.push($(this).val());
                 });
 
                 var data = {
-                    'name': $('.name').val(),
-                    'description': $('.description').val(),
-                    'functions': checkboxValues,
-                }
-
-                // console.log(data);
+                    'name': name,
+                    'description': description,
+                    'functions': functions,
+                };
 
                 $.ajax({
                     type: "POST",
@@ -209,13 +197,13 @@
                             $.each(response.errors, function(key, err_value) {
                                 $('#save_msgList').append('<li>' + err_value + '</li>');
                             });
-                            $('.add_data').text('Tạo');
+                            $('#add_data').text('Tạo');
                         } else {
                             $('#add_permission').html("");
                             $('#success_message').addClass('alert alert-success');
                             $('#success_message').text(response.message);
                             $('#add_modal').find('input').val('');
-                            $('.add_data').text('Tạo');
+                            $('#add_data').text('Tạo');
                             $('#add_modal').modal('hide');
                             location.reload();
                         }
@@ -242,8 +230,7 @@
                         } else {
                             let data = response.data;
                             // $('.edit_name[value="' + data.name+ '"]').prop('selected', true);
-                            $('.edit_display_name[value="' + data.display_name + '"]').prop(
-                                'checked', true);
+                            $('.edit_display_name[value="' + data.display_name+ '"]').prop('checked', true);
                             $('#edit_key_code').val(data.key_code);
                             $('#edit_description').val(data.description);
                             $('#edit_id').val(id);
@@ -336,27 +323,25 @@
                 });
             });
 
-            $('.choose').on('change', function() {
-                var action = $(this).attr('name');
-                var name_parent = $(this).val();
-                var result = '';
-
-                if (action == 'name') {
-                    result = 'parent_id'
-                }
-
-                $.ajax({
-                    url: '{{ route('permission.load_function') }}',
-                    method: 'POST',
-                    data: {
-                        action: action,
-                        parent_id: name_parent,
-                    },
-                    success: function(data) {
-                        $('#' + result).html(data);
-                    }
-                });
-            });
+            // $('.choose').on('change', function() {
+            //         var action = $(this).attr('name');
+            //         var name_parent = $(this).val();
+            //         var result = '';
+            //         if (action == 'name') {
+            //             result = 'parent_id'
+            //         }
+            //     $.ajax({
+            //         url:  '{{ route('permission.load_function') }}',
+            //         method: 'POST',
+            //         data: {
+            //             action: action,
+            //             parent_id: name_parent,
+            //         },
+            //         success: function(data) {
+            //             $('#' + result).html(data);
+            //         }
+            //     });
+            // });
 
         });
     </script>

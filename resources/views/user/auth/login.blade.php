@@ -61,7 +61,6 @@
                         <h3 class="text-2xl font-semibold text-gray-900">Đăng nhập tài khoản</h3>
                         <p class="my-2 font-semibold text-gray-800">Để được trải nghiệm những chức năng của người dùng!</p>
 
-
                         <form class="flex flex-col space-y-5" action="/dang-nhap" method="POST">
                             @csrf
                             <div class="flex flex-col space-y-1">

@@ -38,8 +38,8 @@ class FeeshipController extends Controller
         ]);
     }
 
-    public function getWardbyDistrict($id){
-        $wards = Ward::where('id', $id)->get();
+    public function getWardbyDistrict($district_id){
+        $wards = Ward::where('district_id', $district_id)->get();
 
         if ($wards){
             return response()->json([

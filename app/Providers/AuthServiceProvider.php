@@ -25,9 +25,9 @@ class AuthServiceProvider extends ServiceProvider
      * @return void
      */
 
-    public function boot() 
+    public function boot()
     {
-        $this->registerPolicies();
+         $this->registerPolicies();
 
         // Define permission
         $permissionGateAndPolicy = new PermissionGateAndPolicyAccess();

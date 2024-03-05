@@ -1,9 +1,10 @@
 @section('head')
+    {{-- /thuc-don --}}
     <link rel="stylesheet" href="teamplate/js/RangeSlider/jQuery.UI.css" type="text/css" media="all" />
     {{-- style giỏ hàng bot --}}
     <style>
-        /* Nút Để Mở cartbox */
-        .nut-mo-cartbox {
+        /* Nút Để Mở Chatbox */
+        .nut-mo-chatbox {
             color: white;
             padding: 10px 15px;
             border: none;
@@ -13,9 +14,8 @@
             bottom: 23px;
             right: 32px;
         }
-
-        /* Ẩn cartbox mặc định */
-        .cartbox {
+        /* Ẩn chatbox mặc định */
+        .Chatbox {
             display: none;
             position: fixed;
             bottom: 0;
@@ -23,7 +23,6 @@
             border: 3px solid #f1f1f1;
             z-index: 9;
         }
-
         /* Thêm style cho form */
         .form-container {
             max-width: 300px;
@@ -60,14 +59,25 @@
             opacity: 0.8;
         }
 
+        .form-container .btnClose {
+            background-color: #4CAF50;
+            color: white;
+            padding: 3px 5px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin: 5px margin-bottom:10px;
+            opacity: 0.8;
+        }
+
         /* Thiết lập màu nền cho nút đóng */
-        .form-container .OpentForm {
+        .form-container .nut-dong {
             background-color: red;
         }
 
         /* Thêm hiệu ứng hover cho nút*/
         .form-container .btn:hover,
-        .nut-mo-cartbox:hover {
+        .nut-mo-chatbox:hover {
             opacity: 1;
         }
     </style>
@@ -108,7 +118,6 @@
         .cart_right.shake {
             animation: shakeCart 0.4s ease-in-out forwards;
         }
-
         @keyframes shakeCart {
             25% {
                 transform: translateX(6px);
@@ -167,19 +176,16 @@
                     <div class="tab-content add_bottom_25" role="tablist">
                         {{-- Số lượng danh mục --}}
                         @foreach ($categories as $category)
-                            <div id="pane-{{ $category->id }}"
-                                class="card tab-pane fade show {{ $loop->first ? 'active' : '' }}" role="tabpanel"
-                                aria-labelledby="tab-{{ $category->id }}">
+                            <div id="pane-{{ $category->id }}" class="card tab-pane fade show {{ $loop->first ? 'active' : '' }}"
+                                role="tabpanel" aria-labelledby="tab-{{ $category->id }}">
                                 <div class="card-header" role="tab" id="heading-{{ $category->id }}">
                                     <h5 class="mb-0">
-                                        <a class="" data-toggle="collapse" href="#collapse-{{ $category->id }}"
-                                            aria-expanded="true" aria-controls="collapse-{{ $category->id }}">
+                                        <a class="" data-toggle="collapse" href="#collapse-{{ $category->id }}"  aria-expanded="true" aria-controls="collapse-{{ $category->id }}">
                                             {{ $category->name }}
                                         </a>
                                     </h5>
                                 </div>
-                                <div id="collapse-{{ $category->id }}" class="collapse" role="tabpanel"
-                                    aria-labelledby="heading-{{ $category->id }}">
+                                <div id="collapse-{{ $category->id }}" class="collapse" role="tabpanel" aria-labelledby="heading-{{ $category->id }}">
                                     <div class="card-body">
                                         <div class="container">
                                             <div class="row small-gutters">
@@ -194,22 +200,17 @@
                                                     <div class="col-6 col-md-4 col-xl-4">
                                                         <div class="grid_item">
                                                             <figure>
-                                                                <a
-                                                                    href="{{ 'thuc-don/' . $product->id }}-{{ \Str::slug($product->name, '-') }}">
-                                                                    <img class="img-fluid lazy" src="{{ $product->thumb }}"
-                                                                        data-src="{{ $product->thumb }}" alt="">
+                                                                <a href="{{ 'thuc-don/' . $product->id }}-{{ \Str::slug($product->name, '-') }}">
+                                                                    <img class="img-fluid lazy" src="{{ $product->thumb }}" data-src="{{ $product->thumb }}" alt="">
                                                                 </a>
                                                                 <div class="add_cart">
                                                                     <span class="btn_1" style="height: 30px">
-                                                                        <a class="add-to-cart"
-                                                                            data-url="{{ route('menus.add_to_cart', ['id' => $product->id]) }}">
+                                                                        <button type="button" class="add-to-cart" id="add-to-cart" data-id="{{ $product->id }}">
                                                                             Thêm giỏ hàng
-                                                                        </a>
+                                                                        </button>
                                                                     </span>
-                                                                    <span class="btn_1"
-                                                                        style="margin-left: 15px; height: 30px">
-                                                                        <a href="{{ 'thuc-don/' . $product->id }}-{{ \Str::slug($product->name, '-') }}"
-                                                                            style="color: #f8f8f8;text-decoration: none;">
+                                                                    <span class="btn_1" style="margin-left: 15px; height: 30px">
+                                                                        <a href="{{ 'thuc-don/' . $product->id }}-{{ \Str::slug($product->name, '-') }}" style="color: #f8f8f8;text-decoration: none;">
                                                                             Xem chi tiết
                                                                         </a>
                                                                     </span>
@@ -224,15 +225,12 @@
 
                                                                 <em>{{ $product->total_rating }} Đánh giá</em>
                                                             </div>
-                                                            <a
-                                                                href="{{ 'thuc-don/' . $product->id }}-{{ \Str::slug($product->name, '-') }}">
+                                                            <a href="{{ 'thuc-don/' . $product->id }}-{{ \Str::slug($product->name, '-') }}">
                                                                 <h3>{{ $product->name }}</h3>
                                                             </a>
                                                             <div class="price_box">
-                                                                <span
-                                                                    class="new_price">{{ number_format($product->price_sale, 0, '', '.') }}đ</span>
-                                                                <span
-                                                                    class="old_price">{{ number_format($product->price, 0, '', '.') }}đ</span>
+                                                                <span class="new_price">{{ number_format($product->price_sale, 0, '', '.') }}đ</span>
+                                                                <span class="old_price">{{ number_format($product->price, 0, '', '.') }}đ</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -255,12 +253,95 @@
         </div>
     </main>
 
+    @php
+        $total = 0;
+        $acount = 0;
+    @endphp
+    <div class="Chatbox" id="myForm">
+        <div class="form-container">
+            <h5>Giỏ hàng</h5>
+            <ul>
+                @foreach ($cartproducts as $key => $cart)
+                    @php
+                        $price = $cart->price_sale != 0 ? $cart->price_sale : $cart->price;
+                        $priceEnd = $price * $carts[$cart->id];
+                        $acount += $carts[$cart->id];
+                        $total += $priceEnd;
+                    @endphp
+                    <li class="botli">
+                        <figure class="botfigure">
+                            <img src="{{ $cart->thumb }}" data-src="{{ $cart->thumb }}" alt="" width="50"
+                                height="50" class="lazy loaded botimg" data-was-processed="true">
+                        </figure>
+                        <strong>
+                            <span class="botspan">
+                                {{ $carts[$cart->id] }} x {{ $cart->name }}
+                            </span>
+                            <br>{{ number_format($priceEnd, 0, '', '.') }}đ
+                        </strong>
+                        <a href="{{ route('cart.destroy', $cart->id) }}" class="action"><i class="icon_trash_alt"></i></a>
+                    </li>
+                @endforeach
+            </ul>
 
-    @include('user.products.compoments.cart')
+            <div class="total_drop">
+                <div class="clearfix add_bottom_15"><strong>Tổng giỏ hàng
+                    </strong><span>{{ number_format($total, 0, '', '.') }}đ</span>
+                </div>
+                <a href="{{ route('cart.index') }}" class="btn_1 outline">Xem giỏ hàng</a>
+                <a href="{{ route('checkout.index') }}" class="btn_1">Thanh toán</a>
+            </div>
+            <hr>
+            <button type="button" class="btnClose nut-dong" onclick="dongForm()">Đóng</button>
+        </div>
+    </div>
+
+    <div class="nut-mo-chatbox cart_right" onclick="moForm()" id="cart" data-totalitems="{{ $acount }}">
+        <span aria-hidden="true" class="icon_cart" style="font-size: 25px;"></span>
+    </div>
     @include('sweetalert::alert')
 @endsection
 
 @section('script')
-    <script src="{{ asset('teamplate/js/RangeSlider/jQuery.UI.js') }}"></script>
-    <script src="{{ asset('teamplate/js/add_to_cart.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.add-to-cart').click(function() {
+                var id = $(this).data('id');
+                var cart = $('#cart');
+                var cartTotal = cart.attr('data-totalitems');
+                var newCartTotal = parseInt(cartTotal) + 1;
+
+                cart.addClass('shake').attr('data-totalitems', newCartTotal);
+                setTimeout(function() {
+                    cart.removeClass('shake');
+                }, 1000)
+
+                $.ajax({
+                    url: '{{ route('menus.add_to_cart') }}',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        product_id: id,
+                    },
+                    success: function() {
+                        swal({
+                            title: "Đã thêm vào giỏ hàng!",
+                            icon: "success",
+                        });
+                    }
+                });
+            });
+        });
+
+        /*Hàm Mở Form*/
+        function moForm() {
+            document.getElementById("myForm").style.display = "block";
+        }
+        /*Hàm Đóng Form*/
+        function dongForm() {
+            document.getElementById("myForm").style.display = "none";
+        }
+    </script>
 @endsection

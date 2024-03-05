@@ -11,7 +11,7 @@
                 <ul id="update_msgList"></ul>
                 <input type="hidden" id="edit_id" />
 
-                {{-- <div class="mb-3">
+                <div class="mb-3">
                     <div class="form-group">
                         <label class="form-label">Quyền chức năng</label>
                         <div class="row">
@@ -29,7 +29,7 @@
                             </label>
                         </div>
                     </div>
-                </div> --}}
+                </div>
 
                 <div class="mb-3">
                     <label class="form-label">Mô tả danh mục</label>

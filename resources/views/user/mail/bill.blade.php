@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="Description" content="Enter your description here" />
-    <title>Thông báo đặt hàng | Mì Quảng Bà Mua</title>
 </head>
-
 <body style="background-color: #e7eff8; font-family: trebuchet,sans-serif; margin-top: 0; box-sizing: border-box; line-height: 1.5;">
     <div marginwidth="0" marginheight="0">
         <div id="m_3175691496930717925wrapper" dir="ltr" style="background-color:#f5f5f5;margin:0;padding:70px 0 70px 0;width:100%">
@@ -24,7 +21,6 @@
                                 <tbody>
                                     <tr>
                                         <td align="center" valign="top">
-
                                             <table border="0" cellpadding="0" cellspacing="0" width="600"
                                                 id="m_3175691496930717925template_header"
                                                 style="background-color: #e4c632;border-radius:3px 3px 0 0!important;color:#ffffff;border-bottom:0;font-weight:bold;line-height:100%;vertical-align:middle;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
@@ -44,7 +40,6 @@
                                     </tr>
                                     <tr>
                                         <td align="center" valign="top">
-
                                             <table border="0" cellpadding="0" cellspacing="0" width="600"
                                                 id="m_3175691496930717925template_body">
                                                 <tbody>
@@ -59,7 +54,6 @@
                                                                         <td valign="top" style="padding:48px">
                                                                             <div id="m_3175691496930717925body_content_inner"
                                                                                 style="color:#737373;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:14px;line-height:150%;text-align:left">
-
                                                                                 <p style="margin:0 0 16px"
                                                                                     _msthash="1365039"
                                                                                     _msttexthash="114562734">Đơn đặt

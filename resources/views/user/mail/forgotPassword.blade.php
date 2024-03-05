@@ -1,7 +1,6 @@
 <head>
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Khôi khục mật khẩu</title>
     <style media="all" type="text/css">
         @media only screen and (max-width: 480px) {
             table[class=body] h1 {
@@ -29,7 +28,6 @@
             table[class=body] .column {
                 width: 100% !important;
             }
-
             table[class=body] .stats .column {
                 width: 50% !important;
             }
@@ -62,8 +60,6 @@
                 font-size: 11px !important;
             }
         }
-    </style>
-    <style type="text/css">
         @font-face {
             font-family: 'Open Sans';
             font-style: normal;
@@ -71,14 +67,12 @@
             src: local('Open Sans Light'), local('OpenSans-Light'), url(https://fonts.gstatic.com/s/opensans/v13/DXI1ORHCpsQm3Vp6mXoaTYnF5uFdDttMLvmWuJdhhgs.ttf) format('truetype');
         }
 
-
         @font-face {
             font-family: 'Open Sans';
             font-style: normal;
             font-weight: 400;
             src: local('Open Sans'), local('OpenSans'), url(https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3aCWcynf_cDxXwCLxiixG1c.ttf) format('truetype');
         }
-
 
         @font-face {
             font-family: 'Open Sans';
@@ -210,11 +204,11 @@
                                             </span>
 
                                             <p class="tagline" style="color: #294661; font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 400; margin-bottom: 5px; margin: 10px 0 20px;">
-                                            from mixi with love
+                                            from Trung with love
                                             </p>
 
                                             <p style="margin: 0; color: #294661; font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: 300; font-size: 12px; margin-bottom: 5px;">
-                                                © Địa chỉ
+                                                © Địa chỉ: Ngũ Hành Sơn, Đà Nẵng
                                             </p>
 
                                             <p style="margin: 0; color: #294661; font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-weight: 300; font-size: 12px; margin-bottom: 5px;">

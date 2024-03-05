@@ -13,14 +13,13 @@ use Illuminate\Support\Facades\Validator;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
 
-
 class AuthController extends Controller
 {
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
 
-    public function __construct() {
-        $this->middleware('guest')->except('logout');
-    }
+    // public function __construct() {
+    //     $this->middleware('guest')->except('logout');
+    // }
 
     //Register
     public function register() {
@@ -64,10 +63,9 @@ class AuthController extends Controller
     public function registerVerify(User $id, $token)
     {
         if ($id->remember_token === $token) {
-            $id->update([
-                'active' => 1,
-                'remember_token' => null,
-            ]);
+            $id->active = 1;
+            $id->remember_token = null;
+            $id->save();
 
             return redirect()->route('login')->with('success', 'Bạn đã xác thực tài khoản thành công!');
         } else {
@@ -200,7 +198,7 @@ class AuthController extends Controller
         return redirect()->back();
     }
 
-    public function loginAjax(Request $request) { 
+    public function loginAjaxHandle(Request $request) {
         $validation = Validator::make($request->all(), [
             'email' => 'required|email:filter|exists:users',
             'password' => 'required',
@@ -209,39 +207,38 @@ class AuthController extends Controller
             'password.required' => 'Vui lòng nhập mật khẩu',
         ]);
 
-        if ($validation->fails()) { 
-            return response()->json(['success' => false, 'errors' => $validator->errors()]); 
+        if ($validation->fails()) {
+            // foreach($validation->messages()->getMessages() as $field_name => $messages)
+            // {
+            //     $error_array[] = $messages;
+            // }
+            return response()->json(['error' => $validation->errors()->first()]);
         }
-        else { 
+        else {
             if (Auth::attempt([
-                'email' => $request->email,
-                'password' => $request->password,
+                'email' => $request->input('email'),
+                'password' => $request->input('password'),
                 'active' => 1
             ])) {
                 return response()->json([
                     'success' => 1,
-                    'message' => 'Chào mừng '. Auth::user()->name. ' đã đăng nhập thành công!',
-                    'user' => Auth::user(), 
+                    'message' => 'Chào mừng '. Auth::user()->name,
+                    'user' => Auth::user()
                 ]);
-            } 
-            elseif(Auth::attempt([
-                'email' => $request->email,
-                'password' => $request->password,
+            } elseif(Auth::attempt([
+                'email' => $request->input('email'),
+                'password' => $request->input('password'),
                 'active' => 0
             ])) {
                 Auth::logout();
                 return response()->json([
-                    'success' => 0,
+                    'error' => 0,
                     'message' => 'Tài khoản của bạn đã bạn khóa hoặc chưa kích hoạt'
                 ]);
             }
-            else {
-                return response()->json([
-                    'success' => 0,
-                    'message' => 'Tài khoản hoặc mật khẩu không. Vui lòng thử lại!'
-                ]);
-            }
-        } 
+        }
+
+        return response()->json(['error' => $validation->errors()->first()]);
 
     }
 
@@ -300,7 +297,7 @@ class AuthController extends Controller
         Auth::login($user);
     }
 
-    public function logout(Request $request) {
+    public function logout() {
         Auth::logout();
         return redirect()->route('login')->with('message', 'Đăng xuất thành công!');
     }

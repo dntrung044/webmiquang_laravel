@@ -35,28 +35,25 @@
                                 </div>
                             </div>
                             <div class="list-group m-2 ">
-                                @can('user-edit')
+                                @can('users-edit')
                                 <a href="{{ route('members') }}" class="list-group-item list-group-item-action border-0 ">
-                                    <i class="icofont-ui-user-group fs-6 me-3"></i>
-                                    Tài khoản người dùng
+                                    <i class="icofont-ui-user-group fs-6 me-3"></i> Tài khoản người dùng
                                 </a>
+                                @endcan
+
+                                @can('roles-edit')
                                 <a href="{{ route('roles') }}" class="list-group-item list-group-item-action border-0 ">
-                                    <i class="icofont-id fs-5 me-3"></i>
-                                   Quản lý vai trò
+                                    <i class="icofont-id fs-5 me-3"></i> Quản lý vai trò
                                 </a>
-                                @endcan
 
-                                @canany(['role-edit', 'user-edit', 'can:role-list'])
                                 <a href="{{ route('permissions') }}" class="list-group-item list-group-item-action border-0 ">
-                                    <i class="icofont-ui-settings fs-5 me-3"></i>
-                                    Quyền
+                                    <i class="icofont-ui-settings fs-5 me-3"></i> Quyền xử lý
                                 </a>
                                 @endcan
-                                <hr class="dropdown-divider border-dark">
 
+                                <hr class="dropdown-divider border-dark">
                                 <a href="/dang-xuat" onclick="return confirm('Bạn có chắc chắn muốn thoát?')" class="list-group-item list-group-item-action border-0 ">
-                                    <i class="icofont-logout fs-6 me-3"></i>
-                                    Đăng xuất
+                                    <i class="icofont-logout fs-6 me-3"></i> Đăng xuất
                                 </a>
                             </div>
                         </div>

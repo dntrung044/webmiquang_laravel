@@ -1,16 +1,5 @@
 @extends('admin.layout.main')
-
-@section('layout/head')
-<meta name="csrf-token" content="{{ csrf_token() }}">​
-    <style>
-        .rating.active {
-            color: #fec348;
-        }
-
-    </style>
-@endsection
 @section('content')
-    <!-- Body: Body -->
     <div class="body d-flex py-lg-3 py-md-2">
         <div class="container-xxl">
             <div class="row align-items-center">
@@ -36,10 +25,10 @@
     @include('sweetalert::alert')
     @include('admin.products.add')
     @include('admin.products.detail')
-    @include('admin.products.edit')
+    {{-- @include('admin.products.edit') --}}
 @endsection
 @section('footer')
-<script>
+{{-- <script>
     // project data table
     $(document).ready(function() {
         $('#myProjectTable')
@@ -54,10 +43,9 @@
     $('.table').dataTable({
       aaSorting: [[0, 'DESC']]
     });
-</script>
+</script> --}}
 <script type="text/javascript">
         $(document).ready(function () {
-
             $('#add_product').submit(function(e){
                 e.preventDefault();
                 $.ajax({
@@ -121,13 +109,9 @@
                 e.preventDefault();
 
                 $.ajax({
-                        //phương thức get
                         type: 'get',
                         url : '{{url('/admin/products/edit')}}',
                         success: function (response) {
-                            //đưa dữ liệu controller gửi về điền vào input trong form edit.
-
-                            //đưa dữ liệu controller gửi về điền vào input trong form edit.
                             $('#name-edit').val(response.data.name);
                             $('#description-edit').val(response.data.description);
                             $('#content-edit').val(response.data.content);

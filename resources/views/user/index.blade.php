@@ -139,8 +139,7 @@
                                     <div class="col-6 col-md-4 col-xl-3" data-cue="slideInUp">
                                         <div class="grid_item">
                                             <figure>
-                                                <a
-                                                    href="/thuc-don/{{ $product->id }}-{{ \Str::slug($product->name, '-') }}">
+                                                <a href="/thuc-don/{{ $product->id }}-{{ \Str::slug($product->name, '-') }}">
                                                     <img class="img-fluid lazy" src="{{ $product->thumb }}"
                                                         data-src="{{ $product->thumb }}" alt="loihinh">
                                                     <div class="add_cart" style="right: 0;">
@@ -157,7 +156,8 @@
 
                                                 <em>{{ $product->total_rating }} Đánh giá</em>
                                             </div>
-                                            <a href="/thuc-don/{{ $product->id }}-{{ \Str::slug($product->name, '-') }}">
+                                            <a
+                                                href="/thuc-don/{{ $product->id }}-{{ \Str::slug($product->name, '-') }}">
                                                 <h3>{{ $product->name }}</h3>
                                             </a>
                                             <div class="price_box">
@@ -283,10 +283,6 @@
 @endsection
 
 @section('script')
-    <!-- Home -->
-    <script src="{{ asset('teamplate/js/wizard/wizard_func.js') }}"></script>
-    <script src="{{ asset('teamplate/js/slider.js') }}"></script>
-    <script src="{{ asset('teamplate/js/sticky_sidebar.min.js') }}"></script>
     <script>
         load_latest_product();
 

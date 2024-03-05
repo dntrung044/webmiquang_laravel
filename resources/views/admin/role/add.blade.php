@@ -24,7 +24,7 @@
                             <tr>
                                 <th>Danh mục</th>
                                 <th class="text-center">Chức năng</th>
-                                <th class="text-center" style="margin-left: 2em">
+                                <th class="text-center">
                                     Tất cả các vai trò
                                     <input class="form-check-input checkbox_all" type="checkbox">
                                 </th>
@@ -40,7 +40,7 @@
                                 </td>
                                 @foreach ($permissionItem->functions as $functionItem)
                                     <td class="text-center">
-                                        <p>{{$functionItem->name}}
+                                        <p>{{$functionItem->function}}
                                             <input class="form-check-input checkbox_childrent" name="permission_id[]" type="checkbox" value="{{$functionItem->id}}">
                                         </p>
                                     </td>

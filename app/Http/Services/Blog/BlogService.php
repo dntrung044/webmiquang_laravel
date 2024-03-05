@@ -4,7 +4,6 @@
 namespace App\Http\Services\Blog;
 
 use App\Models\Post;
-use App\Models\PostComment; 
 use App\Models\PostCategory;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
@@ -74,7 +73,21 @@ class BlogService
     public function blognew()
     {
         return Post::where('active', 1)->OrderBy('id', 'desc')->limit('3')->get();
-    } 
+    }
+
+    // public function searchpost()
+    // {
+    //     $tukhoa = $_GET['tukhoa'];
+    //     return Post::where('title', 'LIKE', '%' .$tukhoa. '%')
+    //     ->OrWhere('description', 'LIKE', '%' .$tukhoa. '%')
+    //     ->get();
+    // }
+    // public function search(Request $request)
+    // {
+    //     $search = $request->search ?? '';
+
+    //     return Post::where('title', 'like', '%' .$search. '%');;
+    // }
 
 
     // Danh sách bài viết
@@ -95,12 +108,15 @@ class BlogService
             ->where('active', 1)
             ->with('postCategory')
             ->firstOrFail();
-    }  
-
-    public function show_comment($id)
-    {
-        return PostComment::where('id', $id)
-            ->where('active', 1) 
-            ->firstOrFail();
     }
+
+    // public function more($id)
+    // {
+    //     return blog::select('id', 'title', 'description', 'content', 'thumb', '	created_at')
+    //         ->where('active', 1)
+    //         ->orderByDesc('id')
+    //         ->limit(8)
+    //         ->get();
+    // }
+
 }

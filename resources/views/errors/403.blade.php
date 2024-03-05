@@ -88,15 +88,19 @@
 
 <body>
     <div class="content">
-        <h1 style="color: #EE4B5E">Quyền Truy Cập Bị Từ Chối.</h1>
+        <h1 style="color: #EE4B5E; margin-top: 2em;">
+            403 - Quyền Truy Cập Bị Từ Chối.<br>
+            403 - ACCESS DENIED.
+        </h1>
         <h2>Bạn không có quyền truy cập vào trang này!</h2>
     </div>
     <div class="overlay">
         <div class="left"></div>
         <div class="right"></div>
        <a href="/admin"><i class="fa fa-lock"></i></a>
-        {{-- <h1 style="color: #EE4B5E">403 - ACCESS DENIED</h1> --}}
+
     </div>
+
 </body>
 <script>
     let lock = document.querySelector(".fa-lock");

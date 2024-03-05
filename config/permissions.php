@@ -5,7 +5,6 @@ return [
         'aboutUs' => 'about_list',
         'list-blog' => 'blog_list',
         'list-blog_category' => 'blog_category_list'
-
     ],
 
     'table_module' => [
@@ -31,7 +30,7 @@ return [
         'add',
         'edit',
         'delete',
-        'download',
-        'Printing',
+        // 'download',
+        // 'Printing',
     ]
 ];
