@@ -1,0 +1,16 @@
+[2024-03-05 21:17:03] local.ERROR: Uncaught RuntimeException: Unable to detect application namespace. in C:\Users\dntru\OneDrive\document\Web\Laravel\webmiquang_laravel\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:1409
+Stack trace:
+#0 Command line code(1): Illuminate\Foundation\Application->getNamespace()
+#1 [internal function]: {closure}('C:\\Users\\dntru\\...')
+#2 Command line code(1): array_map(Object(Closure), Array)
+#3 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught RuntimeException: Unable to detect application namespace. in C:\\Users\\dntru\\OneDrive\\document\\Web\\Laravel\\webmiquang_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:1409
+Stack trace:
+#0 Command line code(1): Illuminate\\Foundation\\Application->getNamespace()
+#1 [internal function]: {closure}('C:\\\\Users\\\\dntru\\\\...')
+#2 Command line code(1): array_map(Object(Closure), Array)
+#3 {main}
+  thrown at C:\\Users\\dntru\\OneDrive\\document\\Web\\Laravel\\webmiquang_laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:1409)
+[stacktrace]
+#0 {main}
+"} 

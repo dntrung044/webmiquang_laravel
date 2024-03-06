@@ -8,19 +8,14 @@ use App\Http\Services\User\UserService;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
-
     protected $userSevice;
 
     public function __construct(UserService $userSevice)
     {
         $this->userSevice = $userSevice;
-
-        // $this->middleware('guest')->except('logout');
     }
 
     public function index()

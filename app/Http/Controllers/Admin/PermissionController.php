@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 class PermissionController extends Controller
 {
- 
+
     public function index()
     {
         return view('admin.permission.index', [
@@ -81,22 +81,23 @@ class PermissionController extends Controller
         }
         else
         {
+
             $permission = new Permission;
             $permission->name = $request->input('name');
-            $permission->description = $request->input('description');
+            $permission->display_name = $request->input('description');
             $permission->parent_id = 0;
-            $permission->function = '';
-            $permission->key_code =  $request->name . '_' . 'key';
+            // $permission->function = '';
+            $permission->key_code = $request->name;
             $permission->save();
 
-            // //Tạo then con
-            foreach($request->functions as $value) {
+            // Tạo thêm function
+            foreach ($request->functions as $value) {
                 Permission::create([
-                    'name' => $request->description . '+' . $value,
-                    'description' => $request->description,
-                    'parent_id' =>  $permission->name,
-                    'key_code' =>  $request->name . '_' . $value,
-                    'function' =>  $value,
+                    'name' => $request->description . '_' . $value,
+                    'display_name' => $request->description,
+                    'parent_id' => $permission->id, // Sửa thành id của bản ghi cha
+                    'key_code' => $request->name . '_' . $value,
+                    'function' => $value,
                 ]);
             }
 
@@ -187,20 +188,20 @@ class PermissionController extends Controller
         }
     }
 
-    public function load_function(Request $request)
-    {
-        $data = $request->all();
-            $output ='';
-            $data['action'] == "name" ;
+    // public function load_function(Request $request)
+    // {
+    //     $data = $request->all();
+    //         $output ='';
+    //         $data['action'] == "name" ;
 
-            $select = PermissionCategory::where('parent_id', $data['parent_id'])->get();
-            $output.='<label class="fancy-checkbox">';
-            foreach ($select as $d){
-                $output.='<input type="checkbox" class="functions" value="'.$d->name.'">
-                    '.$d->name.'
-                </label>';
-            }
+    //         $select = PermissionCategory::where('parent_id', $data['parent_id'])->get();
+    //         $output.='<label class="fancy-checkbox">';
+    //         foreach ($select as $d){
+    //             $output.='<input type="checkbox" class="functions" value="'.$d->name.'">
+    //                 '.$d->name.'
+    //             </label>';
+    //         }
 
-        echo  $output;
-    }
+    //     echo  $output;
+    // }
 }

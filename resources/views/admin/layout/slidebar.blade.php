@@ -40,10 +40,8 @@
                     class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
             <ul class="sub-menu collapse" id="products">
                 <li><a class="ms-link" href="{{ route('products.index') }}"><span>Món ăn</span> </a></li>
-                <li><a class="ms-link" href="{{ route('categories.index') }}"><span>Loại món ăn</span> </a>
-                </li>
-                <li><a class="ms-link" href=""><span>Bình luận món ăn</span>
-                    </a></li>
+                <li><a class="ms-link" href="{{ route('categories.index') }}"><span>Loại món ăn</span> </a></li>
+                <li><a class="ms-link" href=""><span>Bình luận món ăn</span></a></li>
             </ul>
         </li>
 

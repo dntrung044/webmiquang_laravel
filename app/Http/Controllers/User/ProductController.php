@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Services\Product\UserService;
 use Illuminate\Http\Request;
-use App\Http\Services\Product\ProductService;
 use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use App\Models\ProductCategory;
 use App\Models\ProductComment;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Validator;  
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
     protected $productService;
 
-    public function __construct(ProductService $productService)
+    public function __construct(UserService $productService)
     {
         $this->productService = $productService;
     }
@@ -35,14 +35,13 @@ class ProductController extends Controller
     // Danh sách sp
     public function index(Request $request)
     {
-        $title = 'Thực đơn - Mì Quảng Bà Mua'; 
-        $products = Product::where('active', 1)->paginate(8); 
         $categories = ProductCategory::where('active', 1)->get();
-        $productsInCart = $this->getProduct();
-        // dd($productsInCart);
-        $carts = Session::get('carts'); 
+        $products = Product::where('active', 1)->paginate(8);
+        $title = 'Thực đơn - Mì Quảng Bà Mua';
+        $cartproducts = $this->getProduct();
+        $carts = Session::get('carts');
 
-        return view('User.products.list', compact('products', 'categories', 'title', 'productsInCart', 'carts'));
+        return view('User.products.list', compact('products', 'categories', 'title', 'cartproducts', 'carts'));
     }
 
     // Danh sách danh mục sp
@@ -87,29 +86,41 @@ class ProductController extends Controller
        }
     }
 
-    public function add_to_cart($id)
-    {       
-        $carts = Session::get('carts'); 
+    public function add_to_cart(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'product_id' => 'required',
+        ], [
+            'product_id.required' => 'Món ăn này không tồn tại'
+        ]);
 
-        if (isset($carts[$id])) {
-            $carts[$id] += 1;
+
+        if ($validation->fails()) {
+            return response()->json(['error' => $validation->errors()->first()]);
         } else {
-            $carts[$id] = 1;
-        }  
 
-        Session::put('carts', $carts);
-        
-        // echo "<pre>";
-        // print_r(session::get('carts'));  
-        $carts = Session::get('carts'); 
-        $productsInCart = $this->getProduct();
-        $cart_compoment = view('user.products.compoments.cart', compact('productsInCart', 'carts'))->render();
-        
-        return response()->json([
-            'cart_compoment' => $cart_compoment,
-            'message' => 'Đã thêm món ăn vào giỏ hàng!',
-            'code' => 200,
-        ], 200);
-    } 
-     
+            $qty =  1;
+            $product_id = $request->product_id;
+
+            $carts = Session::get('carts');
+            if (is_null($carts)) {
+                Session::put('carts', [
+                    $product_id => $qty
+                ]);
+            }
+
+            $exists = Arr::exists($carts, $product_id);
+            if ($exists) {
+                $carts[$product_id] = $carts[$product_id] + $qty;
+                Session::put('carts', $carts);
+            }
+
+            $carts[$product_id] = $qty;
+            Session::put('carts', $carts);
+
+            return response()->json(['data' => $carts]);
+        }
+
+        return response()->json(['error' => $validation->errors()->first()]);
+    }
 }

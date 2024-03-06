@@ -21,17 +21,17 @@ class RedirectIfAuthenticated
     {
         $guards = empty($guards) ? [null] : $guards;
 
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME)->with('error', 'Vui lòng đăng nhập!!');
+        // foreach ($guards as $guard) {
+        //     if (Auth::guard($guard)->check()) {
+        //         return redirect(RouteServiceProvider::HOME)->with('error', 'Vui lòng đăng nhập!!');
                 // return redirect('/');
             }
             // elseif (Auth::guard($guard)->user()->active != 1) {
             //     Auth::guard($guard)->logout();
             //     return redirect()->back()->with('error', 'Tài khoản của bạn chưa được kích hoạt hoặc đã khóa');
             // }
-        }
+        // }
 
-        return $next($request);
-    }
+        // return $next($request);
+    // }
 }

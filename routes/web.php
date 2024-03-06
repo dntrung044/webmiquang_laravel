@@ -1,32 +1,31 @@
-<?php 
-use Illuminate\Support\Facades\Artisan; 
+<?php
+
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Admin;
-use App\Http\Controllers\User;  
+use App\Http\Controllers\User;
+use Illuminate\Support\Facades\Artisan;
 
 Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
     echo '<script>alert("done")</script>';
 });
 
-// -------------------------ADMIN-------------------------
+// ADMIN
 Route::middleware(['auth'])->group(function () {
-
     Route::prefix('admin')->group(function () {
-        #Trang chủ
-        Route::get('/', [Admin\IndexController::class, 'index'])->name('admin');
-        #Trạng thái liên hệ
-        Route::get('/activeContact{contact}', [Admin\IndexController::class, 'activeContact'])->name('admin.activeContact');
-        #Trạng thái đặt bàn
-        Route::get('/activeRevervation{reservation}', [Admin\IndexController::class, 'activeReservation'])->name('admin.activeReservation');
-        #Quản lý thông tin
+        #index
+        Route::get('/', [Admin\HomeController::class, 'index'])->name('admin');
+        #active Contact
+        Route::get('/activeContact{contact}', [Admin\HomeController::class, 'activeContact'])->name('admin.activeContact');
+        #active Revervation
+        Route::get('/activeRevervation{reservation}', [Admin\HomeController::class, 'activeReservation'])->name('admin.activeReservation');
+
+        #abouts
         Route::prefix('abouts')->middleware(['can:about-list,can:about-edit'])->group(function () {
             Route::get('index', [Admin\AboutUsController::class, 'index'])->name('abouts.index');
             Route::get('edit/{id}', [Admin\AboutUsController::class, 'edit'])->name('abouts.edit');
             Route::post('update/{id}', [Admin\AboutUsController::class, 'update'])->name('abouts.update');
 
-            #Quản lý hình ảnh
             Route::prefix('galleries')->group(function () {
                 Route::get('index', [Admin\GalleryController::class, 'index'])->name('galleries.index');
                 Route::get('add', [Admin\GalleryController::class, 'add'])->name('galleries.add');
@@ -35,7 +34,6 @@ Route::middleware(['auth'])->group(function () {
                 Route::post('edit/{gallery}', [Admin\GalleryController::class, 'update'])->name('galleries.update');
                 Route::DELETE('destroy', [Admin\GalleryController::class, 'destroy'])->name('galleries.destroy');
             });
-            #Quản lý banner
             Route::prefix('banner')->group(function () {
                 Route::get('index', [Admin\MenuController::class, 'index'])->name('banners.index');
                 Route::get('add', [Admin\MenuController::class, 'create'])->name('banners.add');
@@ -44,7 +42,6 @@ Route::middleware(['auth'])->group(function () {
                 Route::post('update/{menu}', [Admin\MenuController::class, 'update'])->name('banners.update');
                 Route::DELETE('destroy', [Admin\MenuController::class, 'destroy'])->name('banners.destroy');
             });
-            #Quản lý Slider
             Route::prefix('sliders')->group(function () {
                 Route::get('list', [Admin\SliderController::class, 'index'])->name('sliders.index');
                 Route::get('add', [Admin\SliderController::class, 'create'])->name('sliders.add');
@@ -53,15 +50,17 @@ Route::middleware(['auth'])->group(function () {
                 Route::post('update/{slider}', [Admin\SliderController::class, 'update'])->name('sliders.update');
                 Route::DELETE('destroy', [Admin\SliderController::class, 'destroy'])->name('sliders.destroy');
             });
-        }); 
-        #Quản lý món ăn
+        });
+
+        #Products
+        Route::resource('products', 'Admin\ProductController');
         Route::prefix('products')->group(function () {
-            Route::get('index', 'Admin\ProductController@index')->name('products.index');
-            Route::post('add', 'Admin\ProductController@store')->name('products.add');
-            Route::get('edit/{product}', 'Admin\ProductController@show')->name('products.index');
-            Route::post('edit/{product}', 'Admin\ProductController@update')->name('products.index');
-            Route::DELETE('destroy', 'Admin\ProductController@destroy')->name('products.index');
-            #Quản lý danh mục
+
+            // Route::get('index', 'Admin\ProductController@index')->name('products.index');
+            // Route::post('add', 'Admin\ProductController@store')->name('products.add');
+            // Route::get('edit/{product}', 'Admin\ProductController@show')->name('products.edit');
+            // Route::post('edit/{product}', 'Admin\ProductController@update')->name('products.update');
+            // Route::DELETE('destroy', 'Admin\ProductController@destroy')->name('products.destroy');
             Route::prefix('categories')->group(function () {
                 Route::get('index', [Admin\ProductCategoryController::class, 'index'])->name('categories.index');;
                 Route::get('add', [Admin\ProductCategoryController::class, 'create'])->name('categories.add');;
@@ -70,17 +69,17 @@ Route::middleware(['auth'])->group(function () {
                 Route::post('update/{productcategory}', [Admin\ProductCategoryController::class, 'update'])->name('categories.update');;
                 Route::DELETE('destroy', [Admin\ProductCategoryController::class, 'destroy'])->name('categories.destroy');;
             });
-            #Quản lý bình luận
             Route::prefix('comments')->group(function () {
                 Route::get('index', [Admin\ProductCommentController::class, 'listProductCmt'])->name('product_comments.index');
                 Route::get('lists{productcomment}', [Admin\ProductCommentController::class, 'activeCMT'])->name('activeCMT');
                 Route::get('list{productcomment}', [Admin\ProductCommentController::class, 'inactiveCmt'])->name('inactiveCMT');
             });
-        }); 
+        });
+
         #Quản lý blog
-        Route::prefix('blogs')->group(function () {
+        Route::prefix('blogs')->group(function() {
             #Quản lý bài viết
-            Route::prefix('post')->middleware(['can:blog-list,can:blog-add,can:blog-edit,can:blog-delete'])->group(function () {
+            Route::prefix('post')->middleware(['can:blog-list,can:blog-add,can:blog-edit,can:blog-delete'])->group(function() {
                 Route::get('index', [Admin\BlogController::class, 'index'])->name('posts.index');
                 Route::get('add', [Admin\BlogController::class, 'create'])->name('posts.add');
                 Route::post('store', [Admin\BlogController::class, 'store'])->name('posts.store');
@@ -90,19 +89,20 @@ Route::middleware(['auth'])->group(function () {
             });
             #Quản lý danh mục bài viết
             Route::prefix('categories')->middleware(['can:blog-list,can:blog-add,can:blog-edit,can:blog-delete'])
-                ->group(function () {
-                    Route::get('index', [Admin\BlogCategoryController::class, 'index'])->name('post_categories.index');
-                    Route::get('add', [Admin\BlogCategoryController::class, 'create'])->name('post_categories.add');
-                    Route::post('store', [Admin\BlogCategoryController::class, 'store'])->name('post_categories.store');
-                    Route::get('edit/{postcategory}', [Admin\BlogCategoryController::class, 'show'])->name('post_categories.edit');
-                    Route::post('update/{postcategory}', [Admin\BlogCategoryController::class, 'update'])->name('post_categories.update');
-                    Route::DELETE('destroy', [Admin\BlogCategoryController::class, 'destroy'])->name('post_categories.destroy');
-                });
+            ->group(function () {
+                Route::get('index', [Admin\BlogCategoryController::class, 'index'])->name('post_categories.index');
+                Route::get('add', [Admin\BlogCategoryController::class, 'create'])->name('post_categories.add');
+                Route::post('store', [Admin\BlogCategoryController::class, 'store'])->name('post_categories.store');
+                Route::get('edit/{postcategory}', [Admin\BlogCategoryController::class, 'show'])->name('post_categories.edit');
+                Route::post('update/{postcategory}', [Admin\BlogCategoryController::class, 'update'])->name('post_categories.update');
+                Route::DELETE('destroy', [Admin\BlogCategoryController::class, 'destroy'])->name('post_categories.destroy');
+            });
             #Quản lý bình luận bài viết
-        }); 
+        });
 
         #Upload hình
-        Route::post('upload/services', [Admin\UploadController::class, 'store']); 
+        Route::post('upload/services', [Admin\UploadController::class, 'store']);
+
         #Quản lý phí vận chuyển
         Route::prefix('feeships')->group(function () {
             Route::get('list', [Admin\FeeShipController::class, 'index'])->name('feeships.index');
@@ -112,9 +112,10 @@ Route::middleware(['auth'])->group(function () {
             Route::get('edit/{post}', [Admin\FeeShipController::class, 'show'])->name('feeships.posts');
             Route::post('edit/{post}', [Admin\FeeShipController::class, 'update'])->name('feeships.posts');
             Route::DELETE('destroy', [Admin\FeeShipController::class, 'destroy'])->name('feeships.posts');
-        }); 
+        });
+
         #Quản lý hóa đơn
-        Route::prefix('transactions')->middleware(['can:transaction'])->group(function () {
+        Route::prefix('transactions')->group(function () {
             Route::get('/', 'Admin\TransactionController@index')->name('transactions.index');
             Route::get('/detail/{transaction}', 'Admin\TransactionController@detail')->name('detail.index');
             Route::get('/active{transaction}', [Admin\TransactionController::class, 'active'])->name('transaction.active');
@@ -127,16 +128,16 @@ Route::middleware(['auth'])->group(function () {
 
         #Phân quyền
         Route::prefix('authorization')->group(function () {
-            #Quản lý tài khoản 
-            Route::prefix('members')->middleware(['can:user'])->group(function () {
+            #Quản lý tài khoản
+            Route::prefix('members')->middleware('can:users-edit')->group(function () {
                 Route::get('list', 'Admin\UserController@index')->name('members');
                 Route::get('/edit/{id}', 'Admin\UserController@show');
                 Route::post('/edit/{id}', 'Admin\UserController@update');
                 Route::DELETE('/destroy', [Admin\UserController::class, 'destroy']);
                 Route::get('/active{user}', [Admin\UserController::class, 'active'])->name('user.active');
             });
-            #Quản lý vai trò 
-            Route::prefix('roles')->middleware(['can:role'])->group(function () {
+            #Quản lý vai trò
+            Route::prefix('roles')->middleware(['can:roles-edit'])->group(function () {
                 Route::get('/', 'Admin\RoleController@index')->name('roles');
                 Route::post('/', 'Admin\RoleController@store')->name('roles.store');
                 Route::get('/show', 'Admin\RoleController@show')->name('roles.show');
@@ -144,50 +145,51 @@ Route::middleware(['auth'])->group(function () {
                 Route::post('/edit/{id}', 'Admin\RoleController@update')->name('roles.update');
                 Route::delete('/destroy/{id}', 'Admin\RoleController@destroy')->name('roles.destroy');
             });
-            #Quản lý quyền 
-            Route::prefix('permissions')->middleware(['can:permission', 'can:role-delete'])->group(function () {
+            #Quản lý quyền
+            Route::prefix('permissions')->middleware('can:roles-edit')->group(function () {
                 Route::get('/list', 'Admin\PermissionController@index')->name('permissions');
                 Route::post('/list', 'Admin\PermissionController@store')->name('permission.store');
+
                 Route::get('/function/show', 'Admin\PermissionController@show_function')->name('function.show');
                 Route::post('/permissionCat', 'Admin\PermissionController@store_permissionCat')->name('permissionCat.store');
                 Route::get('/permissionCat/show', 'Admin\PermissionController@show_permissionCat')->name('permissionCat.show');
-                Route::get('/show', 'Admin\PermissionController@show')->name('permission.show');
-                Route::get('/edit/{id}', 'Admin\PermissionController@edit')->name('permission.edit')->middleware('auth');
-                Route::put('/edit/{id}', 'Admin\PermissionController@update')->name('permission.update');
-                Route::delete('/destroy/{id}', 'Admin\PermissionController@destroy')->name('permission.destroy')->middleware('auth');
                 Route::post('load_function', 'Admin\PermissionController@load_function')->name('permission.load_function');
+                Route::get('/show', 'Admin\PermissionController@show')->name('permission.show');
+
+                Route::get('/edit/{id}', 'Admin\PermissionController@edit')->name('permission.edit');
+                Route::put('/edit/{id}', 'Admin\PermissionController@update')->name('permission.update');
+
+                Route::delete('/destroy/{id}', 'Admin\PermissionController@destroy')->name('permission.destroy');
             });
         });
 
     });
 });
-
-//-------------------------USER----------------------------
-#index
+//USER
+#Trang chủ
 Route::get('/', [User\HomeController::class, 'index'])->name('home');
 Route::post('/load_more_latest_product', [User\HomeController::class, 'latest_product'])->name("home.latest-product");
 
-#Menu
+#Thực đơn
 Route::prefix('thuc-don')->group(function () {
     Route::get('/', [User\ProductController::class, 'index'])->name('menus.index');
     Route::get('/{id}-{slug}', [User\ProductController::class, 'details']);
-    Route::get('/add-to-cart/{id}', [User\ProductController::class, 'add_to_cart'])->name('menus.add_to_cart');
-    #Comment product
+    Route::post('/them-gio-hang', [User\ProductController::class, 'add_to_cart'])->name('menus.add_to_cart');
+    #Đánh giá sp
     Route::post('/danh-gia-{id}', [User\ProductController::class, 'postComment'])->name('menus.comment');
 });
 
-#Cart
+#Giỏ hàng
 Route::prefix('gio-hang')->group(function () {
-    Route::get('/', [User\CartController::class, 'index'])->name('cart.index');
-    Route::post('/them-gio-hang', [User\CartController::class, 'add'])->name('cart.add');
+    Route::get('/', [User\CartController::class, 'show'])->name('cart.index');
+    Route::post('/them-gio-hang', [User\CartController::class, 'index'])->name('cart.add');
     // Route::post('/addToCartAjax', [User\CartController::class, 'addToCartAjax']);
     Route::get('/Ajax', [User\CartController::class, 'showcartAjax']);
-    Route::get('/cap-nhat-ajax-dec', [User\CartController::class, 'cart_decrease'])->name('cart.decrease');
-    Route::get('/cap-nhat-ajax-inc', [User\CartController::class, 'cart_increase'])->name('cart.increase');
     Route::post('/cap-nhat', [User\CartController::class, 'updatecart']);
-    Route::delete('/xoa/{id}', [User\CartController::class, 'destroy'])->name('cart.destroy');
+    Route::get('/xoa/{id}', [User\CartController::class, 'destroy'])->name('cart.destroy');
     Route::post('/carts', [User\CartController::class, 'addCart']);
-    Route::post('/check_coupon', [User\CartController::class, 'check_coupon'])->name('cart.check_coupon');
+
+    Route::post('/check_coupon', [User\CartController::class, 'check_coupon']);
 });
 
 #middleware
@@ -235,16 +237,19 @@ Route::prefix('blog')->group(function () {
     Route::get('/', [User\BlogController::class, 'index'])->name("blog");
     //detail
     Route::get('/{id}-{slug}', [User\BlogController::class, 'detail'])->name("blog.detail");
-     
+
+
     //comment
-    Route::post('/binh-luan/{id}', [User\BlogController::class, 'add_Comment'])->name("blog.comment");
-    Route::post('/load_comment', [User\BlogController::class, 'load_comment'])->name("comment.load-more");
-    Route::post('/binh-luan/sap-xep/moi-nhat', [User\BlogController::class, 'latest_comment'])->name("comment.latest");
-    Route::post('/binh-luan/sap-xep/thich-nhat', [User\BlogController::class, 'popular_comment'])->name("comment.popular");
+    Route::post('/binh-luan/{post_id}', [User\BlogController::class, 'postComment'])->name("blog.comment");
+    Route::post('/load_comment', [User\BlogController::class, 'load_Comment'])->name("comment.load-more");
     Route::post('/binh-luan/thich/binh-luan', [User\BlogController::class, 'postCommentLike'])->name("comment.like");
     //reply
-    Route::post('/tra-loi-binh-luan/{id}', [User\BlogController::class, 'add_Reply'])->name("blog.reply"); 
-    Route::post('/load_reply', [User\BlogController::class, 'load_Reply'])->name("reply.load-more"); 
+    Route::post('/tra-loi-binh-luan', [User\BlogController::class, 'postReply'])->name("blog.reply");
+    Route::post('/binh-luan/thich/binh-luan/tra-loi', [User\BlogController::class, 'postReplyLike'])->name("reply.like");
+    Route::post('/load_reply', [User\BlogController::class, 'load_Reply'])->name("reply.load-more");
+
+
+
     //category
     Route::get('/danh-muc/{id}-{slug}', [User\BlogController::class, 'category'])->name("blog.category");
     //search
@@ -273,10 +278,10 @@ Route::group(['namspace' => 'Auth'], function () {
     });
     #Login
     Route::prefix('dang-nhap')->group(function () {
-        #Login
+        //login
         Route::get('/', 'User\AuthController@login')->name('login');
         Route::post('/', 'User\AuthController@loginHandle');
-        Route::post('/ajax', 'User\AuthController@loginAjax')->name('login.ajax');;
+        Route::post('/ajax', 'User\AuthController@loginAjaxHandle')->name('login.ajax');;
         #Login with Facebook
         Route::get('/facebook', 'User\AuthController@redirectToFacebook')->name('login.facebook');
         Route::get('/facebook/callback', 'User\AuthController@handleFacebookCallback');
@@ -291,5 +296,6 @@ Route::group(['namspace' => 'Auth'], function () {
     Route::get('/thay-doi-mat-khau/{id}/{token}', 'User\AuthController@changePassword')->name("changePassword");
     Route::post('/thay-doi-mat-khau/{id}/{token}', 'User\AuthController@changetPasswordHandle');
     #Logout
-    Route::post('/dang-xuat', 'User\AuthController@logout')->name("logout");
+    Route::get('/dang-xuat', 'User\AuthController@logout')->name("logout");
 });
+

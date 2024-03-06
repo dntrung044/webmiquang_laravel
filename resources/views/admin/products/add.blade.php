@@ -22,9 +22,9 @@
                             <div class="col-md-6">
                                 <label class="form-label">Danh mục</label>
                                 <select class="form-select" name="cat_id" id="cat_id">
-                                    @foreach ($productcategories as $productcategory)
-                                        <option value="{{ $productcategory->id }}">
-                                            {{ $productcategory->name }}</option>
+                                    @foreach ($product_categories as $category)
+                                        <option value="{{ $category->id }}">
+                                            {{ $category->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

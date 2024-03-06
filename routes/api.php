@@ -29,7 +29,7 @@ Route::get('post', 'Api\BlogController@index');
 Route::get('ship', 'Api\FeeshipController@index');
 Route::get('district', 'Api\FeeshipController@getDistrict');
 Route::get('ward', 'Api\FeeshipController@getWard');
-Route::get('ward/{id}', 'Api\FeeshipController@getWardbyDistrict');
+Route::get('ward/{district_id}', 'Api\FeeshipController@getWardbyDistrict');
 
 //reservation
 Route::post('reservation', 'Api\ReservationController@index');

@@ -46,7 +46,7 @@ class TransactionController extends Controller
         $output = '';
         $data['action'] == "district";
 
-        $select = Ward::where('id', $data['id'])->get();
+        $select = Ward::where('id', $data['district_id'])->get();
         $output .= '<option>---Chọn xã/phường---</option>';
         foreach ($select as $key => $d) {
             $output .= '<option value="' . $d->ward_id . '">' . $d->name . '</option>';
@@ -92,7 +92,8 @@ class TransactionController extends Controller
         }
 
         return Cart::insert($data);
-    } 
+    }
+
 
     public function addOrders(Request $request)
     {
@@ -103,7 +104,6 @@ class TransactionController extends Controller
             'time' => 'required',
             'day' => 'required',
         ]);
-        // dd($request->all());
 
         if ($validasi->fails()) {
             $val = $validasi->errors()->all();
@@ -115,13 +115,11 @@ class TransactionController extends Controller
         $transaction = Transaction::create($request->all());
 
         //trừ đi MGG
-          $cou = Session::get('coupon');   
-          if (isset($cou[0]['code'])) {
-            $code = $cou[0]['code']; 
-            $coupon = Coupon::where('code', $code)->first();
-            $coupon->amount = $coupon->amount -1;
-            $coupon->save();
-          }
+        //   $cou = Session::get('coupon');
+        //   $code =$cou['code'];
+        //   $coupon = Coupon::where('code', $code)->first();
+        //   $coupon->amount = $coupon->amount -1;
+        //   $coupon->save();
 
         //02 them chi tiet don hang
         $productId = array_keys($carts);

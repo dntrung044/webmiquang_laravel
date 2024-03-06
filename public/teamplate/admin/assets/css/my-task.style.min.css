@@ -22867,3 +22867,7 @@ iframe.map_contact {
     border-radius: 5px;
     overflow: hidden;
 }
+
+.rating.active {
+    color: #fec348;
+}

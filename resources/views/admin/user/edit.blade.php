@@ -26,13 +26,14 @@
                                     <option value="" > Chọn danh mục </option>
                                     @foreach ($roles as $role)
                                         <option value="{{ $role->id }}"
-                                            {{ $rolesOfUser->contains('id',  $role->id) ? 'selected' : '' }}>
-                                                {{ $role->description }} ({{ $role->name }})
+                                            {{ $rolesOfUser->contains('id',  $role->id) ? 'selected' : 'd' }}>
+                                            {{ $role->name }}  ( {{ $role->description }} )
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+
                         <div class="col-3">
                             <label class="form-label">Trạng thái</label>
                             <div>

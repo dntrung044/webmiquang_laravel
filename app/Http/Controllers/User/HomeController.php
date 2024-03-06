@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Services\Slider\SliderService;
 use App\Http\Services\Menu\MenuService;
 use App\Http\Services\Blog\BlogService;
-use App\Http\Services\Product\ProductService;
+use App\Http\Services\Product\UserService;
 use App\Http\Controllers\Controller;
 use App\Http\Services\About\AboutService;
 use App\Models\Product;
@@ -22,7 +22,7 @@ class HomeController extends Controller
     public function __construct(
         SliderService $slider,
         MenuService $menu,
-        ProductService $product,
+        UserService $product,
         BlogService $post,
         AboutService $about
     ) {

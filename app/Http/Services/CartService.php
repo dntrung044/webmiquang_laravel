@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class CartService
-{ 
+{
+
+    //Admin/HoaDon
     public function getTransaction()
     {
         return Transaction::orderByDesc('id')->paginate(7);
@@ -76,7 +78,7 @@ class CartService
     {
         $qty = (int)$request->input('num_product');
         $product_id = (int)$request->input('product_id');
- 
+
 
         // if ($qty <= 0 || $product_id <= 0) {
         if ($product_id <= 0) {
@@ -90,13 +92,12 @@ class CartService
                 $product_id => $qty
             ]);
             return true;
-        }  
-         
+        }
+
         $exists = Arr::exists($carts, $product_id);
         if ($exists) {
             $carts[$product_id] = $carts[$product_id] + $qty;
-            Session::put('carts', $carts); 
-            
+            Session::put('carts', $carts);
             return true;
         }
 
@@ -105,24 +106,6 @@ class CartService
 
         return true;
     }
-
-    public function add_to_cart_MENU($id)
-    {       
-        $carts = Session::get('carts'); 
-        
-        $carts[$product_id] = $carts[$product_id] + 1;
-        Session::put('carts', $carts);  
-
-        $carts[$product_id] = $qty;
-        Session::put('carts', $carts);  
-        
-        // echo "<pre>";
-        // print_r(session::get('carts')); 
-        return response()->json([
-            'data' => $carts,
-            'message' => 'Đã thêm món ăn vào giỏ hàng!',
-        ], 200);
-    } 
 
     public function getProduct()
     {
@@ -152,7 +135,6 @@ class CartService
         return true;
     }
 
-    //repart
     public function addCart($request)
     {
         try {

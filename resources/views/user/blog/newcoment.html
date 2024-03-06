@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/StudioKonKon/bootstrap-konkon@1.4.1-beta/dist/css/studio-konkon.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            font-size: 16px;
+            align-items: center;
+            justify-content: center;
+            font-family: Inter;
+            padding: 1rem;
+            color: #585757;
+            background: #e8e8e8;
+        }
+
+        .block {
+            background: #fff;
+            width: 504px;
+            padding: 1rem;
+            background: #ffffff;
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 2px 1px rgba(0, 0, 0, 0.06), 0px 1px 1px rgba(0, 0, 0, 0.08);
+            border-radius: 8px;
+            display: block;
+        }
+
+        .block-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .block-header .title {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .block-header .title .tag {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 4px;
+            background: #f7f7f7;
+            color: #1c1c1c;
+            text-align: center;
+            padding: 0 4px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            font-weight: 500;
+            font-size: 10px;
+            line-height: 16px;
+            border: 1px solid #e8e8e8;
+            border-radius: 96px;
+        }
+
+        .writing {
+            background: #ffffff;
+            border: 1px solid #e8e8e8;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 24px;
+            padding: 12px;
+        }
+
+        .writing .textarea {
+            width: 100%;
+            font-family: "Inter";
+            color: #585757;
+            height: 50px;
+            overflow-y: auto;
+            appearance: none;
+            border: 0;
+            outline: 0;
+            resize: none;
+            font-size: 16px;
+            line-height: 24px;
+        }
+
+        .writing:focus-within {
+            border: 1px solid #0085ff;
+            box-shadow: 0px 0px 2px 2px rgba(0, 133, 255, 0.15);
+        }
+
+        .writing .footer {
+            margin-top: 12px;
+            padding-top: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid #e8e8e8;
+        }
+
+        .writing .footer .text-format {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .comment {
+            display: grid;
+            gap: 14px;
+        }
+
+        .comment .user-banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .comment .user-banner .user {
+            gap: 8px;
+            align-items: center;
+            display: flex;
+        }
+
+        .comment .user-banner .user .avatar {
+            height: 32px;
+            width: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid transparent;
+            position: relative;
+            border-radius: 100px;
+            font-weight: 500;
+            font-size: 13px;
+            line-height: 20px;
+        }
+
+        .comment .user-banner .user .avatar img {
+            max-width: 100%;
+            border-radius: 50%;
+        }
+
+        .comment .user-banner .user .avatar .stat {
+            display: flex;
+            position: absolute;
+            right: -2px;
+            bottom: -2px;
+            display: block;
+            width: 12px;
+            height: 12px;
+            z-index: 9;
+            border: 2px solid #ffffff;
+            border-radius: 100px;
+        }
+
+        .comment .user-banner .user .avatar .stat.green {
+            background: #00ba34;
+        }
+
+        .comment .user-banner .user .avatar .stat.grey {
+            background: #969696;
+        }
+
+        .comment .footer {
+            gap: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .comment .footer .reactions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .comment .footer .divider {
+            height: 12px;
+            width: 1px;
+            background: #e8e8e8;
+        }
+
+        .comment:not(.comment:first-child) {
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .comment+.comment {
+            padding-top: 12px;
+        }
+
+        .comment.reply .user-banner,
+        .comment.reply .content,
+        .comment.reply .footer {
+            margin-left: 32px;
+        }
+
+        .group-radio {
+            position: relative;
+            display: flex;
+            user-select: none;
+            align-items: stretch;
+        }
+
+        .group-radio .button-radio {
+            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.06);
+        }
+
+        .group-radio .button-radio label {
+            cursor: pointer;
+            padding: 4px 8px;
+            font-weight: 500;
+            font-size: 14px;
+            display: flex;
+            height: 28px;
+            align-items: center;
+            line-height: 28px;
+            transition: 0.2s ease;
+        }
+
+        .group-radio .button-radio:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+            border-left: 1px solid #e8e8e8;
+            border-top: 1px solid #e8e8e8;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .group-radio .button-radio:last-child {
+            border-top-right-radius: 8px;
+            border-right: 1px solid #e8e8e8;
+            border-top: 1px solid #e8e8e8;
+            border-bottom: 1px solid #e8e8e8;
+            border-bottom-right-radius: 8px;
+        }
+
+        .group-radio .button-radio input[type=radio] {
+            display: none;
+        }
+
+        .group-radio .button-radio input[type=radio]:checked+label {
+            background: #f7f7f7;
+        }
+
+        .group-radio .divider {
+            width: 1px;
+            background: #e8e8e8;
+        }
+
+        h5 {
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 24px;
+            color: #1c1c1c;
+            letter-spacing: 0em;
+            text-align: left;
+        }
+
+        .btn {
+            appearance: none;
+            background: transparent;
+            border: 0;
+            padding: 0;
+            display: flex;
+            font: inherit;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #1c1c1c;
+            transition: 0.2s ease;
+            outline: none;
+        }
+
+        .btn i {
+            color: #969696;
+            font-size: 18px;
+            transition: 0.15s ease-in-out;
+        }
+
+        .btn.primary {
+            min-width: 64px;
+            padding: 8px 12px;
+            height: 40px;
+            color: #fff;
+            display: inline-flex;
+            background: #0085ff;
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 2px 1px rgba(0, 0, 0, 0.06), 0px 1px 1px rgba(0, 0, 0, 0.08);
+            border-radius: 8px;
+        }
+
+        .btn.primary:hover {
+            background: #339dff;
+        }
+
+        .btn:hover i {
+            opacity: 0.7;
+        }
+
+        .btn img {
+            max-width: 18px;
+            height: auto;
+        }
+
+        .btn.react {
+            padding: 4px 8px 4px 4px;
+            background: #f7f7f7;
+            border: 1px solid #e8e8e8;
+            border-radius: 8px;
+            gap: 4px;
+        }
+
+        .btn.react:hover {
+            background-color: #eee;
+        }
+
+        .btn.dropdown {
+            display: flex;
+            cursor: pointer;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            width: 26px;
+            height: 26px;
+        }
+
+        .btn.dropdown:hover {
+            background-color: #eee;
+        }
+
+        p {
+            line-height: 24px;
+        }
+
+        p a.tagged-user {
+            display: inline-flex;
+            padding: 2px 8px;
+            background: #e5f3ff;
+            border-radius: 256px;
+            color: #0085ff;
+        }
+
+        .is-mute {
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 20px;
+            color: #969696;
+        }
+
+        a {
+            font-weight: 500;
+            font-size: 13px;
+            line-height: 20px;
+            color: #1c1c1c;
+            text-decoration: none;
+            transition: opacity 0.15s ease-in-out;
+        }
+
+        a:hover {
+            opacity: 0.7;
+        }
+
+        h2 {
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 28px;
+            color: #1c1c1c;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .load {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .load span {
+            display: flex;
+            align-items: center;
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 20px;
+            color: #969696;
+        }
+
+        .load span i {
+            margin-right: 6px;
+        }
+
+        .group-button {
+            display: flex;
+            gap: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="block">
+        <div class="block-header">
+            <div class="title">
+                <h2>Comments</h2>
+                <div class="tag">12</div>
+            </div>
+            <div class="group-radio">
+                <span class="button-radio">
+                    <input id="latest" name="latest" type="radio" checked>
+                    <label for="latest">Latest</label>
+                </span>
+                <div class="divider"></div>
+                <span class="button-radio">
+                    <input id="popular" name="latest" type="radio">
+                    <label for="popular">Popular</label>
+                </span>
+            </div>
+        </div>
+
+        <div class="writing">
+            <div contenteditable="true" class="textarea" autofocus spellcheck="false">
+                <p>Hi <a class="tagged-user">@Jo</a></p>
+            </div>
+            <div class="footer">
+                <div class="text-format">
+                    <button class="btn"><i class="ri-bold"></i></button>
+                    <button class="btn"><i class="ri-italic"></i></button>
+                    <button class="btn"><i class="ri-underline"></i></button>
+                    <button class="btn"><i class="ri-list-unordered"></i></button>
+                </div>
+                <div class="group-button">
+                    <button class="btn"><i class="ri-at-line"></i></button>
+                    <button class="btn primary">Send</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="comment">
+            <div class="user-banner">
+                <div class="user">
+                    <div class="avatar">
+                        <img src="https://randomuser.me/api/portraits/men/86.jpg">
+                        <span class="stat grey"></span>
+                    </div>
+                    <h5>Floyd Miles</h5>
+                </div>
+                <button class="btn dropdown"><i class="ri-more-line"></i></button>
+            </div>
+            <div class="content">
+                <p>Actually, now that I try out the links on my message, above, none of them take me to the secure site. Only my shortcut on my desktop, which I created years ago.</p>
+            </div>
+            <div class="footer">
+                <button class="btn"><i class="ri-emotion-line"></i></button>
+                <div class="reactions">
+                    <button class="btn react"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/apple/325/thumbs-up_1f44d.png" alt="">4</button>
+                    <button class="btn react"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/apple/325/angry-face-with-horns_1f47f.png" alt="">1</button>
+                </div>
+                <div class="divider"></div>
+                <a href="#">Reply</a>
+                <div class="divider"></div>
+                <span class="is-mute">6 hour</span>
+            </div>
+        </div>
+        <div>
+            <div class="comment">
+                <div class="user-banner">
+                    <div class="user">
+                        <div class="avatar" style="background-color:#fff5e9;border-color:#ffe0bd; color:#F98600">
+                            AF
+                            <span class="stat green"></span>
+                        </div>
+                        <h5>Albert Flores</h5>
+                    </div>
+                    <button class="btn dropdown"><i class="ri-more-line"></i></button>
+                </div>
+                <div class="content">
+                    <p>Before installing this plugin please put back again your wordpress and site url back to http.</p>
+                </div>
+                <div class="footer">
+                    <button class="btn"><i class="ri-emotion-line"></i></button>
+                    <div class="divider"></div>
+                    <a href="#">Reply</a>
+                    <div class="divider"></div>
+                    <span class="is-mute">2 min</span>
+                </div>
+            </div>
+            <div class="reply comment">
+                <div class="user-banner">
+                    <div class="user">
+                        <div class="avatar">
+                            <img src="https://images.unsplash.com/photo-1510227272981-87123e259b17?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=3759e09a5b9fbe53088b23c615b6312e" alt="">
+                            <span class="stat green"></span>
+                        </div>
+                        <h5>Bessie Cooper</h5>
+                    </div>
+                    <button class="btn dropdown"><i class="ri-more-line"></i></button>
+                </div>
+                <div class="content">
+                    <p>Hi <a href="#" class="tagged-user">@Albert Flores</a>.Thanks for your reply.</p>
+                </div>
+                <div class="footer">
+                    <button class="btn"><i class="ri-emotion-line"></i></button>
+                    <div class="reactions">
+                        <button class="btn react"><img src="https://cdn-0.emojis.wiki/emoji-pics/apple/smiling-face-with-heart-eyes-apple.png" alt="">2</button>
+                    </div>
+                    <div class="divider"></div>
+                    <a href="#">Reply</a>
+                    <div class="divider"></div>
+                    <span class="is-mute">18 sec</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="load">
+            <span><i class="ri-refresh-line"></i>Loading</span>
+        </div> -->
+    </div>
+</body>
+
+</html>
