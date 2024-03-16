@@ -6,56 +6,43 @@
                 <h5 class="modal-title  fw-bold" id="createprojectlLabelone"> Thêm vai trò</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="" data-url="{{ route('roles.store') }}" method="POST" role="form">
-			@csrf
             <div class="modal-body">
                 <div class="mb-3">
                     <label class="form-label">Tên vài trò</label>
-                    <input type="text" name="name" id="#name-add" value="{{ old('name') }}"class="form-control"  placeholder="Nhập tên vai trò">
+                    <input type="text" name="name" value="{{ old('name') }}"class="form-control name_add"  placeholder="Nhập tên vai trò">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Mô tả</label>
-                    <textarea  id="#description-add" class="form-control" name="description" rows="3">{{ old('description') }} </textarea>
+                    <textarea class="form-control description_add" name="description" rows="3" placeholder="Nhập nội dung mô tả">{{ old('description') }} </textarea>
                 </div>
-
                 <div class="table-responsive">
                     <table class="table table-striped custom-table">
                         <thead>
                             <tr>
-                                <th>Danh mục</th>
-                                <th class="text-center">Chức năng</th>
-                                <th class="text-center">
-                                    Tất cả các vai trò
-                                    <input class="form-check-input checkbox_all" type="checkbox">
-                                </th>
+                                <th>Quyền quản lý</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($permissions as $permissionItem )
                             <tr class="parent">
                                 <td class="fw-bold">
-                                    <h6> Danh mục {{$permissionItem->name}}
-                                        <input class="form-check-input checkbox_wrapper" type="checkbox" id="checkAllRoles">
+                                    <h6>  {{ $permissionItem->name }} ( {{ $permissionItem->description }})
+                                        <input class="form-check-input checkbox_role_add" type="checkbox" value=" {{ $permissionItem->id }}" id="checkAllRoles">
                                     </h6>
                                 </td>
-                                @foreach ($permissionItem->functions as $functionItem)
-                                    <td class="text-center">
-                                        <p>{{$functionItem->function}}
-                                            <input class="form-check-input checkbox_childrent" name="permission_id[]" type="checkbox" value="{{$functionItem->id}}">
-                                        </p>
-                                    </td>
-                                @endforeach
                             </tr>
                             @endforeach
+                            <td class="fw-bold">
+                                Tất cả các vai trò <input class="form-check-input" type="checkbox" id="checkbox_add_all">
+                            </td>
                         </tbody>
                     </table>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
-                <button type="submit" class="btn btn-primary">Tạo vai trò</button>
+                <button type="button" class="btn btn-primary" id="add_data">Tạo</button>
             </div>
-            </form>
         </div>
     </div>
 </div>

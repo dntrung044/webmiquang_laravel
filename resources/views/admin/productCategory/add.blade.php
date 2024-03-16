@@ -16,7 +16,7 @@
             <!-- Add Tickit-->
             <div class="modal-body">
                 <div class="deadline-form">
-                    <form action="" method="POST">
+                    <form action="{{ route('categories.store') }}" method="POST">
                         <div class="row">
                             <div class="col-md-6">
                                 <label class="form-label">Tên tiêu đề</label>
@@ -36,8 +36,8 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Tạo</button>
+                                <a href="{{ route('categories.index') }}" class="btn btn-secondary">Hủy</a>
+                                <button type="submit" class="btn btn-primary">Tạo</button>
                             </div>
                             @csrf
                     </form>

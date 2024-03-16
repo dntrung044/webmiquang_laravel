@@ -8,9 +8,9 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Services\CartService;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
-// use Barryvdh\DomPDF\PDF;
-use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\PDF;
+use Illuminate\Support\Str; 
+
 ini_set('max_execution_time', 300);
 
 class TransactionController extends Controller
@@ -34,36 +34,39 @@ class TransactionController extends Controller
     public function detail(Transaction $transaction)
     {
         $carts = $this->cart->getProductForCart($transaction);
-        $abouts = $this->about->display();
-        $pdf = PDF::loadView('admin.transactions.pdf', [
-            'title' => 'Chi Tiết Đơn Hàng: ' . $transaction->name,
-            'transaction' => $transaction,
-            'carts' => $carts,
-            'abouts' => $abouts,
-        ]);
-        $pdf_name = Str::slug($transaction->name). '-' .time(). '.pdf';
-        $pdf_path = public_path('storage/pdf/' .$pdf_name);
-        $pdf->save($pdf_path);
+        $abouts = $this->about->get();
+        // $pdf = PDF::loadView('admin.transactions.pdf', [
+        //     'title' => 'Chi Tiết Đơn Hàng: ' . $transaction->name,
+        //     'transaction' => $transaction,
+        //     'carts' => $carts,
+        //     'abouts' => $abouts, 
+        // ]);
+        // $pdf = \App::make('dompdf.wrapper');
+        // $pdf->loadView('invoices.credit_note', compact('credit_notes'));
+        // $pdf->save(public_path($path));
+        // $pdf_name = Str::slug($transaction->name). '-' .time(). '.pdf';
+        // $pdf_path = public_path('storage/pdf/' .$pdf_name);
+        // $pdf->save($pdf_path);
 
-        if(request('pdf', false)) {
-            return $pdf->stream();
-        }elseif(request('download', false)) {
-            return $pdf->download($pdf_name);
-        } elseif(request('sentmail', false)) {
-            Mail::send('user.mail.bill', compact('transaction'),
-            function ($message) use ($transaction, $pdf_path) {
-                $message->subject('Đặt đồ uống');
-                $message->to($transaction->email, $transaction->name);
-                $message->from($transaction->email);
-                if(file_exists($pdf_path)) {
-                    $message->attach($pdf_path);
-                }
-            });
+        // if(request('pdf', false)) {
+        //     return $pdf->stream();
+        // }elseif(request('download', false)) {
+        //     return $pdf->download($pdf_name);
+        // } elseif(request('sentmail', false)) {
+        //     Mail::send('user.mail.bill', compact('transaction'),
+        //     function ($message) use ($transaction, $pdf_path) {
+        //         $message->subject('Đặt đồ uống');
+        //         $message->to($transaction->email, $transaction->name);
+        //         $message->from($transaction->email);
+        //         if(file_exists($pdf_path)) {
+        //             $message->attach($pdf_path);
+        //         }
+        //     });
 
-            if(file_exists($pdf_path)) {
-                unlink($pdf_path);
-            }
-        }
+        //     if(file_exists($pdf_path)) {
+        //         unlink($pdf_path);
+        //     }
+        // }
 
         return view('admin.transactions.detail', [
             'title' => 'Chi Tiết Đơn Hàng: ' . $transaction->name,
@@ -91,11 +94,18 @@ class TransactionController extends Controller
     public function active($transaction)
     {
         $transaction = Transaction::find($transaction);
-
-        $transaction->status = Transaction::STATUS_DONE;
+        $transaction->status = Transaction::STATUS_DELIVERING;
         $transaction->save();
 
-        return redirect()->back()->with('success',' Xử lý đơn hàng thành công!');
+        return redirect()->back()->with('success','Xử lý đơn hàng thành công!');
+    }
+    public function cancel($transaction)
+    {
+        $transaction = Transaction::find($transaction);
+        $transaction->status = Transaction::STATUS_CANCELLED;
+        $transaction->save();
+
+        return redirect()->back()->with('success',' Hủy đơn hàng thành công!');
     }
 
     // Gửi mail hóa đơn

@@ -67,12 +67,10 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function checkPermissionAccess($pemissionCheck)
-    {
-       // B1 lay duoc tat ca cac quyen cua user dang login he thong
+    { 
         $roles = auth()->user()->roles;
 
         foreach ($roles as $role) {
-            // B2 So sanh gia tri dua vao cua router hien tai xem co ton tai trong cac quyen ma minh lay dc hay khong
             $permissions = $role->permissions;
             if ($permissions->contains('key_code', $pemissionCheck)) {
                 return true;

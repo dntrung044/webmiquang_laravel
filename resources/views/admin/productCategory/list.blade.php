@@ -1,5 +1,4 @@
 @extends('admin.layout.main')
-
 @section('content')
     <!-- Body: Body -->
     <div class="body d-flex py-lg-3 py-md-2">
@@ -10,7 +9,7 @@
                         class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                         <h3 class="fw-bold mb-0"> {{ $title }}</h3>
                         <div class="col-auto d-flex w-sm-100">
-                            <a href="/admin/productcategories/add">
+                            <a href="{{ route('categories.add') }}">
                                 <button type="button" class="btn btn-dark btn-set-task w-sm-100">
                                     <i class="icofont-plus-circle me-2 fs-6"></i>Thêm danh mục sản phẩm
                                 </button>
@@ -46,14 +45,14 @@
                                                 <button type="button" class="btn btn-outline-secondary"
                                                     data-bs-toggle="modal">
                                                     <a class="btn btn-primary btn-sm"
-                                                        href="/admin/productcategories/edit/{{ $ProductCategory->id }}">
+                                                        href="{{ route('categories.edit', ['productcategory'=>  $ProductCategory->id ]) }}">
                                                         <i class="icofont-edit text-success"></i>
                                                     </a>
                                                 </button>
 
                                                 <button type="button" class="btn btn-outline-secondary deleterow">
                                                     <a href="#"
-                                                        onclick="removeRow({{ $ProductCategory->id }}, '/admin/productcategories/destroy')">
+                                                    onclick="removeRow({{ $ProductCategory->id }}, '{{ route('categories.destroy') }}')">
                                                         <i class="icofont-ui-delete text-danger"></i>
                                                     </a>
                                                 </button>
@@ -63,12 +62,10 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                             {!! $productcategories->links() !!}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection

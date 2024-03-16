@@ -40,7 +40,6 @@
                                 </div>
 
                                 <div class="form-group">
-                                    {{-- <label>Địa chỉ:</label> --}}
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="form-group">
@@ -80,7 +79,6 @@
                                                     @else
                                                         <option value="">Chọn phường/xã</option>
                                                     @endif
-
                                                 </select>
                                             </div>
                                         </div>
@@ -107,9 +105,7 @@
             <!-- /container -->
     </main>
     @include('sweetalert::alert')
-
 @endsection
-
 @section('script')
     <script>
         $(document).ready(function() {
@@ -138,7 +134,7 @@
                         _token: _token
                     },
                     success: function(data) {
-                        $('#' + result).html(data);
+                        $('#' + result).html(data.html); // Đặt HTML vào phần tử <select>
                     }
                 });
             });

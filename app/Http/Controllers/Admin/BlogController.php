@@ -8,7 +8,6 @@ use App\Http\Services\Blog\BlogService;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
-
 class BlogController extends Controller
 {
     protected $blogService;
@@ -22,16 +21,15 @@ class BlogController extends Controller
     public function index()
     {
         return view('admin.blog.list', [
-            'titles' => 'Danh Sách Bài Viết Mới Nhất',
+            'title' => 'Danh Sách Bài Viết Mới Nhất',
             'blogs' => $this->blogService->get()
         ]);
     }
 
-
     public function create()
     {
         return view('admin.blog.add', [
-           'titles' => 'Thêm Bài viết mới',
+           'title' => 'Thêm Bài viết mới',
            'blogs' => $this->blogService->getCategoryBlog()
         ]);
     }
@@ -39,16 +37,16 @@ class BlogController extends Controller
     public function store(BlogRequest $request)
     {
         $this->blogService->insert($request);
-        return redirect()->route('post.index');
+        return redirect()->route('posts.index');
     }
 
-    public function show(Post $blog)
+    public function show(Post $post)
     {
         return view('admin.blog.edit', [
-            'titles' => 'Chỉnh Sửa Bài viết',
-            'blog' => $blog,
+            'title' => 'Chỉnh Sửa Bài viết',
+            'post' => $post,
             // 'Blogs' => $this->blogService->getCategoryBlog()
-            'blogCategories' => $this->blogService->getCategoryBlog()
+            'postCategories' => $this->blogService->getCategoryBlog()
         ]);
     }
 
@@ -57,7 +55,7 @@ class BlogController extends Controller
     {
         $result = $this->blogService->update($request, $post);
         if ($result) {
-            return redirect()->route('post.index');
+            return redirect()->route('posts.index');
         }
         return redirect()->back();
     }

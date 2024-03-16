@@ -11,24 +11,22 @@
                 <div class="border-0 mb-4">
                     <div
                         class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
-                        <h3 class="fw-bold mb-0"> {{ $titles }}</h3>
+                        <h3 class="fw-bold mb-0"> {{ $title }}</h3>
                     </div>
                 </div>
             </div>
 
-            <!-- Add Tickit-->
             <div class="modal-body">
                 <div class="deadline-form">
-                    <form action="" method="POST">
+                    <form action="{{ route('posts.update', $post->id ) }}" method="POST">
                         <div class="row">
                             <div class="col-md-6">
                                 <label class="form-label">Tiều đề</label>
                                 <input type="text" name="name" value="{{ $post->name }}"class="form-control">
                             </div>
-
                             <div class="col-md-6">
                                 <label class="form-label">Danh mục</label>
-                                <select class="form-select" name="id_category">
+                                <select class="form-select" name="category_id">
                                     <option value="0"> Danh Mục </option>
                                     @foreach ($postCategories as $postcategory)
                                         <option value="{{ $postcategory->id }}" {{ $post->category_id == $postcategory->id ? 'selected' : ''}}>
@@ -45,7 +43,7 @@
 
                             <div id="image_show">
                                 <a href="{{ $post->thumb}}" target="_blank">
-                                   <img src="{{ $post->thumb}}" alt="error" width="100px">
+                                   <img src="{{ $post->thumb}}" alt="error" style="height: 200px; width: 400px;">
                                 </a>
                             </div>
                             <input type="hidden" name="thumb" value="{{ $post->thumb}}" id="thumb">
@@ -76,7 +74,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <a href="{{ route('blog.posts') }}" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</a>
+                            <a href="{{ route('feeships.index') }}" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</a>
                             <button type="submit" class="btn btn-primary" >Sửa bài Viết</button>
                         </div>
                         @csrf
@@ -85,10 +83,9 @@
             </div>
         </div>
     </div>
-
 @endsection
 
-@section('footer')
+@section('script')
     <script>
         CKEDITOR.replace('content');
     </script>

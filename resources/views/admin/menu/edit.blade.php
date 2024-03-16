@@ -19,7 +19,7 @@
             <!-- Add Tickit-->
             <div class="modal-body">
                 <div class="deadline-form">
-                    <form action="" method="POST">
+                    <form action="{{ route('banners.update', ['menu'=> $menu->id]) }}" method="POST">
                         <div class="row">
                             <div class="col-md-6">
                                 <label class="form-label">Tên danh mục</label>
@@ -41,7 +41,7 @@
                         <div class="col-md-6">
                             <label for="menu" class="form-label"> Hình ảnh</label>
                             <input class="form-control" type="file" id="upload" name="file" multiple="">
-                        
+
                             <div id="image_show">
                                 <a href="{{ $menu->thumb}}" target="_blank">
                                    <img src="{{ $menu->thumb}}" alt="error" width="100px">
@@ -73,10 +73,8 @@
             </div>
         </div>
     </div>
-
 @endsection
-
-@section('footer')
+@section('script')
     <script>
         CKEDITOR.replace('content');
     </script>

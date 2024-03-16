@@ -1,10 +1,10 @@
-<!-- Delete Permission-->
+<!-- Delete Modal-->
 <div class="modal fade" id="delete_modal" tabindex="-1" aria-modal="true">
     <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
         <div class="modal-content">
             <input type="hidden" id="deleteing_id">
             <div class="modal-header">
-                <h5 class="modal-title  fw-bold" id="deleteprojectLabel"> Xóa mục Vĩnh viễn?</h5>
+                <h5 class="modal-title  fw-bold" id="deleteprojectLabel"> Xóa danh mục này?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
             </div>
             <div class="modal-body justify-content-center flex-column d-flex">
@@ -13,7 +13,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <button type="button" class="btn btn-danger color-fff delete_data">Có Xóa</button>
+                <button type="button" class="btn btn-danger color-fff delete_data">Xóa</button>
             </div>
         </div>
     </div>

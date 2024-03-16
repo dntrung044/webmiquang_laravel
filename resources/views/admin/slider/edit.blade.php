@@ -14,7 +14,7 @@
             </div>
             <div class="modal-body">
                 <div class="deadline-form">
-                    <form action="{{ route('sliders.update') }}" method="POST">
+                    <form action="{{ route('sliders.update', ['slider'=> $slider->id]) }}" method="POST">
                         <div class="row">
                             <div class="col-md-6">
                                 <label class="form-label">Tiều đề</label>
@@ -72,7 +72,7 @@
 
                         <div class="modal-footer">
                             <a href="{{ route('sliders.index') }}"><button type="button" class="btn btn-secondary">Hủy</button></a>
-                            <button type="submit" class="btn btn-primary">Cập nhật Slider</button>
+                            <button type="submit" class="btn btn-primary">Cập nhật</button>
                         </div>
                         @csrf
                     </form>
@@ -80,5 +80,4 @@
             </div>
         </div>
     </div>
-
 @endsection

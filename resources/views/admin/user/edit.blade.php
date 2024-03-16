@@ -59,7 +59,7 @@
 
 @endsection
 
-@section('footer')
+@section('script')
 <script src="{{ asset('/teamplate/admin/js/select2.min.js') }}"></script>
 <script>
     $('select2_init').select2({

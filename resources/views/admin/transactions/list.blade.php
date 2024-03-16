@@ -20,9 +20,7 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 50px">#</th>
-                                        <th>Tên khách hàng </th>
-                                        <th>Số điện thoại</th>
-                                        <th>Email </th>
+                                        <th>Liên hệ </th>
                                         <th>Ngày đặt hàng</th>
                                         <th>Tình trạng</th>
                                         <th>Chức năng</th>
@@ -32,19 +30,41 @@
                                     @foreach ($transactions as $key => $transaction)
                                         <tr>
                                             <td>{{ $transaction->id }}</td>
-                                            <td>{{ $transaction->user->name }}</td>
-                                            <td>{{ $transaction->user->phone }}</td>
-                                            <td>{{ $transaction->user->email }}</td>
+                                            <td>
+                                                <ul>
+                                                    <li>
+                                                        <i class="icofont-tags-squared"></i>
+                                                        <span>{{ $transaction->user->name }}</span>
+                                                    </li>
+                                                    <li>
+                                                        <i class="icofont-phone"></i>
+                                                        <span>{{ $transaction->user->phone }}</span>
+                                                    </li>
+                                                    <li>
+                                                        <i class="icofont-email"></i>
+                                                        <span>{{ $transaction->user->email }}</span>
+                                                    </li>
+                                                </ul>
+                                            </td>
                                             <td>{{ $transaction->created_at }}</td>
                                             <td>
                                                 @if ($transaction->status == "DEFAULT")
-                                                <a href="{{ route('transaction.active', $transaction->id) }}">
-                                                    <span class="badge bg-warning">Chưa giao hàng</span>
+                                                <a href="{{ route('transactions.active', $transaction->id) }}" class="btn btn-outline-secondary">
+                                                    <span class="badge bg-danger text-primary">Chưa giao hàng</span>
                                                 </a>
+                                                <a href="{{ route('transactions.cancel', $transaction->id) }}" class="btn btn-outline-secondary">
+                                                    <span class="badge bg-danger text-warning">Hủy đơn</span>
+                                                </a>
+                                                @elseif ($transaction->status == "DELIVERING")
+                                                   <span class="badge bg-warning">Đang giao hàng</span>
+
                                                 @elseif ($transaction->status == "DONE")
-                                                   <span class="badge bg-success">Đã giao hàng</span>
+                                                   <span class="badge bg-success">Đã thành công</span>
                                                 @elseif ($transaction->status == "CANCELLED")
-                                                    <span class="badge bg-danger">Đã hủy</span>
+                                                    <span class="badge bg-success text-danger">Đã hủy!!!</span>
+                                                    <a href="" class="btn btn-outline-secondary">
+                                                        <span class="badge bg-danger">chi tiết</span>
+                                                    </a>
                                                 @endif
                                             </td>
                                             <td>
@@ -52,7 +72,7 @@
                                                     <button type="button" class="btn btn-outline-secondary"
                                                         data-bs-toggle="modal">
                                                         <a class="btn btn-primary btn-sm"
-                                                            href="{{ route('detail.index', $transaction->id) }}">
+                                                            href="{{ route('transactions.detail', $transaction->id) }}">
                                                             <i class="icofont-eye-alt text-success"></i>
                                                         </a>
                                                     </button>
@@ -76,15 +96,10 @@
                                     @endforeach
                                 </tbody>
                             </table>
-
-
                         </div>
                     </div>
                 </div>
             </div>
-            {!! $transactions->links() !!}
-
         </div>
     </div>
-
 @endsection

@@ -4,6 +4,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon-->
     <link rel="icon" href="favicon.png" type="image/x-icon">
+    <title>
+        @if( $title)
+            {{ $title }}
+        @else
+             Quản lý
+        @endif
+    </title>
     <!-- plugin css file  -->
     <link rel="stylesheet" href="{{ asset('/teamplate/admin/assets/plugin/datatables/responsive.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/teamplate/admin/assets/plugin/datatables/dataTables.bootstrap5.min.css') }}">

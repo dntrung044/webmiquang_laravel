@@ -33,11 +33,11 @@ class RoleService
 
     public function get()
     {
-        return Role::orderByDesc('id')->paginate(7);
+        return Role::orderByDesc('id')->get();
     }
     public function getPermission()
     {
-        return Permission::where('parent_id', '0')->get();
+        return Permission::orderByDesc('id')->get();
     }
 
     public function update($request, $role)

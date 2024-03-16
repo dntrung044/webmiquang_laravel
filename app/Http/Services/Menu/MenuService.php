@@ -6,18 +6,11 @@ namespace App\Http\Services\Menu;
 
 use App\Models\Menu;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Str;
 
 class MenuService
 {
-    public function show()
-    {
-        return Menu::select('name', 'link', 'thumb', 'description')
-            ->orderbyDesc('id')
-            ->get();
-    }
 
-    public function getAll()
+    public function get()
     {
         return Menu::orderbyDesc('id')->paginate(3);
     }
@@ -50,7 +43,7 @@ class MenuService
         $menu->link = (string)$request->input('link');
         $menu->thumb = (string)$request->input('thumb');
         $menu->active = (string)$request->input('active');
-        $menu->save(); 
+        $menu->save();
 
         Session::flash('success', 'Cập nhật thành công Danh mục');
         return true;

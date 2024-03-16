@@ -1,5 +1,4 @@
 @extends('admin.layout.main')
-
 @section('head')
     <script src="/ckeditor/ckeditor.js"></script>
 @endsection
@@ -11,12 +10,11 @@
                 <div class="border-0 mb-4">
                     <div
                         class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
-                        <h3 class="fw-bold mb-0"> {{ $titles }}</h3>
+                        <h3 class="fw-bold mb-0"> {{ $title }}</h3>
                     </div>
                 </div>
             </div>
-
-            <!-- Add Tickit-->
+            <!-- Add post-->
             <div class="modal-body">
                 <div class="deadline-form">
                     <form action="" method="post">
@@ -71,7 +69,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <a href="{{ route('blog.posts') }}" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</a>
+                            <a href="{{ route('posts.index') }}" class="btn btn-secondary">Hủy</a>
                             <button type="submit" class="btn btn-primary" >Thêm Bài Viết</button>
                         </div>
                         @csrf
@@ -80,10 +78,8 @@
             </div>
         </div>
     </div>
-
 @endsection
-
-@section('footer')
+@section('script')
     <script>
         CKEDITOR.replace('content');
     </script>

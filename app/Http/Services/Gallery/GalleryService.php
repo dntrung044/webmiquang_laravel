@@ -28,7 +28,7 @@ class GalleryService
 
     public function get()
     {
-        return Gallery::orderByDesc('id')->paginate(8);
+        return Gallery::orderByDesc('id')->get();
     }
 
     public function update($request, $gallery)

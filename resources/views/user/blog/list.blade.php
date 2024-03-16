@@ -103,8 +103,8 @@
                                 <div class="col-md-6" data-cue="slideInUp">
                                     <article class="blog">
                                         <figure>
-                                            <a href="
-                                            {{ route('blog.detail', ['id'=> $blog->id, 'slug'=> \Str::slug($blog->name, '-')] )}}">
+                                            <a
+                                            href="{{ route('blog.detail', ['id'=> $blog->id, 'slug'=> \Str::slug($blog->name, '-')] )}}">
                                                 <img src="{{ $blog->thumb }}" alt="">
                                                 <div class="preview"><span>Đọc thêm</span></div>
                                             </a>

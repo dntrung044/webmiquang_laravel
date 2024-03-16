@@ -16,6 +16,14 @@ class GalleryController extends Controller
         $this->gallery = $gallery;
     }
 
+    public function index()
+    {
+        return view('admin.gallery.list', [
+            'title' => 'Danh Sách Thư viện hình ảnh Mới Nhất',
+            'galleries' => $this->gallery->get()
+        ]);
+    }
+
     public function add()
     {
         return view('admin.gallery.add', [
@@ -32,14 +40,6 @@ class GalleryController extends Controller
         $this->gallery->insert($request);
 
         return redirect()->route('galleries.index');
-    }
-
-    public function index()
-    {
-        return view('admin.gallery.list', [
-            'title' => 'Danh Sách Thư viện hình ảnh Mới Nhất',
-            'galleries' => $this->gallery->get()
-        ]);
     }
 
     public function edit(Gallery $gallery)

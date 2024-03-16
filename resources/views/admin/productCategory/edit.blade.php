@@ -15,7 +15,7 @@
 
             <div class="modal-body">
                 <div class="deadline-form">
-                    <form action="" method="POST">
+                    <form action="{{ route('categories.update', ['productcategory'=> $productcategory->id]) }}" method="POST">
                         <div class="row">
                             <div class="col-md-6">
                                 <label class="form-label">Tên tiêu đề</label>
@@ -25,7 +25,7 @@
                             <div class="mb-3">
                                 <label class="form-label">Kích hoạt</label>
                                 <div>
-                                    <input type="radio" id="active" value="1" name="active" 
+                                    <input type="radio" id="active" value="1" name="active"
                                     {{ $productcategory->active == 1 ? 'checked="' : ''}}>
                                     <label for="active">Có</label>
                                 </div>

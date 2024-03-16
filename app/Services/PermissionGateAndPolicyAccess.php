@@ -17,40 +17,31 @@ class PermissionGateAndPolicyAccess {
         Gate::define('admin-access', function ($user) {
             return $user->level === 1;
         });
-
         // Gate('web', 'server');
         #Quản lý thông tin
-        Gate::define('about-list', function ($user) {
-            return $user->checkPermissionAccess('about_list');
-        });
         Gate::define('about-edit', function ($user) {
-            return $user->checkPermissionAccess('about_edit');
+            return $user->checkPermissionAccess('abouts');
         });
-
+          #Quản lý Menu
+        Gate::define('menu-edit', function ($user) {
+            return $user->checkPermissionAccess('menus');
+        });
         #Quản lý Blog
-        Gate::define('blog-list', function ($user) {
-            return $user->checkPermissionAccess('blog_list');
-        });
-        Gate::define('blog-add', function ($user) {
-            return $user->checkPermissionAccess('blog_add');
-        });
         Gate::define('blog-edit', function ($user) {
-            return $user->checkPermissionAccess('blog_edit');
+            return $user->checkPermissionAccess('blogs');
         });
-        Gate::define('blog-delete', function ($user) {
-            return $user->checkPermissionAccess('blog_delete');
+        #Quản lý đơn hàng
+        Gate::define('order-edit', function ($user) {
+            return $user->checkPermissionAccess('orders');
         });
-
-
         #Quản lý tài khoản
-        Gate::define('users-edit', function ($user) {
-            return $user->checkPermissionAccess('user_edit');
+        Gate::define('user-edit', function ($user) {
+            return $user->checkPermissionAccess('users');
         });
         #Quản lý Vai trò tài khoản
-        Gate::define('roles-edit', function ($user) {
-            return $user->checkPermissionAccess('role_edit');// nay trong database
+        Gate::define('role-edit', function ($user) {
+            return $user->checkPermissionAccess('roles');
         });
-
     }
 
 }

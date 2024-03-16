@@ -17,5 +17,14 @@ class District extends Model
 
     protected $primarykey = 'id';
     protected $table = 'district_dn';
+    public function wards()
+    {
+        return $this->hasMany(Ward::class, 'district_id');
+    }
 
+
+    public function fees()
+    {
+        return $this->hasMany(Feeship::class, 'district_id');
+    }
 }

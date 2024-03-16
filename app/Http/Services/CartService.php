@@ -11,7 +11,6 @@ use App\Models\Transaction;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 
 class CartService
 {
@@ -19,7 +18,7 @@ class CartService
     //Admin/HoaDon
     public function getTransaction()
     {
-        return Transaction::orderByDesc('id')->paginate(7);
+        return Transaction::orderByDesc('id')->get();
     }
 
     public function getProductForCart($transaction)

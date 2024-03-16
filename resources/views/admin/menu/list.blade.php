@@ -48,7 +48,7 @@
                                                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                                                     <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal">
                                                         <a class="btn btn-primary btn-sm"
-                                                        href="/admin/menus/edit/{{ $menu->id }}">
+                                                        href="{{ route('banners.edit', ['menu'=> $menu->id ]) }}">
                                                         <i class="icofont-edit text-success"></i>
                                                         </a>
                                                     </button>
@@ -64,5 +64,4 @@
             </div>
         </div>
     </div>
-
 @endsection

@@ -11,11 +11,20 @@ class Feeship extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'district',
-        'ward',
+        'district_id',
+        'ward_id',
         'feeship'
     ];
 
     protected $primarykey = 'id ';
-    protected $table = 'feeship';
+    protected $table = 'fees';
+
+    public function district()
+    {
+        return $this->belongsTo(District::class, 'district_id');
+    }
+    public function ward()
+    {
+        return $this->belongsTo(Ward::class, 'ward_id');
+    }
 }

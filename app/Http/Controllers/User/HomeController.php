@@ -3,50 +3,36 @@
 namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
-use App\Http\Services\Slider\SliderService;
-use App\Http\Services\Menu\MenuService;
-use App\Http\Services\Blog\BlogService;
-use App\Http\Services\Product\UserService;
 use App\Http\Controllers\Controller;
-use App\Http\Services\About\AboutService;
+use App\Models\Aboutus;
+use App\Models\Menu;
+use App\Models\Post;
 use App\Models\Product;
+use App\Models\Slider;
 
 class HomeController extends Controller
 {
-    protected $slider;
-    protected $menu;
-    protected $product;
-    protected $post;
-    protected $about;
-
-    public function __construct(
-        SliderService $slider,
-        MenuService $menu,
-        UserService $product,
-        BlogService $post,
-        AboutService $about
-    ) {
-        $this->slider = $slider;
-        $this->menu = $menu;
-        $this->product = $product;
-        $this->post = $post;
-        $this->about = $about;
-    }
 
     public function index()
     {
+        $slider = Slider::where('active', 1)->orderBy('sort_by')->get();
+        $menu = Menu::select('name', 'link', 'thumb', 'description')->orderbyDesc('id')->get();
+        $posts = Post::where('active', 1)->OrderBy('id', 'desc')->limit('3')->get();
+        $abouthome =Aboutus::select('thumb', 'linkYT', 'description')->firstOrFail();
+        $minprice =Product::min('price_sale');
+        $cat1Product = Product::where('cat_id', 7)->limit(4)->get();
+        $cat2Product = Product::where('cat_id', 5)->limit(4)->get();
         return view('User.index', [
             'title' => 'Trang chủ - Mì Quảng Bà Mua',
-            'sliders' => $this->slider->show(),
-            'menus' => $this->menu->show(),
-            'posts' => $this->post->blognew(),
-            'about' => $this->about->abouthome(),
-            'product' => $this->product->minprice(),
-            'productcat1' => $this->product->cat1Product(),
-            'productcat2' => $this->product->cat2Product(),
+            'sliders' => $slider,
+            'menus' => $menu,
+            'posts' => $posts,
+            'about' => $abouthome,
+            'product' => $minprice,
+            'productcat1' => $cat1Product,
+            'productcat2' => $cat2Product,
         ]);
     }
-
 
     public function latest_product(Request $request)
     {

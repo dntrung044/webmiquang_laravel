@@ -20,14 +20,12 @@ class AboutUsController extends Controller
     {
         return view('admin.aboutus.list', [
             'title' => 'Thông tin cửa hàng',
-            'abouts' => $this->about->display()
+            'abouts' => $this->about->get()
         ]);
     }
 
     public function edit($id)
     {
-        // $about = Aboutus::get();
-        // dd($about);
         $about = Aboutus::where('id', $id)->get();
         return view('admin.aboutus.edit', [
             'title' => 'Chỉnh Sửa bài viết giới thiệu cửa hàng',
@@ -53,6 +51,4 @@ class AboutUsController extends Controller
 
         return redirect()->back();
     }
-
-
 }

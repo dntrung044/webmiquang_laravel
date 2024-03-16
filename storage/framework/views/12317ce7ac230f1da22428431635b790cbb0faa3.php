@@ -3,7 +3,7 @@
         <span class="logo-icon">
             <img src="<?php echo e(asset('teamplate/admin/assets/images/logoadmin.png')); ?>" alt="">
         </span>
-        <span class="logo-text">Quản Lý Cửa Hàng Mì Quảng</span>
+        <span class="logo-text">Nhà Hàng</span>
     </a>
     <!-- Menu: main ul -->
     <ul class="menu-list flex-grow-1 mt-3">
@@ -41,7 +41,7 @@
             <ul class="sub-menu collapse" id="products">
                 <li><a class="ms-link" href="<?php echo e(route('products.index')); ?>"><span>Món ăn</span> </a></li>
                 <li><a class="ms-link" href="<?php echo e(route('categories.index')); ?>"><span>Loại món ăn</span> </a></li>
-                <li><a class="ms-link" href=""><span>Bình luận món ăn</span></a></li>
+                <li><a class="ms-link" href="<?php echo e(route('product_comments.index')); ?>"><span>Bình luận món ăn</span></a></li>
             </ul>
         </li>
 
@@ -53,7 +53,7 @@
             <ul class="sub-menu collapse" id="Blogs">
                 <li><a class="ms-link" href="<?php echo e(route('posts.index')); ?>"><span>Bài Viết</span> </a></li>
                 <li><a class="ms-link" href="<?php echo e(route('post_categories.index')); ?>"><span>Danh Mục</span> </a></li>
-                <li><a class="ms-link" href=""><span>Bình luận</span> </a></li>
+                <li><a class="ms-link" href="<?php echo e(route('post_comments.index')); ?>"><span>Bình luận</span> </a></li>
             </ul>
         </li>
         <!-- Menu: Quản lý Đơn hàng -->
@@ -64,7 +64,7 @@
             </a>
             <ul class="sub-menu collapse" id="Transactions">
                 <li>
-                    <a class="ms-link" href="<?php echo e(route('feeships.index')); ?>">
+                    <a class="ms-link" href="<?php echo e(route('coupons.index')); ?>">
                         <span>Mã giảm giá</span>
                     </a>
                 </li>

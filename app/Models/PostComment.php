@@ -20,8 +20,16 @@ class PostComment extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
 
+    const ACTIVE_DONE = 1;
+    const ACTIVE_NOT_DEFAULT = 0;
+
     public function user() {
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function post() {
+        return $this->hasOne(Post::class, 'id', 'post_id')
+        ->withDefault(['name' => '']);
     }
 
     // public function replies() {
