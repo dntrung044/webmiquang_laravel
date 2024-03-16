@@ -10,15 +10,17 @@ $(function() {
 
     // project data table
     $(document).ready(function() {
-        $('#myProjectTable')
-        .addClass( 'nowrap' )
-        .dataTable( {
+        $('#myProjectTable').addClass('nowrap').dataTable({
+            paging: false,
+            info: false,
             responsive: true,
-            columnDefs: [
-                { targets: [-1, -3], className: 'dt-body-right' }
-            ]
+            columnDefs: [{
+                targets: [-1, -3],
+                className: 'dt-body-right'
+            }],
         });
     });
+
 
     // Timeline
     $(document).ready(function() {
@@ -29,23 +31,23 @@ $(function() {
                 toolbar: {
                     show: false,
                 }
-            },        
+            },
             plotOptions: {
                 bar: {
-                    horizontal: true,                
+                    horizontal: true,
                 }
             },
             colors: ['var(--chart-color1)', 'var(--chart-color2)', 'var(--chart-color4)'],
 
             series: [{
-                name: 'Justin',            
+                name: 'Justin',
                 data: [{
                     x: 'Design',
                     y: [new Date('2020-03-02').getTime(), new Date('2020-03-04').getTime()]
                 }, {
                     x: 'MobileApp',
                     y: [new Date('2020-03-02').getTime(), new Date('2020-03-04').getTime()]
-                 
+
                 }, {
                     x: 'Infography',
                     y: [new Date('2020-03-04').getTime(), new Date('2020-03-07').getTime()]
@@ -60,10 +62,10 @@ $(function() {
                 name: 'Michael',
                 data: [{
                     x: 'Design',
-                    y: [new Date('2020-03-01').getTime(), new Date('2020-03-03').getTime()] 
+                    y: [new Date('2020-03-01').getTime(), new Date('2020-03-03').getTime()]
                 }, {
                     x: 'MobileApp',
-                    y: [new Date('2020-03-03').getTime(), new Date('2020-03-07').getTime()] 
+                    y: [new Date('2020-03-03').getTime(), new Date('2020-03-07').getTime()]
                 }, {
                     x: 'Infography',
                     y: [new Date('2020-03-06').getTime(), new Date('2020-03-09').getTime()]
@@ -73,16 +75,16 @@ $(function() {
                 },
                 {
                     x: 'Development',
-                    y: [new Date('2020-03-01').getTime(), new Date('2020-03-02').getTime()] 
+                    y: [new Date('2020-03-01').getTime(), new Date('2020-03-02').getTime()]
                 }]
             },{
                 name: 'Jason',
                 data: [{
                     x: 'Design',
-                    y: [new Date('2020-03-03').getTime(), new Date('2020-03-05').getTime()] 
+                    y: [new Date('2020-03-03').getTime(), new Date('2020-03-05').getTime()]
                 }, {
                     x: 'MobileApp',
-                    y: [new Date('2020-03-01').getTime(), new Date('2020-03-09').getTime()] 
+                    y: [new Date('2020-03-01').getTime(), new Date('2020-03-09').getTime()]
                 }, {
                     x: 'Infography',
                     y: [new Date('2020-03-05').getTime(), new Date('2020-03-08').getTime()]
@@ -92,7 +94,7 @@ $(function() {
                 },
                 {
                     x: 'Development',
-                    y: [new Date('2020-03-03').getTime(), new Date('2020-03-05').getTime()] 
+                    y: [new Date('2020-03-03').getTime(), new Date('2020-03-05').getTime()]
                 }]
             }],
             yaxis: {
@@ -109,7 +111,7 @@ $(function() {
             document.querySelector("#apex-timeline"),
             options
         );
-        
+
         chart.render();
     });
 
@@ -177,7 +179,7 @@ $(function() {
 
         var chart = new ApexCharts(document.querySelector("#incomeanalytics"), options);
         chart.render();
-    }); 
-    
+    });
+
 });
 

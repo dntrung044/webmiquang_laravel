@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="vi" dir="ltr">
-
 <head>
     @include('admin.layout.head')
 </head>
@@ -21,10 +20,10 @@
             @include('admin.alert')
             {{-- nội dung đây --}}
             @yield('content')
-
         </div>
     </div>
-
-    @include('admin.layout.footer')
+    @include('admin.layout.toastr_notifications')
+    @include('admin.layout.logout')
+    @include('admin.layout.script')
 </body>
 </html>

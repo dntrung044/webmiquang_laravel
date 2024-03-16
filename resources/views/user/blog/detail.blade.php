@@ -38,17 +38,8 @@
         .signup-section {
             padding: 0.3rem 0rem;
         }
-    </style>
 
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
 
         /** ====================
                     * Lista de Comentarios
@@ -304,9 +295,7 @@
                 width: 320px;
             }
         }
-    </style>
 
-    <style>
         div.comment-module {
             width: 100%;
             height: auto;
@@ -419,11 +408,11 @@
         div.comment-module ul li::before {
             content: "";
             position: absolute;
-            top: 70px;
+            top: 50px;
             left: 60px;
             transform: translateX(-25px);
             width: 2px;
-            height: calc(100% - 80px);
+            height: calc(100% - 13px);
             background: #c5c5c5;
         }
 
@@ -570,9 +559,7 @@
                 width: calc(100% - 50px);
             }
         }
-    </style>
 
-    <style>
         .block {
             background: #fff;
             padding: 1rem;
@@ -647,12 +634,6 @@
             align-items: center;
             justify-content: space-between;
             border-top: 1px solid #e8e8e8;
-        }
-
-        .writing .footer .text-format {
-            display: flex;
-            align-items: center;
-            gap: 12px;
         }
 
         .comment {
@@ -763,7 +744,7 @@
             font-weight: 500;
             font-size: 14px;
             display: flex;
-            height: 28px;
+            height: 40px;
             align-items: center;
             line-height: 28px;
             transition: 0.2s ease;
@@ -790,7 +771,7 @@
         }
 
         .group-radio .button-radio input[type=radio]:checked+label {
-            background: #f7f7f7;
+            background: #f8da45;
         }
 
         .group-radio .divider {
@@ -841,9 +822,7 @@
             display: flex;
             gap: 16px;
         }
-    </style>
 
-    <style>
 /* Dropdown styles */
 
         .media-option summary {
@@ -960,9 +939,10 @@
                         <div class="postmeta">
                             <ul>
                                 <li>
-                                    <a href="blog/{{ $blog->postCategory->name }}">
+                                    <a href="{{ route('blog.category', ['id'=> $blog->postCategory->id, 'slug'=> \Str::slug($blog->postCategory->name, '-')] )}}">
                                         <i class="icon_folder-alt"></i>
-                                        {{ $blog->postCategory->name }}</a>
+                                        {{ $blog->postCategory->name }}
+                                    </a>
                                 </li>
                                 <li>
                                     <i class="icon_calendar"></i> {{ date('d-m-Y', strtotime($blog->created_at)) }}
@@ -989,7 +969,7 @@
                                     <h2>Danh sách bình luận</h2>
                                     <div class="tag">{{ $blog->comments->count() }}</div>
                                 </div>
-                                {{-- <div class="group-radio">
+                                <div class="group-radio">
                                     <span class="button-radio">
                                         <input id="latest" name="latest" type="radio" checked>
                                         <label for="latest">NỔI BẬC</label>
@@ -999,28 +979,24 @@
                                         <input id="popular" name="latest" type="radio">
                                         <label for="popular">MỚI NHẤT</label>
                                     </span>
-                                </div> --}}
+                                </div>
                             </div>
                             <div class="writing">
                                 @if (!empty(Auth::user()))
                                     <form method="POST" role="form">
                                         @csrf
-                                        <textarea id="cmt_content" rows="4" placeholder="Nội dung bình luận" class="textarea"></textarea>
+                                        <textarea rows="4" placeholder="Nội dung bình luận" class="textarea cmt_content"></textarea>
                                         <input type="hidden" value="{{ $blog->id }}" name="blog_id">
-
                                         <div class="footer">
-                                            <div class="text-format">
-                                                <button class="btn"><i class="ri-bold"></i></button>
-                                                <button class="btn"><i class="ri-italic"></i></button>
-                                                <button class="btn"><i class="ri-underline"></i></button>
-                                                <button class="btn"><i class="ri-list-unordered"></i></button>
-                                            </div>
                                             <div class="group-button">
-                                                {{-- <button class="btn">hủy</button> --}}
-                                                <button class="btn_1 mb-3 btn-comment">Bình luận</button>
+                                                <button class="btn_1 mb-3" id="btn-comment">Bình luận</button>
                                             </div>
                                         </div>
                                     </form>
+                                @else
+                                <button type="button" class="btn btn-primary form-control" id="loginModal">
+                                   Đăng nhập để bình luận!
+                                </button>
                                 @endif
                             </div>
 
@@ -1030,13 +1006,12 @@
                             </div>
                         </div>
                     </div>
-                    {{-- comment --}}
-
                 </div>
                 <!-- /col -->
 
                 <div class="fb-comments" data-href="{{ $blog->id }}-{{ \Str::slug($blog->name, '-') }}.html"
                     data-width="" data-numposts="5"></div>
+
                 <aside class="col-lg-3">
                     <div class="widget">
                         <div class="widget-title first">
@@ -1046,17 +1021,17 @@
                             @foreach ($blognew as $new)
                                 <li>
                                     <div class="alignleft">
-                                        <a
-                                            href="
-                                        {{ route('blog.detail', ['id' => $new->id, 'slug' => \Str::slug($new->name, '-')]) }}">
+                                        <a href="{{ route('blog.detail', ['id' => $new->id, 'slug' => \Str::slug($new->name, '-')]) }}">
                                             <img src="{{ $new->thumb }}" alt="">
                                         </a>
                                     </div>
-                                    <small>Thể loại - {{ date('d/m/Y', strtotime($new->created_at)) }}</small>
+                                    <small>
+                                        <a href="{{ route('blog.category', ['id'=> $blog->postCategory->id, 'slug'=> \Str::slug($blog->postCategory->name, '-')] )}}">
+                                            {{ $blog->postCategory->name }}
+                                        </a> - {{ date('d/m/Y', strtotime($new->created_at)) }}
+                                    </small>
                                     <h3>
-                                        <a
-                                            href="
-                                        {{ route('blog.detail', ['id' => $new->id, 'slug' => \Str::slug($new->name, '-')]) }}">
+                                        <a href="{{ route('blog.detail', ['id' => $new->id, 'slug' => \Str::slug($new->name, '-')]) }}">
                                             {{ $new->name }}
                                         </a>
                                     </h3>
@@ -1065,40 +1040,45 @@
                         </ul>
                     </div>
                     <!-- /widget -->
-                    {{-- <div class="widget">
-                            <div class="widget-title">
-                                <h4>Popular Tags</h4>
-                            </div>
-                            <div class="tags">
-                                <a href="#">Food</a>
-                                <a href="#">Bars</a>
-                                <a href="#">Cooktails</a>
-                                <a href="#">Shops</a>
-                                <a href="#">Best Offers</a>
-                                <a href="#">Transports</a>
-                                <a href="#">Restaurants</a>
-                            </div>
-                        </div> --}}
+                    <div class="widget">
+                        <div class="widget-title">
+                            <h4>Danh mục</h4>
+                        </div>
+                        <div class="tags">
+                            <a href="#">Food</a>
+                            <a href="#">Bars</a>
+                            <a href="#">Cooktails</a>
+                            <a href="#">Shops</a>
+                            <a href="#">Best Offers</a>
+                            <a href="#">Transports</a>
+                            <a href="#">Restaurants</a>
+                        </div>
+                    </div>
                     <!-- /widget -->
+                    <div class="widget">
+                        <div class="widget-title">
+                            <h4>Quảng cáo</h4>
+                        </div>
+                        <img src="https://giaiphaptruyenthong.vn/images/tintuc/1447056236_1446709167_truyenhinh3.jpg" alt="error">
+                        <img style="margin-top: 2em;"  src="https://nplaw.vn/upload/images/quang-cao-thuong-mai-min.jpg" alt="error">
+                    </div>
                 </aside>
                 <!-- /aside -->
                 <div id="show-data-replies"></div>
             </div>
-            <!-- /row -->
         </div>
-        <!-- /container -->
     </main>
 @endsection
 
 @section('script')
     <script>
         function show_reply() {
-        var x = document.getElementById("show-list-reply");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        } else {
-            x.style.display = "none";
-        }
+            var x = document.getElementById("show-list-reply");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
         }
 
         $(document).ready(function(){
@@ -1116,10 +1096,12 @@
     <script>
         load_more_comment();
 
+        var _token = $('input[name="_token"]').val();
+
         function load_more_comment(id = '') {
             var post_id = $('#post_id').val();
             $.ajax({
-                url: '{{ route('comment.load-more') }}',
+                url: '{{ route('comment.load_more') }}',
                 type: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1135,27 +1117,26 @@
             });
         }
 
-        // function load_more_reply(id = '') {
-        //     $.ajax({
-        //         url: '{{ route('reply.load-more') }}',
-        //         type: 'POST',
-        //         headers: {
-        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //         },
-        //         data: { id: id, },
-        //         success: function(data) {
-        //             $('#load_more_button').remove();
-        //             $('#list-comment').append(data);
-        //         }
-        //     });
-        // }
+        function load_more_reply(id = '') {
+            $.ajax({
+                url: '{{ route('reply.load_more') }}',
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: { id: id, },
+                success: function(data) {
+                    $('#load_more_button').remove();
+                    $('#list-comment').append(data);
+                }
+            });
+        }
 
         $(document).on('click', '#load-more-reply', function(ev) {
             ev.preventDefault();
             var comment_id = $(this).data('id');
-
             $.ajax({
-                url: '{{ route('reply.load-more') }}',
+                url: '{{ route('reply.load_more') }}',
                 type: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1169,25 +1150,19 @@
                         $('#comment-error').html(res.error)
                     } else {
                         $('#show-data-replies').append(res);
-                        // $('#comment-error').html('');
-                        // $('#comment-content').val('')
-                        // $('#comment').html(res);
-
-                        // console.log(res);
-                        // alert('thành công!');
-                        // location.reload();
-                        // }
                     }
                 }
             });
         });
 
-        $(document).on('click', '#load_more_button', function() {
+        $(document).on('click', '#load_more_comment_button', function() {
             var id = $(this).data('id');
             load_more_comment(id);
         });
-
-        var _token = $('input[name="_token"]').val();
+        $(document).on('click', '#load_more_replies_button', function() {
+            var id = $(this).data('id');
+            load_more_replies(id);
+        });
 
         $(document).ready(function() {
             // window.$('#loginModal').modal();
@@ -1228,13 +1203,12 @@
             });
         })
 
-        $('.btn-comment').click(function(ev) {
+        $('#btn-comment').click(function(ev) {
             ev.preventDefault();
-            let content = $('#cmt_content').val();
-            // console.log(content);
-
+            let content = $('.cmt_content').val();
+            var _token = $('input[name="_token"]').val();
             $.ajax({
-                url: '{{ route('blog.comment', $blog->id) }}',
+                url: '{{ route('comment.sent', $blog->id) }}',
                 type: 'POST',
                 data: {
                     content: content,
@@ -1242,48 +1216,9 @@
                 },
                 success: function(res) {
                     location.reload();
-                    // if (res.error) {
-                    //     $('#comment-error').html(res.error)
-                    // } else {
-                    //     $('#comment-error').html('');
-                    //     $('#comment-content').val('')
-                    //     $('#comment').html(res);
-
-                    //     load_more_comment();
-                    // }
                 }
             });
         });
-
-        $(document).on('click', '.btn-show-reply-form', function(ev) {
-            ev.preventDefault();
-            // var x = document.getElementById("show-list-reply");
-            // if (x.style.display === "none") {
-            //     x.style.display = "block";
-            // }
-            var id = $(this).data('id');
-            var content_reply_id = '.content-reply-' + id;
-            let content_reply = $(content_reply_id).val();
-            let form_reply = '.form-reply-' + id;
-
-            $('.formReply').slideUp();
-            $(form_reply).slideDown();
-        });
-
-        // $(document).on('click', '#dropdown', function(ev) {
-        //     ev.preventDefault();
-        //     var id = $(this).data('id');
-        //     let form_dropdown = '.form-dropdown-' + id;
-
-        //     $('.dropdown-menu').slideUp();
-        //     if( $(form_dropdown).slideDown()) {
-        //         $(form_dropdown).slideUp();
-        //     } else {
-        //         $(form_dropdown).slideDown();
-        //     }
-
-        // });
-
         $(document).on('click', '#btn-reply', function(ev) {
             ev.preventDefault();
             var id = $(this).data('id');
@@ -1291,7 +1226,7 @@
             let form_reply = '.form-reply-' + id;
             let content_reply = $(content_reply_id).val();
             $.ajax({
-                url: '{{ route('blog.reply') }}',
+                url: '{{ route('reply.sent') }}',
                 type: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1305,23 +1240,43 @@
                     if (res.error) {
                         $('#comment-error').html(res.error)
                     } else {
-                        // $('#comment-error').html('');
-                        // $('#comment-content').val('')
-                        // $('#comment').html(res);
                         location.reload();
-                        // console.log(res);
-                        // alert('thành công!');
-                        // location.reload();
-                        // }
                     }
                 }
             });
         });
 
+
+        $(document).on('click', '.btn-show-reply-form', function(ev) {
+            ev.preventDefault();
+            var id = $(this).data('id');
+            var content_reply_id = '.content-reply-' + id;
+            let content_reply = $(content_reply_id).val();
+            let form_reply = '.form-reply-' + id;
+
+            $('.formReply').slideUp();
+            $(form_reply).slideDown();
+        });
+
+        $(document).on('click', '#dropdown', function(ev) {
+            ev.preventDefault();
+            var id = $(this).data('id');
+            let form_dropdown = '.form-dropdown-' + id;
+
+            $('.dropdown-menu').slideUp();
+            if( $(form_dropdown).slideDown()) {
+                $(form_dropdown).slideUp();
+            } else {
+                $(form_dropdown).slideDown();
+            }
+
+        });
+
+
         $(document).on('click', '#like-comment', function(ev) {
             ev.preventDefault();
             var comment_like_id = $(this).data('id');
-
+            var _token = $('input[name="_token"]').val();
             $.ajax({
                 url: '{{ route('comment.like') }}',
                 type: 'POST',
@@ -1336,14 +1291,7 @@
                     if (res.error) {
                         $('#comment-error').html(res.error)
                     } else {
-                        // $('#comment-error').html('');
-                        // $('#comment-content').val('')
-                        // $('#comment').html(res);
                         location.reload();
-                        // console.log(res);
-                        // alert('thành công!');
-                        // location.reload();
-                        // }
                     }
                 }
             });
@@ -1367,14 +1315,7 @@
                     if (res.error) {
                         $('#comment-error').html(res.error)
                     } else {
-                        // $('#comment-error').html('');
-                        // $('#comment-content').val('')
-                        // $('#comment').html(res);
                         location.reload();
-                        // console.log(res);
-                        // alert('thành công!');
-                        // location.reload();
-                        // }
                     }
                 }
             });

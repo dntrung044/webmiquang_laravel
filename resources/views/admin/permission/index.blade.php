@@ -41,15 +41,15 @@
                                                 <span>{{  $permissionItem->id }}</span>
                                             </label>
                                         </td>
-                                        <td>{{ $permissionItem->name }} ( {{ $permissionItem->display_name  }} )</td>
+                                        <td>{{ $permissionItem->name }} ( {{ $permissionItem->description  }} )</td>
                                         <td>{{  $permissionItem->key_code }}</td>
                                         <td>
                                             <button type="button" value="{{  $permissionItem->id }}" class="btn btn-outline-secondary btn_edit">
-                                                <i class="icofont-edit text-success"></i>Sửa
+                                                <i class="icofont-edit text-success"></i>
                                             </button>
 
                                             <button type="button" value="{{  $permissionItem->id }}" class="btn btn-outline-secondary btn_delete">
-                                                <i class="icofont-ui-delete text-danger"></i>Xóa
+                                                <i class="icofont-ui-delete text-danger"></i>
                                             </button>
                                         </td>
                                     </tr>
@@ -60,129 +60,25 @@
                     </div>
                 </div>
             </div>
-            {{ $permissions->links() }}
             @include('admin.permission.add')
             @include('admin.permission.edit')
             @include('admin.permission.delete')
-            @include('admin.permission.add_function')
         </div>
     </div>
 @endsection
 
-@section('footer')
+@section('script')
     <script>
         $(document).ready(function() {
-
-            ShowListPermissionCat();
-            showSelectFunction();
-
-            function ShowListPermissionCat() {
-                $.ajax({
-                    type: "GET",
-                    url: "{{ route('permissionCat.show') }}",
-                    dataType: "json",
-                    success: function(response) {
-                        // console.log(response.datalist);
-                        $('.ListPermissionCat').html("");
-                        $.each(response.ListPermissionCats, function(key, item) {
-                            $('.ListPermissionCat').append(
-                                '<tr>\
-                                    <td  class="fw-bold text-secondary">\
-                                        <label class="fancy-checkbox">\
-                                            <span>#' + item.id + '</span>\
-                                        </label>\
-                                    </td>\
-                                    <td>' + item.name + '</td>\
-                                    <td>' + item.parent_id + '</td>\
-                                    <td>\
-                                        <button type="button" value="' + item.id + '" class="btn btn-outline-secondary btn_edit"><i class="icofont-edit text-success"></i></button>\
-                                        <button type="button" value="' + item.id + '" class="btn btn-outline-secondary btn_delete"><i class="icofont-ui-delete text-danger"></i></button>\
-                                    </td>\
-                                \</tr>');
-                        });
-                    }
-                });
-            }
-            function showSelectFunction() {
-                $.ajax({
-                    type: "GET",
-                    url: "{{ route('function.show') }}",
-                    dataType: "json",
-                    success: function(response) {
-                        // console.log(response.datalist);
-                        $('.selectFunction').html("");
-                        $('.selectFunction').append(
-                           '<option selected="" value="0">Danh mục lớn</option>');
-                        $.each(response.functions, function(key, item) {
-
-                            $('.selectFunction').append(
-                           ' <option  value="' + item.name + '">--Chức năng của ' + item.name + '--</option>' );
-                        });
-                    }
-                });
-            }
-
-            $(document).on('click', '#add_data_function', function(e) {
-                e.preventDefault();
-                $(this).text('Đang tạo danh mục..');
-
-                var data = {
-                    'name' : $('.name_function').val(),
-                    'description' : $('.description_function').val(),
-                    'parent_id' : $('.parent_id_function').val(),
-
-                }
-
-                console.log(data);
-
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('permissionCat.store') }}",
-                    data: data,
-                    dataType: "json",
-                    success: function(response) {
-                        if (response.status == 400) {
-                            $('#save_msgList_function').html("");
-                            $('#save_msgList_function').addClass('alert alert-danger');
-                            $.each(response.errors, function(key, err_value) {
-                                $('#save_msgList_function').append('<li>' + err_value + '</li>');
-                            });
-                            $('#add_data_function').text('Tạo danh mục');
-                        } else {
-                            $('#save_msgList_function').html("");
-                            $('#save_msgList_function').addClass('alert alert-success');
-                            $('#save_msgList_function').text(response.message);
-                            $('#add_data_function').text('Tạo danh mục');
-                            $('.name_function').text('');
-
-                            ShowListPermissionCat();
-                            showSelectFunction();
-                        }
-                    }
-                });
-
-            });
-
-            $('#function-all').click(function () {
-                $('.checkbox_functions').prop('checked', this.checked);
-            });
-
             $(document).on('click', '#add_data', function(e) {
                 e.preventDefault();
                 $(this).text('Đang tạo..');
 
-                var name = $('.name').val();
-                var description = $('.description').val();
-                var functions = [];
-
-                $('input.checkbox_functions:checked').each(function() {
-                    functions.push($(this).val());
-                });
-
+                var name = $('.name_add').val();
+                var description = $('.description_add').val();
                 var data = {
                     'name': name,
                     'description': description,
-                    'functions': functions,
                 };
 
                 $.ajax({
@@ -229,9 +125,7 @@
                             $('#edit_modal').modal('hide');
                         } else {
                             let data = response.data;
-                            // $('.edit_name[value="' + data.name+ '"]').prop('selected', true);
-                            $('.edit_display_name[value="' + data.display_name+ '"]').prop('checked', true);
-                            $('#edit_key_code').val(data.key_code);
+                            $('#edit_name').val(data.name);
                             $('#edit_description').val(data.description);
                             $('#edit_id').val(id);
                         }
@@ -250,10 +144,8 @@
                 url = url.replace(':id', id);
 
                 var data = {
-                    // 'name': $('#edit_name').val(),
-                    // 'function': $('#edit_function').val(),
                     'description': $('#edit_description').val(),
-                    'key_code': $('#edit_key_code').val(),
+                    'name': $('#edit_name').val(),
                 }
 
                 $.ajax({
@@ -322,27 +214,6 @@
                     }
                 });
             });
-
-            // $('.choose').on('change', function() {
-            //         var action = $(this).attr('name');
-            //         var name_parent = $(this).val();
-            //         var result = '';
-            //         if (action == 'name') {
-            //             result = 'parent_id'
-            //         }
-            //     $.ajax({
-            //         url:  '{{ route('permission.load_function') }}',
-            //         method: 'POST',
-            //         data: {
-            //             action: action,
-            //             parent_id: name_parent,
-            //         },
-            //         success: function(data) {
-            //             $('#' + result).html(data);
-            //         }
-            //     });
-            // });
-
         });
     </script>
 @endsection

@@ -6,22 +6,21 @@ namespace App\Http\Services\About;
 use App\Models\Aboutus;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 
 
 class AboutService
 {
 
-    public function display()
+    public function get()
     {
         return Aboutus::select('id', 'description', 'address', 'email', 'phone', 'openH', 'thumb', 'map')->get();
     }
 
-    public function update($request, $abouts)
+    public function update($request, $about)
     {
         try {
-            $abouts->fill($request->input());
-            $abouts->save();
+            $about->fill($request->input());
+            $about->save();
             Session::flash('success', 'Cập nhật thành công');
         } catch (\Exception $err) {
             Session::flash('error', 'Cập nhật Lỗi');
@@ -43,10 +42,7 @@ class AboutService
         return Aboutus::select('thumb', 'linkYT', 'description')->firstOrFail();
     }
     // Home
-    public function showBlognew()
-    {
-        return Aboutus::OrderBy('id', 'desc')->limit('3')->get();
-    }
+
 
 
 }

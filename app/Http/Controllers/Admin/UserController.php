@@ -8,6 +8,7 @@ use App\Http\Services\User\UserService;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -20,55 +21,59 @@ class UserController extends Controller
 
     public function index()
     {
+        $roles = Role::all();
+        // $rolesOfUser = $user->roles;
         return view('admin.user.list', [
             'title' => 'Danh Sách người dùng',
-            'users' => $this->userSevice->get()
-        ]);
-    }
-
-
-    public function show($id)
-    {
-        $user = User::where('id', $id)->firstOrFail();
-        $roles = Role::All();
-        $rolesOfUser = $user->roles;
-
-        return view('admin.user.edit', [
-            'title' => 'Chỉnh Sửa người dùng',
-            'users' => $user,
+            'users' => $this->userSevice->get(),
             'roles' => $roles,
-            'rolesOfUser' => $rolesOfUser,
         ]);
     }
-
 
     public function update(Request $request, $id)
     {
         $result = $this->userSevice->update($request, $id);
 
         if ($result) {
-            return redirect()->route('members')->with('success', 'Cập nhập thành công!');
-        }
-
-        return redirect()->back()->with('error', 'Cập nhập không thành công!');
-
-    }
-
-    public function destroy(Request $request)
-    {
-        $result = $this->userSevice->destroy($request);
-        if ($result) {
             return response()->json([
-                'error' => false,
-                'message' => 'Xóa người dùng thành công'
+                'status'=>200,
+                'message'=>'Cập nhập người dùng thành công!',
+                Session::flash('success', 'Cập nhật thành công')
+            ]);
+
+        } else {
+            return response()->json([
+                'error' => true,
+                'message'=>'Không tìm thấy người dùng!',
+                Session::flash('error', 'Cập nhật thành công')
             ]);
         }
-
-        return response()->json(['error' => true
-        ]);
     }
 
-    // Đăng xuất
+    public function destroy($id)
+    {
+        $user = User::find($id);
+
+        if($user)
+        {
+            User::where('id', $user)->delete();
+            $user->delete();
+
+            return response()->json([
+                'status'=>200,
+                Session::flash('success', 'Xóa người dùng thành công!')
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'error' => true,
+                'message'=>'Không tìm thấy người dùng!',
+                Session::flash('error', 'Cập nhật thành công')
+            ]);
+        }
+    }
+
     public function LogOut()
     {
         Auth::logout();

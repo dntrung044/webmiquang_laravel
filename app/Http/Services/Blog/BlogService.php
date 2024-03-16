@@ -16,6 +16,10 @@ class BlogService
     {
         return PostCategory::get();
     }
+    public function get()
+    {
+        return Post::with('postCategory')->orderByDesc('id')->get();
+    }
     public function insert($request)
     {
         try {
@@ -33,11 +37,6 @@ class BlogService
         return true;
     }
 
-    public function get()
-    {
-        return Post::with('postCategory')->orderByDesc('id')->paginate(5);
-    }
-
     public function update($request, $blog)
     {
         try {
@@ -53,8 +52,6 @@ class BlogService
 
         return true;
     }
-
-
     public function destroy($request)
     {
         $blog = Post::where('id', $request->input('id'))->first();
@@ -66,13 +63,6 @@ class BlogService
         }
 
         return false;
-    }
-    //End admin
-
-    // Bài viết mới nhất
-    public function blognew()
-    {
-        return Post::where('active', 1)->OrderBy('id', 'desc')->limit('3')->get();
     }
 
     // public function searchpost()
@@ -100,23 +90,5 @@ class BlogService
     public function blogdetail($id) {
         return Post::find($id)->where('active', 1);
     }
-
-    //Danh mục bài viết
-    public function show($id)
-    {
-        return Post::where('id', $id)
-            ->where('active', 1)
-            ->with('postCategory')
-            ->firstOrFail();
-    }
-
-    // public function more($id)
-    // {
-    //     return blog::select('id', 'title', 'description', 'content', 'thumb', '	created_at')
-    //         ->where('active', 1)
-    //         ->orderByDesc('id')
-    //         ->limit(8)
-    //         ->get();
-    // }
 
 }

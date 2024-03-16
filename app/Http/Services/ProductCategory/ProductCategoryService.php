@@ -6,7 +6,6 @@ namespace App\Http\Services\ProductCategory;
 
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Str;
 
 class ProductCategoryService
 {
@@ -15,9 +14,9 @@ class ProductCategoryService
         return ProductCategory::select('name', 'id')->orderbyDesc('id')->get();
     }
 
-    public function getAll()
+    public function get()
     {
-        return ProductCategory::orderbyDesc('id')->paginate(5);
+        return ProductCategory::orderbyDesc('id')->get();
     }
 
     public function create($request)
@@ -43,8 +42,8 @@ class ProductCategoryService
         $productcategory->active = (string)$request->input('active');
         $productcategory->save();
 
-        Session::flash('success', 'Cập nhật thành công Danh mục'); 
-        return true; 
+        Session::flash('success', 'Cập nhật thành công Danh mục');
+        return true;
     }
 
     public function destroy($request)

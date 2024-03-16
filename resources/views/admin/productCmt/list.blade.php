@@ -38,9 +38,8 @@
                                             {{-- <td>{{ !empty($cmt->user_id) ? $cmt->user->name : '' }}</td> --}}
                                             <td>{{ $cmt->name }}</td>
                                             <td>{{ $cmt->email }}</td>
-                                            <td>{{ $cmt->messages }}</td>
+                                            <td>{{ $cmt->content }}</td>
                                             <td>
-
                                                 <span class="rating">
                                                     @for ($i = 1; $i <= 5; $i++)
                                                        <i class="{{ $i <= $cmt->rating ? 'icofont-star' : '' }}"></i>
@@ -63,9 +62,6 @@
                     </div>
                 </div>
             </div>
-            {!! $productsCMT->links() !!}
-
         </div>
     </div>
-
 @endsection

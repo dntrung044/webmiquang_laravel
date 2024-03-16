@@ -42,23 +42,6 @@ class UserService
         return Product::where('cat_id', $product->cat_id)->limit(4)->whereNotIn('id', [$id])->get();
     }
 
-    public function minprice() {
-        return Product::min('price_sale');
-    }
-    // menu cat
-    public function cat1Product() {
-        $product = 7; //29
-        return Product::where('cat_id', $product)->limit(4)->get();
-    }
-    public function cat2Product() {
-        // $product = Product::where('id', $id)
-        // ->where('active', 1)
-        // ->with('productCategory')
-        // ->firstOrFail();
-        $product = 5;
-        return Product::where('cat_id', $product)->limit(4)->get();
-    }
-
     public function insertComment($request, $id)
     {
         try {

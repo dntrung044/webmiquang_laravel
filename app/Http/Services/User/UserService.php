@@ -12,16 +12,23 @@ use Illuminate\Support\Facades\Session;
 class UserService
 {
     public function get() {
-        return User::orderByDesc('id')->paginate(10);
+        return User::orderByDesc('id')->get();
     }
 
-
-    public function update($request, $user)
+    public function update($request, $id)
     {
+        $Role = $request->input('selectedRole');
+        $Level = $request->input('selectedLevel');
+        $Active = $request->input('selectedActive');
+
+        $user = User::find($id);
         try {
             DB::beginTransaction();
-            $user->fill($request->input());
-            $user->save();
+            $user->roles()->sync([$Role]);
+            $user->update([
+                'level' => $Level,
+                'active' => $Active
+            ]);
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -63,14 +70,4 @@ class UserService
 
     //     // return true;
     // }
-
-    public function destroy($request) {
-        $id = (int)$request->input('id');
-        $user = User::where('id', $id)->first();
-        if ($user) {
-            return User::where('id', $id)->delete();
-        }
-
-        return false;
-    }
 }

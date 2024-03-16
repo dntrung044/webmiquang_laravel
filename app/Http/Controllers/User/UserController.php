@@ -111,8 +111,7 @@ class UserController extends Controller
             foreach ($select as $d){
                 $output.='<option value="'.$d->name.'">'.$d->name.'</option>';
             }
-
-        echo  $output;
+         return response()->json(['html' => $output]);
     }
 
     public function calculate_ship(Request $request)

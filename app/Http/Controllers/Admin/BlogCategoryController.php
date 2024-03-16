@@ -21,7 +21,7 @@ class BlogCategoryController extends Controller
     {
         return view('admin.blogCategory.list', [
             'title' => 'Danh Sách Danh Mục bài viết',
-            'blogCategories' => $this->blogCategoryService->getAll()
+            'postcategories' => $this->blogCategoryService->getAll()
         ]);
     }
 

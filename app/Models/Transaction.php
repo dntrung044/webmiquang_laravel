@@ -26,7 +26,7 @@ class Transaction extends Model
     ];
 
     const STATUS_DEFAULT = "DEFAULT";
-    const STATUS_DEVLIVERING = "DEVLIVERING";
+    const STATUS_DELIVERING = "DELIVERING";
     const STATUS_DONE = "DONE";
     const STATUS_CANCELLED = "CANCELLED";
 

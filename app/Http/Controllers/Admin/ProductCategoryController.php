@@ -23,7 +23,7 @@ class ProductCategoryController extends Controller
     {
         return view('admin.productCategory.list', [
             'title' => 'Danh Sách Loại Món Ăn',
-            'productcategories' => $this->productcategoryService->getAll()
+            'productcategories' => $this->productcategoryService->get()
         ]);
     }
 
@@ -38,7 +38,7 @@ class ProductCategoryController extends Controller
     {
         $this->productcategoryService->create($request);
 
-        return redirect('/admin/productcategories/list');
+        return redirect()->route('categories.index');
     }
 
     public function show(ProductCategory $productcategory)
@@ -53,7 +53,7 @@ class ProductCategoryController extends Controller
     {
         $result = $this->productcategoryService->update($request, $productcategory);
         if ($result) {
-            return redirect('/admin/productcategories/list');
+            return redirect()->route('categories.index');
         }
 
         return redirect()->back();

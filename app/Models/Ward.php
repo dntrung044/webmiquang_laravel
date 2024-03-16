@@ -13,7 +13,7 @@ class Ward extends Model
     protected $fillable = [
         'name',
         'type',
-        'district_name'
+        'district_id'
     ];
 
     protected $primarykey = 'id ';
@@ -21,7 +21,12 @@ class Ward extends Model
 
     public function district()
     {
-        return $this->hasOne(District::class, 'ward_id', 'district_name')
+        return $this->hasOne(District::class, 'ward_id', 'district_id')
         ->withDefault(['name' => '']);
+    }
+
+    public function fees()
+    {
+        return $this->hasMany(Feeship::class, 'ward_id');
     }
 }

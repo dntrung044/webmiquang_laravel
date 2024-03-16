@@ -16,7 +16,7 @@
             <!-- Add Tickit-->
             <div class="modal-body">
                 <div class="deadline-form">
-                    <form action="" method="POST">  
+                    <form action="" method="POST">
                         <div class="col-md-6">
                             <label for="menu" class="form-label"> Ảnh</label>
                             <input class="form-control" type="file" id="upload" name="file" multiple="">
@@ -44,7 +44,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <a href="/admin/galleries/list"><button type="button" class="btn btn-secondary">Hủy</button></a>
+                            <a href="{{ route('galleries.index') }}"><button type="button" class="btn btn-secondary">Hủy</button></a>
                             <button type="submit" class="btn btn-primary">Cập nhật hình ảnh</button>
                         </div>
                         @csrf

@@ -17,7 +17,7 @@ class BlogCategoryService
 
     public function getAll()
     {
-        return PostCategory::orderbyDesc('id')->paginate(5);
+        return PostCategory::orderbyDesc('id')->get();
     }
 
     public function create($request)

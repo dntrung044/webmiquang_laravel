@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Storage;
 
 class SliderService
 {
+    public function get()
+    {
+        return Slider::orderByDesc('id')->get();
+    }
+
     public function insert($request)
     {
         try {
@@ -25,11 +30,6 @@ class SliderService
         }
 
         return true;
-    }
-
-    public function get()
-    {
-        return Slider::orderByDesc('id')->paginate(8);
     }
 
     public function update($request, $slider)
@@ -59,10 +59,5 @@ class SliderService
         }
 
         return false;
-    }
-// home main
-    public function show()
-    {
-        return Slider::where('active', 1)->orderBy('sort_by')->get();
     }
 }

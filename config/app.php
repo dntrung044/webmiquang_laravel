@@ -167,7 +167,7 @@ return [
         // Other service providers... SweetAlert
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         //PDF
-        Barryvdh\DomPDF\ServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class, 
         //debugbar
         Barryvdh\Debugbar\ServiceProvider::class,
 

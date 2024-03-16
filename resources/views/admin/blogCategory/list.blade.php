@@ -63,7 +63,6 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            {{-- {!! $postcategories->links() !!} con loi sly--}}
                         </div>
                     </div>
                 </div>

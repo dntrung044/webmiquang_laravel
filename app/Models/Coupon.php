@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Coupon extends Model
 {
     use HasFactory;
-    public $timestamps = false;
 
     protected $fillable = [
         'name',
@@ -18,7 +17,9 @@ class Coupon extends Model
         'condition',
         'date_start',
         'date_end',
-        'status'
+        'status',
+        'created_at',
+        'updated_at',
     ];
     protected $table = 'coupons';
     protected $primaryKey = 'id';

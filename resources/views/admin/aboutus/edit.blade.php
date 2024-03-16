@@ -15,8 +15,7 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Add Tickit-->
+ 
             <div class="modal-body">
                 <div class="deadline-form">
                         @foreach ($ab as $key => $aboutus)
@@ -86,7 +85,7 @@
 
 @endsection
 
-@section('footer')
+@section('script')
     <script>
         CKEDITOR.replace('content');
     </script>

@@ -5,14 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use App\Models\ProductComment;
-use Illuminate\Http\Request;
 
 class ProductCommentController extends Controller
 {
     // Cmt
-    public function listProductCmt()
+    public function index()
     {
-        $getCMT = ProductComment::orderByDesc('id')->paginate(8);
+        $getCMT = ProductComment::orderByDesc('id')->get();
 
         return view('admin.productCMT.list', [
             'title' => 'Danh Sách Bình luận Món Ăn',
@@ -20,7 +19,6 @@ class ProductCommentController extends Controller
         ]);
     }
 
-    // Trạng thái Cmt
     public function activeCmt($productcomment)
     {
         $productsCMT = ProductComment::find($productcomment);
@@ -30,8 +28,6 @@ class ProductCommentController extends Controller
 
         return redirect()->back()->with('success', 'Xử lý trang thái bình luận món ăn thành công');
     }
-
-    // Trạng thái CMT
     public function inactiveCmt($productcomment)
     {
         $productsCMT = ProductComment::find($productcomment);

@@ -4,6 +4,14 @@
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <!-- Favicon-->
     <link rel="icon" href="favicon.png" type="image/x-icon">
+    <title>
+        <?php if( $title): ?>
+            <?php echo e($title); ?>
+
+        <?php else: ?>
+             Quản lý
+        <?php endif; ?>
+    </title>
     <!-- plugin css file  -->
     <link rel="stylesheet" href="<?php echo e(asset('/teamplate/admin/assets/plugin/datatables/responsive.dataTables.min.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('/teamplate/admin/assets/plugin/datatables/dataTables.bootstrap5.min.css')); ?>">

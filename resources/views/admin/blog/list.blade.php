@@ -11,9 +11,15 @@
                 <div class="border-0 mb-4">
                     <div
                         class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
-                        <h3 class="fw-bold mb-0"> {{ $titles }}</h3>
+                        <h3 class="fw-bold mb-0">
+                            @if($title)
+                                {{ $title }}
+                            @else
+                                Quản lý
+                            @endif
+                        </h3>
                         <div class="col-auto d-flex w-sm-100">
-                            <a href="/admin/blogs/add">
+                            <a href="{{ route('posts.add') }}">
                                 <button type="button" class="btn btn-dark btn-set-task w-sm-100">
                                     <i class="icofont-plus-circle me-2 fs-6"></i>Thêm danh mục
                                 </button>
@@ -22,8 +28,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Row end  -->
-            {{-- List --}}
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card mb-3">
@@ -48,7 +52,7 @@
                                             <td>{{ $post->description }}</td>
                                             <td>
                                                 <a href="{{ $post->thumb }}" target="_blank">
-                                                    <img src="{{ $post->thumb }}" height="50px">
+                                                    <img src="{{ $post->thumb }}" style="height: 100px">
                                                 </a>
                                             </td>
 
@@ -57,35 +61,29 @@
                                             <td>
                                                 <div class="btn-group" role="group"
                                                     aria-label="Basic outlined example">
-                                                    <button type="button" class="btn btn-outline-secondary"
-                                                        data-bs-toggle="modal">
-                                                        <a class="btn btn-primary btn-sm"
-                                                            href="/admin/blogs/edit/{{ $post->id }}">
+                                                    <a href="{{ route('posts.edit', ['post'=>  $post->id]) }} "
+                                                        class="btn btn-outline-secondary">
+                                                        <button class="btn btn-primary btn-sm"  type="button">
                                                             <i class="icofont-edit text-success"></i>
-                                                        </a>
-                                                    </button>
+                                                        </button>
+                                                    </a>
 
-                                                    <button type="button" class="btn btn-outline-secondary deleterow">
-                                                        <a href="#"
-                                                            onclick="removeRow({{ $post->id }}, '/admin/blogs/destroy')">
+                                                    <a href="#" class="btn btn-outline-secondary"
+                                                        onclick="removeRow({{ $post->id }}, '{{ route('posts.destroy') }}')">
+                                                        <button type="button" class="btn btn-warning btn-sm" >
                                                             <i class="icofont-ui-delete text-danger"></i>
-                                                        </a>
-                                                    </button>
+                                                        </button>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-
-
                         </div>
                     </div>
                 </div>
             </div>
-            {!! $blogs->links() !!}
-
         </div>
     </div>
-
 @endsection

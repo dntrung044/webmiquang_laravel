@@ -10,9 +10,9 @@
                         class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                         <h3 class="fw-bold mb-0"> {{ $title }}</h3>
                         <div class="col-auto d-flex w-sm-100">
-                            <a href="/admin/feeships/add">
+                            <a href="{{ route('feeships.add') }}">
                                 <button type="button" class="btn btn-dark btn-set-task w-sm-100">
-                                    <i class="icofont-plus-circle me-2 fs-6"></i>Thêm Phí Ship
+                                    <i class="icofont-plus-circle me-2 fs-6"></i>Thêm Phí Vận Chuyển
                                 </button>
                             </a>
                         </div>
@@ -36,44 +36,38 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($feeships as $key => $ship)
+                                    @foreach ($feeships as $key => $fee)
                                         <tr>
-                                            <td>{{ $ship->id }}</td>
-                                            <td>{{ $ship->district }}</td>
-                                            <td>{{ $ship->ward }}</td>
-                                            <td>{{ $ship->feeship }}</td>
+                                            <td>{{ $fee->id }}</td>
+                                            <td>{{ $fee->district->name }}</td>
+                                            <td>{{ $fee->ward->name }}</td>
+                                            <td>{{ number_format($fee->feeship, 0, '', '.') }}đ</td>
                                             <td>
-                                                <div class="btn-group" role="group"
-                                                    aria-label="Basic outlined example">
-                                                    <button type="button" class="btn btn-outline-secondary"
-                                                        data-bs-toggle="modal">
-                                                        <a class="btn btn-primary btn-sm"
-                                                            href="/admin/feeships/edit/{{ $ship->id }}">
+                                                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                    <a class="btn btn-outline-secondary"
+                                                        href="{{ route('feeships.edit', ['feeship' => $fee->id]) }}">
+                                                        <button class="btn btn-primary btn-sm"  type="button">
                                                             <i class="icofont-edit text-success"></i>
-                                                        </a>
-                                                    </button>
+                                                        </button>
+                                                    </a>
 
-                                                    <button type="button" class="btn btn-outline-secondary deleterow">
-                                                        <a href="#"
-                                                            onclick="removeRow({{ $ship->id }}, '/admin/feeships/destroy')">
+                                                    <a href="#" class="btn btn-outline-secondary"
+                                                        onclick="removeRow({{ $fee->id }}, '{{ route('feeships.destroy') }}')">
+                                                        <button type="button" class="btn btn-warning btn-sm" >
                                                             <i class="icofont-ui-delete text-danger"></i>
-                                                        </a>
-                                                    </button>
+                                                        </button>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-
-
                         </div>
                     </div>
                 </div>
             </div>
-            {!! $feeships->links() !!}
-
         </div>
     </div>
-
+    @include('sweetalert::alert')
 @endsection

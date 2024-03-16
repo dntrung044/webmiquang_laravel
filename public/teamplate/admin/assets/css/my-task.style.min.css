@@ -22871,3 +22871,9 @@ iframe.map_contact {
 .rating.active {
     color: #fec348;
 }
+
+    /* Tự định nghĩa màu cho nút đăng xuất */
+    .logout-btn {
+        background-color: #dc3545; /* Màu đỏ của Bootstrap */
+        color: #fff; /* Màu chữ trắng */
+      }

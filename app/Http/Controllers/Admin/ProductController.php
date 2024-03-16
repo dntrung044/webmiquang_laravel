@@ -27,19 +27,26 @@ class ProductController extends Controller
             'product_categories' => $this->productService->getCategory()
         ]);
     }
+    public function create()
+    {
+        return view('admin.products.add', [
+           'title' => 'Thêm Phí Vận Chuyển mới',
+           'product_categories' => $this->productService->getCategory()
+        ]);
+    }
 
     public function store(ProductRequest $request)
     {
         Product::create($request->all());
-        return redirect('/admin/products/list');
+        return redirect()->route('products.index');
     }
 
     public function show(Product $product)
     {
         return view('admin.products.edit', [
             'title' => 'Chỉnh Sửa Món Ăn',
-            'products' => $product,
-            'productcategories' => $this->productService->getCategory()
+            'product' => $product,
+            'product_categories' => $this->productService->getCategory()
         ]);
     }
 
