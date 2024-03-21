@@ -5,9 +5,9 @@
             <nav class="navbar navbar-expand-lg navbar-light px-0 py-0">
                 <div class="row">
                     <a href="/" id="logo">
-                        <img src="{{ asset('teamplate/img/logo0.png') }}" width="170" height="50" alt=""
+                        <img src="{{ asset('teamplate/img/logo0 .png') }}" width="170" height="50" alt=""
                             class="logo_normal">
-                        <img src="{{ asset('teamplate/img/logo1.png') }}" width="170" height="50" alt=""
+                        <img src="{{ asset('teamplate/img/logo1 .png') }}" width="170" height="50" alt=""
                             class="logo_sticky">
                     </a>
 

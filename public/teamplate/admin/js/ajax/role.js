@@ -60,10 +60,6 @@ $(document).ready(function() {
         var id = $(this).val();
         $('#edit_modal').modal('show');
         var url = '{{ route('role.edit', ':id') }}';
-
-
-       
-
         var url = editRoute.replace(':id', id);
         url = url.replace(':id', id);
 

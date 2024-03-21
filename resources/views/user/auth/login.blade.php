@@ -65,7 +65,7 @@
                             @csrf
                             <div class="flex flex-col space-y-1">
                                 <label class="text-base font-semibold text-gray-700">Email</label>
-                                <input name="email" type="email" style="background: rgb(182, 180, 180);" autofocus placeholder="Nhập địa chỉ Email"
+                                <input name="email"  value=" {{ old('email') }}" type="email" style="background: rgb(182, 180, 180);" autofocus placeholder="Nhập địa chỉ Email"
                                     class="px-4 py-2 transition duration-300 border border-yellow-400 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-yellow-200" />
                             </div>
                             <div class="flex flex-col space-y-1">
@@ -73,7 +73,7 @@
                                     <label class="text-base font-semibold text-gray-700">Mật khẩu</label>
                                     <a href="{{ route('forgotPassword') }}" class="text-sm text-blue-600 hover:underline focus:text-blue-800">Quên mật khẩu?</a>
                                 </div>
-                                <input name="password" type="password" placeholder="Nhập mật khẩu" style="background: rgb(182, 180, 180);"
+                                <input name="password" type="password" value=" {{ old('password') }}" placeholder="Nhập mật khẩu" style="background: rgb(182, 180, 180);"
                                     class="px-4 py-2 transition duration-300 border border-yellow-400 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-yellow-200" />
                             </div>
 

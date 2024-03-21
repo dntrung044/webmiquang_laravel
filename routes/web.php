@@ -241,23 +241,22 @@ Route::prefix('blog')->group(function () {
     //category
     Route::get('danh-muc/{id}-{slug}', [User\BlogController::class, 'category'])->name("blog.category");
     //search
-    Route::post('tim-kiem-ajax', [User\BlogController::class, 'searchAjax'])->name("blog.searchAjax");
-    Route::post('tim-kiem', [User\BlogController::class, 'search'])->name("blog.search");
-
+    Route::post('/tim-kiem-ajax', [User\BlogController::class, 'searchAjax'])->name("blog.searchAjax");
+    Route::post('/tim-kiem', [User\BlogController::class, 'search'])->name("blog.search");
     //comment
-    Route::middleware(['auth'])->group(function () {
-        Route::prefix('binh-luan')->group(function () {
-            Route::post('{post_id}', [User\BlogController::class, 'postComment'])->name("comment.sent");
-            Route::post('load_comment', [User\BlogController::class, 'load_Comment'])->name("comment.load_more");
-            Route::post('thich', [User\BlogController::class, 'postCommentLike'])->name("comment.like");
-        });
-        //reply
-        Route::prefix('tra-loi')->group(function () {
-            Route::post('/comment', [User\BlogController::class, 'postReply'])->name("reply.sent");
-            Route::post('/load_reply', [User\BlogController::class, 'load_Reply'])->name("reply.load_more");
-            Route::post('/thich', [User\BlogController::class, 'postReplyLike'])->name("reply.like");
-        });
+    Route::prefix('binh-luan')->group(function () {
+        Route::post('gui/{post_id}', [User\BlogController::class, 'add_comment'])->name("comment.send");
+        Route::post('load_comment', [User\BlogController::class, 'load_Comment'])->name("comment.load_more");
+        Route::post('moi-nhat', [User\BlogController::class, 'latest_comment'])->name("comment.latest");
+        Route::post('thich-nhat', [User\BlogController::class, 'popular_comment'])->name("comment.popular");
+        Route::post('thich', [User\BlogController::class, 'postCommentLike'])->name("comment.like");
+
     });
+ //reply
+ Route::prefix('tra-loi')->group(function () {
+    Route::post('binh-luan/{id}', [User\BlogController::class, 'add_reply'])->name("reply.send");
+    Route::post('thich', [User\BlogController::class, 'postReplyLike'])->name("reply.like");
+});
 });
 
 #Giới thiệu
