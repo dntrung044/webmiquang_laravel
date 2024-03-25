@@ -1,24 +1,18 @@
-<!--HEADER PART START-->
 <header>
     <div class="header py-1">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light px-0 py-0">
-                <div class="row">
-                    <a href="/" id="logo">
-                        <img src="{{ asset('teamplate/img/logo0 .png') }}" width="170" height="50" alt=""
-                            class="logo_normal">
-                        <img src="{{ asset('teamplate/img/logo1 .png') }}" width="170" height="50" alt=""
-                            class="logo_sticky">
-                    </a>
-
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="icofont-navigation-menu"></i>
-                    </button>
-                </div>
+                    <div class="d-flex flex-wrap-nowrap">
+                        <a href="/" id="logo" class="navbar-brand">
+                            <img src="{{ asset('teamplate/img/logo0.png') }}" width="170" height="50" alt=""
+                                class="logo_normal">
+                            <img src="{{ asset('teamplate/img/logo1.png') }}" width="170" height="50" alt=""
+                                class="logo_sticky">
+                        </a>
+                    </div>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav navbar-custom">
+                    <ul class="navbar-nav navbar-custom ml-auto">
                         <li class="nav-item {{ request()->segment(1) == '' ? 'active' : '' }}">
                             <a class="nav-link" href="/">Trang chủ</a>
                         </li>
@@ -38,8 +32,11 @@
                         </li>
                     </ul>
                 </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="icofont-navigation-menu"></i>
+                </button>
             </nav>
         </div>
     </div>
 </header>
-<!--HEADER PART END-

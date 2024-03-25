@@ -35,7 +35,7 @@ class BlogController extends Controller
         $blog->save();
         $blognew = Post::where('active', 1)->get();
         $countComment = PostComment::where('post_id', $id)->where('active', 1)->count();
-        $list_comment = PostComment::where('post_id',$id)->orderby('id', 'DESC')->take($comment_number)->get();
+        $list_comment = PostComment::where('post_id',$id)->where('active', 1)->orderby('id', 'DESC')->take($comment_number)->get();
 
         return view('user.blog.detail', [
             'title' => 'Chi tiết bài viết - Mì Quảng Bà Mua',
@@ -43,13 +43,6 @@ class BlogController extends Controller
             'blognew' => $blognew,
             'countTotalComments' => $countComment,
             'comments' => $list_comment,
-        ]);
-    }
-
-    public function showComment()
-    {
-        return response()->json([
-            'functions' => PostComment::where('parent_id', '0')->get(),
         ]);
     }
 
@@ -103,7 +96,7 @@ class BlogController extends Controller
                 ->where('active', 1)
                 ->with('postCategory')
                 ->firstOrFail();
-        $comments = PostComment::where('post_id', $post_id)->orderBy('id', 'DESC')->get();
+        $comments = PostComment::where('post_id', $post_id)->where('active', 1)->orderBy('id', 'DESC')->get();
         $comment_component = view('user.blog.components.comment_component', compact('comments', 'blog'))->render();
 
         return response()->json([
@@ -120,7 +113,21 @@ class BlogController extends Controller
                 ->where('active', 1)
                 ->with('postCategory')
                 ->firstOrFail();
-        $comments = PostComment::where('post_id', $post_id)->orderBy('number_like', 'DESC')->get();
+
+                $comments = PostComment::withCount('likes')
+                            ->with(['replies' => function ($query) {
+                                $query->withCount('likes')->orderBy('likes_count', 'desc');
+                            }])->where('post_id', $post_id)->where('active', 1)->get()
+                            ->orderByRaw('likes_count + (SELECT COALESCE(SUM(likes_count), 0) FROM replies WHERE comment_id = comments.id) DESC');
+
+                // $popular_comments = PostComment::withCount('likes')
+                //                     ->orderBy('number_like', 'desc')
+                //                     ->get();
+                // $comments = PostCommentReply::whereIn('comment_id', $popular_comments->pluck('id'))
+                //                     ->withCount('likes')
+                //                     ->orderBy('number_like', 'desc')
+                //                     ->get();
+        // $comments = PostComment::where('post_id', $post_id)->where('active', 1)->orderBy('number_like', 'DESC')->get();
         $comment_component = view('user.blog.components.comment_component', compact('comments', 'blog'))->render();
 
         return response()->json([
@@ -140,15 +147,83 @@ class BlogController extends Controller
                 ->where('active', 1)
                 ->with('postCategory')
                 ->firstOrFail();
-        $comments  = PostComment::where('post_id',$post_id)->where('id', '<', $last_id)->orderby('id', 'DESC')->limit($currentCount)->get();
+        $comments  = PostComment::where('post_id',$post_id)->where('active', 1)->where('id', '<', $last_id)->orderby('id', 'DESC')->limit($currentCount)->get();
 
+        // if ($comments->isEmpty()) {
+            $comment_component = view('user.blog.components.comment_component', compact('comments', 'blog'))->render();
+            return response()->json([
+                'success' => 'Xem thêm bình luận!',
+                'comment_component' => $comment_component,
+                'comments' => $comments,
+                'code' => 200
+            ]);
+        // } else {
+        //     $button_out_data = '<div style="margin-top: 36px;">
+        //         <button type="button" class="btn btn-default form-control">
+        //             không còn bình luận nào
+        //         </button>
+        //     </div>';
+        //     return response()->json([
+        //         'success' => 'Đã là bình luận cuối cùng!',
+        //         'button_out_data' => $button_out_data,
+        //         'code' => 201
+        //     ]);
+        // }
+    }
+    public function comment_hidden(Request $request)
+    {
+        $comment_id = $request->id_comment;
+        $post_id = $request->post_id;
+        $comment = PostComment::find($comment_id);
+
+        if ($comment) {
+            $comment->active = 0;
+            $comment->save();
+        } else {
+            return response()->json([
+                'error' => 'Ẩn bình luận thất bại!',
+            ]);
+        }
+
+        $blog = Post::where('id', $post_id)
+            ->where('active', 1)
+            ->with('postCategory')
+            ->firstOrFail();
+        $comments =  PostComment::where('post_id',$post_id)->where('active', 1)->orderby('id', 'DESC')->get();
         $comment_component = view('user.blog.components.comment_component', compact('comments', 'blog'))->render();
 
         return response()->json([
-            'success' => 'Xem thêm bình luận!',
+            'success' => 'Ẩn bình luận thành công!',
             'comment_component' => $comment_component,
-            'comments' => $comments,
-            'code' => 200
+            'code' => 200,
+        ]);
+    }
+    public function reply_hidden(Request $request)
+    {
+        $reply_id = $request->id_reply;
+        $post_id = $request->post_id;
+        $reply = PostCommentReply::find($reply_id);
+
+        if ($reply) {
+            $reply->active = 0;
+            $reply->save();
+        } else {
+            return response()->json([
+                'error' => 'Ẩn trả lời thất bại!',
+            ]);
+        }
+
+        $blog = Post::where('id', $post_id)
+            ->where('active', 1)
+            ->with('postCategory')
+            ->firstOrFail();
+        $comments =  PostComment::where('post_id',$post_id)->where('active', 1)->orderby('id', 'DESC')->get();
+        $comment_component = view('user.blog.components.comment_component', compact('comments', 'blog'))->render();
+
+        return response()->json([
+            'success' => 'Ẩn trả lời thành công!',
+            'comment_component' => $comment_component,
+            'code' => 200,
         ]);
     }
 
@@ -177,7 +252,7 @@ class BlogController extends Controller
                 ->where('active', 1)
                 ->with('postCategory')
                 ->firstOrFail();
-        $comments = $blog->comments;
+        $comments =  PostComment::where('post_id',$post_id)->where('active', 1)->orderby('id', 'DESC')->get();
         $comment_component = view('user.blog.components.comment_component', compact('comments', 'blog'))->render();
 
         return response()->json([
@@ -191,6 +266,7 @@ class BlogController extends Controller
     {
         $post_id = $request->post_id;
         $comment_id = $request->comment_id;
+        $commented_id = $request->commented_id;
         $validation = Validator::make($request->all(), [
             'content' => 'required',
         ], [
@@ -203,6 +279,7 @@ class BlogController extends Controller
             $reply = new PostCommentReply();
             $reply->user_id =  Auth::id();
             $reply->comment_id = $comment_id;
+            $reply->commented_id = $commented_id;
             $reply->content = $request->content;
             $reply->active = 1;
             $reply->save();
@@ -211,9 +288,7 @@ class BlogController extends Controller
                 ->where('active', 1)
                 ->with('postCategory')
                 ->firstOrFail();
-
-
-        $comments = $blog->comments;
+        $comments =  PostComment::where('post_id',$post_id)->where('active', 1)->orderby('id', 'DESC')->get();
         $reply_component = view('user.blog.components.comment_component', compact('comments', 'blog'))->render();
 
 
@@ -228,7 +303,7 @@ class BlogController extends Controller
     {
         $id = $request->id_comment;
         $user = Auth::user();
-        $comment = PostComment::find($id);
+        $comment = PostComment::where('active', 1)->find($id);
 
         $likeComment = $user->likedComments()->where('comment_id', $id)->count();
         if ($likeComment == 0) {
@@ -253,7 +328,7 @@ class BlogController extends Controller
     {
             $id = $request->id_reply;
             $user = Auth::user();
-            $reply = PostCommentReply::find($id);
+            $reply = PostCommentReply::where('active', 1)->find($id);
 
             $likeReply = $user->likedReplies()->where('reply_id', $id)->count();
 

@@ -19,7 +19,7 @@ class MenuController extends Controller {
     {
         return view('admin.menu.list', [
             'title' => 'Danh Sách Danh Mục Mới Nhất',
-            'menus' => $this->menuService->getAll()
+            'menus' => $this->menuService->get()
         ]);
     }
 

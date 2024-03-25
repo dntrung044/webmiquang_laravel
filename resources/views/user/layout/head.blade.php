@@ -1,7 +1,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="csrf-token" content="{{ csrf_token() }}">​
     <title>{{ $title }}</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicons-->
     <link rel="shortcut icon" href="{{ asset('teamplate/img/favicon/favicon.png') }}" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('teamplate/img/favicon/apple-touch-icon.png') }}">

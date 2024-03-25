@@ -33,7 +33,7 @@ Route::prefix('admin')->middleware('can:admin-access')->group(function () {
             Route::post('edit/{gallery}', [Admin\GalleryController::class, 'update'])->name('galleries.update');
             Route::DELETE('destroy', [Admin\GalleryController::class, 'destroy'])->name('galleries.destroy');
         });
-        Route::prefix('banner')->group(function () {
+        Route::prefix('banners')->group(function () {
             Route::get('index', [Admin\MenuController::class, 'index'])->name('banners.index');
             Route::get('add', [Admin\MenuController::class, 'create'])->name('banners.add');
             Route::post('add', [Admin\MenuController::class, 'store'])->name('banners.store');
@@ -109,11 +109,11 @@ Route::prefix('admin')->middleware('can:admin-access')->group(function () {
 
     #Quản lý hóa đơn
     Route::prefix('transactions')->middleware(['can:order-edit'])->group(function () {
-        Route::get('/', 'Admin\TransactionController@index')->name('transactions.index');
-        Route::get('/detail/{transaction}', 'Admin\TransactionController@detail')->name('transactions.detail');
-        Route::get('/active{transaction}', [Admin\TransactionController::class, 'active'])->name('transactions.active');
-        Route::get('/cancel{transaction}', [Admin\TransactionController::class, 'cancel'])->name('transactions.cancel');
-        Route::DELETE('/destroy', [Admin\TransactionController::class, 'destroy'])->name('transactions.destroy');
+        Route::get('index', 'Admin\TransactionController@index')->name('transactions.index');
+        Route::get('detail/{transaction}', 'Admin\TransactionController@detail')->name('transactions.detail');
+        Route::get('active{transaction}', [Admin\TransactionController::class, 'active'])->name('transactions.active');
+        Route::get('cancel{transaction}', [Admin\TransactionController::class, 'cancel'])->name('transactions.cancel');
+        Route::DELETE('destroy', [Admin\TransactionController::class, 'destroy'])->name('transactions.destroy');
         #Quản lý phí vận chuyển
         Route::prefix('feeships')->group(function () {
             Route::get('list', [Admin\FeeShipController::class, 'index'])->name('feeships.index');
@@ -250,12 +250,15 @@ Route::prefix('blog')->group(function () {
         Route::post('moi-nhat', [User\BlogController::class, 'latest_comment'])->name("comment.latest");
         Route::post('thich-nhat', [User\BlogController::class, 'popular_comment'])->name("comment.popular");
         Route::post('thich', [User\BlogController::class, 'postCommentLike'])->name("comment.like");
+        Route::post('an-binh-luan', [User\BlogController::class, 'comment_hidden'])->name("comment.hidden");
+
 
     });
- //reply
- Route::prefix('tra-loi')->group(function () {
-    Route::post('binh-luan/{id}', [User\BlogController::class, 'add_reply'])->name("reply.send");
-    Route::post('thich', [User\BlogController::class, 'postReplyLike'])->name("reply.like");
+    //reply
+    Route::prefix('tra-loi')->group(function () {
+        Route::post('binh-luan/{id}', [User\BlogController::class, 'add_reply'])->name("reply.send");
+        Route::post('thich', [User\BlogController::class, 'postReplyLike'])->name("reply.like");
+        Route::post('an-tra-loi', [User\BlogController::class, 'reply_hidden'])->name("reply.hidden");
 });
 });
 

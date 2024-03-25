@@ -31,7 +31,7 @@
                             <ul>
                                 <li>
                                     <a href="blog/<?php echo e($blog->postCategory->name); ?>">
-                                        <i class="icon_folder-alt"></i>
+                                        <i class="icon_menu"></i>
                                         <?php echo e($blog->postCategory->name); ?>
 
                                     </a>
@@ -55,7 +55,7 @@
                     </div>
                     <!-- /single-post -->
 
-                    <div id="comments">
+                        
                         <div class="col-md-12 block">
                             <div class="block-header">
                                 <div class="title">
@@ -92,17 +92,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="comment-module">
-                                    <?php echo $__env->make('user.blog.components.comment_component', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                                </div>
-
-                                
                             <?php else: ?>
                                 <button type="button" class="btn btn-info btn-round show_model_login" data-toggle="modal"
-                                    data-target="#loginModal"> Vui lòng đăng nhập </button>
+                                    data-target="#loginModal"> Vui lòng đăng nhập để viết bình luận! </button>
                             <?php endif; ?>
+                            <div class="comment-module">
+                                <?php echo $__env->make('user.blog.components.comment_component', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                            </div>
                         </div>
-                    </div>
 
                     
                    <?php echo $__env->make('user.blog.components.login_modal_component', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

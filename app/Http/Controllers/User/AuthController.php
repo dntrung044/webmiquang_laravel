@@ -203,8 +203,8 @@ class AuthController extends Controller
             'email' => 'required|email:filter|exists:users',
             'password' => 'required',
         ], [
-            'email.required' => 'Vui lòng nhập địa chỉ Email',
-            'password.required' => 'Vui lòng nhập mật khẩu',
+            'email.required' => 'Vui lòng nhập địa chỉ Email!',
+            'password.required' => 'Vui lòng nhập mật khẩu!',
         ]);
 
         if ($validation->fails()) {

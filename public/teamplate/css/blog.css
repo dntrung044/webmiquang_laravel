@@ -438,27 +438,6 @@ article.blog .post_info ul li:last-child i {
 
 
 
-
-
-
-
-#comments {
-    padding: 10px 0 0px 0;
-    margin-bottom: 30px;
-}
-
-#comments ul {
-
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-
-#comments ul li {
-    padding: 25px 0 0 0;
-    list-style: none;
-}
-
 .avatar {
     float: left;
     margin-right: 25px;
@@ -857,6 +836,7 @@ div.comment-module ul {
 div.comment-module ul li {
     width: 100%;
     position: relative;
+    padding: 10px 0;
 }
 
 div.comment-module ul li .comment {
@@ -866,6 +846,7 @@ div.comment-module ul li .comment {
 div.comment-module ul li .reply {
     width: 100%;
     display: flex;
+    padding: 10px 0;
 }
 
 
@@ -995,7 +976,7 @@ div.comment-module ul li::before {
     left: 64px;
     transform: translateX(-23px);
     width: 2px;
-    height: calc(100% - 83px);
+    height: calc(100% - 108px);
     background: #c5c5c5;
 }
 
@@ -1189,7 +1170,7 @@ div.comment-module ul li ul {
     border: 1px solid #e8e8e8;
     border-radius: 96px;
 }
-/* .title-comment {
+.title-comment {
     display: flex;
     align-items: flex-start;
     margin: 12px;
@@ -1211,7 +1192,7 @@ div.comment-module ul li ul {
     line-height: 16px;
     border: 1px solid #e8e8e8;
     border-radius: 96px;
-} */
+}
 .writing {
     background: #ffffff;
     border: 1px solid #e8e8e8;
@@ -1470,14 +1451,15 @@ p a.tagged-user {
     margin: 20px 0 0 0;
     padding: 20px 0;
     width: 160px;
+    height: auto;
     left: 50%;
     margin-left: calc((160px / 2) * -1);
     box-sizing: border-box;
     z-index: 2;
-
-    background: white;
+    background: rgb(231, 230, 230);
     border-radius: 6px;
     list-style: none;
+    display: none;
 }
 
 .media-option .ul_dropdown .li_dropdown {

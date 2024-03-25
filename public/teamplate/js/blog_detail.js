@@ -27,10 +27,9 @@ $(document).on("click", ".load_more_comment", function (e) {
             if (data.code === 200) {
                 $('#comment-list').html(data.comment_component);
                 loadMoreButton.remove();
-                // Kiểm tra số lượng bình luận mới
-                if (data.comments.length === 0) {
-                    loadMoreButton.hide();
-                }
+            } else {
+                loadMoreButton.remove();
+                $(".load_more_comment").html(data.button_out_data);
             }
         }
     });
@@ -53,6 +52,13 @@ $(document).on("click", ".latest_button", function (e) {
             if (data.code === 200) {
                 $('#comment-list').html(data.comment_component);
                 show_loadmore()
+            } else{
+                Swal.fire({
+                    type: 'error',
+                    title: data.error,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             }
         }
     });
@@ -75,6 +81,13 @@ $(document).on("click", ".popular_button", function (e) {
             if (data.code === 200) {
                 $('#comment-list').html(data.comment_component);
                 show_loadmore()
+            } else{
+                Swal.fire({
+                    type: 'error',
+                    title: data.error,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             }
         }
     });
@@ -131,9 +144,68 @@ $(document).on("click", ".like-comment", function (e) {
                 } else {
                     $('.comment-active_'+ id_comment).addClass('active');
                 }
+            } else{
+                Swal.fire({
+                    type: 'error',
+                    title: data.error,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             }
         }
     });
+});
+$(document).on('click', '.button_ul_dropdown', function(ev) {
+    ev.preventDefault();
+    var id = $(this).data('id');
+    let form_dropdown = '.form-dropdown-' + id;
+
+    $('.ul_dropdown').css('display') === 'none';
+    if ($('.ul_dropdown').css('display') === 'none') {
+        //mở ra
+        $('.ul_dropdown').slideUp();
+        $(form_dropdown).slideDown();
+   } else {
+       // đóng lại
+       $(form_dropdown).slideUp();
+       $('.ul_dropdown').css('display') === 'none';
+   }
+});
+$(document).on("click", ".button_comment_hidden", function (e) {
+    e.preventDefault();
+    var id_comment = $(this).data("id");
+    var url = $(this).data('url');
+    var post_id = $(this).data('id_blog')
+    var _token = $("input[name='_token']").val();
+    $.ajax({
+        url: url,
+        method: 'POST',
+        data: { _token: _token, id_comment: id_comment, post_id:post_id },
+        success: function (data) {
+            if (data.code === 200) {
+                Swal.fire({
+                    type: 'success',
+                    title: data.success,
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(function () {
+                    $('#comment-list').html(data.comment_component);
+                    show_loadmore();
+                });
+            } else{
+                Swal.fire({
+                    type: 'error',
+                    title: data.error,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        }
+    });
+});
+$(document).on("click", ".report_comment", function (e) {
+    e.preventDefault();
+    alert('Tính năng vẫn chưa phát tiển!')
 });
 
 // --------------------------reply--------------------------
@@ -141,6 +213,11 @@ $(document).on("click", ".show-reply-form", function (e) {
     e.preventDefault();
     var id = $(this).data('id');
     let form_reply = '.form_reply-' + id;
+    var commenter_name = $(this).data('commenter_name');
+    var commenter_id = $(this).data('commenter_id');
+
+    $('.show_reply_name').text('@' + commenter_name);
+    $('.send-reply').attr('data-commenter_id', commenter_id);
 
     if ($(form_reply).css('display') === 'none') {
          //mở ra
@@ -151,12 +228,10 @@ $(document).on("click", ".show-reply-form", function (e) {
         $('.form_replies').slideUp();
     }
 });
-
 $(document).on("click", ".close-reply-form", function (e) {
     e.preventDefault();
     $('.form_replies').slideUp();
 });
-
 $(document).on("click", ".send-reply", function (e) {
     e.preventDefault();
     var comment_id = $(this).data("id");
@@ -165,11 +240,12 @@ $(document).on("click", ".send-reply", function (e) {
     var _token = $("input[name='_token']").val();
     var content_reply_id = '.content-reply-' + comment_id;
     var content_reply = $(content_reply_id).val();
+    var commented_id = $(this).data('commenter_id');
 
     $.ajax({
         url: url,
         method: 'POST',
-        data: { _token: _token, comment_id: comment_id, content: content_reply, post_id: post_id },
+        data: { _token: _token, comment_id: comment_id, commented_id: commented_id, content: content_reply, post_id: post_id },
         success: function (data) {
             if (data.code === 200) {
                 Swal.fire({
@@ -183,6 +259,14 @@ $(document).on("click", ".send-reply", function (e) {
                     $(content_reply_id).val('');
 
                     show_loadmore();
+                });
+            } else {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Đã xảy ra lỗi!',
+                    text: 'Thông báo lỗi từ máy chủ',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
                 });
             }
         }
@@ -206,6 +290,71 @@ $(document).on("click", ".like-reply", function (e) {
                 } else {
                     $('.reply-active_' + id_reply).addClass('active');
                 }
+            } else {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Đã xảy ra lỗi!',
+                    text: 'Thông báo lỗi từ máy chủ',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                });
+            }
+        }
+    });
+});
+
+$(document).on("click", ".reply-form", function (e) {
+    e.preventDefault();
+    var responder_name = $(this).data('reply_name');
+    var responder_id = $(this).data('reply_id');
+
+    $('.show_reply_name').text('@' + responder_name);
+    $('.send-reply').attr('data-commenter_id', responder_id);
+});
+$(document).on('click', '.button_ul_dropdown_reply', function(ev) {
+    ev.preventDefault();
+    var id = $(this).data('id');
+    let form_dropdown = '.form-dropdown-reply_' + id;
+
+    $('.ul_dropdown').css('display') === 'none';
+    if ($('.ul_dropdown').css('display') === 'none') {
+        //mở ra
+        $('.ul_dropdown').slideUp();
+        $(form_dropdown).slideDown();
+   } else {
+       // đóng lại
+       $(form_dropdown).slideUp();
+       $('.ul_dropdown').css('display') === 'none';
+   }
+});
+$(document).on("click", ".button_reply_hidden", function (e) {
+    e.preventDefault();
+    var id_reply = $(this).data("id");
+    var url = $(this).data('url');
+    var post_id = $(this).data('id_blog')
+    var _token = $("input[name='_token']").val();
+    $.ajax({
+        url: url,
+        method: 'POST',
+        data: { _token: _token, id_reply: id_reply, post_id:post_id },
+        success: function (data) {
+            if (data.code === 200) {
+                Swal.fire({
+                    type: 'success',
+                    title: data.success,
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(function () {
+                    $('#comment-list').html(data.comment_component);
+                    show_loadmore();
+                });
+            } else{
+                Swal.fire({
+                    type: 'error',
+                    title: data.error,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             }
         }
     });
@@ -253,20 +402,20 @@ $(document).on("click", ".btn-login", function (e) {
                     let _html_error =
                         '<div class="alert alert-danger">';
                     for (let error of data.error) {
-                        _html_error += '<li> ${error}</li>';
+                        let formattedError = error.split('').join(' ');
+                        _html_error += `${formattedError}`;
                     }
                     _html_error += '</div>'
                     $('#login-error').html(_html_error);
                 });
-            }
-            else {
-                let _html_error =
-                    '<div class="alert alert-danger">';
-                for (let error of data.error) {
-                    _html_error += '<li> ${error}</li>';
-                }
-                _html_error += '</div>'
-                $('#login-error').html(_html_error);
+            } else {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Đã xảy ra lỗi!',
+                    text: 'Thông báo lỗi từ máy chủ',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                });
             }
         }
     });

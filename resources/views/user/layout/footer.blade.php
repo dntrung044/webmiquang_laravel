@@ -1,6 +1,5 @@
 <footer class="dk-footer">
     <div class="container">
-
         <div class="fixed-bg bg3"></div>
         <div class="row top-footer">
             <div class="phone-div">

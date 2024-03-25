@@ -1,12 +1,12 @@
 
-footer.top-footer {
+/* footer.top-footer { */
     /*position: relative;*/
     /* padding: 75px 0; */
     /* background-color: #f8da45; */
     /* margin-bottom: 10em;
      margin-top: em; */
 
-}
+/* } */
 
 .fixed-bg {
     position: absolute;
@@ -293,9 +293,9 @@ footer .top-footer .phone-div .border-circle .phone-circle .ext-link {
     color: rgb(255, 223, 42);
     border-color: rgb(255, 223, 42);
     outline: 0;
-    float: left;
-    margin-left: 28em;
-    margin-bottom: 0.2em;
+    margin: auto;
+    float: right;
+    margin-right: 1em;
 }
 
 .navbar-light .navbar-toggler:hover,
@@ -398,12 +398,19 @@ footer .top-footer .phone-div .border-circle .phone-circle .ext-link {
 
     #logo img {
         width: auto;
-        height: 45px;
+        height: 35px;
         float: left;
         margin-left: 1em;
         margin-top: 0.5em;
         margin-bottom: 0.5em;
     }
+    .navbar-light .navbar-toggler {
+        float: left;
+        margin-left: 1em;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+    }
+
 }
 
 

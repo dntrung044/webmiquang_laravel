@@ -31,7 +31,7 @@
                             <ul>
                                 <li>
                                     <a href="blog/{{ $blog->postCategory->name }}">
-                                        <i class="icon_folder-alt"></i>
+                                        <i class="icon_menu"></i>
                                         {{ $blog->postCategory->name }}
                                     </a>
                                 </li>
@@ -53,7 +53,7 @@
                     </div>
                     <!-- /single-post -->
 
-                    <div id="comments">
+                        {{-- comments --}}
                         <div class="col-md-12 block">
                             <div class="block-header">
                                 <div class="title">
@@ -89,17 +89,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="comment-module">
-                                    @include('user.blog.components.comment_component')
-                                </div>
-
-                                {{-- comment --}}
                             @else
                                 <button type="button" class="btn btn-info btn-round show_model_login" data-toggle="modal"
-                                    data-target="#loginModal"> Vui lòng đăng nhập </button>
+                                    data-target="#loginModal"> Vui lòng đăng nhập để viết bình luận! </button>
                             @endif
+                            <div class="comment-module">
+                                @include('user.blog.components.comment_component')
+                            </div>
                         </div>
-                    </div>
 
                     {{-- login modal compoment --}}
                    @include('user.blog.components.login_modal_component')
