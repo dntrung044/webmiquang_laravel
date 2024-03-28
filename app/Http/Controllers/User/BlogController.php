@@ -147,28 +147,33 @@ class BlogController extends Controller
                 ->where('active', 1)
                 ->with('postCategory')
                 ->firstOrFail();
-        $comments  = PostComment::where('post_id',$post_id)->where('active', 1)->where('id', '<', $last_id)->orderby('id', 'DESC')->limit($currentCount)->get();
+        $comments  = PostComment::where('post_id',$post_id)->where('active', 1)
+                                ->where('id', '<', $last_id)->orderby('id', 'DESC')
+                                ->limit($currentCount)->get();
 
-        // if ($comments->isEmpty()) {
-            $comment_component = view('user.blog.components.comment_component', compact('comments', 'blog'))->render();
+
+        $lastCommentId = $comments->isNotEmpty() ? $comments->last()->id : null;
+        if ($comments->isEmpty()) {
+            $comment_component = view('user.blog.components.comment_component', compact('comments', 'blog', 'lastCommentId'))->render();
             return response()->json([
                 'success' => 'Xem thêm bình luận!',
                 'comment_component' => $comment_component,
                 'comments' => $comments,
                 'code' => 200
             ]);
-        // } else {
-        //     $button_out_data = '<div style="margin-top: 36px;">
-        //         <button type="button" class="btn btn-default form-control">
-        //             không còn bình luận nào
-        //         </button>
-        //     </div>';
-        //     return response()->json([
-        //         'success' => 'Đã là bình luận cuối cùng!',
-        //         'button_out_data' => $button_out_data,
-        //         'code' => 201
-        //     ]);
-        // }
+        } else {
+            $button_out_data = '<div style="margin-top: 36px;">
+                <button type="button" class="btn btn-default form-control">
+                    không còn bình luận nào
+                </button>
+            </div>';
+            return response()->json([
+                'success' => 'Đã là bình luận cuối cùng!',
+                'button_out_data' => $button_out_data,
+                'comments' => $comments,
+                'code' => 201
+            ]);
+        }
     }
     public function comment_hidden(Request $request)
     {

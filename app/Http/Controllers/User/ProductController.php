@@ -28,9 +28,9 @@ class ProductController extends Controller
 
         $productId = array_keys($carts);
         return Product::select('id', 'name', 'price', 'price_sale', 'thumb')
-            ->where('active', 1)
-            ->whereIn('id', $productId)
-            ->get();
+                        ->where('active', 1)
+                        ->whereIn('id', $productId)
+                        ->get();
     }
     // Danh sách sp
     public function index(Request $request)
@@ -93,13 +93,10 @@ class ProductController extends Controller
         ], [
             'product_id.required' => 'Món ăn này không tồn tại'
         ]);
-
-
         if ($validation->fails()) {
             return response()->json(['error' => $validation->errors()->first()]);
         } else {
-
-            $qty =  1;
+            $qty = +1;
             $product_id = $request->product_id;
 
             $carts = Session::get('carts');
@@ -114,11 +111,19 @@ class ProductController extends Controller
                 $carts[$product_id] = $carts[$product_id] + $qty;
                 Session::put('carts', $carts);
             }
-
             $carts[$product_id] = $qty;
             Session::put('carts', $carts);
 
-            return response()->json(['data' => $carts]);
+            $cartproducts = $this->getProduct();
+
+            $cart_component = view('user.products.cart', compact('cartproducts', 'carts'))->render();
+
+            return response()->json([
+                'success' => 'Thêm món ăn thành công!',
+                'carts' => $carts,
+                'cart_component' => $cart_component,
+                'code' => 200
+            ]);
         }
 
         return response()->json(['error' => $validation->errors()->first()]);

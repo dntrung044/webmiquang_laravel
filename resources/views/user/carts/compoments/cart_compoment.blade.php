@@ -1,4 +1,4 @@
-<table class="table table-striped cart-list">
+<table class="table table-striped" id="cart_list">
     <thead>
         <tr>
             <th>SẢN PHẨM</th>
@@ -22,13 +22,16 @@
                 </td>
                 <td>
                     <div class="numbers-row">
-                        <input type="text" id="quantity_1" class="qty2 num_product"
+                        <input type="text" id="quantity_{{ $product->id }}" class="qty2 num_product"
                             name="num_product[{{ $product->id }}]" value="{{ $carts[$product->id] }}">
-                        <div class="inc button_inc" data-id="{{ $product->id }}"
-                            data-url="{{ route('cart.increase') }}">+</div>
-
-                        <div class="dec button_inc" data-id="{{ $product->id }}"
-                            data-url="{{ route('cart.decrease') }}">-</div>
+                        <div class="inc button_inc cart_increase"
+                            data-id="{{ $product->id }}" data-url="{{ route('cart.increase') }}">
+                            +
+                        </div>
+                        <div class="dec button_inc cart_decrease"
+                            data-id="{{ $product->id }}" data-url="{{ route('cart.decrease') }}">
+                            -
+                        </div>
                     </div>
                 </td>
                 <td>

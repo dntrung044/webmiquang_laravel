@@ -59,26 +59,27 @@
             opacity: 0.8;
         }
 
+        /* Thiết lập màu nền cho nút đóng */
         .form-container .btnClose {
-            background-color: #4CAF50;
+            background-color: red;
             color: white;
             padding: 3px 5px;
             border: none;
             cursor: pointer;
             width: 100%;
-            margin: 5px margin-bottom:10px;
+            margin: 5px;
+            margin-bottom:10px;
             opacity: 0.8;
         }
-
-        /* Thiết lập màu nền cho nút đóng */
-        .form-container .nut-dong {
-            background-color: red;
+        .form-container .btnClose:hover {
+            background-color: rgb(196, 12, 12) !important;
+            color:white;
         }
-
         /* Thêm hiệu ứng hover cho nút*/
         .form-container .btn:hover,
         .nut-mo-chatbox:hover {
             opacity: 1;
+            background-color: #f8da45;
         }
     </style>
     {{-- style amination cart --}}
@@ -86,7 +87,7 @@
         .cart_right {
             width: 50px;
             height: 50px;
-            background: #292d48;
+            background: #9d770f;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -205,7 +206,7 @@
                                                                 </a>
                                                                 <div class="add_cart">
                                                                     <span class="btn_1" style="height: 30px">
-                                                                        <button type="button" class="add-to-cart" id="add-to-cart" data-id="{{ $product->id }}">
+                                                                        <button type="button" class="add-to-cart" data-id="{{ $product->id }}">
                                                                             Thêm giỏ hàng
                                                                         </button>
                                                                     </span>
@@ -252,51 +253,14 @@
             <!-- /container -->
         </div>
     </main>
-
     @php
         $total = 0;
         $acount = 0;
     @endphp
     <div class="Chatbox" id="myForm">
-        <div class="form-container">
-            <h5>Giỏ hàng</h5>
-            <ul>
-                @foreach ($cartproducts as $key => $cart)
-                    @php
-                        $price = $cart->price_sale != 0 ? $cart->price_sale : $cart->price;
-                        $priceEnd = $price * $carts[$cart->id];
-                        $acount += $carts[$cart->id];
-                        $total += $priceEnd;
-                    @endphp
-                    <li class="botli">
-                        <figure class="botfigure">
-                            <img src="{{ $cart->thumb }}" data-src="{{ $cart->thumb }}" alt="" width="50"
-                                height="50" class="lazy loaded botimg" data-was-processed="true">
-                        </figure>
-                        <strong>
-                            <span class="botspan">
-                                {{ $carts[$cart->id] }} x {{ $cart->name }}
-                            </span>
-                            <br>{{ number_format($priceEnd, 0, '', '.') }}đ
-                        </strong>
-                        <a href="{{ route('cart.destroy', $cart->id) }}" class="action"><i class="icon_trash_alt"></i></a>
-                    </li>
-                @endforeach
-            </ul>
-
-            <div class="total_drop">
-                <div class="clearfix add_bottom_15"><strong>Tổng giỏ hàng
-                    </strong><span>{{ number_format($total, 0, '', '.') }}đ</span>
-                </div>
-                <a href="{{ route('cart.index') }}" class="btn_1 outline">Xem giỏ hàng</a>
-                <a href="{{ route('checkout.index') }}" class="btn_1">Thanh toán</a>
-            </div>
-            <hr>
-            <button type="button" class="btnClose nut-dong" onclick="dongForm()">Đóng</button>
-        </div>
+        @include('user.products.cart')
     </div>
-
-    <div class="nut-mo-chatbox cart_right" onclick="moForm()" id="cart" data-totalitems="{{ $acount }}">
+    <div class="nut-mo-chatbox cart_right" onclick="moForm()" id="cart" data-total_items="{{ $acount }}">
         <span aria-hidden="true" class="icon_cart" style="font-size: 25px;"></span>
     </div>
     @include('sweetalert::alert')
@@ -304,17 +268,22 @@
 
 @section('script')
     <script>
+        /*Hàm Mở Form*/
+        function moForm() {
+            document.getElementById("myForm").style.display = "block";
+        }
+        /*Hàm Đóng Form*/
+        function dongForm() {
+            document.getElementById("myForm").style.display = "none";
+        }
+
         $(document).ready(function() {
-            $('.add-to-cart').click(function() {
+            $('.add-to-cart').click(function(e) {
+                e.preventDefault();
                 var id = $(this).data('id');
                 var cart = $('#cart');
-                var cartTotal = cart.attr('data-totalitems');
-                var newCartTotal = parseInt(cartTotal) + 1;
-
-                cart.addClass('shake').attr('data-totalitems', newCartTotal);
-                setTimeout(function() {
-                    cart.removeClass('shake');
-                }, 1000)
+                var cart_total = cart.attr('data-total_items');
+                var new_art_total = parseInt(cart_total) + 1;
 
                 $.ajax({
                     url: '{{ route('menus.add_to_cart') }}',
@@ -326,22 +295,34 @@
                         product_id: id,
                     },
                     success: function() {
-                        swal({
-                            title: "Đã thêm vào giỏ hàng!",
-                            icon: "success",
-                        });
+                        if (data.code === 200) {
+                            Swal({
+                                type: 'success',
+                                title: "Đã thêm vào giỏ hàng!",
+                                showConfirmButton: false,
+                                timer: 1500
+                        }).then(function () {
+                            $('#cart-list').html(data.cart_component);
+                            cart.addClass('shake').attr('data-totalitems', new_art_total);
+                            setTimeout(function() {
+                                cart.removeClass('shake');
+                            }, 1000)
+                            });
+                        } else{
+                            Swal({
+                                type: 'error',
+                                title: "Thêm vào giỏ hàng lỗi!",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    },
+                    error: function (error) {
+                        // Xử lý lỗi (nếu có)
+                        console.log(error);
                     }
                 });
             });
         });
-
-        /*Hàm Mở Form*/
-        function moForm() {
-            document.getElementById("myForm").style.display = "block";
-        }
-        /*Hàm Đóng Form*/
-        function dongForm() {
-            document.getElementById("myForm").style.display = "none";
-        }
     </script>
 @endsection

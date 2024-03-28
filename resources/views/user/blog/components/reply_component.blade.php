@@ -43,7 +43,11 @@
                             </div>
                             <div class="comment-desc">
 
-                                <span style="background: #1D85FC72">@ {{ $reply->commenter->name }}</span>
+                                @if (isset($reply->commenter->name))
+                                    <span style="background: #1D85FC72">@ {{ $reply->commenter->name }}</span>
+                                @else
+                                    <span style="background: #1D85FC72">@ Không Tên</span>
+                                @endif
                                 <p>{{ $reply->content }}</p>
                             </div>
                             <div class="media-comment-footer">

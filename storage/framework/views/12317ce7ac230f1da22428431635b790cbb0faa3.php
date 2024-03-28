@@ -16,7 +16,7 @@
             <ul class="sub-menu collapse" id="abouts">
                 <!-- AboutUs: bài viết-->
                 <li>
-                    <a class="ms-link <?php echo e(request()->segment(1) == 'abouts' && request()->segment(2) == 'index' ? 'active' : ''); ?>" href="<?php echo e(route('abouts.index')); ?>">
+                    <a class="ms-link <?php echo e(request()->segment(2) == 'abouts' && request()->segment(3) == 'index' ? 'active' : ''); ?>" href="<?php echo e(route('abouts.index')); ?>">
                         <i class="icofont-ui-note"></i> <span>Bài viết giới thiệu</span>
                     </a>
                 </li>

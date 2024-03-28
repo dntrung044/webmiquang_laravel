@@ -1,9 +1,9 @@
 <div id="comment-list">
     <?php if($comments->count()): ?>
         <ul class="list-comment">
-            <?php $__currentLoopData = $comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php $__currentLoopData = $comments->take(5); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <li>
-                    <div class="comment">
+                    <div class="comment comment_count">
                         <div class="comment-img">
                             
                             <?php if($comment->user->avatar): ?>
@@ -97,6 +97,7 @@
                 ?>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </ul>
+        <div id="out_data"></div>
         <button type="button" class="btn btn-primary mt-5 form-control load_more_comment"
             data-id_last="<?php echo e($lastCommentId); ?>" data-id_blog="<?php echo e($blog->id); ?>"
             data-url="<?php echo e(route('comment.load_more')); ?>">

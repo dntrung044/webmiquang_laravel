@@ -43,7 +43,11 @@
                             </div>
                             <div class="comment-desc">
 
-                                <span style="background: #1D85FC72">@ <?php echo e($reply->commenter->name); ?></span>
+                                <?php if(isset($reply->commenter->name)): ?>
+                                    <span style="background: #1D85FC72">@ <?php echo e($reply->commenter->name); ?></span>
+                                <?php else: ?>
+                                    <span style="background: #1D85FC72">@ Không Tên</span>
+                                <?php endif; ?>
                                 <p><?php echo e($reply->content); ?></p>
                             </div>
                             <div class="media-comment-footer">

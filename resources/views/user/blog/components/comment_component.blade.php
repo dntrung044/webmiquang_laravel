@@ -1,9 +1,9 @@
 <div id="comment-list">
     @if ($comments->count())
         <ul class="list-comment">
-            @foreach ($comments as $comment)
+            @foreach ($comments->take(5) as $comment)
                 <li>
-                    <div class="comment">
+                    <div class="comment comment_count">
                         <div class="comment-img">
                             {{-- Avatar --}}
                             @if ($comment->user->avatar)
@@ -95,6 +95,7 @@
                 @endphp
             @endforeach
         </ul>
+        <div id="out_data"></div>
         <button type="button" class="btn btn-primary mt-5 form-control load_more_comment"
             data-id_last="{{ $lastCommentId }}" data-id_blog="{{ $blog->id }}"
             data-url="{{ route('comment.load_more') }}">

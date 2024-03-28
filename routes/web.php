@@ -180,19 +180,19 @@ Route::prefix('thuc-don')->group(function () {
     Route::post('/danh-gia-{id}', [User\ProductController::class, 'postComment'])->name('menus.comment');
 });
 
-#Giỏ hàng
+#Cart
 Route::prefix('gio-hang')->group(function () {
-    Route::get('/', [User\CartController::class, 'show'])->name('cart.index');
-    Route::post('/them-gio-hang', [User\CartController::class, 'index'])->name('cart.add');
+    Route::get('/', [User\CartController::class, 'index'])->name('cart.index');
+    Route::post('/them-gio-hang', [User\CartController::class, 'add'])->name('cart.add');
     // Route::post('/addToCartAjax', [User\CartController::class, 'addToCartAjax']);
     Route::get('/Ajax', [User\CartController::class, 'showcartAjax']);
+    Route::get('/cap-nhat-ajax-dec', [User\CartController::class, 'cart_decrease'])->name('cart.decrease');
+    Route::get('/cap-nhat-ajax-inc', [User\CartController::class, 'cart_increase'])->name('cart.increase');
     Route::post('/cap-nhat', [User\CartController::class, 'updatecart']);
-    Route::get('/xoa/{id}', [User\CartController::class, 'destroy'])->name('cart.destroy');
+    Route::delete('/xoa/{id}', [User\CartController::class, 'destroy'])->name('cart.destroy');
     Route::post('/carts', [User\CartController::class, 'addCart']);
-
-    Route::post('/check_coupon', [User\CartController::class, 'check_coupon']);
+    Route::post('/check_coupon', [User\CartController::class, 'check_coupon'])->name('cart.check_coupon');
 });
-
 #middleware
 Route::middleware(['auth'])->group(function () {
     Route::prefix('thanh-toan')->group(function () {

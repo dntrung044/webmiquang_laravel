@@ -1,6 +1,5 @@
 $(document).ready(function () {
-    // Sự kiện nhấn nút "+"    
-    $(document).on("click", ".inc", function () {
+    $(document).on("click", ".cart_decrease", function () {
         var productId = $(this).data("id");
         var url = $(this).data('url');
         $.ajax({
@@ -11,25 +10,24 @@ $(document).ready(function () {
             },
             success: function (data) {
                 if (data.code === 200) {
+                    $('#cart_list').html(data.cart_compoment);
+                    $('#cart_total').html(data.payment_compoment);
+                }  else {
                     Swal.fire({
-                        type: 'success',
+                        type: 'error',
                         title: data.success,
                         showConfirmButton: false,
                         timer: 1500
-                    }).then(function () {
-                        $('.cart-list').html(data.cart_compoment);
-                        $('#cart_total').html(data.payment_compoment);
                     });
                 }
             },
             error: function (error) {
-                // Xử lý lỗi (nếu có)
                 console.log(error);
             }
         });
     });
-    // Sự kiện nhấn nút "-"    
-    $(document).on("click", ".dec", function () {
+
+    $(document).on("click", ".cart_increase", function () {
         var productId = $(this).data("id");
         var url = $(this).data('url');
         $.ajax({
@@ -40,19 +38,18 @@ $(document).ready(function () {
             },
             success: function (data) {
                 if (data.code === 200) {
+                    $('#cart_list').html(data.cart_compoment);
+                    $('#cart_total').html(data.payment_compoment);
+                }  else {
                     Swal.fire({
-                        type: 'success',
+                        type: 'error',
                         title: data.success,
                         showConfirmButton: false,
                         timer: 1500
-                    }).then(function () {
-                        $('.cart-list').html(data.cart_compoment);
-                        $('#cart_total').html(data.payment_compoment);
                     });
                 }
             },
             error: function (error) {
-                // Xử lý lỗi (nếu có)
                 console.log(error);
             }
         });
@@ -60,11 +57,9 @@ $(document).ready(function () {
 
     $(document).on("click", ".check_coupon", function (e) {
         e.preventDefault();
-
         var _token = $("input[name='_token']").val();
         var coupon = $("input[name='coupon']").val();
         var url = $(this).data('url');
-
         $.ajax({
             url: url,
             method: 'POST',
@@ -78,10 +73,16 @@ $(document).ready(function () {
                         showConfirmButton: false,
                         timer: 1500
                     }).then(function () {
-                        $('.cart-list').html(data.cart_compoment);
+                        $('#cart_list').html(data.cart_compoment);
                         $('#cart_total').html(data.payment_compoment);
                     });
-
+                } else {
+                    Swal.fire({
+                        type: 'error',
+                        title: data.success,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                 }
             }
         });
@@ -99,6 +100,7 @@ $(document).ready(function () {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Vâng, xóa nó!',
+            cancelButtonText: 'Hủy',
             closeOnConfirm: false
         }).then(function (e) {
             if (e.value === true) {
@@ -111,15 +113,8 @@ $(document).ready(function () {
                     data: { id: productId },
                     success: function (data) {
                         if (data.code === 200) {
-                            Swal.fire({
-                                type: 'success',
-                                title: data.success,
-                                showConfirmButton: false,
-                                timer: 1500
-                            }).then(function () {
-                                $('.cart-list').html(data.cart_compoment);
+                                $('#cart_list').html(data.cart_compoment);
                                 $('#cart_total').html(data.payment_compoment);
-                            });
                         } else {
                             Swal.fire({
                                 type: 'error',
@@ -136,5 +131,4 @@ $(document).ready(function () {
             }
         });
     });
-
 });

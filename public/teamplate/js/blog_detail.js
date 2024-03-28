@@ -1,7 +1,7 @@
 // --------------------------comment--------------------------
 show_loadmore()
 function show_loadmore() {
-    var commentCount = $(".comment").length;
+    var commentCount = $(".comment_count").length;
     var maxComments = 5;
     // Hiển thị nút "Xem thêm" nếu số lượng comment vượt quá giới hạn
     if (commentCount > maxComments) {
@@ -11,14 +11,14 @@ function show_loadmore() {
     }
 
 }
+var _token = $('meta[name="csrf-token"]').attr('content');
 $(document).on("click", ".load_more_comment", function (e) {
     e.preventDefault();
     var loadMoreButton = $(this);
-    var currentCount = $('.comment').length + 5; // số lượng cmt
+    var currentCount = $('.comment_count').length + 5; // số lượng cmt
     var blog_id = $(this).data("id_blog");
     var last_id = $(this).data("id_last");
     var url = $(this).data('url');
-    var _token = $("input[name='_token']").val();
     $.ajax({
         url: url,
         method: 'POST',
@@ -29,12 +29,11 @@ $(document).on("click", ".load_more_comment", function (e) {
                 loadMoreButton.remove();
             } else {
                 loadMoreButton.remove();
-                $(".load_more_comment").html(data.button_out_data);
+                $("#out_data").html(data.button_out_data);
             }
         }
     });
 });
-
 $(document).on("click", ".latest_button", function (e) {
     e.preventDefault();
    // Xoá đi kiểu dáng của nhãn label khi không được chọn
@@ -43,7 +42,6 @@ $(document).on("click", ".latest_button", function (e) {
     $(this).find('label').css('background', '#f8da45');
     var blog_id = $(this).data("id_blog");
     var url = $(this).data('url');
-    var _token = $("input[name='_token']").val();
     $.ajax({
         url: url,
         method: 'POST',
@@ -63,7 +61,6 @@ $(document).on("click", ".latest_button", function (e) {
         }
     });
 });
-
 $(document).on("click", ".popular_button", function (e) {
     e.preventDefault();
    // Xoá đi kiểu dáng của nhãn label khi không được chọn
@@ -72,7 +69,6 @@ $(document).on("click", ".popular_button", function (e) {
     $(this).find('label').css('background', '#f8da45');
     var blog_id = $(this).data("id_blog");
     var url = $(this).data('url');
-    var _token = $("input[name='_token']").val();
     $.ajax({
         url: url,
         method: 'POST',
@@ -92,13 +88,11 @@ $(document).on("click", ".popular_button", function (e) {
         }
     });
 });
-
 $(document).on("click", ".send-comment", function (e) {
     e.preventDefault();
     var content = $('.cmt_content').val();
     var blogId = $(this).data("id");
     var url = $(this).data('url');
-    var _token = $("input[name='_token']").val();
     $.ajax({
         url: url,
         method: 'POST',
@@ -130,7 +124,6 @@ $(document).on("click", ".like-comment", function (e) {
     e.preventDefault();
     var id_comment = $(this).data("id");
     var url = $(this).data('url');
-    var _token = $("input[name='_token']").val();
     $.ajax({
         url: url,
         method: 'POST',
@@ -176,7 +169,6 @@ $(document).on("click", ".button_comment_hidden", function (e) {
     var id_comment = $(this).data("id");
     var url = $(this).data('url');
     var post_id = $(this).data('id_blog')
-    var _token = $("input[name='_token']").val();
     $.ajax({
         url: url,
         method: 'POST',
@@ -207,7 +199,6 @@ $(document).on("click", ".report_comment", function (e) {
     e.preventDefault();
     alert('Tính năng vẫn chưa phát tiển!')
 });
-
 // --------------------------reply--------------------------
 $(document).on("click", ".show-reply-form", function (e) {
     e.preventDefault();
@@ -237,7 +228,6 @@ $(document).on("click", ".send-reply", function (e) {
     var comment_id = $(this).data("id");
     var post_id = $(this).data("id_post");
     var url = $(this).data('url');
-    var _token = $("input[name='_token']").val();
     var content_reply_id = '.content-reply-' + comment_id;
     var content_reply = $(content_reply_id).val();
     var commented_id = $(this).data('commenter_id');
@@ -276,7 +266,6 @@ $(document).on("click", ".like-reply", function (e) {
     e.preventDefault();
     var id_reply = $(this).data("id");
     var url = $(this).data('url');
-    var _token = $("input[name='_token']").val();
     $.ajax({
         url: url,
         method: 'POST',
@@ -302,7 +291,6 @@ $(document).on("click", ".like-reply", function (e) {
         }
     });
 });
-
 $(document).on("click", ".reply-form", function (e) {
     e.preventDefault();
     var responder_name = $(this).data('reply_name');
@@ -332,7 +320,6 @@ $(document).on("click", ".button_reply_hidden", function (e) {
     var id_reply = $(this).data("id");
     var url = $(this).data('url');
     var post_id = $(this).data('id_blog')
-    var _token = $("input[name='_token']").val();
     $.ajax({
         url: url,
         method: 'POST',
