@@ -65,7 +65,7 @@
                     url: '<?php echo e(url('/admin/transactions/feeships/load_address')); ?>',
                     method: 'POST',
                     data: {
-                        id: id,
+                        action: id,
                         district_id: district_id,
                     },
                     dataType: "json",

@@ -1,6 +1,4 @@
-@extends('admin.layout.main')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
     <!-- Body: Body -->
     <div class="body d-flex py-lg-3 py-md-2">
         <div class="container-xxl">
@@ -9,11 +7,12 @@
                     <div
                         class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                         <h3 class="fw-bold mb-0">
-                            @if($title)
-                                {{ $title }}
-                            @else
+                            <?php if($title): ?>
+                                <?php echo e($title); ?>
+
+                            <?php else: ?>
                                 Quản lý
-                            @endif
+                            <?php endif; ?>
                         </h3>
                     </div>
                 </div>
@@ -28,14 +27,16 @@
                                     <div class="form-group">
                                         <label>Quận/Huyện</label>
                                         <select class="form-select choose district" name="district_id" id="district">
-                                            <option value=" {{ $feeship->district->id }}">
-                                                {{ $feeship->district->name }}
+                                            <option value=" <?php echo e($feeship->district->id); ?>">
+                                                <?php echo e($feeship->district->name); ?>
+
                                             </option>
-                                            @foreach ($districts as $d)
-                                                <option value="{{ $d->id }}">
-                                                    {{ $d->name }}
+                                            <?php $__currentLoopData = $districts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $d): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($d->id); ?>">
+                                                    <?php echo e($d->name); ?>
+
                                                 </option>
-                                            @endforeach
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
                                     </div>
                                 </div>
@@ -44,8 +45,9 @@
                                     <div class="form-group">
                                         <label>Xã/Phường</label>
                                         <select class="form-select ward" name="ward_id" id="ward">
-                                            <option value="{{ $feeship->ward->id }}">
-                                                {{ $feeship->ward->name }}
+                                            <option value="<?php echo e($feeship->ward->id); ?>">
+                                                <?php echo e($feeship->ward->name); ?>
+
                                             </option>
                                         </select>
                                     </div>
@@ -57,23 +59,23 @@
                             <div class="col-md-6">
                                 <label class="form-label">Phí vận chuyển:</label>
                                 <input type="number" name="feeship"
-                                    value="{{  $feeship->feeship }}" class="form-control">
+                                    value="<?php echo e($feeship->feeship); ?>" class="form-control">
                             </div>
                         </div>
 
                         <div class="modal-footer">
-                            <a href="{{ route('feeships.index') }}"><button type="button"
+                            <a href="<?php echo e(route('feeships.index')); ?>"><button type="button"
                                     class="btn btn-secondary">Hủy</button></a>
                             <button type="submit" class="btn btn-primary">Cập nhật</button>
                         </div>
-                        @csrf
+                        <?php echo csrf_field(); ?>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-@endsection
-@section('script')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
     <script>
         $(document).ready(function() {
             $('.choose').on('change', function() {
@@ -86,7 +88,7 @@
                 }
 
                 $.ajax({
-                    url: '{{ url('/admin/transactions/feeships/load_address') }}',
+                    url: '<?php echo e(url('/admin/transactions/feeships/load_address')); ?>',
                     method: 'POST',
                     data: {
                         action: action,
@@ -136,4 +138,6 @@
             }
         });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layout.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\dntru\OneDrive\document\Web\Laravel\webmiquang_laravel\resources\views/admin/feeship/edit.blade.php ENDPATH**/ ?>

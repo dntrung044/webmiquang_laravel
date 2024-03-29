@@ -82,7 +82,7 @@ class FeeShipController extends Controller
     {
         $data = $request->all();
         $output ='';
-        $data['id'] == "district" ;
+        $data['action'] == "district" ;
 
         $select = Ward::where('district_id', $data['district_id'])->get();
         $output.='<option>---Chọn xã/phường---</option>';
