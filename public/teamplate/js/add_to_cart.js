@@ -1,13 +1,84 @@
 $(document).ready(function () {
     let cart = $('#cart_shake');
-    $('.add-to-cart').click(function () {
-        var addToCartURL = $(this).data('url');
-        //Cart shake 
+    $('.add_to_cart').click(function (e) {
+        e.preventDefault();
+        var _token = $('meta[name="csrf-token"]').attr('content');
+        var url = $(this).data('url');
+        var id = $(this).data('id');
+
         shake();
-        //img to Cart  
         imgtoCart($(this));
-        //add to Cart 
-        addtoCart(addToCartURL);
+
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: { _token: _token, product_id: id },
+
+            success: function (data) {
+                if (data.code === 200) {
+                    Swal.fire({
+                        type: 'success',
+                        title: 'Đã thêm món ăn vào giỏ hàng!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(function () {
+                         $('#cart_list').html(data.cart_compoment);
+                    });
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    });
+    $('.action_delete').click(function (e) {
+        e.preventDefault();
+        var productId = $(this).data("id");
+        var url = $(this).data('url');
+        Swal.fire({
+            title: 'Bạn có chắc món ăn này không?',
+            type: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Vâng, xóa nó!',
+            cancelButtonText: 'Hủy',
+            closeOnConfirm: false
+        }).then(function (e) {
+            if (e.value === true) {
+                $.ajax({
+                    url: url,
+                    method: 'delete',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: { id: productId },
+                    success: function (data) {
+                        if (data.code === 200) {
+                            Swal.fire({
+                                type: 'success',
+                                title: 'Đã xóa món ăn ra khỏi giỏ hàng!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(function () {
+                                location.reload();
+                            });
+
+                        } else {
+                            Swal.fire({
+                                type: 'error',
+                                title: data.success,
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    }
+                });
+            }
+            else {
+                e.dismiss;
+            }
+        });
     });
 
     function shake() {
@@ -48,34 +119,6 @@ $(document).ready(function () {
             });
         }
     }
-
-    //ajax add to cart
-    function addtoCart(addToCartURL) {
-        $.ajax({
-            url: addToCartURL,
-            type: 'get',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function (data) {
-                if (data.code === 200) {
-                    Swal.fire({
-                        type: 'success',
-                        title: 'Đã thêm món ăn vào giỏ hàng!',
-                        showConfirmButton: false,
-                        timer: 1500
-                    }).then(function () {
-                        $('.cart').html(data.cart_compoment);
-                    });
-                }
-            },
-            error: function () {
-
-            }
-        });
-    }
-    //end add to cart 
-
 });
 /*Form Opent*/
 function OpentForm() {

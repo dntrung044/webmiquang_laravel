@@ -57,7 +57,7 @@ $(document).ready(function () {
 
     $(document).on("click", ".check_coupon", function (e) {
         e.preventDefault();
-        var _token = $("input[name='_token']").val();
+        var _token = $('meta[name="csrf-token"]').attr('content');
         var coupon = $("input[name='coupon']").val();
         var url = $(this).data('url');
         $.ajax({

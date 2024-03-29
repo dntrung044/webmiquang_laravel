@@ -1,39 +1,31 @@
-<div class="cart">
-    @php
-        $total = 0;
-        $acount = 0;
-    @endphp
+<div class="cart" id="cart_list">
     <div class="cartbox" id="myForm">
         <div class="form-container">
             <h5>Giỏ hàng</h5>
             <ul>
-                @foreach ($productsInCart as $key => $Pcart)
-                    @php
-                        $price = $Pcart->price_sale != 0 ? $Pcart->price_sale : $Pcart->price;
-                        $priceEnd = $price * $carts[$Pcart->id];
-                        $acount += $carts[$Pcart->id];
-                        $total += $priceEnd;
-                    @endphp
+                @foreach ($productsInCart as $key => $product)
                     <li class="botli">
                         <figure class="botfigure">
-                            <img src="{{ $Pcart->thumb }}" data-src="{{ $Pcart->thumb }}" alt="" width="50"
+                            <img src="{{ $product->thumb }}" data-src="{{ $product->thumb }}" alt="" width="50"
                                 height="50" class="lazy loaded botimg" data-was-processed="true">
                         </figure>
                         <strong>
                             <span class="botspan">
-                                {{ $carts[$Pcart->id] }}
-                                x {{ $Pcart->name }}
+                                {{ $carts[$product->id] }}
+                                x {{ $product->name }}
                             </span>
-                            <br>{{ number_format($priceEnd, 0, '', '.') }}đ
+                            <br>{{ number_format($subtotal, 0, '', '.') }}đ
                         </strong>
-                        <a href="{{ route('cart.destroy', $Pcart->id) }}" class="action"><i
-                                class="icon_trash_alt"></i></a>
+                        <button type="button" data-url="{{ route('cart.destroy', ['id' => $product->id]) }}"
+                            data-id="{{ $product->id }}" class="action action_delete">
+                            <i class="icon_trash_alt"></i>
+                        </button>
                     </li>
                 @endforeach
             </ul>
             <div class="total_drop">
                 <div class="clearfix add_bottom_15"><strong>Tổng giỏ hàng
-                    </strong><span>{{ number_format($total, 0, '', '.') }}đ</span>
+                    </strong><span>{{ number_format($total_cart, 0, '', '.') }}đ</span>
                 </div>
                 <button class="btn_1 OpentForm" onclick="CloseForm()">Đóng</button>
                 <a href="{{ route('cart.index') }}" class="btn_1 outline">Thanh toán</a>
@@ -43,7 +35,7 @@
         </div>
     </div>
 
-    <div class="nut-mo-cartbox cart_right" onclick="OpentForm()" id="cart_shake" data-totalitems="{{ $acount }}">
+    <div class="nut-mo-cartbox cart_right" onclick="OpentForm()" id="cart_shake" data-totalitems="{{ $quantity_total }}">
         <span aria-hidden="true" class="icon_cart" style="font-size: 25px;"></span>
     </div>
 </div>

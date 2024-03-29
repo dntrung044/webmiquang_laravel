@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Http\Services;
-
 
 use App\Jobs\SendMail;
 use App\Models\Cart;
@@ -45,9 +43,9 @@ class CartService
     public function addToCart($request)
     {
         $qty = (int)1;
-        $product_id = (int)$request->input('product_id');
+        $product_id = (int)$request->product_id;
 
-        if ($qty <= 0 || $product_id <= 0) {
+        if ($product_id <= 0) {
             Session::flash('error', 'Số lượng hoặc Sản phẩm không chính xác');
             return false;
         }
@@ -55,7 +53,7 @@ class CartService
         $carts = Session::get('carts');
         if (is_null($carts)) {
             Session::put('carts', [
-                $product_id => $qty
+                $product_id => 1
             ]);
             return true;
         }
@@ -190,6 +188,4 @@ class CartService
 
         return Cart::insert($data);
     }
-
-
 }

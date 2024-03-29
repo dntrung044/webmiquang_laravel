@@ -24,11 +24,11 @@
                     <div class="numbers-row">
                         <input type="text" id="quantity_<?php echo e($product->id); ?>" class="qty2 num_product"
                             name="num_product[<?php echo e($product->id); ?>]" value="<?php echo e($carts[$product->id]); ?>">
-                        <div class="inc button_inc cart_decrease"
+                        <div class="inc button_inc cart_increase"
                             data-id="<?php echo e($product->id); ?>" data-url="<?php echo e(route('cart.increase')); ?>">
                             +
                         </div>
-                        <div class="dec button_inc cart_increase"
+                        <div class="dec button_inc cart_decrease"
                             data-id="<?php echo e($product->id); ?>" data-url="<?php echo e(route('cart.decrease')); ?>">
                             -
                         </div>

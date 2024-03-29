@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Services\Product\UserService;
 use Illuminate\Http\Request;
+use App\Http\Services\Product\ProductService;
 use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use App\Models\ProductCategory;
 use App\Models\ProductComment;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Validator;
-
 class ProductController extends Controller
 {
     protected $productService;
-
-    public function __construct(UserService $productService)
+    public function __construct(ProductService $productService)
     {
         $this->productService = $productService;
     }
@@ -35,24 +31,32 @@ class ProductController extends Controller
     // Danh sách sp
     public function index(Request $request)
     {
-        $categories = ProductCategory::where('active', 1)->get();
-        $products = Product::where('active', 1)->paginate(8);
         $title = 'Thực đơn - Mì Quảng Bà Mua';
-        $cartproducts = $this->getProduct();
+        $products = Product::where('active', 1)->paginate(8);
+        $categories = ProductCategory::where('active', 1)->get();
+        $productsInCart = $this->getProduct();
+        $carts = Session::get('carts');
+        //price
+        $price = $quantity = $quantity_total = $subtotal = $total = $total_cart = 0;
+        foreach ($productsInCart as $key => $product) {
+            $price = $product->price_sale != 0 ? $product->price_sale : $product->price;
+            $quantity = $carts[$product->id];
+            $quantity_total += $quantity;
+            $subtotal = $price * $quantity;
+            $total_cart += $subtotal;
+        }
         $carts = Session::get('carts');
 
-        return view('User.products.list', compact('products', 'categories', 'title', 'cartproducts', 'carts'));
+        return view('User.products.list',
+        compact('products', 'categories', 'title', 'productsInCart', 'carts', 'price', 'quantity', 'quantity_total', 'subtotal', 'total_cart' ));
     }
 
     // Danh sách danh mục sp
     public function category($categoryName, Request $request)
     {
-        $categories = ProductCategory::all();
-
         $categories = ProductCategory::where('active', 1)->get();
 
-
-        $products = ProductCategory::where('name', $categoryName)->first()->products->toQuery();
+        $products = ProductCategory::where('name', $categoryName)->first()->where('active', 1)->products->toQuery();
 
         return view('User.products.list', compact('products', 'categories'));
     }
@@ -74,7 +78,7 @@ class ProductController extends Controller
             'productcmt' => $productcmt
         ]);
     }
-    //Gửi Bình luận
+    //Gửi Bình luận: sửa alert
     public function postComment(Request $request, $id)
     {
        $result = $this->productService->insertComment($request, $id);
@@ -84,48 +88,5 @@ class ProductController extends Controller
        } else {
             return redirect()->back()->with('success', 'Đăng bình luận sản phẩm thành công!');
        }
-    }
-
-    public function add_to_cart(Request $request)
-    {
-        $validation = Validator::make($request->all(), [
-            'product_id' => 'required',
-        ], [
-            'product_id.required' => 'Món ăn này không tồn tại'
-        ]);
-        if ($validation->fails()) {
-            return response()->json(['error' => $validation->errors()->first()]);
-        } else {
-            $qty = +1;
-            $product_id = $request->product_id;
-
-            $carts = Session::get('carts');
-            if (is_null($carts)) {
-                Session::put('carts', [
-                    $product_id => $qty
-                ]);
-            }
-
-            $exists = Arr::exists($carts, $product_id);
-            if ($exists) {
-                $carts[$product_id] = $carts[$product_id] + $qty;
-                Session::put('carts', $carts);
-            }
-            $carts[$product_id] = $qty;
-            Session::put('carts', $carts);
-
-            $cartproducts = $this->getProduct();
-
-            $cart_component = view('user.products.cart', compact('cartproducts', 'carts'))->render();
-
-            return response()->json([
-                'success' => 'Thêm món ăn thành công!',
-                'carts' => $carts,
-                'cart_component' => $cart_component,
-                'code' => 200
-            ]);
-        }
-
-        return response()->json(['error' => $validation->errors()->first()]);
     }
 }

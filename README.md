@@ -4,9 +4,7 @@
   <meta charset="UTF-8">  
 </head>
 <body>
-  <h1>Các chức năng chính</h1>
-
-
+  <h1>Các chức năng:</h1>
   <h2>Người dùng</h2>
   <ul>
     <li>Đăng nhập</li>
@@ -16,13 +14,11 @@
     <li>Sửa thông tin người dùng</li>
   </ul>
 
-
   <h2>Thực đơn</h2>
   <ul>
     <li>Xem sản phẩm theo tab</li>
     <li>Đánh giá số sao sản phẩm</li>
   </ul>
-
 
   <h2>Giỏ hàng (AJAX)</h2>
   <ul>
@@ -64,9 +60,8 @@
   <ul>
     <li>Quản lý các chức năng thêm, sửa, xóa ở phần người dùng</li>
     <li>Điều chỉnh trạng thái của các thông tin yêu cầu từ người dùng: đặt sản phẩm, đặt bàn, in hóa đơn, xem chi tiết thông tin</li>
-  </ul>
-
-
+  </ul> 
+  
   <h2>Phân quyền với gate và policy</h2>
   <ul>
     <li>Người dùng sẽ có các vai trò (Quản trị viên, Khách hàng, Phát triển hệ thống...)</li>

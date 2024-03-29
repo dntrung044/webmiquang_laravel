@@ -175,7 +175,7 @@ Route::post('/load_more_latest_product', [User\HomeController::class, 'latest_pr
 Route::prefix('thuc-don')->group(function () {
     Route::get('/', [User\ProductController::class, 'index'])->name('menus.index');
     Route::get('/{id}-{slug}', [User\ProductController::class, 'details']);
-    Route::post('/them-gio-hang', [User\ProductController::class, 'add_to_cart'])->name('menus.add_to_cart');
+    Route::post('/them-gio-hang-ajax', [User\CartController::class, 'add_to_cart'])->name('menus.add_to_cart');
     #Đánh giá sp
     Route::post('/danh-gia-{id}', [User\ProductController::class, 'postComment'])->name('menus.comment');
 });
@@ -301,5 +301,5 @@ Route::group(['namspace' => 'Auth'], function () {
     Route::get('/thay-doi-mat-khau/{id}/{token}', 'User\AuthController@changePassword')->name("changePassword");
     Route::post('/thay-doi-mat-khau/{id}/{token}', 'User\AuthController@changetPasswordHandle');
     #Logout
-    Route::get('/dang-xuat', 'User\AuthController@logout')->name("logout");
+    Route::post('/dang-xuat', 'User\AuthController@logout')->name("logout");
 });

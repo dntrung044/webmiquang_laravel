@@ -1,5 +1,4 @@
 <?php $__env->startSection('head'); ?>
-    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <style>
         .mt-100 {
             margin-top: 100px

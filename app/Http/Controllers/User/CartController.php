@@ -7,6 +7,7 @@ use App\Http\Services\CartService;
 use App\Models\Coupon;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -104,6 +105,35 @@ class CartController extends Controller
         return redirect('/gio-hang');
     }
 
+    public function add_to_cart(Request $request)
+    {
+        // add To Cart
+        $result = $this->cartService->addToCart($request);
+        if ($result === false) {
+            return redirect()->back();
+        }
+
+        $productsInCart = $this->cartService->getProduct();
+        $carts = Session::get('carts');
+        //price
+        $price = $quantity = $quantity_total = $subtotal = $total = $total_cart = 0;
+        foreach ($productsInCart as $key => $product) {
+            $price = $product->price_sale != 0 ? $product->price_sale : $product->price;
+            $quantity = $carts[$product->id];
+            $quantity_total += $quantity;
+            $subtotal = $price * $quantity;
+            $total_cart += $subtotal;
+        }
+        //render view
+       $cart_compoment = view('user.products.compoments.cart', compact('productsInCart', 'carts', 'price', 'quantity', 'subtotal','total_cart', 'quantity_total' ))->render();
+
+        return response()->json([
+              'cart_compoment' => $cart_compoment,
+              'message' => 'Đã thêm món ăn vào giỏ hàng!',
+              'code' => 200,
+        ], 200);
+    }
+
     public function showcartAjax()
     {
         $products = $this->cartService->getProduct();
@@ -160,7 +190,6 @@ class CartController extends Controller
 
         return redirect('/gio-hang');
     }
-
     public function destroy(Request $request)
     {
         $productId = $request->id;
