@@ -5,7 +5,6 @@ namespace App\Http\Services\Product;
 
 
 use App\Models\Product;
-use App\Models\ProductCategory;
 use App\Models\ProductComment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -29,17 +28,17 @@ class ProductService
     public function showdetail($id)
     {
         return Product::where('id', $id)
-            ->where('active', 1)
-            ->with('productCategory')
-            ->firstOrFail();
+                    ->where('active', 1)
+                    ->with('productCategory')
+                    ->firstOrFail();
     }
     // List Đồ uống liên quan
     public function relatedProduct($id)
     {
         $product = Product::where('id', $id)
-        ->where('active', 1)
-        ->with('productCategory')
-        ->firstOrFail();
+                    ->where('active', 1)
+                    ->with('productCategory')
+                    ->firstOrFail();
         return Product::where('cat_id', $product->cat_id)->limit(4)->whereNotIn('id', [$id])->get();
     }
 
@@ -86,21 +85,6 @@ class ProductService
 
         return true;
     }
-
-    // public function more($id)
-    // {
-    //     return Product::select('id', 'name', 'price', 'price_sale', 'thumb')
-    //         ->where('active', 1)
-    //         ->where('id', '!=', $id)
-    //         ->orderByDesc('id')
-    //         ->limit(8)
-    //         ->get();
-    // }
-
-
-
-
-
 
     public function cat1() {
         // $product = Product::where('id', $id)

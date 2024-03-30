@@ -36,11 +36,11 @@
                                     <tr>
                                         <th style="width: 50px">#</th>
                                         <th>Chi tiết mã giảm giá</th>
+                                        <th>Ngày tạo</th>
+                                        <th>Ngày cập nhập</th>
                                         <th>Mã</th>
-                                        <th>Số lượng</th>
                                         <th>Trạng thái</th>
                                         <th>Xử lý</th>
-                                        <th>Trạng thái</th>
                                     </tr>
                                 </thead>
                                 <tbody>

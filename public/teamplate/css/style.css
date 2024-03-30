@@ -242,6 +242,32 @@ a.btn_1,
     line-height: normal;
 }
 
+.btn_1b {
+    border: none;
+    background: #ffffff;
+    outline: none;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    padding: 8px 25px;
+    color: var(--primary-color);
+    font-weight: 500;
+    text-align: center;
+    font-size: 14px;
+    font-size: 0.875rem;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    line-height: normal;
+}
+
+
 .btn_1c {
     border: none;
     background: #7F6000;
@@ -278,7 +304,17 @@ a.btn_1:hover,
     filter: brightness(115%);
     text-decoration: none;
 }
+a.btn_1b:focus,
+.btn_1b:focus {
+    outline: none;
+}
 
+a.btn_1b:hover,
+.btn_1b:hover {
+    -webkit-filter: brightness(115%);
+    filter: brightness(115%);
+    text-decoration: none;
+}
 a.btn_1.full-width,
 .btn_1.full-width {
     display: block;

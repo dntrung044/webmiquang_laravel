@@ -3,12 +3,10 @@
         <span>Giỏ hàng ({{ $quantity_total }} món):</span>
         {{ number_format($total_cart, 0, '', '.') }}đ
     </li>
-
     <li>
         <span>Phí giao hàng</span>
         {{ number_format($feeship, 0, '', '.') }}đ
     </li>
-
     <li>
         @if (!empty(Session::get('coupon')))
             @if ($condition == 1)
@@ -19,7 +17,6 @@
             <p>-{{ number_format($total_coupon, 0, '', '.') }}đ </p>
         @endif
     </li>
-
     <hr>
     @php
         if (empty(Auth::user()->fee)) {

@@ -1,9 +1,8 @@
-<!--HEADER PART START-->
 <header>
     <div class="header py-1">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light px-0 py-0">
-                <div class="row">
+                <div class="d-flex flex-wrap-nowrap">
                     <a href="/" id="logo">
                         <img src="<?php echo e(asset('teamplate/img/logo0.png')); ?>" width="170" height="50" alt=""
                             class="logo_normal">
@@ -42,5 +41,4 @@
         </div>
     </div>
 </header>
-<!--HEADER PART END-
 <?php /**PATH C:\Users\dntru\OneDrive\document\Web\Laravel\webmiquang_laravel\resources\views/User/layout/header.blade.php ENDPATH**/ ?>

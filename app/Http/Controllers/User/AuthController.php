@@ -4,7 +4,6 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -203,8 +202,8 @@ class AuthController extends Controller
             'email' => 'required|email:filter|exists:users',
             'password' => 'required',
         ], [
-            'email.required' => 'Vui lòng nhập địa chỉ Email',
-            'password.required' => 'Vui lòng nhập mật khẩu',
+            'email.required' => 'Vui lòng nhập địa chỉ Email!',
+            'password.required' => 'Vui lòng nhập mật khẩu!',
         ]);
 
         if ($validation->fails()) {

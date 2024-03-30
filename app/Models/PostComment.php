@@ -32,10 +32,6 @@ class PostComment extends Model
         ->withDefault(['name' => '']);
     }
 
-    // public function replies() {
-    //     return $this->hasMany(PostCommentReply::class);
-    // }
-
     public function replies() {
         return $this->hasMany(PostCommentReply::class, 'comment_id', 'id');
     }

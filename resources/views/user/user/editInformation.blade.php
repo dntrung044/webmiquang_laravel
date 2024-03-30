@@ -51,10 +51,10 @@
                                                             {{ Auth::user()->district }}
                                                         </option>
                                                         @foreach ($districts as $d)
-                                                        <option value="{{ $d->name }}">
-                                                            {{ $d->name }}
-                                                        </option>
-                                                    @endforeach
+                                                            <option value="{{ $d->name }}">
+                                                                {{ $d->name }}
+                                                            </option>
+                                                        @endforeach
                                                     @else
                                                         <option value="">Chọn quận/huyện</option>
                                                         @foreach ($districts as $d)
@@ -90,7 +90,7 @@
                                 </div>
 
                                 @if (Auth::user()->fee == 0)
-                                    <input type="hidden" id="fee"  name="fee" value="15000">
+                                    <input type="hidden" id="fee" name="fee" value="15000">
                                 @else
                                     <input type="hidden" name="fee" id="fee" value="{{ Auth::user()->fee }}">
                                 @endif
@@ -109,60 +109,64 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
             $('.choose').on('change', function() {
-                var action = $(this).attr('id');
-                var district_name = $(this).val();
-                var _token = $('input[name="_token"]').val();
+                var id = $(this).attr('id');
+                var district_id = $(this).val();
                 var result = '';
 
-                if (action == 'district') {
+                if (id == 'district') {
                     result = 'ward'
                 }
 
                 $.ajax({
-                    url: '{{ url('/tai-khoan/load_address') }}',
+                    url: '{{ url('/admin/transactions/feeships/load_address') }}',
                     method: 'POST',
                     data: {
-                        action: action,
-                        district_name: district_name,
-                        _token: _token
+                        action: id,
+                        district_id: district_id,
                     },
+                    dataType: "json",
                     success: function(data) {
-                        $('#' + result).html(data.html); // Đặt HTML vào phần tử <select>
+                        $('#' + result).html(data
+                        .html); // Đặt HTML vào phần tử <select>
                     }
                 });
             });
 
-
-            $('.calculate_ship').on('change', function() {
-                var district = $('.district').val();
-                var ward = $('.ward').val();
-
-                $.ajax({
-                    url: '{{ url('/tai-khoan/calculate_ship') }}',
-                    method: 'POST',
-                    data: {
-                        district: district,
-                        ward: ward,
-                    },
-                    success: function(response) {
-                        if (response.status == 400) {
-                            $('#fee').html("");
-                            $('#fee').val(response.nodata);
-                        } else {
-                            $('#fee').html("");
-                            $('#fee').val(response.fee);
-                        }
-                    }
-                });
-
+            $('.ward ').on('change', function() {
+                var districtSelect = $('.district');
+                var feeshipInput = $('input[name="feeship"]');
+                var selectedDistrict = districtSelect.val();
+                updateFeeship(selectedDistrict, feeshipInput);
             });
+
+            function updateFeeship(selectedDistrict, feeshipInput) {
+                switch (selectedDistrict) {
+                    case '2':
+                        feeshipInput.val(25000);
+                        break;
+                    case '2':
+                        feeshipInput.val(15000);
+                        break;
+                    case '3':
+                        feeshipInput.val(10000);
+                        break;
+                    case '4':
+                        feeshipInput.val(20000);
+                        break;
+                    case '5':
+                        feeshipInput.val(30000);
+                        break;
+                    case '6':
+                        feeshipInput.val(28000);
+                        break;
+                    case '7':
+                        feeshipInput.val(45000);
+                        break;
+                    default:
+                        feeshipInput.val('40000');
+                        break;
+                }
+            }
         });
-    </script>
 @endsection

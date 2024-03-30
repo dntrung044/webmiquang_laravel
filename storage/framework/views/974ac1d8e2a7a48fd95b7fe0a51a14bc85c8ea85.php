@@ -65,7 +65,7 @@
                             <?php echo csrf_field(); ?>
                             <div class="flex flex-col space-y-1">
                                 <label class="text-base font-semibold text-gray-700">Email</label>
-                                <input name="email" type="email" style="background: rgb(182, 180, 180);" autofocus placeholder="Nhập địa chỉ Email"
+                                <input name="email"  value=" <?php echo e(old('email')); ?>" type="email" style="background: rgb(182, 180, 180);" autofocus placeholder="Nhập địa chỉ Email"
                                     class="px-4 py-2 transition duration-300 border border-yellow-400 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-yellow-200" />
                             </div>
                             <div class="flex flex-col space-y-1">

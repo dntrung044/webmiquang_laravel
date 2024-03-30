@@ -13,6 +13,7 @@ class PostCommentReply extends Model
         'user_id',
         'number_like',
         'comment_id',
+        'commented_id',
         'content',
         'active',
     ];
@@ -29,8 +30,13 @@ class PostCommentReply extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+    public function commenter()
+    {
+        return $this->belongsTo(User::class, 'commented_id', 'id');
+    }
+
 
     public function likes() {
-        return $this->belongsToMany(User::class, 'comment_user', 'reply_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'reply_user', 'reply_id', 'user_id')->withTimestamps();
     }
 }

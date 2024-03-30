@@ -25,6 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'facebook_id',
         'active',
         'level',
+        'avatar',
         'fee',
     ];
 
@@ -43,15 +44,11 @@ class User extends Authenticatable implements MustVerifyEmail
     //     'email_verified_at' => 'datetime',
     // ];
 
-    public function replies() {
-        return $this->hasMany(PostCommentReply::class, 'id', 'comment_id');
-    }
-
     public function likedComments() {
         return $this->belongsToMany(PostComment::class, 'comment_user', 'user_id', 'comment_id')->withTimestamps();
     }
     public function likedReplies() {
-        return $this->belongsToMany(PostCommentReply::class, 'comment_user', 'user_id', 'reply_id')->withTimestamps();
+        return $this->belongsToMany(PostCommentReply::class, 'reply_user', 'user_id', 'reply_id')->withTimestamps();
     }
 
     public function productComment() {
@@ -67,7 +64,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function checkPermissionAccess($pemissionCheck)
-    { 
+    {
         $roles = auth()->user()->roles;
 
         foreach ($roles as $role) {

@@ -94,7 +94,7 @@
                     },
                     dataType: "json",
                     success: function(data) {
-                        $('#' + result).html(data.html); // Đặt HTML vào phần tử <select>
+                        $('#' + result).html(data.html);
                     }
                 });
             });
@@ -105,25 +105,29 @@
                 var selectedDistrict = districtSelect.val();
                 updateFeeship(selectedDistrict, feeshipInput);
             });
+
             function updateFeeship(selectedDistrict, feeshipInput) {
                 switch (selectedDistrict) {
-                    case 'Quận Liên Chiểu':
+                    case '2':
                         feeshipInput.val(25000);
                         break;
-                    case 'Quận Thanh Khê':
+                    case '2':
                         feeshipInput.val(15000);
                         break;
-                    case 'Quận Hải Châu':
+                    case '3':
                         feeshipInput.val(10000);
                         break;
-                    case 'Quận Sơn Trà':
+                    case '4':
                         feeshipInput.val(20000);
                         break;
-                    case 'Quận Ngũ Hành Sơn':
+                    case '5':
                         feeshipInput.val(30000);
                         break;
-                    case 'Quận Cẩm Lệ':
+                    case '6':
                         feeshipInput.val(28000);
+                        break;
+                    case '7':
+                        feeshipInput.val(45000);
                         break;
                     default:
                         feeshipInput.val('40000');
