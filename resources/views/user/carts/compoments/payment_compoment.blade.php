@@ -20,10 +20,19 @@
     <hr>
     @php
         if (empty(Auth::user()->fee)) {
-            echo '(
-            <a href="/tai-khoan" style="color: #f8da45;" >
+            if (empty(Auth::user())) {
+                echo '(
+            <a href="/dang-nhap" style="color: #f8da45;" >
                 Thêm vào địa chỉ
             </a>để được giảm phí giao hàng )';
+            } else {
+                echo '(
+                <a href="/tai-khoan/thay-doi-thong-tin/' .
+                    Auth::user()->id .
+                    '" style="color: #f8da45;" >
+                    Thêm vào địa chỉ
+                </a>để được giảm phí giao hàng )';
+            }
         }
     @endphp
     <hr>

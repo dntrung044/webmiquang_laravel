@@ -134,6 +134,39 @@ class CartController extends Controller
         ], 200);
     }
 
+    public function destroy_cart(Request $request)
+    {
+        $productId = $request->id;
+        $carts = session()->get('carts');
+
+        if (isset($carts[$productId])) {
+            unset($carts[$productId]);
+            session()->put('carts', $carts);
+            session()->save();
+
+            $productsInCart = $this->cartService->getProduct();
+            $carts = Session::get('carts');
+            //price
+            $price = $quantity = $quantity_total = $subtotal = $total = $total_cart = 0;
+            foreach ($productsInCart as $key => $product) {
+                $price = $product->price_sale != 0 ? $product->price_sale : $product->price;
+                $quantity = $carts[$product->id];
+                $quantity_total += $quantity;
+                $subtotal = $price * $quantity;
+                $total_cart += $subtotal;
+            }
+            //render view
+            $cart_compoment = view('user.products.compoments.cart', compact('productsInCart', 'carts', 'price', 'quantity', 'subtotal','total_cart', 'quantity_total' ))->render();
+
+            return response()->json([
+                'cart_compoment' => $cart_compoment,
+                'code' => 200,
+                'success' => 'Đã xoá món ăn thành công!',
+            ]);
+        }
+
+        return response()->json(['errors' => 'Không tìm thấy sản phẩm trong giỏ hàng!']);
+    }
     public function showcartAjax()
     {
         $products = $this->cartService->getProduct();
@@ -280,7 +313,6 @@ class CartController extends Controller
             }
         }
     }
-
 
     public function payment_compoment()
     {

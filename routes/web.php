@@ -122,7 +122,6 @@ Route::prefix('admin')->middleware('can:admin-access')->group(function () {
             Route::get('edit/{feeship}', [Admin\FeeShipController::class, 'show'])->name('feeships.edit');
             Route::post('edit/{feeship}', [Admin\FeeShipController::class, 'update'])->name('feeships.update');
             Route::post('load_address', 'Admin\FeeShipController@load_address')->name('feeships.load_address');
-            Route::post('add_address', [Admin\FeeShipController::class, 'add_address'])->name('feeships.add_address');
             Route::DELETE('destroy', [Admin\FeeShipController::class, 'destroy'])->name('feeships.destroy');
         });
         #Quản lý mã giảm giá
@@ -166,6 +165,7 @@ Route::prefix('admin')->middleware('can:admin-access')->group(function () {
         });
     });
 });
+
 //USER
 #Trang chủ
 Route::get('/', [User\HomeController::class, 'index'])->name('home');
@@ -176,7 +176,7 @@ Route::prefix('thuc-don')->group(function () {
     Route::get('/', [User\ProductController::class, 'index'])->name('menus.index');
     Route::get('/{id}-{slug}', [User\ProductController::class, 'details']);
     Route::post('/them-gio-hang-ajax', [User\CartController::class, 'add_to_cart'])->name('menus.add_to_cart');
-    #Đánh giá sp
+    Route::delete('/xoa/{id}', [User\CartController::class, 'destroy_cart'])->name('menus.destroy');
     Route::post('/danh-gia-{id}', [User\ProductController::class, 'postComment'])->name('menus.comment');
 });
 
@@ -206,15 +206,12 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('tai-khoan')->group(function () {
         Route::get('/', 'User\UserController@index')->name('account');
         Route::get('/thay-doi-thong-tin', 'User\UserController@redirectLogin');
-
+        Route::post('load_address_user', 'User\UserController@load_address')->name('account.load_address');
         Route::get('/thay-doi-thong-tin/{user}', 'User\UserController@changeInfor');
         Route::post('/thay-doi-thong-tin/{user}', 'User\UserController@updateInfor');
 
         Route::get('/thay-doi-mat-khau/{user}', 'User\UserController@changePassword');
         Route::post('/thay-doi-mat-khau/{user}', 'User\UserController@updatePassword');
-
-        Route::post('load_address', 'User\UserController@load_address');
-        Route::post('calculate_ship', 'User\UserController@calculate_ship');
     });
 
     #Đặt bàn

@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('content'); ?>
     <main class="pattern_2">
         <div class="hero_single inner_pages background-image" data-background="url(teamplate/img/tintuc.jpg)">
@@ -83,12 +82,20 @@
                                         
                                         <?php
                                         if (empty(Auth::user()->fee)) {
-                                            $id_user = Auth::user()->id;
-                                            echo '(
-                                                <a href="nguoi-dung/thay-doi-thong-tin/$id_user " style="color: #f8da45;" >
+                                            if (empty(Auth::user())) {
+                                                echo '(
+                                                <a href="/dang-nhap" style="color: #f8da45;" >
                                                     Thêm vào địa chỉ
                                                 </a>để được giảm phí giao hàng )';
-                                        }
+                                            } else {
+                                                    echo '(
+                                                    <a href="/tai-khoan/thay-doi-thong-tin/' .
+                                                        Auth::user()->id .
+                                                        '" style="color: #f8da45;" >
+                                                        Thêm vào địa chỉ
+                                                    </a>để được giảm phí giao hàng )';
+                                                }
+                                            }
                                         ?>
                                     </li>
                                         

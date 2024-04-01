@@ -87,12 +87,20 @@
                                         {{-- Thêm vào địa chỉ --}}
                                         @php
                                         if (empty(Auth::user()->fee)) {
-                                            $id_user = Auth::user()->id;
-                                            echo '(
-                                                <a href="nguoi-dung/thay-doi-thong-tin/$id_user " style="color: #f8da45;" >
+                                            if (empty(Auth::user())) {
+                                                echo '(
+                                                <a href="/dang-nhap" style="color: #f8da45;" >
                                                     Thêm vào địa chỉ
                                                 </a>để được giảm phí giao hàng )';
-                                        }
+                                            } else {
+                                                    echo '(
+                                                    <a href="/tai-khoan/thay-doi-thong-tin/' .
+                                                        Auth::user()->id .
+                                                        '" style="color: #f8da45;" >
+                                                        Thêm vào địa chỉ
+                                                    </a>để được giảm phí giao hàng )';
+                                                }
+                                            }
                                         @endphp
                                     </li>
                                         {{-- Mã giảm giá --}}
@@ -300,7 +308,9 @@
                                 <div class="row">
                                     <label>Địa chỉ: </label>
                                     <p name="address">
-                                        {{ Auth::user()->street}}, {{ Auth::user()->ward}}, {{  !empty(Auth::user()->district) ? Auth::user()->district : 'Thêm địa chỉ để được giảm phí vận chuyển' }} </p>
+                                         {{ Auth::user()->street}}, {{ Auth::user()->ward}},
+                                         {{  !empty(Auth::user()->district) ? Auth::user()->district : 'Thêm địa chỉ để được giảm phí vận chuyển' }}
+                                    </p>
                                 </div>
 
                                 <a href="tai-khoan/thay-doi-thong-tin/{{ Auth::user()->id}}" class="btn_1 full-width mb_5">
