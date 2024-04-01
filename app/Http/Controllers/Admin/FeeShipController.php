@@ -31,20 +31,6 @@ class FeeShipController extends Controller
         ]);
     }
 
-    public function add_address(Request $request)
-    {
-        $data = $request->all();
-        $output ='';
-        $data['action'] == "district" ;
-        $select = Ward::where('district_name', $data['district_name'])->get();
-        $output.='<option>---Chọn xã/phường---</option>';
-        foreach ($select as $key => $ward){
-            $output.='<option value="'.$ward->name.'">'.$ward->name.'</option>';
-        }
-
-        echo  $output;
-    }
-
     public function store(Request $request)
     {
         $this->validate($request, [

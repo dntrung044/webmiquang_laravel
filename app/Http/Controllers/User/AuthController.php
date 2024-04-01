@@ -163,6 +163,9 @@ class AuthController extends Controller
 
     // Login
     public function login() {
+        if (Auth::check()) {
+            return redirect()->route('home');
+        }
         return view('user.auth.login',[
             'title' => 'Đăng nhập - Mì Quảng Bà Mua',
         ]);
@@ -181,8 +184,7 @@ class AuthController extends Controller
             if (Auth::user()->level==1) {
                 return redirect('admin')->with('success', 'Đăng nhập thành công');
             } else {
-                // return redirect()->back()->with('success', 'Đăng nhập với vài trò thành công');
-                return redirect()->intended('/');
+                return redirect()->intended('/')->with('success', 'Đăng nhập với vài trò thành công');
             }
         } elseif(Auth::attempt([
             'email' => $request->input('email'),
@@ -207,10 +209,6 @@ class AuthController extends Controller
         ]);
 
         if ($validation->fails()) {
-            // foreach($validation->messages()->getMessages() as $field_name => $messages)
-            // {
-            //     $error_array[] = $messages;
-            // }
             return response()->json(['error' => $validation->errors()->first()]);
         }
         else {

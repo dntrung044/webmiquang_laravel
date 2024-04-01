@@ -28,9 +28,7 @@
                                 <div class="col-md-6" data-cue="slideInUp">
                                     <article class="blog">
                                         <figure>
-                                            <a
-                                            href="
-                                            {{ route('blog.detail', ['id' => $blog->id, 'slug' => \Str::slug($blog->name, '-')]) }}">
+                                            <a href="{{ route('blog.detail', ['id' => $blog->id, 'slug' => \Str::slug($blog->name, '-')]) }}">
                                                 <img src="{{ $blog->thumb }}" alt="">
                                                 <div class="preview"><span>Đọc thêm</span></div>
                                             </a>
@@ -69,7 +67,7 @@
                                                 <img src="{{ $new->thumb }}" alt="">
                                             </a>
                                         </div>
-                                        <small>danh mục - {{ date('m.d.y', strtotime($new->created_at)) }}</small>
+                                        <small>{{ $new->postCategory->name }} - {{ date('m.d.y', strtotime($new->created_at)) }}</small>
                                         <h3>
                                             <a
                                                 href="

@@ -44,23 +44,24 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Quận/Huyện</label>
-                                                <select style="background: #ebebeb;" class="form-select choose district"
-                                                    name="district" id="district">
+                                                <select class="form-select choose district" data-url="<?php echo e(route('account.load_address')); ?>"
+                                                name="district" id="district">
                                                     <?php if(!empty(Auth::user()->district)): ?>
                                                         <option value="<?php echo e(Auth::user()->district); ?>">
                                                             <?php echo e(Auth::user()->district); ?>
 
                                                         </option>
                                                         <?php $__currentLoopData = $districts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $d): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                        <option value="<?php echo e($d->name); ?>">
-                                                            <?php echo e($d->name); ?>
+                                                            <option value="<?php echo e($d->id); ?>">
+                                                                <?php echo e($d->name); ?>
 
-                                                        </option>
-                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                            </option>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                     <?php else: ?>
                                                         <option value="">Chọn quận/huyện</option>
+
                                                         <?php $__currentLoopData = $districts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $d): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                            <option value="<?php echo e($d->name); ?>">
+                                                            <option value="<?php echo e($d->id); ?>">
                                                                 <?php echo e($d->name); ?>
 
                                                             </option>
@@ -73,8 +74,7 @@
                                         <div class="col-md-3 ml-20">
                                             <div class="form-group">
                                                 <label>Xã/Phường</label>
-                                                <select style="background: #ebebeb;" class="form-select ward calculate_ship"
-                                                    name="ward" id="ward">
+                                                <select class="form-select ward" name="ward" id="ward">
                                                     <?php if(!empty(Auth::user()->ward)): ?>
                                                         <option value="<?php echo e(Auth::user()->ward); ?>">
                                                             <?php echo e(Auth::user()->ward); ?>
@@ -89,12 +89,12 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Đường, số nhà:</label>
-                                        <input class="form-control" name="street" value="<?php echo e(Auth::user()->street); ?>">
+                                        <input type="text" class="form-control" name="street" value="<?php echo e(Auth::user()->street); ?>">
                                     </div>
                                 </div>
 
                                 <?php if(Auth::user()->fee == 0): ?>
-                                    <input type="hidden" id="fee"  name="fee" value="15000">
+                                    <input type="hidden" id="fee" name="fee" value="15000">
                                 <?php else: ?>
                                     <input type="hidden" name="fee" id="fee" value="<?php echo e(Auth::user()->fee); ?>">
                                 <?php endif; ?>
@@ -113,60 +113,67 @@
 <?php $__env->startSection('script'); ?>
     <script>
         $(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
             $('.choose').on('change', function() {
-                var action = $(this).attr('id');
-                var district_name = $(this).val();
-                var _token = $('input[name="_token"]').val();
+                var id = $(this).attr('id');
+                var district_id = $(this).val();
+                var _token = $('meta[name="csrf-token"]').attr('content');
                 var result = '';
+                var url = $(this).data('url');
 
-                if (action == 'district') {
+                if (id == 'district') {
                     result = 'ward'
                 }
-
                 $.ajax({
-                    url: '<?php echo e(url('/tai-khoan/load_address')); ?>',
+                    url: url,
                     method: 'POST',
                     data: {
-                        action: action,
-                        district_name: district_name,
-                        _token: _token
+                        _token: _token,
+                        action: id,
+                        district_id: district_id,
                     },
+                    dataType: "json",
                     success: function(data) {
-                        $('#' + result).html(data.html); // Đặt HTML vào phần tử <select>
+                        $('#' + result).html(data
+                        .html); // Đặt HTML vào phần tử <select>
                     }
                 });
             });
 
-
-            $('.calculate_ship').on('change', function() {
-                var district = $('.district').val();
-                var ward = $('.ward').val();
-
-                $.ajax({
-                    url: '<?php echo e(url('/tai-khoan/calculate_ship')); ?>',
-                    method: 'POST',
-                    data: {
-                        district: district,
-                        ward: ward,
-                    },
-                    success: function(response) {
-                        if (response.status == 400) {
-                            $('#fee').html("");
-                            $('#fee').val(response.nodata);
-                        } else {
-                            $('#fee').html("");
-                            $('#fee').val(response.fee);
-                        }
-                    }
-                });
-
+            $('.ward ').on('change', function() {
+                var districtSelect = $('.district');
+                var feeshipInput = $('input[name="fee"]');
+                var selectedDistrict = districtSelect.val();
+                updateFeeship(selectedDistrict, feeshipInput);
             });
+
+            function updateFeeship(selectedDistrict, feeshipInput) {
+                switch (selectedDistrict) {
+                    case '2':
+                        feeshipInput.val(25000);
+                        break;
+                    case '2':
+                        feeshipInput.val(15000);
+                        break;
+                    case '3':
+                        feeshipInput.val(10000);
+                        break;
+                    case '4':
+                        feeshipInput.val(20000);
+                        break;
+                    case '5':
+                        feeshipInput.val(30000);
+                        break;
+                    case '6':
+                        feeshipInput.val(28000);
+                        break;
+                    case '7':
+                        feeshipInput.val(45000);
+                        break;
+                    default:
+                        feeshipInput.val('40000');
+                        break;
+                }
+            }
         });
     </script>
 <?php $__env->stopSection(); ?>

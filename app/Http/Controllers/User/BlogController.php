@@ -114,15 +114,15 @@ class BlogController extends Controller
                 ->with('postCategory')
                 ->firstOrFail();
 
-                $comments = PostComment::withCount('likes')
-                            ->with(['replies' => function ($query) {
-                                $query->withCount('likes')->orderBy('likes_count', 'desc');
-                            }])->where('post_id', $post_id)->where('active', 1)->get()
-                            ->orderByRaw('likes_count + (SELECT COALESCE(SUM(likes_count), 0) FROM replies WHERE comment_id = comments.id) DESC');
+                // $comments = PostComment::withCount('likes')
+                //             ->with(['replies' => function ($query) {
+                //                 $query->withCount('likes')->orderBy('likes_count', 'desc');
+                //             }])->where('post_id', $post_id)->where('active', 1)->get()
+                //             ->orderByRaw('likes_count + (SELECT COALESCE(SUM(likes_count), 0) FROM replies WHERE comment_id = comments.id) DESC');
 
-                // $popular_comments = PostComment::withCount('likes')
-                //                     ->orderBy('number_like', 'desc')
-                //                     ->get();
+                $comments = PostComment::withCount('likes')
+                                    ->orderBy('number_like', 'desc')
+                                    ->get();
                 // $comments = PostCommentReply::whereIn('comment_id', $popular_comments->pluck('id'))
                 //                     ->withCount('likes')
                 //                     ->orderBy('number_like', 'desc')

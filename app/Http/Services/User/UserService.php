@@ -3,11 +3,9 @@
 
 namespace App\Http\Services\User;
 
-use App\Models\District;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
 
 class UserService
 {

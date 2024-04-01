@@ -16,7 +16,7 @@
                             </span>
                             <br>{{ number_format($subtotal, 0, '', '.') }}đ
                         </strong>
-                        <button type="button" data-url="{{ route('cart.destroy', ['id' => $product->id]) }}"
+                        <button type="button" data-url="{{ route('menus.destroy', ['id' => $product->id]) }}"
                             data-id="{{ $product->id }}" class="action action_delete">
                             <i class="icon_trash_alt"></i>
                         </button>

@@ -44,21 +44,22 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Quận/Huyện</label>
-                                                <select style="background: #ebebeb;" class="form-select choose district"
-                                                    name="district" id="district">
+                                                <select class="form-select choose district" data-url="{{ route('account.load_address') }}"
+                                                name="district" id="district">
                                                     @if (!empty(Auth::user()->district))
                                                         <option value="{{ Auth::user()->district }}">
                                                             {{ Auth::user()->district }}
                                                         </option>
                                                         @foreach ($districts as $d)
-                                                            <option value="{{ $d->name }}">
+                                                            <option value="{{ $d->id }}">
                                                                 {{ $d->name }}
                                                             </option>
                                                         @endforeach
                                                     @else
                                                         <option value="">Chọn quận/huyện</option>
+
                                                         @foreach ($districts as $d)
-                                                            <option value="{{ $d->name }}">
+                                                            <option value="{{ $d->id }}">
                                                                 {{ $d->name }}
                                                             </option>
                                                         @endforeach
@@ -70,8 +71,7 @@
                                         <div class="col-md-3 ml-20">
                                             <div class="form-group">
                                                 <label>Xã/Phường</label>
-                                                <select style="background: #ebebeb;" class="form-select ward calculate_ship"
-                                                    name="ward" id="ward">
+                                                <select class="form-select ward" name="ward" id="ward">
                                                     @if (!empty(Auth::user()->ward))
                                                         <option value="{{ Auth::user()->ward }}">
                                                             {{ Auth::user()->ward }}
@@ -85,7 +85,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Đường, số nhà:</label>
-                                        <input class="form-control" name="street" value="{{ Auth::user()->street }}">
+                                        <input type="text" class="form-control" name="street" value="{{ Auth::user()->street }}">
                                     </div>
                                 </div>
 
@@ -112,16 +112,18 @@
             $('.choose').on('change', function() {
                 var id = $(this).attr('id');
                 var district_id = $(this).val();
+                var _token = $('meta[name="csrf-token"]').attr('content');
                 var result = '';
+                var url = $(this).data('url');
 
                 if (id == 'district') {
                     result = 'ward'
                 }
-
                 $.ajax({
-                    url: '{{ url('/admin/transactions/feeships/load_address') }}',
+                    url: url,
                     method: 'POST',
                     data: {
+                        _token: _token,
                         action: id,
                         district_id: district_id,
                     },
@@ -135,7 +137,7 @@
 
             $('.ward ').on('change', function() {
                 var districtSelect = $('.district');
-                var feeshipInput = $('input[name="feeship"]');
+                var feeshipInput = $('input[name="fee"]');
                 var selectedDistrict = districtSelect.val();
                 updateFeeship(selectedDistrict, feeshipInput);
             });
@@ -169,4 +171,5 @@
                 }
             }
         });
+    </script>
 @endsection

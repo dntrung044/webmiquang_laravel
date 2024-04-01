@@ -18,7 +18,7 @@
                             </span>
                             <br><?php echo e(number_format($subtotal, 0, '', '.')); ?>đ
                         </strong>
-                        <button type="button" data-url="<?php echo e(route('cart.destroy', ['id' => $product->id])); ?>"
+                        <button type="button" data-url="<?php echo e(route('menus.destroy', ['id' => $product->id])); ?>"
                             data-id="<?php echo e($product->id); ?>" class="action action_delete">
                             <i class="icon_trash_alt"></i>
                         </button>
