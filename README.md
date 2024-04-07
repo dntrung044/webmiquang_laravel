@@ -5,7 +5,7 @@
 </head>
 <body>
   <h1>Giới thiệu: </h1>
-  
+  DATABASE, VIDEO DEMO: https://s.net.vn/SJ5U
   <h2>Công cụ sử dụng:</h2>
     <ul>
         <li>
