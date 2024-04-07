@@ -9,13 +9,13 @@
   <h2>Công cụ sử dụng:</h2>
     <ul>
         <li>
-           Backend: PHP, ajax jquery
+           Backend: PHP, Ajax jQuery
         </li>
         <li>
           Fontend: HTML, CSS, JS
         </li>
         <li>
-           DB: Mysql
+           DB: MySQL
         </li>
     </ul>
 
@@ -42,8 +42,8 @@
         <li>
             Sửa thông tin người dùng
             <ul>
-                <li> Địa chỉ có load api của tỉnh ĐN</li>
-                <li> Thông tin đơn hàng</li>
+                <li> Địa chỉ load api của tỉnh Đà Nẵng chỉnh sửa lại và tính phí vận chuyển Ajax</li>
+                <li> Trạng thái đơn hàng</li>
                 <li> Xem Đánh giá, Mã giảm giá</li> 
             </ul>
         </li>
@@ -61,13 +61,13 @@
     <ul>
         <li>Xem sản phẩm theo tab</li>
         <li>Đánh giá (số sao sản phẩm)</li>
-        <li>Thêm món bằng ajax</li> 
+        <li>Thêm món bằng Ajax</li> 
          <li>Xem chi tiết món ăn</li> 
     </ul>
 
   <h2>Giỏ hàng (AJAX)</h2>
   <ul>
-    <li>Thêm, sửa, xóa bằng ajax jquery</li>
+    <li>Thêm, sửa, xóa bằng Ajax Jquery</li>
     <li>Tính toán điều kiện giá tiền khi:</li>
         <ul>
             <li>Thêm</li>
@@ -80,8 +80,8 @@
 
   <h2>Thanh toán</h2>
   <ul>
-    <li>Qua các phương thức thanh toán</li>
-    <li>Gửi email</li>
+    <li>Qua các phương thức thanh toán(online VNPAY lỗi)</li>
+    <li>Gửi email thông tin đơn hàng</li>
   </ul>
 
   <h2>Blog</h2>
@@ -94,17 +94,15 @@
             <li>Sắp xếp theo nổi bậc(lượt thích cmt và reply nhiều nhất) hoặc mới nhất</li>
             <li>Thích và không thích</li>
             <li>Báo cáo bình luận(Người dùng), Ẩn bình luận(Quản trị)</li>
-            <li>Xem thêm</li>
+            <li>Xem thêm bình luận</li>
         </ul>
     </li>
   </ul>
 
   <h2>Quản trị viên</h2>
   <ul> 
-    Gồm các trang quản lý
     <li>Quản lý thông tin nhà hàng
         <ul> 
-            Gồm các trang quản lý
             <li>Bài viết giới thiệu</li> 
             <li>Thư viện hình ảnh</li> 
             <li>Slider</li>
@@ -112,8 +110,7 @@
         </ul> 
     </li> 
      <li>Quản lý thực đơn
-        <ul> 
-            Gồm các trang quản lý
+        <ul>  
             <li>Món ăn</li> 
             <li>Loại món ăn</li> 
             <li>Bình luận món ăn</li> 
@@ -121,25 +118,21 @@
     </li> 
      <li>Quản lý Đơn Hàng
         <ul> 
-            Gồm các trang quản lý
             <li>Mã giảm giá</li> 
             <li>Phí Vận Chuyển(load API tỉnh,quận ĐN)</li> 
             <li>Đơn hàng
                 <ul> 
-                    Gồm các trang quản lý
                     <li>Xem chi tiết</li>  
                     <li>In hóa đơn, gửi mail, các trạng thái đơn hàng</li>  
                 </ul> 
             </li> 
         </ul> 
     </li> 
-     <li>Phân quyền hệ thống
-        <ul> 
-            Gồm các trang quản lý
+     <li>Phân quyền hệ thống(gate và policy)
+        <ul>  
             <li>Tài khoản người dùng</li> 
             <li>Quản lý vai trò</li> 
             <li> Quyền xử lý</li>
-            <li>Banner</li>
         </ul> 
     </li> 
   </ul>  
