@@ -5,6 +5,8 @@
 * Backend: PHP(Laravel)
 * Frontend: HTML, CSS, JS(Ajax jQuery)
 * Database: MySQL
+## Cơ sở dữ liệu
+![Database 4](docs/images/Database_4.png)
 **##Database, report, video demo, Source code** if error: [https://s.net.vn/SJ5U](https://s.net.vn/SJ5U)
 ## Hướng dẫn cài đặt và sửa lỗi
 * Lỗi hình ảnh
@@ -81,12 +83,5 @@
   * Tài khoản người dùng
   * Quản lý vai trò
   * Quyền xử lý
-## Cơ sở dữ liệu
-![Admin Home Page](docs/images/Database.png)
-### Database: 
-![Database 1](docs/images/Database_1.png)
-![Database 2](docs/images/Database_2.png)
-![Database 3](docs/images/Database_3.png)
-![Database 4](docs/images/Database_4.png)
 # Hết
 ![Database 4](docs/images/thank_you.png)
