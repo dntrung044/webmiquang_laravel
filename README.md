@@ -7,7 +7,7 @@
 * Database: MySQL
 ## Cơ sở dữ liệu
 ![Database 4](docs/images/Database_4.png)
-**##Database, report, video demo, Source code** if error: [https://s.net.vn/SJ5U](https://s.net.vn/SJ5U)
+**##Database, report, video demo, Source code** if error: https://s.net.vn/M7qj
 ## Hướng dẫn cài đặt và sửa lỗi
 * Lỗi hình ảnh
   * Xóa `public->storage`
