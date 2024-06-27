@@ -1,15 +1,17 @@
  
 # Giới thiệu
+![Cover](docs/images/Cover.png)
 ## Công cụ sử dụng:
-* Backend: PHP, Ajax jQuery
-* Fontend: HTML, CSS, JS
-* DB: MySQL
-##DATABASE, VIDEO DEMO, Source code: [https://s.net.vn/SJ5U](https://s.net.vn/SJ5U)
+* Backend: PHP(Laravel)
+* Frontend: HTML, CSS, JS(Ajax jQuery)
+* Database: MySQL
+**##Database, report, video demo, Source code** if error: [https://s.net.vn/SJ5U](https://s.net.vn/SJ5U)
 ## Hướng dẫn cài đặt và sửa lỗi
 * Lỗi hình ảnh
   * Xóa `public->storage`
-  * Chạy Terminal : `php artisan storage:link`
-    
+  * Chạy Terminal: `php artisan storage:link`
+## Sơ đồ Trang web
+![sitemap](docs/images/sitemap.png)
 # Các chức năng
 ## Trang Người dùng
 * Đăng nhập, Đăng ký (Mạng xã hội)
@@ -33,31 +35,29 @@
 * Xem sản phẩm 
   * theo tab
 * Đánh giá
-  * số sao (5 sao) sản phẩm
+  * số sao (5 sao)
 * Thêm món bằng Ajax
 * Xem chi tiết món ăn
 
 ## Giỏ hàng (AJAX)
 * Thêm, sửa, xóa bằng Ajax Jquery
 * Tính toán điều kiện giá tiền khi: Thêm, Sửa, Xóa, Áp mã giảm giá, Phí vận chuyển
-
 ## Thanh toán
-* Qua các phương thức thanh toán (online VNPAY lỗi)
 * Gửi email thông tin đơn hàng
-
 ## Blog
 * Xem danh sách, danh mục, chi tiết bài viết
 * Tìm kiếm ajax (từ khóa gợi ý)
-* Bình luận (ajax jquery)
+* Bình luận (AJAX)
   * Thêm bình luận
   * Sắp xếp 
-    * mới nhất hoặc nổi bật (lượt thích cmt và reply nhiều nhất)
+    * mới nhất hoặc nổi bật
   * Thích/ không thích
   * Báo cáo (Người dùng), Ẩn bình luận (Quản trị)
   * Xem thêm
-
+## Đặt bàn
+* Thêm vào DB và gửi mail
 ## Quản trị viên
-
+![Admin Home Page](docs/images/admin.png)
 ### Quản lý thông tin nhà hàng
   * Bài viết giới thiệu
   * Thư viện hình ảnh
@@ -76,9 +76,17 @@
   * Phí Vận Chuyển (load API tỉnh, quận ĐN)
   * Đơn hàng
     * Duyệt các trạng thái đơn hàng
-    * Xem chi tiết
-    * In hóa đơn, gửi mail thông báo
+    * Xem chi tiết(In hóa đơn, gửi mail thông báo)
 ### Phân quyền hệ thống (gate và policy)
   * Tài khoản người dùng
   * Quản lý vai trò
   * Quyền xử lý
+## Cơ sở dữ liệu
+![Admin Home Page](docs/images/Database.png)
+### Database: 
+![Database 1](docs/images/Database_1.png)
+![Database 2](docs/images/Database_2.png)
+![Database 3](docs/images/Database_3.png)
+![Database 4](docs/images/Database_4.png)
+# Hết
+![Database 4](docs/images/thank_you.png)
