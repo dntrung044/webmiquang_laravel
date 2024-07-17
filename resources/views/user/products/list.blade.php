@@ -2,7 +2,6 @@
     <link rel="stylesheet" href="teamplate/js/RangeSlider/jQuery.UI.css" type="text/css" media="all" />
     {{-- style giỏ hàng bot --}}
     <style>
-        /* Nút Để Mở cartbox */
         .nut-mo-cartbox {
             color: white;
             padding: 10px 15px;
@@ -14,7 +13,6 @@
             right: 32px;
         }
 
-        /* Ẩn cartbox mặc định */
         .cartbox {
             display: none;
             position: fixed;
@@ -243,26 +241,18 @@
                                                 @endforeach
                                             </div>
                                         </div>
-                                        <!-- /row -->
                                     </div>
-                                    <!-- /card-body -->
                                 </div>
                             </div>
                         @endforeach
-                        <!-- /tab -->
                     </div>
-                    <!-- /tab-content -->
                 </div>
-                <!-- /tabs_menu-->
             </div>
-            <!-- /container -->
         </div>
     </main>
-
     @include('user.products.compoments.cart')
     @include('sweetalert::alert')
 @endsection
-
 @section('script')
     <script src="{{ asset('teamplate/js/RangeSlider/jQuery.UI.js') }}"></script>
     <script src="{{ asset('teamplate/js/add_to_cart.js') }}"></script>

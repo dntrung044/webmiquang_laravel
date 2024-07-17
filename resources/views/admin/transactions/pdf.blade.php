@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -76,7 +77,8 @@
                     <div class="logotype">Mì Quảng</div>
                 </td>
                 <td width="300px">
-                    <div style="background: #ffd9e8;border-left: 15px solid #fff;padding-left: 30px;font-size: 26px;font-weight: bold;letter-spacing: -1px;height: 73px;line-height: 75px;">
+                    <div
+                        style="background: #ffd9e8;border-left: 15px solid #fff;padding-left: 30px;font-size: 26px;font-weight: bold;letter-spacing: -1px;height: 73px;line-height: 75px;">
                         Hoá đơn đặt hàng
                     </div>
                 </td>
@@ -159,25 +161,27 @@
             @php
                 $total = 0;
                 $ship = 10000;
-                $totalss=0
+                $totalss = 0;
             @endphp
             @foreach ($carts as $key => $cart)
-            @php
-                $price = $cart->total_price * $cart->total_item;
-                $total += $price;
-                $i = 0;
-            @endphp
-            <tr>
-                {{-- <span style="color:#777;font-size:11px;"> --}}
-                <td class="row"><span style="color:#777;font-size:11px;">{{ $i+1 }}</span></td>
-                <td class="row">
-                    <img alt="img error" src="{{ public_path($cart->product->thumb) }}" style="width: 120px; height: 70px; margin-bottom: 4px">
-                    <br>
-                    {{ $cart->product->name }}
-                </td>
-                <td class="row">{{ number_format($cart->total_price, 0, '', '.') }}đ <span style="color:#777">X</span> {{ $cart->total_item }}</td>
-                <td class="row">{{ number_format($price, 0, '', '.') }}đ</td>
-            </tr>
+                @php
+                    $price = $cart->total_price * $cart->total_item;
+                    $total += $price;
+                    $i = 0;
+                @endphp
+                <tr>
+                    {{-- <span style="color:#777;font-size:11px;"> --}}
+                    <td class="row"><span style="color:#777;font-size:11px;">{{ $i + 1 }}</span></td>
+                    <td class="row">
+                        <img alt="img error" src="{{ public_path($cart->product->thumb) }}"
+                            style="width: 120px; height: 70px; margin-bottom: 4px">
+                        <br>
+                        {{ $cart->product->name }}
+                    </td>
+                    <td class="row">{{ number_format($cart->total_price, 0, '', '.') }}đ <span
+                            style="color:#777">X</span> {{ $cart->total_item }}</td>
+                    <td class="row">{{ number_format($price, 0, '', '.') }}đ</td>
+                </tr>
             @endforeach
         </table><br>
 
@@ -209,7 +213,7 @@
             Xàm
         </div>
         <div class="socialmedia">Theo dõi chúng tôi trực tuyến <small>[FB] [INSTA]</small></div>
-    </div><!-- container -->
+    </div>
 </body>
 
 </html>

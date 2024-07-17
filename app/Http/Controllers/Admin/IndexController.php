@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 class IndexController extends Controller
 {
     public function index()
-    { 
+    {
         $product_count = Product::count();
         $order_count = Cart::count();
         $post_count = Post::count();
@@ -38,17 +38,15 @@ class IndexController extends Controller
                 'reservationNew',
                 'orderNew'
             ));
-        } else { 
+        } else {
             return redirect()->route('home');
         }
-       
     }
 
     // Trạng thái liên hệ
     public function activeContact($contact)
     {
         $transaction = Contact::find($contact);
-
         $transaction->status = Contact::STATUS_DONE;
         $transaction->save();
 
@@ -59,7 +57,6 @@ class IndexController extends Controller
     public function activeReservation($reservation)
     {
         $transaction = Reservation::find($reservation);
-
         $transaction->status = Reservation::STATUS_DONE;
         $transaction->save();
 

@@ -19,7 +19,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Row end  -->
             {{-- List --}}
             <div class="row clearfix g-3">
                 <div class="col-sm-12">
@@ -36,31 +35,30 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($postcategories as $key => $PostCategory)
-                                    <tr>
-                                        <td>{{ $PostCategory->id }}</td>
-                                        <td>{{ $PostCategory->name }}</td>
-                                        <td>{!! \App\Helpers\Helper::active($PostCategory->active) !!}</td>
-                                        <td>
-                                            <div class="btn-group" role="group"
-                                                aria-label="Basic outlined example">
-                                                <button type="button" class="btn btn-outline-secondary"
-                                                    data-bs-toggle="modal">
-                                                    <a class="btn btn-primary btn-sm"
-                                                        href="/admin/postcategories/edit/{{ $PostCategory->id }}">
-                                                        <i class="icofont-edit text-success"></i>
-                                                    </a>
-                                                </button>
+                                        <tr>
+                                            <td>{{ $PostCategory->id }}</td>
+                                            <td>{{ $PostCategory->name }}</td>
+                                            <td>{!! \App\Helpers\Helper::active($PostCategory->active) !!}</td>
+                                            <td>
+                                                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                    <button type="button" class="btn btn-outline-secondary"
+                                                        data-bs-toggle="modal">
+                                                        <a class="btn btn-primary btn-sm"
+                                                            href="/admin/postcategories/edit/{{ $PostCategory->id }}">
+                                                            <i class="icofont-edit text-success"></i>
+                                                        </a>
+                                                    </button>
 
-                                                <button type="button" class="btn btn-outline-secondary deleterow">
-                                                    <a href="#"
-                                                        onclick="removeRow({{ $PostCategory->id }}, '/admin/postcategories/destroy')">
-                                                        <i class="icofont-ui-delete text-danger"></i>
-                                                    </a>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                                    <button type="button" class="btn btn-outline-secondary deleterow">
+                                                        <a href="#"
+                                                            onclick="removeRow({{ $PostCategory->id }}, '/admin/postcategories/destroy')">
+                                                            <i class="icofont-ui-delete text-danger"></i>
+                                                        </a>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -69,5 +67,4 @@
             </div>
         </div>
     </div>
-
 @endsection

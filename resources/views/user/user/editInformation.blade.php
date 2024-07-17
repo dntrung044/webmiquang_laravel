@@ -1,6 +1,3 @@
-@section('head')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-@endsection
 @extends('User.layout.main')
 @section('content')
     <main class="pattern_2" style="transform: none;">
@@ -13,7 +10,6 @@
                                 <h3>Thông tin cá nhân</h3>
                             </div>
                         </div>
-                        <!-- /head -->
                         <form action="" method="POST">
                             @csrf
                             <div class="main">
@@ -44,8 +40,9 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Quận/Huyện</label>
-                                                <select class="form-select choose district" data-url="{{ route('account.load_address') }}"
-                                                name="district" id="district">
+                                                <select class="form-select choose district"
+                                                    data-url="{{ route('account.load_address') }}" name="district"
+                                                    id="district">
                                                     @if (!empty(Auth::user()->district))
                                                         <option value="{{ Auth::user()->district }}">
                                                             {{ Auth::user()->district }}
@@ -85,7 +82,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Đường, số nhà:</label>
-                                        <input type="text" class="form-control" name="street" value="{{ Auth::user()->street }}">
+                                        <input type="text" class="form-control" name="street"
+                                            value="{{ Auth::user()->street }}">
                                     </div>
                                 </div>
 
@@ -130,7 +128,7 @@
                     dataType: "json",
                     success: function(data) {
                         $('#' + result).html(data
-                        .html); // Đặt HTML vào phần tử <select>
+                            .html); // Đặt HTML vào phần tử <select>
                     }
                 });
             });

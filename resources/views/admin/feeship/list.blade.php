@@ -19,7 +19,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Row end  -->
             {{-- List --}}
             <div class="row">
                 <div class="col-sm-12">
@@ -46,14 +45,14 @@
                                                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                                                     <a class="btn btn-outline-secondary"
                                                         href="{{ route('feeships.edit', ['feeship' => $fee->id]) }}">
-                                                        <button class="btn btn-primary btn-sm"  type="button">
+                                                        <button class="btn btn-primary btn-sm" type="button">
                                                             <i class="icofont-edit text-success"></i>
                                                         </button>
                                                     </a>
 
                                                     <a href="#" class="btn btn-outline-secondary"
                                                         onclick="removeRow({{ $fee->id }}, '{{ route('feeships.destroy') }}')">
-                                                        <button type="button" class="btn btn-warning btn-sm" >
+                                                        <button type="button" class="btn btn-warning btn-sm">
                                                             <i class="icofont-ui-delete text-danger"></i>
                                                         </button>
                                                     </a>

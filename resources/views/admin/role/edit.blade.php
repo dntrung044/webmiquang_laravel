@@ -11,13 +11,11 @@
                 <input type="hidden" id="edit_id" />
                 <div class="mb-3">
                     <label class="form-label">Tên vài trò:</label>
-                    <textarea class="form-control" rows="2" id="edit_name"
-                    placeholder="Nhập tên vai trò">{{ old('name') }}</textarea>
+                    <textarea class="form-control" rows="2" id="edit_name" placeholder="Nhập tên vai trò">{{ old('name') }}</textarea>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Mô tả:</label>
-                    <textarea id="edit_description" class="form-control" rows="3"
-                        placeholder="Nhập nội dung mô tả">{{ old('description') }}</textarea>
+                    <textarea id="edit_description" class="form-control" rows="3" placeholder="Nhập nội dung mô tả">{{ old('description') }}</textarea>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped custom-table">
@@ -33,7 +31,7 @@
                                         <p>
                                             {{ $permissionItem->name }} ( {{ $permissionItem->description }})
                                             <input class="form-check-input checkbox_role_edit" type="checkbox"
-                                            value="{{ $permissionItem->id }}">
+                                                value="{{ $permissionItem->id }}">
                                         </p>
                                     </td>
                                 </tr>

@@ -19,7 +19,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Row end  -->
             {{-- List --}}
             <div class="row">
                 <div class="col-sm-12">
@@ -46,8 +45,7 @@
                                             </td>
                                             <td>{!! \App\Helpers\Helper::active($gallery->active) !!}</td>
                                             <td>
-                                                <div class="btn-group" role="group"
-                                                    aria-label="Basic outlined example">
+                                                <div class="btn-group" role="group" aria-label="Basic outlined example">
                                                     <button type="button" class="btn btn-outline-secondary"
                                                         data-bs-toggle="modal">
                                                         <a class="btn btn-primary btn-sm"
@@ -57,7 +55,8 @@
                                                     </button>
 
                                                     <button type="button" class="btn btn-outline-secondary deleterow">
-                                                        <a href="#" onclick="removeRow({{ $gallery->id }}, '/admin/abouts/galleries/destroy')">
+                                                        <a href="#"
+                                                            onclick="removeRow({{ $gallery->id }}, '/admin/abouts/galleries/destroy')">
                                                             <i class="icofont-ui-delete text-danger"></i>
                                                         </a>
                                                     </button>

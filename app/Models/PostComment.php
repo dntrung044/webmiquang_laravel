@@ -23,20 +23,24 @@ class PostComment extends Model
     const ACTIVE_DONE = 1;
     const ACTIVE_NOT_DEFAULT = 0;
 
-    public function user() {
+    public function user()
+    {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
-    public function post() {
+    public function post()
+    {
         return $this->hasOne(Post::class, 'id', 'post_id')
-        ->withDefault(['name' => '']);
+            ->withDefault(['name' => '']);
     }
 
-    public function replies() {
+    public function replies()
+    {
         return $this->hasMany(PostCommentReply::class, 'comment_id', 'id');
     }
 
-    public function likes() {
+    public function likes()
+    {
         return $this->belongsToMany(User::class, 'comment_user', 'comment_id', 'user_id')->withTimestamps();
     }
 }

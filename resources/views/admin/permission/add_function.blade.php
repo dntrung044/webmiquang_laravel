@@ -11,7 +11,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label class="form-label">Tên danh mục/Chức năng(*Không dấu, ngăn cách "_")</label>
-                        <input type="text" class="form-control name_function" placeholder="Nhập tên danh mục/Chức năng danh mục">
+                        <input type="text" class="form-control name_function"
+                            placeholder="Nhập tên danh mục/Chức năng danh mục">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Mô tả danh mục</label>
@@ -24,7 +25,6 @@
                         <option selected="" value="0">Danh mục lớn</option>
                     </select>
                 </div>
-
                 <table id="myProjectTable" class="table table-hover align-middle mb-0" style="width: 100%;">
                     <thead>
                         <tr>
@@ -38,12 +38,10 @@
                     </tbody>
                 </table>
             </div>
-
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
                 <button type="button" class="btn btn-primary add_data_function">Tạo</button>
             </div>
-
         </div>
     </div>
 </div>

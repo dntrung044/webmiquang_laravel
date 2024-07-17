@@ -27,7 +27,7 @@ class GalleryController extends Controller
     public function add()
     {
         return view('admin.gallery.add', [
-           'title' => 'Thêm ảnh mới'
+            'title' => 'Thêm ảnh mới'
         ]);
     }
 
@@ -74,6 +74,6 @@ class GalleryController extends Controller
             ]);
         }
 
-        return response()->json([ 'error' => true ]);
+        return response()->json(['error' => true]);
     }
 }

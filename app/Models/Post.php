@@ -26,10 +26,11 @@ class Post extends Model
     public function postCategory()
     {
         return $this->hasOne(PostCategory::class, 'id', 'category_id')
-        ->withDefault(['name' => '']);
+            ->withDefault(['name' => '']);
     }
 
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany(PostComment::class, 'post_id', 'id')->orderBy('id', 'DESC');
     }
 

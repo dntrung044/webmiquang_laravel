@@ -44,22 +44,27 @@ class User extends Authenticatable implements MustVerifyEmail
     //     'email_verified_at' => 'datetime',
     // ];
 
-    public function likedComments() {
+    public function likedComments()
+    {
         return $this->belongsToMany(PostComment::class, 'comment_user', 'user_id', 'comment_id')->withTimestamps();
     }
-    public function likedReplies() {
+    public function likedReplies()
+    {
         return $this->belongsToMany(PostCommentReply::class, 'reply_user', 'user_id', 'reply_id')->withTimestamps();
     }
 
-    public function productComment() {
+    public function productComment()
+    {
         return $this->hasMany(ProductComment::class, 'user_id', 'id');
     }
 
-    public function PostLike() {
+    public function PostLike()
+    {
         return $this->hasMany(ProductComment::class, 'user_id', 'id');
     }
 
-    public function roles() {
+    public function roles()
+    {
         return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
     }
 
@@ -75,7 +80,4 @@ class User extends Authenticatable implements MustVerifyEmail
         }
         return false;
     }
-
-
-
 }

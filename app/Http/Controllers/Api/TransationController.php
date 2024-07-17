@@ -9,9 +9,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
-class TransationController extends Controller {
+class TransationController extends Controller
+{
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $validasi = Validator::make($request->all(), [
             'user_id' => 'required',
             'name' => 'required',
@@ -58,7 +60,8 @@ class TransationController extends Controller {
     }
 
 
-    public function history($id) {
+    public function history($id)
+    {
         $transactions = Transaction::with(['user'])->whereHas('user', function ($query) use ($id) {
             $query->whereId($id);
         })->orderBy("id", "desc")->get();
@@ -81,9 +84,10 @@ class TransationController extends Controller {
         }
     }
 
-    public function cancelled($id){
+    public function cancelled($id)
+    {
         $transaction = Transaction::with(['carts.product', 'user'])->where('id', $id)->first();
-        if ($transaction){
+        if ($transaction) {
             // update data
 
             $transaction->update([
@@ -103,7 +107,8 @@ class TransationController extends Controller {
         }
     }
 
-    public function error($pasan) {
+    public function error($pasan)
+    {
         return response()->json([
             'success' => 0,
             'message' => $pasan

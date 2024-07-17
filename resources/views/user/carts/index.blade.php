@@ -3,6 +3,7 @@
         .mt-100 {
             margin-top: 100px
         }
+
         .card {
             margin-bottom: 30px;
             border: 0;
@@ -19,18 +20,21 @@
             padding: 30px;
             background-color: transparent
         }
+
         .btn-primary,
         .btn-primary.disabled,
         .btn-primary:disabled {
             background-color: #4466f2 !important;
             border-color: #4466f2 !important
         }
+
         .search-box {
             width: 100%;
             position: relative;
             display: flex;
 
         }
+
         .search-input {
             width: 100%;
             padding: 4px;
@@ -43,6 +47,7 @@
             ;
             background: none;
         }
+
         .search-button {
             padding: 4px;
             width: 70%;
@@ -72,7 +77,7 @@
                                     <li style="display: inline-block;  position: relative;    padding: 0 16px 0 23px;">
                                         <a href="/" title="">Trang chủ</a>
                                     </li>/
-                                    <li  style="display: inline-block;  position: relative;  padding: 0 16px 0 23px;">
+                                    <li style="display: inline-block;  position: relative;  padding: 0 16px 0 23px;">
                                         <a href="/thuc-don" title="">Thực đơn</a>
                                     </li>/
                                     <li style="display: inline-block;  position: relative; padding: 0 16px 0 23px;">
@@ -81,12 +86,10 @@
                                 </ul>
                             </div>
                         </div>
-                        <!-- /row -->
                     </div>
                 </div>
                 <div class="frame white"></div>
             </div>
-            <!-- /hero_single -->
 
             <form method="post">
                 <div class="bg_gray">
@@ -137,7 +140,8 @@
                                 <div class="col-sm-12 empty-cart-cls text-center">
                                     <h3><strong>Rất tiếc ... giỏ hàng của bạn trống</strong></h3>
                                     <h4>Hãy thêm một món ăn bất kỳ để hiển thị chi tiết giỏ hàng :)) </h4>
-                                    <a href="{{ route('menus.index') }}" class="btn btn-primary cart-btn-transform m-3" data-abc="true">quay
+                                    <a href="{{ route('menus.index') }}" class="btn btn-primary cart-btn-transform m-3"
+                                        data-abc="true">quay
                                         lại chọn món</a>
                                 </div>
                             </div>
@@ -150,6 +154,5 @@
     @include('sweetalert::alert')
 @endsection
 @section('script')
-    <script src="{{ asset('teamplate/js/specific_shop.js') }}"></script>
     <script src="{{ asset('teamplate/js/cart_ajax.js') }}"></script>
 @endsection

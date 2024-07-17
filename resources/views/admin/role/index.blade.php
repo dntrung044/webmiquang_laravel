@@ -142,8 +142,8 @@
                             $('.checkbox_role_edit').each(function() {
                                 var permissionId = $(this).val();
                                 $(this).prop('checked', checkedPermissions.some(
-                                        permission => permission.id == permissionId
-                                        ));
+                                    permission => permission.id == permissionId
+                                ));
                             });
                             let data = response.data;
                             $('#edit_name').val(data.name);

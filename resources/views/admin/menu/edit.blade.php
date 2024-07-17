@@ -15,11 +15,10 @@
                     </div>
                 </div>
             </div>
-
             <!-- Add Tickit-->
             <div class="modal-body">
                 <div class="deadline-form">
-                    <form action="{{ route('banners.update', ['menu'=> $menu->id]) }}" method="POST">
+                    <form action="{{ route('banners.update', ['menu' => $menu->id]) }}" method="POST">
                         <div class="row">
                             <div class="col-md-6">
                                 <label class="form-label">Tên danh mục</label>
@@ -34,8 +33,7 @@
 
                         <div class="mb-3">
                             <label class="form-label">Mô tả</label>
-                            <textarea class="form-control" name="description" rows="3"
-                                placeholder="Nội dung mô tả"> {{ $menu->description }}</textarea>
+                            <textarea class="form-control" name="description" rows="3" placeholder="Nội dung mô tả"> {{ $menu->description }}</textarea>
                         </div>
 
                         <div class="col-md-6">
@@ -43,11 +41,11 @@
                             <input class="form-control" type="file" id="upload" name="file" multiple="">
 
                             <div id="image_show">
-                                <a href="{{ $menu->thumb}}" target="_blank">
-                                   <img src="{{ $menu->thumb}}" alt="error" width="100px">
+                                <a href="{{ $menu->thumb }}" target="_blank">
+                                    <img src="{{ $menu->thumb }}" alt="error" width="100px">
                                 </a>
                             </div>
-                            <input type="hidden" name="thumb" value="{{ $menu->thumb}}" id="thumb">
+                            <input type="hidden" name="thumb" value="{{ $menu->thumb }}" id="thumb">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Kích hoạt</label>

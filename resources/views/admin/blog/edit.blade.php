@@ -18,7 +18,7 @@
 
             <div class="modal-body">
                 <div class="deadline-form">
-                    <form action="{{ route('posts.update', $post->id ) }}" method="POST">
+                    <form action="{{ route('posts.update', $post->id) }}" method="POST">
                         <div class="row">
                             <div class="col-md-6">
                                 <label class="form-label">Tiều đề</label>
@@ -29,24 +29,24 @@
                                 <select class="form-select" name="category_id">
                                     <option value="0"> Danh Mục </option>
                                     @foreach ($postCategories as $postcategory)
-                                        <option value="{{ $postcategory->id }}" {{ $post->category_id == $postcategory->id ? 'selected' : ''}}>
+                                        <option value="{{ $postcategory->id }}"
+                                            {{ $post->category_id == $postcategory->id ? 'selected' : '' }}>
                                             {{ $postcategory->name }}
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-
                         <div class="col-md-6">
                             <label for="menu" class="form-label"> Hình ảnh</label>
                             <input class="form-control" type="file" id="upload" name="file" multiple="">
 
                             <div id="image_show">
-                                <a href="{{ $post->thumb}}" target="_blank">
-                                   <img src="{{ $post->thumb}}" alt="error" style="height: 200px; width: 400px;">
+                                <a href="{{ $post->thumb }}" target="_blank">
+                                    <img src="{{ $post->thumb }}" alt="error" style="height: 200px; width: 400px;">
                                 </a>
                             </div>
-                            <input type="hidden" name="thumb" value="{{ $post->thumb}}" id="thumb">
+                            <input type="hidden" name="thumb" value="{{ $post->thumb }}" id="thumb">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Mô tả</label>
@@ -55,27 +55,27 @@
 
                         <div class="mb-3">
                             <label class="form-label">Nội dung</label>
-                            <textarea class="form-control" name="content" id="content"
-                                placeholder="Nội dung mô tả">{{ $post->content }}</textarea>
+                            <textarea class="form-control" name="content" id="content" placeholder="Nội dung mô tả">{{ $post->content }}</textarea>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Kích hoạt</label>
                             <div>
                                 <input type="radio" id="active" value="1" name="active"
-                                {{ $post->active == 1 ? 'checked="' : ''}}>
+                                    {{ $post->active == 1 ? 'checked="' : '' }}>
                                 <label for="active">Có</label>
                             </div>
                             <div>
                                 <input type="radio" id="no_active" value="0" name="active"
-                                {{ $post->active == 0 ? 'checked="' : ''}}>
+                                    {{ $post->active == 0 ? 'checked="' : '' }}>
                                 <label for="no_active">Không</label>
                             </div>
                         </div>
 
                         <div class="modal-footer">
-                            <a href="{{ route('feeships.index') }}" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</a>
-                            <button type="submit" class="btn btn-primary" >Sửa bài Viết</button>
+                            <a href="{{ route('feeships.index') }}" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Hủy</a>
+                            <button type="submit" class="btn btn-primary">Sửa bài Viết</button>
                         </div>
                         @csrf
                     </form>

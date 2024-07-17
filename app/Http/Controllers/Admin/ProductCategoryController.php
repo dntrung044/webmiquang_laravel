@@ -16,7 +16,7 @@ class ProductCategoryController extends Controller
 
     public function __construct(ProductCategoryService $productcategoryService)
     {
-        $this->productcategoryService= $productcategoryService;
+        $this->productcategoryService = $productcategoryService;
     }
 
     public function index()
@@ -59,7 +59,8 @@ class ProductCategoryController extends Controller
         return redirect()->back();
     }
 
-    public function destroy(Request $request) {
+    public function destroy(Request $request)
+    {
         $result = $this->productcategoryService->destroy($request);
         if ($result) {
             return response()->json([

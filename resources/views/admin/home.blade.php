@@ -56,7 +56,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <div class="row align-items-center">
@@ -71,7 +70,6 @@
             <div class="row clearfix  g-2">
                 <div class="col-lg-12 col-md-12 flex-column">
                     <div class="row g-2 row-deck">
-
                         <div class="col-md-12 col-lg-5 col-xl-6 col-xxl-6">
                             <div class="card">
                                 <div class="d-flex align-items-center justify-content-between mt-5">
@@ -89,7 +87,8 @@
                                             <div class="fade show alert-light">
                                                 <div class="toast-header  bg-primary text-light">
                                                     <img class="avatar rounded-circle"
-                                                        src="{{ asset('teamplate/admin/assets/images/xs/avatar4.jpg') }}" alt="">
+                                                        src="{{ asset('teamplate/admin/assets/images/xs/avatar4.jpg') }}"
+                                                        alt="">
                                                     <div class="flex-fill ms-3 text-truncate">
                                                         <h6 class="d-flex justify-content-between mb-0">
                                                             <span class="badge alert-primary text-end">
@@ -116,7 +115,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                                 <div class="toast-body alert-info">
                                                     <p class="py-2 mb-0 ">
                                                         <i class="icofont-ui-text-chat"></i>
@@ -124,7 +122,6 @@
                                                     </p>
                                                 </div>
                                             </div>
-
                                             <div class="tikit-info row g-3 align-items-center">
                                                 <div class="col-sm">
                                                     <ul class="d-flex list-unstyled align-items-center flex-wrap">
@@ -147,7 +144,6 @@
                                                                             <span class="ms-1">Chờ xử lý.</span>
                                                                         </a>
                                                                     </div>
-
                                                                 @endif
                                                             </div>
                                                         </li>
@@ -157,7 +153,6 @@
                                             <br>
                                         @endforeach
                                     </div>
-
                                 </div>
                                 <br>
                             </div>
@@ -178,25 +173,25 @@
                                         <div class="fade show alert-light">
                                             <div class="toast-header bg-primary text-light">
                                                 <img class="avatar rounded-circle"
-                                                    src="{{ asset('teamplate/admin/assets/images/xs/avatar4.jpg') }}" alt="">
+                                                    src="{{ asset('teamplate/admin/assets/images/xs/avatar4.jpg') }}"
+                                                    alt="">
                                                 <div class="flex-fill ms-3 text-truncate">
                                                     <h6 class="d-flex justify-content-between mb-0">
                                                         <span class="badge alert-primary text-end">
                                                             {{ $resNew->name }}
                                                         </span>
                                                     </h6>
-                                                   <a href="mailto: {{ $resNew->email }}">
-                                                    <i class="icofont-email"></i>
-                                                    <span class="ms-1">0{{ $resNew->email }}</span>
-                                                    <a href=""><i class="icofont-reply"></i></a>
-                                                   </a>
-
+                                                    <a href="mailto: {{ $resNew->email }}">
+                                                        <i class="icofont-email"></i>
+                                                        <span class="ms-1">0{{ $resNew->email }}</span>
+                                                        <a href=""><i class="icofont-reply"></i></a>
+                                                    </a>
                                                     <h2>
-                                                       <a href="tel:+ 0{{ $resNew->phone }}">
-                                                        <i class="icofont-ui-dial-phone"></i>
-                                                        <span class="ms-1">0{{ $resNew->phone }}</span>
-                                                        <i class="icofont-reply"></i>
-                                                       </a>
+                                                        <a href="tel:+ 0{{ $resNew->phone }}">
+                                                            <i class="icofont-ui-dial-phone"></i>
+                                                            <span class="ms-1">0{{ $resNew->phone }}</span>
+                                                            <i class="icofont-reply"></i>
+                                                        </a>
                                                     </h2>
                                                     <div class="text-end">
                                                         <i class="icofont-clock-time"></i>
@@ -253,14 +248,12 @@
                                         </div>
                                         <br><br>
                                     @endforeach
-                                    <!-- timeline item end  -->
                                 </div>
-                            </div> <!-- .card: My Timeline -->
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Row End -->
         </div>
     </div>
 @endsection

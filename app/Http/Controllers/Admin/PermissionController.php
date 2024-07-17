@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Validator;
 
 class PermissionController extends Controller
 {
-
     public function index()
     {
         return view('admin.permission.index', [
@@ -28,7 +27,6 @@ class PermissionController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'status' => 400,
-                // 'errors'=>$validator->messages()
                 'errors' => $validator->errors()
             ]);
         } else {

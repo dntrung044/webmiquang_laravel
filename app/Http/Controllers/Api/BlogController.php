@@ -8,7 +8,8 @@ use App\Models\Blog;
 
 class BlogController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         // dd($requset->all());die();
         $posts = Blog::where('active', 1)->get();
         return response()->json([

@@ -22,7 +22,7 @@ class Ward extends Model
     public function district()
     {
         return $this->hasOne(District::class, 'ward_id', 'district_id')
-        ->withDefault(['name' => '']);
+            ->withDefault(['name' => '']);
     }
 
     public function fees()

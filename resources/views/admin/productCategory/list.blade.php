@@ -35,31 +35,30 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($productcategories as $key => $ProductCategory)
-                                    <tr>
-                                        <td>{{ $ProductCategory->id }}</td>
-                                        <td>{{ $ProductCategory->name }}</td>
-                                        <td>{!! \App\Helpers\Helper::active($ProductCategory->active) !!}</td>
-                                        <td>
-                                            <div class="btn-group" role="group"
-                                                aria-label="Basic outlined example">
-                                                <button type="button" class="btn btn-outline-secondary"
-                                                    data-bs-toggle="modal">
-                                                    <a class="btn btn-primary btn-sm"
-                                                        href="{{ route('categories.edit', ['productcategory'=>  $ProductCategory->id ]) }}">
-                                                        <i class="icofont-edit text-success"></i>
-                                                    </a>
-                                                </button>
+                                        <tr>
+                                            <td>{{ $ProductCategory->id }}</td>
+                                            <td>{{ $ProductCategory->name }}</td>
+                                            <td>{!! \App\Helpers\Helper::active($ProductCategory->active) !!}</td>
+                                            <td>
+                                                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                    <button type="button" class="btn btn-outline-secondary"
+                                                        data-bs-toggle="modal">
+                                                        <a class="btn btn-primary btn-sm"
+                                                            href="{{ route('categories.edit', ['productcategory' => $ProductCategory->id]) }}">
+                                                            <i class="icofont-edit text-success"></i>
+                                                        </a>
+                                                    </button>
 
-                                                <button type="button" class="btn btn-outline-secondary deleterow">
-                                                    <a href="#"
-                                                    onclick="removeRow({{ $ProductCategory->id }}, '{{ route('categories.destroy') }}')">
-                                                        <i class="icofont-ui-delete text-danger"></i>
-                                                    </a>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                                    <button type="button" class="btn btn-outline-secondary deleterow">
+                                                        <a href="#"
+                                                            onclick="removeRow({{ $ProductCategory->id }}, '{{ route('categories.destroy') }}')">
+                                                            <i class="icofont-ui-delete text-danger"></i>
+                                                        </a>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

@@ -8,10 +8,11 @@ use App\Models\Reservation;
 
 class ReservationController extends Controller
 {
-    public function index(Request $requset){
+    public function index(Request $requset)
+    {
         $orrder = Reservation::create(array_merge($requset->all()));
 
-        if($orrder){
+        if ($orrder) {
             return response()->json([
                 'success' => 1,
                 'message' => 'Đặt bàn thành công',
@@ -20,10 +21,10 @@ class ReservationController extends Controller
         }
 
         return $this->error('Đặt bàn thất bại');
-
     }
 
-    public function error($pasan){
+    public function error($pasan)
+    {
         return response()->json([
             'success' => 0,
             'message' => $pasan

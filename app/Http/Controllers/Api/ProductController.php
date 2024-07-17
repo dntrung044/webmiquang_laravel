@@ -8,7 +8,8 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         // dd($requset->all());die();
         $products = Product::all();
         return response()->json([
@@ -18,7 +19,8 @@ class ProductController extends Controller
         ]);
     }
 
-    public function noodles(){
+    public function noodles()
+    {
         $product = 5;
         $products = Product::where('cat_id', $product)->get();
         return response()->json([
@@ -28,7 +30,8 @@ class ProductController extends Controller
         ]);
     }
 
-    public function Latest(){
+    public function Latest()
+    {
         $products = Product::OrderBy('id', 'desc')->get();
         return response()->json([
             'success' => 1,
@@ -37,9 +40,10 @@ class ProductController extends Controller
         ]);
     }
 
-    public function jsonWard(){
+    public function jsonWard()
+    {
         return response()->json([
-           '
+            '
             [
                 {
                     "name": "Phường Hòa Hiệp Bắc",
@@ -448,6 +452,7 @@ class ProductController extends Controller
 
 
 
-        ']);
+        '
+        ]);
     }
 }

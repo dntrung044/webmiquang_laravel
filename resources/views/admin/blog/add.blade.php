@@ -23,7 +23,6 @@
                                 <label class="form-label">Tiều đề</label>
                                 <input type="text" name="name" value="{{ old('name') }}"class="form-control">
                             </div>
-
                             <div class="col-md-6">
                                 <label class="form-label">Danh mục</label>
                                 <select class="form-select" name="id_category">
@@ -34,43 +33,40 @@
                                 </select>
                             </div>
                         </div>
-
                         <div class="col-md-6">
                             <label for="menu" class="form-label"> Hình ảnh</label>
-                            <input class="form-control" type="file" id="upload" name="file" multiple="" required="">
+                            <input class="form-control" type="file" id="upload" name="file" multiple=""
+                                required="">
 
                             <div id="image_show">
                             </div>
                             <input type="hidden" name="thumb" id="thumb">
                         </div>
-
                         <div class="mb-3">
                             <label class="form-label">Tóm tắt</label>
-                            <textarea class="form-control" name="description" rows="3"
-                                placeholder="Nội dung mô tả">{{ old('description') }}</textarea>
+                            <textarea class="form-control" name="description" rows="3" placeholder="Nội dung mô tả">{{ old('description') }}</textarea>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Nội dung</label>
-                            <textarea class="form-control" name="content" id="content" rows="3"
-                                placeholder="Nội dung mô tả chi tiết">{{ old('content') }}</textarea>
+                            <textarea class="form-control" name="content" id="content" rows="3" placeholder="Nội dung mô tả chi tiết">{{ old('content') }}</textarea>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Kích hoạt</label>
                             <div>
                                 <input type="radio" id="active" value="1" name="active" checked="">
-                                <label for="active" {{ (old('available') == '1') ? 'checked' : ''}}>Có</label>
+                                <label for="active" {{ old('available') == '1' ? 'checked' : '' }}>Có</label>
                             </div>
                             <div>
                                 <input type="radio" id="no_active" value="0" name="active">
-                                <label for="no_active" {{ (old('available') == '0') ? 'checked' : ''}}>Không</label>
+                                <label for="no_active" {{ old('available') == '0' ? 'checked' : '' }}>Không</label>
                             </div>
                         </div>
 
                         <div class="modal-footer">
                             <a href="{{ route('posts.index') }}" class="btn btn-secondary">Hủy</a>
-                            <button type="submit" class="btn btn-primary" >Thêm Bài Viết</button>
+                            <button type="submit" class="btn btn-primary">Thêm Bài Viết</button>
                         </div>
                         @csrf
                     </form>

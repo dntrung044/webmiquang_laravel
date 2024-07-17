@@ -74,7 +74,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="modal-footer">
                             <a href="/admin/postcategories/list"><button type="button"
                                     class="btn btn-secondary">Hủy</button></a>

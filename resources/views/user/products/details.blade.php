@@ -61,12 +61,10 @@
                             </ul>
                         </div>
                     </div>
-                    <!-- /row -->
                 </div>
             </div>
             <div class="frame white"></div>
         </div>
-        <!-- /Endhero_single -->
         @php
             $age = 0;
             if ($product->total_rating) {
@@ -126,12 +124,9 @@
                             @endif
                         </form>
                     </div>
-                    <!-- /prod_info -->
                 </div>
             </div>
-            <!-- /row -->
         </div>
-        <!-- /End detail -->
 
         <div class="tabs_product">
             <div class="container">
@@ -366,13 +361,10 @@
                                     @endif
                                 </div>
                             </div>
-                            <!-- /row -->
                         </div>
-                        <!-- /card-body -->
                     </div>
                 </div>
             </div>
-            <!-- /tab-content -->
         </div>
         </div>
 
@@ -421,15 +413,7 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('teamplate/js/specific_shop.js') }}"></script>
     <script>
-        // $(document).ready(function() {
-        //     $('#loginModal').modal('show');
-        //     $(function() {
-        //         $('[data-toggle="tooltip"]').tooltip()
-        //     })
-        // });
-
         $('#btn-login').click(function(ev) {
             ev.preventDefault();
             var email = $('#email').val();
@@ -460,12 +444,5 @@
                 }
             });
         });
-
-        // Sticky sidebar
-        // $('#sidebar_fixed').theiaStickySidebar({
-        //     minWidth: 991,
-        //     updateSidebarHeight: true,
-        //     additionalMarginTop: 90
-        // });
     </script>
 @endsection

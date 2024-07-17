@@ -11,7 +11,7 @@
                         <p class="mb-0 text-end line-height-sm ">Chào <span
                                 class="font-weight-bold">{{ Auth::user()->name }}</span></p>
                         <small>
-                            @if(Auth::user()->roles->isNotEmpty())
+                            @if (Auth::user()->roles->isNotEmpty())
                                 {{ Auth::user()->roles->pluck('name')->implode(', ') }}
                             @else
                                 Không có vai trò
@@ -59,7 +59,8 @@
                                 @endcan
 
                                 <hr class="dropdown-divider border-dark">
-                                <button type="button" class="list-group-item list-group-item-action border-0 btn_logout">
+                                <button type="button"
+                                    class="list-group-item list-group-item-action border-0 btn_logout">
                                     <i class="icofont-logout fs-6 me-3 "></i> Đăng xuất
                                 </button>
                             </div>
@@ -67,13 +68,11 @@
                     </div>
                 </div>
             </div>
-
             <!-- menu toggler -->
             <button class="navbar-toggler p-0 border-0 menu-toggle order-3" type="button" data-bs-toggle="collapse"
                 data-bs-target="#mainHeader">
                 <span class="fa fa-bars"></span>
             </button>
-
             <!-- main menu Search-->
             <div class="order-0 col-lg-4 col-md-4 col-sm-12 col-12 mb-3 mb-md-0 ">
                 {{-- <form method="GET" action="/admin/search">
@@ -93,7 +92,3 @@
         </div>
     </nav>
 </div>
-
-
-
-

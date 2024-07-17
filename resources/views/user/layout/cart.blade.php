@@ -1,19 +1,18 @@
 <div class="dropdown-menu">
     @php
-         $sumPriceCart = 0;
+        $sumPriceCart = 0;
     @endphp
     <ul>
-        {{-- @if (count($productss) > 0) --}}
         @if (!empty($carts))
             @foreach ($productss as $key => $product)
                 @php
-                    $price = ($product->price_sale);
+                    $price = $product->price_sale;
                     $sumPriceCart += $product->price_sale != 0 ? $product->price_sale : $product->price;
                 @endphp
                 <li>
                     <figure>
-                        <img src="{{ $product->thumb }}" data-src="{{ $product->thumb }}"
-                            alt="" width="50" height="50" class="lazy">
+                        <img src="{{ $product->thumb }}" data-src="{{ $product->thumb }}" alt="" width="50"
+                            height="50" class="lazy">
                     </figure>
                     <a href="{{ 'thuc-don/' . $product->id }}-{{ \Str::slug($product->name, '-') }}">
                         <strong><span>{{ $product->name }}</span>{!! $price !!}</strong>

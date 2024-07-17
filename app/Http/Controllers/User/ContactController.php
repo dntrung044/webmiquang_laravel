@@ -11,21 +11,19 @@ use Carbon\Carbon;
 
 class ContactController extends Controller
 {
-
-
     public function index()
-    { 
-        return view('user.contact.index', [ 'title' => 'Liên hệ - Mì Quảng Bà Mua',]);
+    {
+        return view('user.contact.index', ['title' => 'Liên hệ - Mì Quảng Bà Mua',]);
     }
 
-    public function postContact(Request $request) 
+    public function postContact(Request $request)
     {
         $data = $request->except('_token');
-        $data ['created_at'] = $data['updated_at'] = Carbon::now();
+        $data['created_at'] = $data['updated_at'] = Carbon::now();
         Contact::insert($data);
 
         $this->sendEmail($request);
-        
+
         return redirect('lien-he/thanh-cong')->with('noti', 'done');
     }
 
@@ -36,12 +34,10 @@ class ContactController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'content' => $request->content,
-        ], function($mail) use($request) {
+        ], function ($mail) use ($request) {
             $mail->to('trungdao10a1@gmail.com', $request->name);
             $mail->from($request->email);
             $mail->subject('Khách hàng liên hệ');
         });
     }
-
-
 }

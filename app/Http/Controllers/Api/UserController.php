@@ -9,20 +9,21 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function login(Request $requset){
+    public function login(Request $requset)
+    {
         // dd($requset->all());die();
         $user = User::where('email', $requset->email)->first();
 
-        if($user){
+        if ($user) {
 
             $user->update([
                 'fcm' => $requset->fcm
             ]);
 
-            if(password_verify($requset->password, $user->password)){
+            if (password_verify($requset->password, $user->password)) {
                 return response()->json([
                     'success' => 1,
-                    'message' => 'Chào mừng '.$user->name,
+                    'message' => 'Chào mừng ' . $user->name,
                     'user' => $user
                 ]);
             }
@@ -31,7 +32,8 @@ class UserController extends Controller
         return $this->error('Email chưa đăng ký');
     }
 
-    public function register(Request $requset){
+    public function register(Request $requset)
+    {
         //nama, email, password
         $validasi = Validator::make($requset->all(), [
             'name' => 'required',
@@ -40,7 +42,7 @@ class UserController extends Controller
             'password' => 'required|min:6'
         ]);
 
-        if($validasi->fails()){
+        if ($validasi->fails()) {
             $val = $validasi->errors()->all();
             return $this->error($val[0]);
         }
@@ -49,7 +51,7 @@ class UserController extends Controller
             'password' => bcrypt($requset->password)
         ]));
 
-        if($user){
+        if ($user) {
             return response()->json([
                 'success' => 1,
                 'message' => 'Chào mừng bạn đăng ký thành công',
@@ -58,10 +60,10 @@ class UserController extends Controller
         }
 
         return $this->error('Đăng ký thất bại');
-
     }
 
-    public function error($pasan){
+    public function error($pasan)
+    {
         return response()->json([
             'success' => 0,
             'message' => $pasan

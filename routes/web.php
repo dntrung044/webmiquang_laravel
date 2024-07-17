@@ -10,7 +10,7 @@ Route::get('/linkstorage', function () {
     echo '<script>alert("done")</script>';
 });
 
-// ADMIN; middleware user: level = 1
+// ADMIN; 
 Route::prefix('admin')->middleware('can:admin-access')->group(function () {
     #index
     Route::get('/', [Admin\HomeController::class, 'index'])->name('admin');
@@ -19,12 +19,12 @@ Route::prefix('admin')->middleware('can:admin-access')->group(function () {
     #active Revervation
     Route::get('/activeRevervation{reservation}', [Admin\HomeController::class, 'activeReservation'])->name('admin.activeReservation');
 
-    #abouts
+    #about us
     Route::prefix('abouts')->middleware(['can:about-edit'])->group(function () {
         Route::get('index', [Admin\AboutUsController::class, 'index'])->name('abouts.index');
         Route::get('edit/{id}', [Admin\AboutUsController::class, 'edit'])->name('abouts.edit');
         Route::post('update/{id}', [Admin\AboutUsController::class, 'update'])->name('abouts.update');
-
+        #galleries
         Route::prefix('galleries')->group(function () {
             Route::get('index', [Admin\GalleryController::class, 'index'])->name('galleries.index');
             Route::get('add', [Admin\GalleryController::class, 'add'])->name('galleries.add');
@@ -33,6 +33,7 @@ Route::prefix('admin')->middleware('can:admin-access')->group(function () {
             Route::post('edit/{gallery}', [Admin\GalleryController::class, 'update'])->name('galleries.update');
             Route::DELETE('destroy', [Admin\GalleryController::class, 'destroy'])->name('galleries.destroy');
         });
+        #banners
         Route::prefix('banners')->group(function () {
             Route::get('index', [Admin\MenuController::class, 'index'])->name('banners.index');
             Route::get('add', [Admin\MenuController::class, 'create'])->name('banners.add');
@@ -41,6 +42,7 @@ Route::prefix('admin')->middleware('can:admin-access')->group(function () {
             Route::post('update/{menu}', [Admin\MenuController::class, 'update'])->name('banners.update');
             Route::DELETE('destroy', [Admin\MenuController::class, 'destroy'])->name('banners.destroy');
         });
+        #sliders
         Route::prefix('sliders')->group(function () {
             Route::get('list', [Admin\SliderController::class, 'index'])->name('sliders.index');
             Route::get('add', [Admin\SliderController::class, 'create'])->name('sliders.add');
@@ -76,7 +78,7 @@ Route::prefix('admin')->middleware('can:admin-access')->group(function () {
         });
     });
 
-    #Quản lý blog
+    #Blog
     Route::prefix('blogs')->middleware(['can:blog-edit'])->group(function () {
         #Quản lý bài viết
         Route::prefix('post')->group(function () {
@@ -231,16 +233,11 @@ Route::middleware(['auth'])->group(function () {
 
 #Blog
 Route::prefix('blog')->group(function () {
-    //list
     Route::get('/', [User\BlogController::class, 'index'])->name("blog");
-    //detail
     Route::get('{id}-{slug}', [User\BlogController::class, 'detail'])->name("blog.detail");
-    //category
     Route::get('danh-muc/{id}-{slug}', [User\BlogController::class, 'category'])->name("blog.category");
-    //search
     Route::post('/tim-kiem-ajax', [User\BlogController::class, 'searchAjax'])->name("blog.searchAjax");
     Route::post('/tim-kiem', [User\BlogController::class, 'search'])->name("blog.search");
-    //comment
     Route::prefix('binh-luan')->group(function () {
         Route::post('gui/{post_id}', [User\BlogController::class, 'add_comment'])->name("comment.send");
         Route::post('load_comment', [User\BlogController::class, 'load_Comment'])->name("comment.load_more");
@@ -248,15 +245,13 @@ Route::prefix('blog')->group(function () {
         Route::post('thich-nhat', [User\BlogController::class, 'popular_comment'])->name("comment.popular");
         Route::post('thich', [User\BlogController::class, 'postCommentLike'])->name("comment.like");
         Route::post('an-binh-luan', [User\BlogController::class, 'comment_hidden'])->name("comment.hidden");
-
-
     });
     //reply
     Route::prefix('tra-loi')->group(function () {
         Route::post('binh-luan/{id}', [User\BlogController::class, 'add_reply'])->name("reply.send");
         Route::post('thich', [User\BlogController::class, 'postReplyLike'])->name("reply.like");
         Route::post('an-tra-loi', [User\BlogController::class, 'reply_hidden'])->name("reply.hidden");
-});
+    });
 });
 
 #Giới thiệu
@@ -268,10 +263,9 @@ Route::prefix('gioi-thieu')->group(function () {
 Route::group(['namspace' => 'Auth'], function () {
     #Register
     Route::prefix('dang-ky')->group(function () {
-        // register
         Route::get('/', 'User\AuthController@register')->name('register');
         Route::post('/', 'User\AuthController@registerHandle');
-        //register Verify
+        // Verify
         Route::get('/thanh-cong', 'User\AuthController@registrationSuccess')->name('register.success');
         //sent Verify mail
         Route::get('/gui-lai/xac-thuc/{email}', 'User\AuthController@sendEmailVerify')->name('register.sendEmailVerify');

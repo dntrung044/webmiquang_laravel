@@ -28,14 +28,14 @@ class BlogController extends Controller
     {
         $comment_number = 7;
         $blog = Post::where('id', $id)
-                ->where('active', 1)
-                ->with('postCategory')
-                ->firstOrFail();
+            ->where('active', 1)
+            ->with('postCategory')
+            ->firstOrFail();
         $blog->view = $blog->view + 1;
         $blog->save();
         $blognew = Post::where('active', 1)->get();
         $countComment = PostComment::where('post_id', $id)->where('active', 1)->count();
-        $list_comment = PostComment::where('post_id',$id)->where('active', 1)->orderby('id', 'DESC')->take($comment_number)->get();
+        $list_comment = PostComment::where('post_id', $id)->where('active', 1)->orderby('id', 'DESC')->take($comment_number)->get();
 
         return view('user.blog.detail', [
             'title' => 'Chi tiết bài viết - Mì Quảng Bà Mua',
@@ -93,9 +93,9 @@ class BlogController extends Controller
     {
         $post_id = $request->blog_id;
         $blog = Post::where('id', $post_id)
-                ->where('active', 1)
-                ->with('postCategory')
-                ->firstOrFail();
+            ->where('active', 1)
+            ->with('postCategory')
+            ->firstOrFail();
         $comments = PostComment::where('post_id', $post_id)->where('active', 1)->orderBy('id', 'DESC')->get();
         $comment_component = view('user.blog.components.comment_component', compact('comments', 'blog'))->render();
 
@@ -110,23 +110,23 @@ class BlogController extends Controller
     {
         $post_id = $request->blog_id;
         $blog = Post::where('id', $post_id)
-                ->where('active', 1)
-                ->with('postCategory')
-                ->firstOrFail();
+            ->where('active', 1)
+            ->with('postCategory')
+            ->firstOrFail();
 
-                // $comments = PostComment::withCount('likes')
-                //             ->with(['replies' => function ($query) {
-                //                 $query->withCount('likes')->orderBy('likes_count', 'desc');
-                //             }])->where('post_id', $post_id)->where('active', 1)->get()
-                //             ->orderByRaw('likes_count + (SELECT COALESCE(SUM(likes_count), 0) FROM replies WHERE comment_id = comments.id) DESC');
+        // $comments = PostComment::withCount('likes')
+        //             ->with(['replies' => function ($query) {
+        //                 $query->withCount('likes')->orderBy('likes_count', 'desc');
+        //             }])->where('post_id', $post_id)->where('active', 1)->get()
+        //             ->orderByRaw('likes_count + (SELECT COALESCE(SUM(likes_count), 0) FROM replies WHERE comment_id = comments.id) DESC');
 
-                $comments = PostComment::withCount('likes')
-                                    ->orderBy('number_like', 'desc')
-                                    ->get();
-                // $comments = PostCommentReply::whereIn('comment_id', $popular_comments->pluck('id'))
-                //                     ->withCount('likes')
-                //                     ->orderBy('number_like', 'desc')
-                //                     ->get();
+        $comments = PostComment::withCount('likes')
+            ->orderBy('number_like', 'desc')
+            ->get();
+        // $comments = PostCommentReply::whereIn('comment_id', $popular_comments->pluck('id'))
+        //                     ->withCount('likes')
+        //                     ->orderBy('number_like', 'desc')
+        //                     ->get();
         // $comments = PostComment::where('post_id', $post_id)->where('active', 1)->orderBy('number_like', 'DESC')->get();
         $comment_component = view('user.blog.components.comment_component', compact('comments', 'blog'))->render();
 
@@ -144,12 +144,12 @@ class BlogController extends Controller
         $currentCount = $request->currentCount;
 
         $blog = Post::where('id', $post_id)
-                ->where('active', 1)
-                ->with('postCategory')
-                ->firstOrFail();
-        $comments  = PostComment::where('post_id',$post_id)->where('active', 1)
-                                ->where('id', '<', $last_id)->orderby('id', 'DESC')
-                                ->limit($currentCount)->get();
+            ->where('active', 1)
+            ->with('postCategory')
+            ->firstOrFail();
+        $comments  = PostComment::where('post_id', $post_id)->where('active', 1)
+            ->where('id', '<', $last_id)->orderby('id', 'DESC')
+            ->limit($currentCount)->get();
 
 
         $lastCommentId = $comments->isNotEmpty() ? $comments->last()->id : null;
@@ -194,7 +194,7 @@ class BlogController extends Controller
             ->where('active', 1)
             ->with('postCategory')
             ->firstOrFail();
-        $comments =  PostComment::where('post_id',$post_id)->where('active', 1)->orderby('id', 'DESC')->get();
+        $comments =  PostComment::where('post_id', $post_id)->where('active', 1)->orderby('id', 'DESC')->get();
         $comment_component = view('user.blog.components.comment_component', compact('comments', 'blog'))->render();
 
         return response()->json([
@@ -222,7 +222,7 @@ class BlogController extends Controller
             ->where('active', 1)
             ->with('postCategory')
             ->firstOrFail();
-        $comments =  PostComment::where('post_id',$post_id)->where('active', 1)->orderby('id', 'DESC')->get();
+        $comments =  PostComment::where('post_id', $post_id)->where('active', 1)->orderby('id', 'DESC')->get();
         $comment_component = view('user.blog.components.comment_component', compact('comments', 'blog'))->render();
 
         return response()->json([
@@ -242,8 +242,7 @@ class BlogController extends Controller
         ]);
         if ($validation->fails()) {
             return response()->json(['error' => $validation->errors()->first()]);
-        }
-        else {
+        } else {
             $comment = new PostComment();
             $comment->user_id =  Auth::id();
             $comment->post_id = $request->post_id;
@@ -254,10 +253,10 @@ class BlogController extends Controller
         }
 
         $blog = Post::where('id', $post_id)
-                ->where('active', 1)
-                ->with('postCategory')
-                ->firstOrFail();
-        $comments =  PostComment::where('post_id',$post_id)->where('active', 1)->orderby('id', 'DESC')->get();
+            ->where('active', 1)
+            ->with('postCategory')
+            ->firstOrFail();
+        $comments =  PostComment::where('post_id', $post_id)->where('active', 1)->orderby('id', 'DESC')->get();
         $comment_component = view('user.blog.components.comment_component', compact('comments', 'blog'))->render();
 
         return response()->json([
@@ -279,8 +278,7 @@ class BlogController extends Controller
         ]);
         if ($validation->fails()) {
             return response()->json(['error' => $validation->errors()->first()]);
-        }
-        else {
+        } else {
             $reply = new PostCommentReply();
             $reply->user_id =  Auth::id();
             $reply->comment_id = $comment_id;
@@ -290,10 +288,10 @@ class BlogController extends Controller
             $reply->save();
         }
         $blog = Post::where('id', $post_id)
-                ->where('active', 1)
-                ->with('postCategory')
-                ->firstOrFail();
-        $comments =  PostComment::where('post_id',$post_id)->where('active', 1)->orderby('id', 'DESC')->get();
+            ->where('active', 1)
+            ->with('postCategory')
+            ->firstOrFail();
+        $comments =  PostComment::where('post_id', $post_id)->where('active', 1)->orderby('id', 'DESC')->get();
         $reply_component = view('user.blog.components.comment_component', compact('comments', 'blog'))->render();
 
 
@@ -331,27 +329,27 @@ class BlogController extends Controller
 
     public function postReplyLike(Request $request)
     {
-            $id = $request->id_reply;
-            $user = Auth::user();
-            $reply = PostCommentReply::where('active', 1)->find($id);
+        $id = $request->id_reply;
+        $user = Auth::user();
+        $reply = PostCommentReply::where('active', 1)->find($id);
 
-            $likeReply = $user->likedReplies()->where('reply_id', $id)->count();
+        $likeReply = $user->likedReplies()->where('reply_id', $id)->count();
 
-            if ($likeReply == 0) {
-                $user->likedReplies()->attach($id);
-                $reply->number_like +=  1;
-                $reply->save();
-            } else {
-                $user->likedReplies()->detach($id);
-                $reply->number_like -=  1;
-                $reply->save();
-            }
+        if ($likeReply == 0) {
+            $user->likedReplies()->attach($id);
+            $reply->number_like +=  1;
+            $reply->save();
+        } else {
+            $user->likedReplies()->detach($id);
+            $reply->number_like -=  1;
+            $reply->save();
+        }
 
-            return response()->json([
-                'success' => 'Thích trả lời thành công!',
-                'likeReply' => $likeReply,
-                'like_count' => $reply->number_like,
-                'code' => 200
-            ]);
+        return response()->json([
+            'success' => 'Thích trả lời thành công!',
+            'likeReply' => $likeReply,
+            'like_count' => $reply->number_like,
+            'code' => 200
+        ]);
     }
 }

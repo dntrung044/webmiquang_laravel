@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Services\CartService;
 use Illuminate\Support\Facades\Mail;
 use Barryvdh\DomPDF\PDF;
-use Illuminate\Support\Str; 
+use Illuminate\Support\Str;
 
 ini_set('max_execution_time', 300);
 
@@ -97,7 +97,7 @@ class TransactionController extends Controller
         $transaction->status = Transaction::STATUS_DELIVERING;
         $transaction->save();
 
-        return redirect()->back()->with('success','Xử lý đơn hàng thành công!');
+        return redirect()->back()->with('success', 'Xử lý đơn hàng thành công!');
     }
     public function cancel($transaction)
     {
@@ -105,7 +105,7 @@ class TransactionController extends Controller
         $transaction->status = Transaction::STATUS_CANCELLED;
         $transaction->save();
 
-        return redirect()->back()->with('success',' Hủy đơn hàng thành công!');
+        return redirect()->back()->with('success', ' Hủy đơn hàng thành công!');
     }
 
     // Gửi mail hóa đơn
@@ -120,8 +120,7 @@ class TransactionController extends Controller
             'time' => $request->time,
             'datepicker_field' => $request->datepicker_field,
 
-        ], function($mail) use($request) {
-
+        ], function ($mail) use ($request) {
         });
         return redirect()->back();
     }
@@ -130,12 +129,14 @@ class TransactionController extends Controller
     {
         $email_to = $transaction->email;
 
-        Mail::send('user.checkout.email', compact('transaction'),
-        function ($message) use ($transaction) {
-            $message->to('trungdao10a1@gmail.com', 'Nö Diary of');
-            $message->from($transaction->email);
-            $message->subject('Đặt đồ uống');
-        });
+        Mail::send(
+            'user.checkout.email',
+            compact('transaction'),
+            function ($message) use ($transaction) {
+                $message->to('trungdao10a1@gmail.com', 'Nö Diary of');
+                $message->from($transaction->email);
+                $message->subject('Đặt đồ uống');
+            }
+        );
     }
-
 }

@@ -12,7 +12,7 @@
                     <div
                         class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                         <h3 class="fw-bold mb-0">
-                            @if($title)
+                            @if ($title)
                                 {{ $title }}
                             @else
                                 Quản lý
@@ -56,21 +56,20 @@
                                                 </a>
                                             </td>
 
-                                            <td>{{ !empty($post->postCategory) ? $post->postCategory->name : ''}}</td>
+                                            <td>{{ !empty($post->postCategory) ? $post->postCategory->name : '' }}</td>
                                             <td>{!! \App\Helpers\Helper::active($post->active) !!}</td>
                                             <td>
-                                                <div class="btn-group" role="group"
-                                                    aria-label="Basic outlined example">
-                                                    <a href="{{ route('posts.edit', ['post'=>  $post->id]) }} "
+                                                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                    <a href="{{ route('posts.edit', ['post' => $post->id]) }} "
                                                         class="btn btn-outline-secondary">
-                                                        <button class="btn btn-primary btn-sm"  type="button">
+                                                        <button class="btn btn-primary btn-sm" type="button">
                                                             <i class="icofont-edit text-success"></i>
                                                         </button>
                                                     </a>
 
                                                     <a href="#" class="btn btn-outline-secondary"
                                                         onclick="removeRow({{ $post->id }}, '{{ route('posts.destroy') }}')">
-                                                        <button type="button" class="btn btn-warning btn-sm" >
+                                                        <button type="button" class="btn btn-warning btn-sm">
                                                             <i class="icofont-ui-delete text-danger"></i>
                                                         </button>
                                                     </a>

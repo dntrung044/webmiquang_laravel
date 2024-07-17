@@ -23,21 +23,22 @@ class UserController extends Controller
     {
         $this->userSevice = $userSevice;
     }
-     public function index(){
+    public function index()
+    {
         $title            = 'Thông tin người dùng';
         $GetTransaction   = Transaction::where('user_id', Auth::User()->id);
         $ListTransactions = $GetTransaction->paginate(8);
         $totalTransaction = $GetTransaction
-                            ->select('id')
-                            ->count();
+            ->select('id')
+            ->count();
         $totalDone        = $GetTransaction
-                            ->where('status', Transaction::STATUS_DONE)
-                            ->select('id')
-                            ->count();
+            ->where('status', Transaction::STATUS_DONE)
+            ->select('id')
+            ->count();
 
         $totalDevliver    = $GetTransaction
-                            ->where('status', Transaction::STATUS_DELIVERING)
-                            ->select('id')->count();
+            ->where('status', Transaction::STATUS_DELIVERING)
+            ->select('id')->count();
 
         $listComments = ProductComment::where('email', Auth::User()->email)->paginate(8);
 
@@ -51,7 +52,7 @@ class UserController extends Controller
         ];
 
         return view('User.user.index', $viewdata,);
-     }
+    }
 
 
     public function changeInfor(User $user)
@@ -63,10 +64,11 @@ class UserController extends Controller
         ]);
     }
 
-    public function updateInfor(Request $request, User $user) {
+    public function updateInfor(Request $request, User $user)
+    {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,'.$user->id,
+            'email' => 'required|email|unique:users,email,' . $user->id,
             'phone' => 'required|string|max:12',
             'street' => 'required|string|max:255',
             'fee' => 'required|numeric',
@@ -96,12 +98,11 @@ class UserController extends Controller
     public function updatePassword(RequestPassword $requestPassword, User $user)
     {
         if (Hash::check($requestPassword->password_old, Auth::user()->password)) {
-            $user = User::find( Auth::user()->id);
+            $user = User::find(Auth::user()->id);
             $user->password = bcrypt($requestPassword->password);
             $user->save();
 
             return redirect()->back()->with('success', 'Thay đổi mật khẩu thành công');
-
         }
         return redirect()->back()->with('danger', 'Mật khẩu không đúng');
     }
@@ -109,15 +110,15 @@ class UserController extends Controller
     public function load_address(Request $request)
     {
         $data = $request->all();
-        $output ='';
-        $data['action'] == "district" ;
+        $output = '';
+        $data['action'] == "district";
 
         $select = Ward::where('district_id', $data['district_id'])->get();
-        $output.='<option>---Chọn xã/phường---</option>';
-        foreach ($select as $d){
-            $output.='<option value="'.$d->id.'">'.$d->name.'</option>';
+        $output .= '<option>---Chọn xã/phường---</option>';
+        foreach ($select as $d) {
+            $output .= '<option value="' . $d->id . '">' . $d->name . '</option>';
         }
-         return response()->json(['html' => $output]);
+        return response()->json(['html' => $output]);
     }
 
     public function redirectLogin()

@@ -24,14 +24,14 @@ class ProductComment extends Model
     protected $primarykey = 'id';
     protected $guarded = [];
 
-    public function product() {
+    public function product()
+    {
         return $this->hasOne(Product::class, 'id', 'product_id')
-        ->withDefault(['name' => '']);
-        // return $this->belongsTo(Product::class, 'product_id', 'id');
+            ->withDefault(['name' => '']);
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
-
 }

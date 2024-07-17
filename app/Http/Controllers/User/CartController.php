@@ -125,12 +125,12 @@ class CartController extends Controller
             $total_cart += $subtotal;
         }
         //render view
-       $cart_compoment = view('user.products.compoments.cart', compact('productsInCart', 'carts', 'price', 'quantity', 'subtotal','total_cart', 'quantity_total' ))->render();
+        $cart_compoment = view('user.products.compoments.cart', compact('productsInCart', 'carts', 'price', 'quantity', 'subtotal', 'total_cart', 'quantity_total'))->render();
 
         return response()->json([
-              'cart_compoment' => $cart_compoment,
-              'message' => 'Đã thêm món ăn vào giỏ hàng!',
-              'code' => 200,
+            'cart_compoment' => $cart_compoment,
+            'message' => 'Đã thêm món ăn vào giỏ hàng!',
+            'code' => 200,
         ], 200);
     }
 
@@ -156,7 +156,7 @@ class CartController extends Controller
                 $total_cart += $subtotal;
             }
             //render view
-            $cart_compoment = view('user.products.compoments.cart', compact('productsInCart', 'carts', 'price', 'quantity', 'subtotal','total_cart', 'quantity_total' ))->render();
+            $cart_compoment = view('user.products.compoments.cart', compact('productsInCart', 'carts', 'price', 'quantity', 'subtotal', 'total_cart', 'quantity_total'))->render();
 
             return response()->json([
                 'cart_compoment' => $cart_compoment,
@@ -186,8 +186,8 @@ class CartController extends Controller
             $carts[$id] += 1;
         }
         Session::put('carts', $carts);
-         $cart_compoment = $this->cart_compoment();
-         $payment_compoment = $this->payment_compoment();
+        $cart_compoment = $this->cart_compoment();
+        $payment_compoment = $this->payment_compoment();
 
         return response()->json([
             'cart_compoment' => $cart_compoment,
@@ -205,9 +205,9 @@ class CartController extends Controller
             $carts[$id] -= 1;
         }
         Session::put('carts', $carts);
-         //update new data
-         $cart_compoment = $this->cart_compoment();
-         $payment_compoment = $this->payment_compoment();
+        //update new data
+        $cart_compoment = $this->cart_compoment();
+        $payment_compoment = $this->payment_compoment();
 
         return response()->json([
             'cart_compoment' => $cart_compoment,
@@ -389,5 +389,4 @@ class CartController extends Controller
 
         return $cart_compoment;
     }
-
 }

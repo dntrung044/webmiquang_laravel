@@ -9,7 +9,7 @@
                     <div
                         class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                         <h3 class="fw-bold mb-0">
-                            @if($title)
+                            @if ($title)
                                 {{ $title }}
                             @else
                                 Quản lý
@@ -25,7 +25,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Row end  -->
             {{-- List --}}
             <div class="row clearfix g-3">
                 <div class="col-sm-12">
@@ -51,13 +50,13 @@
                                                 <ul>
                                                     <li>
                                                         <h3 class="fw-bold">
-                                                         {{ $coupon->name }}
+                                                            {{ $coupon->name }}
                                                         </h3>
                                                     </li>
                                                     <li>
                                                         <i class="icofont-clock-time"></i>
                                                         <span>{{ $coupon->date_start }}</span>
-                                                       -
+                                                        -
                                                         <span>{{ $coupon->date_end }}</span>
                                                     </li>
                                                     <li>

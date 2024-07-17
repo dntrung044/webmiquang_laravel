@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Services\Role\RoleService; 
+use App\Http\Services\Role\RoleService;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -27,22 +27,20 @@ class RoleController extends Controller
         ]);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $validator = Validator::make($request->all(), [
-            'name'=> 'required',
-            'description'=>'required',
-            'permission_id'=>'required',
+            'name' => 'required',
+            'description' => 'required',
+            'permission_id' => 'required',
         ]);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json([
-                'status'=>400,
-                'errors'=>$validator->errors()
+                'status' => 400,
+                'errors' => $validator->errors()
             ]);
-        }
-        else
-        {
+        } else {
             // $role = ProductCategory::create([
             //     'name' => (string)$request->input('name'),
             //     'active' => (string)$request->input('active')
@@ -58,31 +56,28 @@ class RoleController extends Controller
             $role->permissions()->attach($permission_id);
 
             return response()->json([
-                'status'=>200,
-                'message'=>'Vai trò đã được tạo thành công',
+                'status' => 200,
+                'message' => 'Vai trò đã được tạo thành công',
                 'data' => $role
             ]);
         }
-	}
+    }
 
     public function edit($id)
     {
         $role = Role::find($id);
         $permissions = $role->permissions;
 
-        if($role)
-        {
+        if ($role) {
             return response()->json([
-                'status'=>200,
-                'data'=> $role,
+                'status' => 200,
+                'data' => $role,
                 'permissions' => $permissions,
             ]);
-        }
-        else
-        {
+        } else {
             return response()->json([
-                'status'=>404,
-                'message'=>'Không tìm thấy vai trò này.'
+                'status' => 404,
+                'message' => 'Không tìm thấy vai trò này.'
             ]);
         }
     }
@@ -90,22 +85,18 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'description'=>'required',
-            'name'=>'required',
+            'description' => 'required',
+            'name' => 'required',
         ]);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json([
-                'status'=>400,
-                'errors'=>$validator->errors()
+                'status' => 400,
+                'errors' => $validator->errors()
             ]);
-        }
-        else
-        {
+        } else {
             $role = Role::find($id);
-            if($role)
-            {
+            if ($role) {
                 $role->update([
                     'name' => $request->name,
                     'description' => $request->description
@@ -114,38 +105,32 @@ class RoleController extends Controller
                 $role->permissions()->sync($request->permission_id);
 
                 return response()->json([
-                    'status'=>200,
-                    'message'=>'Cập nhật thông tin thành công'
+                    'status' => 200,
+                    'message' => 'Cập nhật thông tin thành công'
                 ]);
-            }
-            else
-            {
+            } else {
                 return response()->json([
-                    'status'=>404,
-                    'message'=>'Không tìm thấy vai trò.'
+                    'status' => 404,
+                    'message' => 'Không tìm thấy vai trò.'
                 ]);
             }
-
         }
     }
 
     public function destroy($id)
     {
         $role = Role::find($id);
-        if($role)
-        {
+        if ($role) {
             $role->permissions()->detach();
             $role->delete();
             return response()->json([
-                'status'=>200,
-                'message'=>'Vai trò đã được xóa thành công.'
+                'status' => 200,
+                'message' => 'Vai trò đã được xóa thành công.'
             ]);
-        }
-        else
-        {
+        } else {
             return response()->json([
-                'status'=>404,
-                'message'=>'Không tìm mã vai trò.'
+                'status' => 404,
+                'message' => 'Không tìm mã vai trò.'
             ]);
         }
     }

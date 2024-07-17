@@ -14,26 +14,22 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
-    // protected $redirectTo = RouteServiceProvider::HOME;
-
-    // public function __construct() {
-    //     $this->middleware('guest')->except('logout');
-    // }
 
     //Register
-    public function register() {
-        return view('user.auth.register',[
+    public function register()
+    {
+        return view('user.auth.register', [
             'title' => 'Đăng ký tài khoản - Mì Quảng Bà Mua',
         ]);
     }
 
     public function registerHandle(Request $request)
-     {
+    {
         $this->validate($request, [
-            'name'=>'required|min:3|max:200',
+            'name' => 'required|min:3|max:200',
             'email' => 'required|max:200|email:filter|unique:users,email',
             'phone' => 'required',
-            'password'=>'required|min:6|max:200'
+            'password' => 'required|min:6|max:200'
         ]);
         $user = new User();
         $user->name = $request->name;
@@ -45,15 +41,18 @@ class AuthController extends Controller
         $user->remember_token = strtoupper(Str::random(15));
         $user->save();
         if ($user->id) {
-            Mail::send('user.mail.confirmRegistration', compact('user'),
-            function ($message) use ($user) {
-                $message->from('Trung@fake.com', 'Trung Admin');
-                $message->to($user->email, $user->name);
-                $message->subject('Xác nhận tài khoản - Website Nhà Hàng Mì Quảng');
-            });
+            Mail::send(
+                'user.mail.confirmRegistration',
+                compact('user'),
+                function ($message) use ($user) {
+                    $message->from('Trung@fake.com', 'Trung Admin');
+                    $message->to($user->email, $user->name);
+                    $message->subject('Xác nhận tài khoản - Website Nhà Hàng Mì Quảng');
+                }
+            );
             return redirect()->route('register.success')
-            // ->with('message', 'Bạn đã đăng ký thành công. Vui lòng xác thực Email để được kích hoạt.')
-            ->with('email', $user->email);
+                // ->with('message', 'Bạn đã đăng ký thành công. Vui lòng xác thực Email để được kích hoạt.')
+                ->with('email', $user->email);
         }
 
         return redirect()->back()->with('error', 'Đăng ký tài khoản thất bại.');
@@ -68,14 +67,17 @@ class AuthController extends Controller
 
             return redirect()->route('login')->with('success', 'Bạn đã xác thực tài khoản thành công!');
         } else {
-           return redirect()->route('login')->with('error', 'Mã xác nhận không hợp lệ hoặc đã cũ!!');
+            return redirect()->route('login')->with('error', 'Mã xác nhận không hợp lệ hoặc đã cũ!!');
         }
     }
 
-    public function sendEmailVerify($email = '') {
+    public function sendEmailVerify($email = '')
+    {
         if ($email != null) {
             $user = User::where('email', $email)->first();
-            Mail::send('user.mail.confirmRegistration', compact('user'),
+            Mail::send(
+                'user.mail.confirmRegistration',
+                compact('user'),
                 function ($message) use ($user) {
                     $message->from('Trung@fake.com', 'Trung Admin');
                     $message->to($user->email, $user->name);
@@ -84,25 +86,26 @@ class AuthController extends Controller
             );
 
             return redirect()->back()
-            ->with('email', $email)
-            ->with('title', 'Đã gửi lại thư kích hoạt tài khoản.');
+                ->with('email', $email)
+                ->with('title', 'Đã gửi lại thư kích hoạt tài khoản.');
         }
         return redirect()->route('register');
-
     }
 
-    public function registrationSuccess() {
+    public function registrationSuccess()
+    {
         $title = session('notificution');
         $title = 'Đăng ký thành công';
-        if(session()->get('email')) {
+        if (session()->get('email')) {
             return view('user.confirm.dangkyok', compact('title'));
         }
 
         return redirect()->route('login');
     }
     //Forgot password
-    public function forgotPassword() {
-        return view('user.auth.forgotPassword',[
+    public function forgotPassword()
+    {
+        return view('user.auth.forgotPassword', [
             'title' => 'Quên mật khẩu - Mì Quảng Bà Mua',
         ]);
     }
@@ -118,10 +121,12 @@ class AuthController extends Controller
         $token = strtoupper(Str::random(15));
         $user = User::where('email', $request->email)->first();
         $user->update([
-            'remember_token'=>$token,
+            'remember_token' => $token,
         ]);
 
-        Mail::send('user.mail.forgotPassword', compact('user'),
+        Mail::send(
+            'user.mail.forgotPassword',
+            compact('user'),
             function ($message) use ($user) {
                 $message->subject('Khôi phục mật khẩu - Web Nhà Hàng Mì Quảng');
                 $message->from('Trung@fake.com', 'Trung');
@@ -131,20 +136,21 @@ class AuthController extends Controller
         return redirect()->back()->with('success', 'Vui lòng check mail để thay đổi mật khẩu!');
     }
 
-     //Change password
+    //Change password
     public function changePassword(User $id, $token)
     {
         if ($id->remember_token === $token) {
-            return view('user.auth.changePassword',[
+            return view('user.auth.changePassword', [
                 'title' => 'Thay đổi mật khẩu - Mì Quảng Bà Mua',
             ]);
         }
         return abort(404);
     }
-    public function changetPasswordHandle(User $id, $token, Request $request) {
+    public function changetPasswordHandle(User $id, $token, Request $request)
+    {
         $this->validate($request, [
             'password' => 'required',
-            'confirm_password'=>'required|same:password'
+            'confirm_password' => 'required|same:password'
         ], [
             'password.required' => 'Vui lòng nhập mật khẩu',
             'confirm_password.required' => 'Vui lòng nhập lại mật khẩu',
@@ -162,15 +168,17 @@ class AuthController extends Controller
     }
 
     // Login
-    public function login() {
+    public function login()
+    {
         if (Auth::check()) {
             return redirect()->route('home');
         }
-        return view('user.auth.login',[
+        return view('user.auth.login', [
             'title' => 'Đăng nhập - Mì Quảng Bà Mua',
         ]);
     }
-    public function loginHandle(Request $request) {
+    public function loginHandle(Request $request)
+    {
         $this->validate($request, [
             'email' => 'required|email:filter',
             'password' => 'required',
@@ -181,12 +189,12 @@ class AuthController extends Controller
             'password' => $request->input('password'),
             'active' => 1
         ], $request->input('remember'))) {
-            if (Auth::user()->level==1) {
+            if (Auth::user()->level == 1) {
                 return redirect('admin')->with('success', 'Đăng nhập thành công');
             } else {
                 return redirect()->intended('/')->with('success', 'Đăng nhập với vài trò thành công');
             }
-        } elseif(Auth::attempt([
+        } elseif (Auth::attempt([
             'email' => $request->input('email'),
             'password' => $request->input('password'),
             'active' => 0
@@ -199,7 +207,8 @@ class AuthController extends Controller
         return redirect()->back();
     }
 
-    public function loginAjaxHandle(Request $request) {
+    public function loginAjaxHandle(Request $request)
+    {
         $validation = Validator::make($request->all(), [
             'email' => 'required|email:filter|exists:users',
             'password' => 'required',
@@ -210,8 +219,7 @@ class AuthController extends Controller
 
         if ($validation->fails()) {
             return response()->json(['error' => $validation->errors()->first()]);
-        }
-        else {
+        } else {
             if (Auth::attempt([
                 'email' => $request->input('email'),
                 'password' => $request->input('password'),
@@ -219,10 +227,10 @@ class AuthController extends Controller
             ])) {
                 return response()->json([
                     'success' => 1,
-                    'message' => 'Chào mừng '. Auth::user()->name,
+                    'message' => 'Chào mừng ' . Auth::user()->name,
                     'user' => Auth::user()
                 ]);
-            } elseif(Auth::attempt([
+            } elseif (Auth::attempt([
                 'email' => $request->input('email'),
                 'password' => $request->input('password'),
                 'active' => 0
@@ -236,7 +244,6 @@ class AuthController extends Controller
         }
 
         return response()->json(['error' => $validation->errors()->first()]);
-
     }
 
     // Login with
@@ -268,7 +275,7 @@ class AuthController extends Controller
         $this->_registerOrLoginUser($user);
 
 
-        if (Auth::user()->level==1) {
+        if (Auth::user()->level == 1) {
             return redirect('admin')->with('success', 'Đăng nhập thành công với quản trị');
         } else {
             return redirect()->intended('/')->with('success', 'Đăng nhập thành công');
@@ -294,7 +301,8 @@ class AuthController extends Controller
         Auth::login($user);
     }
 
-    public function logout() {
+    public function logout()
+    {
         Auth::logout();
         return redirect()->route('login')->with('message', 'Đăng xuất thành công!');
     }

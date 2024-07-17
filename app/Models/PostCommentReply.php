@@ -36,7 +36,8 @@ class PostCommentReply extends Model
     }
 
 
-    public function likes() {
+    public function likes()
+    {
         return $this->belongsToMany(User::class, 'reply_user', 'reply_id', 'user_id')->withTimestamps();
     }
 }

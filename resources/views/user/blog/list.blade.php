@@ -1,7 +1,3 @@
-@section('head')
-    <!-- Blog CSS -->
-    <link href="{{ asset('teamplate/css/blog.css') }}" rel="stylesheet">
-@endsection
 @extends('user.layout.main')
 @section('content')
     <main>
@@ -13,7 +9,6 @@
                             <h1>Trang tin tức</h1>
                         </div>
                     </div>
-                    <!-- /row -->
                 </div>
             </div>
             <div class="frame white"></div>
@@ -28,7 +23,8 @@
                                 <div class="col-md-6" data-cue="slideInUp">
                                     <article class="blog">
                                         <figure>
-                                            <a href="{{ route('blog.detail', ['id' => $blog->id, 'slug' => \Str::slug($blog->name, '-')]) }}">
+                                            <a
+                                                href="{{ route('blog.detail', ['id' => $blog->id, 'slug' => \Str::slug($blog->name, '-')]) }}">
                                                 <img src="{{ $blog->thumb }}" alt="">
                                                 <div class="preview"><span>Đọc thêm</span></div>
                                             </a>
@@ -36,7 +32,8 @@
                                         <div class="post_info">
                                             <small>{{ date('d-m-Y', strtotime($blog->created_at)) }}</small>
                                             <h2>
-                                                <a href="
+                                                <a
+                                                    href="
                                                     {{ route('blog.detail', ['id' => $blog->id, 'slug' => \Str::slug($blog->name, '-')]) }}">
                                                     {{ $blog->name }}
                                                 </a>
@@ -44,14 +41,11 @@
                                             <p>{{ $blog->description }}</p>
                                         </div>
                                     </article>
-                                    <!-- /article -->
                                 </div>
                             @endforeach
                         </div>
-                        <!-- /row -->
                         {!! $blogs->links() !!}
                     </div>
-                    <!-- /col -->
 
                     <aside class="col-lg-3 bg-white">
                         <div class="widget ">
@@ -67,7 +61,8 @@
                                                 <img src="{{ $new->thumb }}" alt="">
                                             </a>
                                         </div>
-                                        <small>{{ $new->postCategory->name }} - {{ date('m.d.y', strtotime($new->created_at)) }}</small>
+                                        <small>{{ $new->postCategory->name }} -
+                                            {{ date('m.d.y', strtotime($new->created_at)) }}</small>
                                         <h3>
                                             <a
                                                 href="
@@ -114,14 +109,10 @@
                             </form>
                             <!-- /search post -->
                         </div>
-                        <!-- /widget -->
                     </aside>
-                    <!-- /aside -->
                 </div>
-                <!-- /row -->
             </div>
         </div>
-        <!-- /container -->
     </main>
 @endsection
 @section('script')

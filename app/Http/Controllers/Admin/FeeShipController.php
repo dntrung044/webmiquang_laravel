@@ -18,7 +18,7 @@ class FeeShipController extends Controller
         $feeship = Feeship::orderbyDesc('id')->get();
         return view('admin.feeship.list', [
             'title' => 'Danh Sách Phí Vận Chuyển Mới Nhất',
-            'feeships'=> $feeship
+            'feeships' => $feeship
         ]);
     }
 
@@ -26,8 +26,8 @@ class FeeShipController extends Controller
     {
         $district = District::get();
         return view('admin.feeship.add', [
-           'title' => 'Thêm Phí Vận Chuyển mới',
-           'districts' => $district
+            'title' => 'Thêm Phí Vận Chuyển mới',
+            'districts' => $district
         ]);
     }
 
@@ -67,15 +67,15 @@ class FeeShipController extends Controller
     public function load_address(Request $request)
     {
         $data = $request->all();
-        $output ='';
-        $data['action'] == "district" ;
+        $output = '';
+        $data['action'] == "district";
 
         $select = Ward::where('district_id', $data['district_id'])->get();
-        $output.='<option>---Chọn xã/phường---</option>';
-        foreach ($select as $d){
-            $output.='<option value="'.$d->id.'">'.$d->name.'</option>';
+        $output .= '<option>---Chọn xã/phường---</option>';
+        foreach ($select as $d) {
+            $output .= '<option value="' . $d->id . '">' . $d->name . '</option>';
         }
-         return response()->json(['html' => $output]);
+        return response()->json(['html' => $output]);
     }
 
     public function destroy(Request $request)
@@ -83,7 +83,7 @@ class FeeShipController extends Controller
         $id = $request->input('id');
         $feeship = Feeship::where('id', $id)->first();
         if ($feeship) {
-            $feeship ->delete();
+            $feeship->delete();
             return response()->json([
                 'error' => false,
                 'message' => 'Xóa Thành Công'

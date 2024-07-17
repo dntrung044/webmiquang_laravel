@@ -1,4 +1,3 @@
-
 @extends('admin.layout.main')
 
 @section('content')
@@ -17,22 +16,22 @@
 
                         <div class="row mb-4">
                             @foreach ($abouts as $about)
-                            <div class="col-sm-6">
-                                <h6 class="mb-3">Từ: </h6>
-                                <div>Cửa hàng: <strong>Mì Quảng Bà Mua</strong></div>
-                                <div>Địa chỉ: {!!$about->address !!}</div>
-                                <div>Email: {{ $about->email }}</div>
-                                <div>Số điện thoại: {{ $about->phone }}</div>
-                            </div>
+                                <div class="col-sm-6">
+                                    <h6 class="mb-3">Từ: </h6>
+                                    <div>Cửa hàng: <strong>Mì Quảng Bà Mua</strong></div>
+                                    <div>Địa chỉ: {!! $about->address !!}</div>
+                                    <div>Email: {{ $about->email }}</div>
+                                    <div>Số điện thoại: {{ $about->phone }}</div>
+                                </div>
                             @endforeach
 
 
                             <div class="col-sm-6">
                                 <h6 class="mb-3">Đến:</h6>
                                 <div> Tên khách hàng:<strong> {{ $transaction->user->name }}</strong></div>
-                                <div>Địa chỉ:<strong>{{ $transaction->user->street}},
-                                    {{ $transaction->user->ward}}, {{ $transaction->user->district}}
-                                </strong></div>
+                                <div>Địa chỉ:<strong>{{ $transaction->user->street }},
+                                        {{ $transaction->user->ward }}, {{ $transaction->user->district }}
+                                    </strong></div>
                                 <div>Email: <strong>{{ $transaction->user->email }}</strong></div>
                                 <div>Số điện thoại: <strong>{{ $transaction->user->phone }}</strong></div>
                                 <div>Ghi chú: <strong>{{ $transaction->content }}</strong></div>
@@ -41,10 +40,10 @@
 
                         <div class="table-responsive-sm">
                             @php
-                            $total = 0;
-                            $ship = 10000;
-                            $totalss=0
-                             @endphp
+                                $total = 0;
+                                $ship = 10000;
+                                $totalss = 0;
+                            @endphp
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
@@ -66,8 +65,9 @@
                                         <tr>
 
                                             <td class="text-center">{{ $cart->id }}</td>
-                                                {{-- <td>{{!empty($cart->product_id) ? $cart->product->name:''}}</td> --}}
-                                            <td><img src="{{ $cart->product->thumb }}" alt="IMG" style="width: 100px"></td>
+                                            {{-- <td>{{!empty($cart->product_id) ? $cart->product->name:''}}</td> --}}
+                                            <td><img src="{{ $cart->product->thumb }}" alt="IMG" style="width: 100px">
+                                            </td>
                                             <td>{{ $cart->product->name }}</td>
                                             <td class="text-end">{{ number_format($cart->total_price, 0, '', '.') }}đ</td>
                                             <td class="text-center">{{ $cart->total_item }}</td>
@@ -93,7 +93,7 @@
                                         </tr>
                                         <tr>
                                             <td><strong>Phí ship</strong></td>
-                                            <td class="text-end"> {{$ship }} đ</td>
+                                            <td class="text-end"> {{ $ship }} đ</td>
                                         </tr>
                                         <tr>
                                             <td><strong>Thành tiền</strong></td>
@@ -116,7 +116,8 @@
 
                                 <button type="button" class="btn btn-outline-secondary btn-lg my-1">
                                     <i class="fa fa-print"></i>
-                                    <a href="{{ route('transactions.detail', $transaction->id) }}?download=true">Tải xuống</a>
+                                    <a href="{{ route('transactions.detail', $transaction->id) }}?download=true">Tải
+                                        xuống</a>
                                 </button>
 
                                 {{-- <button type="button" class="btn btn-outline-secondary btn-lg my-1">
@@ -125,21 +126,17 @@
                                     class="pointer underline" ga="event" ga-category="Invoice" ga-action="Link" ga-label="Print">
                                     </a>
                                 </button> --}}
-
-
                                 <button type="button" class="btn btn-primary btn-lg my-1">
                                     <i class="fa fa-paper-plane-o"></i>Gửi hóa đơn
                                 </button>
                             </div>
                         </div>
-                        <!-- Row end  -->
                     </div>
-
                 </div>
             </div>
-        </div> <!-- Row end  -->
+        </div>
     </div>
 @endsection
 @section('script')
-<script src="teamplate/admin/assets/app.js"></script>
+    <script src="teamplate/admin/assets/app.js"></script>
 @endsection

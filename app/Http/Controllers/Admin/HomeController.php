@@ -57,7 +57,6 @@ class HomeController extends Controller
     public function activeReservation($reservation)
     {
         $transaction = Reservation::find($reservation);
-
         $transaction->status = Reservation::STATUS_DONE;
         $transaction->save();
 

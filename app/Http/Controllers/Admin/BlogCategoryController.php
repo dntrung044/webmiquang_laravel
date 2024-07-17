@@ -57,7 +57,8 @@ class BlogCategoryController extends Controller
         return redirect()->back();
     }
 
-    public function destroy(Request $request) {
+    public function destroy(Request $request)
+    {
         $result = $this->blogCategoryService->destroy($request);
         if ($result) {
             return response()->json([

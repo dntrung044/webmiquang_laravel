@@ -30,8 +30,8 @@ class ProductController extends Controller
     public function create()
     {
         return view('admin.products.add', [
-           'title' => 'Thêm Phí Vận Chuyển mới',
-           'product_categories' => $this->productService->getCategory()
+            'title' => 'Thêm Phí Vận Chuyển mới',
+            'product_categories' => $this->productService->getCategory()
         ]);
     }
 
@@ -72,7 +72,6 @@ class ProductController extends Controller
             ]);
         }
 
-        return response()->json([ 'error' => true ]);
+        return response()->json(['error' => true]);
     }
-
 }

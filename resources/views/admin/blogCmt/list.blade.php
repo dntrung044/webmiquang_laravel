@@ -5,12 +5,12 @@
         <div class="container-xxl">
             <div class="row align-items-center">
                 <div class="border-0 mb-4">
-                    <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+                    <div
+                        class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                         <h3 class="fw-bold mb-0"> {{ $title }}</h3>
                     </div>
                 </div>
             </div>
-            <!-- Row end  -->
             {{-- List --}}
             <div class="row">
                 <div class="col-sm-12">
@@ -37,7 +37,7 @@
                                                 @if ($cmt->reply_id == 0)
                                                     Bình luận
                                                 @else
-                                                    {{ $cmt->reply_id  }}
+                                                    {{ $cmt->reply_id }}
                                                 @endif
                                             </td>
                                             <td>{{ $cmt->post->name }}</td>
@@ -46,9 +46,11 @@
                                             <td>{{ $cmt->created_at }}</td>
                                             <td>
                                                 @if ($cmt->active == 1)
-                                                    <a href="{{ route('post_comments.inactiveCMT', $cmt->id) }}"><span class="badge bg-success">Hiển thị</span></a>
+                                                    <a href="{{ route('post_comments.inactiveCMT', $cmt->id) }}"><span
+                                                            class="badge bg-success">Hiển thị</span></a>
                                                 @else
-                                                    <a href="{{ route('post_comments.activeCMT', $cmt->id) }}"><span class="badge bg-danger">Ẩn</span></a>
+                                                    <a href="{{ route('post_comments.activeCMT', $cmt->id) }}"><span
+                                                            class="badge bg-danger">Ẩn</span></a>
                                                 @endif
                                             </td>
                                         </tr>

@@ -9,7 +9,7 @@
                     <div
                         class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                         <h3 class="fw-bold mb-0">
-                            @if($title)
+                            @if ($title)
                                 {{ $title }}
                             @else
                                 Quản lý
@@ -18,7 +18,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="modal-body">
                 <div class="deadline-form">
                     <form action="" method="POST">
@@ -39,7 +38,6 @@
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="col-md-3 ml-20">
                                     <div class="form-group">
                                         <label>Xã/Phường</label>
@@ -56,8 +54,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label class="form-label">Phí vận chuyển:</label>
-                                <input type="number" name="feeship"
-                                    value="{{  $feeship->feeship }}" class="form-control">
+                                <input type="number" name="feeship" value="{{ $feeship->feeship }}" class="form-control">
                             </div>
                         </div>
 

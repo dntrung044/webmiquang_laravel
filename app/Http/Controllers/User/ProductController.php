@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use App\Models\ProductCategory;
 use App\Models\ProductComment;
+
 class ProductController extends Controller
 {
     protected $productService;
@@ -16,7 +17,6 @@ class ProductController extends Controller
     {
         $this->productService = $productService;
     }
-
     public function getProduct()
     {
         $carts = Session::get('carts');
@@ -24,9 +24,9 @@ class ProductController extends Controller
 
         $productId = array_keys($carts);
         return Product::select('id', 'name', 'price', 'price_sale', 'thumb')
-                        ->where('active', 1)
-                        ->whereIn('id', $productId)
-                        ->get();
+            ->where('active', 1)
+            ->whereIn('id', $productId)
+            ->get();
     }
     // Danh sách sp
     public function index(Request $request)
@@ -47,8 +47,10 @@ class ProductController extends Controller
         }
         $carts = Session::get('carts');
 
-        return view('User.products.list',
-        compact('products', 'categories', 'title', 'productsInCart', 'carts', 'price', 'quantity', 'quantity_total', 'subtotal', 'total_cart' ));
+        return view(
+            'User.products.list',
+            compact('products', 'categories', 'title', 'productsInCart', 'carts', 'price', 'quantity', 'quantity_total', 'subtotal', 'total_cart')
+        );
     }
 
     // Danh sách danh mục sp
@@ -81,12 +83,12 @@ class ProductController extends Controller
     //Gửi Bình luận: sửa alert
     public function postComment(Request $request, $id)
     {
-       $result = $this->productService->insertComment($request, $id);
-       if ($result) {
+        $result = $this->productService->insertComment($request, $id);
+        if ($result) {
             return redirect()->route('menus.index');
-            alert('Đánh giá thành công','Quản trị sẽ phê duyệt bình luận của bạn trong thời gian sớm nhất!', 'success');
-       } else {
+            alert('Đánh giá thành công', 'Quản trị sẽ phê duyệt bình luận của bạn trong thời gian sớm nhất!', 'success');
+        } else {
             return redirect()->back()->with('success', 'Đăng bình luận sản phẩm thành công!');
-       }
+        }
     }
 }

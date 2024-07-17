@@ -5,7 +5,8 @@
         <div class="container-xxl">
             <div class="row align-items-center">
                 <div class="border-0 mb-4">
-                    <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+                    <div
+                        class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                         <h3 class="fw-bold mb-0"> {{ $title }}</h3>
                     </div>
                 </div>
@@ -34,7 +35,7 @@
                                     @foreach ($productsCMT as $key => $cmt)
                                         <tr>
                                             <td>{{ $cmt->id }}</td>
-                                            <td>{{!empty($cmt->product_id) ? $cmt->product->name:''}}</td>
+                                            <td>{{ !empty($cmt->product_id) ? $cmt->product->name : '' }}</td>
                                             {{-- <td>{{ !empty($cmt->user_id) ? $cmt->user->name : '' }}</td> --}}
                                             <td>{{ $cmt->name }}</td>
                                             <td>{{ $cmt->email }}</td>
@@ -42,16 +43,18 @@
                                             <td>
                                                 <span class="rating">
                                                     @for ($i = 1; $i <= 5; $i++)
-                                                       <i class="{{ $i <= $cmt->rating ? 'icofont-star' : '' }}"></i>
-                                                   @endfor
-                                                <em>{{ $cmt->rating }}/5.0</em>
+                                                        <i class="{{ $i <= $cmt->rating ? 'icofont-star' : '' }}"></i>
+                                                    @endfor
+                                                    <em>{{ $cmt->rating }}/5.0</em>
                                             </td>
                                             <td>{{ $cmt->created_at }}</td>
                                             <td>
                                                 @if ($cmt->active == 1)
-                                                    <a href="{{ route('inactiveCMT', $cmt->id) }}"><span class="badge bg-success">Hiển thị</span></a>
+                                                    <a href="{{ route('inactiveCMT', $cmt->id) }}"><span
+                                                            class="badge bg-success">Hiển thị</span></a>
                                                 @else
-                                                    <a href="{{ route('activeCMT', $cmt->id) }}"><span class="badge bg-danger">Ẩn</span></a>
+                                                    <a href="{{ route('activeCMT', $cmt->id) }}"><span
+                                                            class="badge bg-danger">Ẩn</span></a>
                                                 @endif
                                             </td>
                                         </tr>

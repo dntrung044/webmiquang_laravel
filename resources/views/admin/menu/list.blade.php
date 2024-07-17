@@ -39,17 +39,18 @@
                                             <td>{{ $menu->description }}</td>
                                             <td>
                                                 <a href="{{ $menu->thumb }}" target="_blank">
-                                                    <img src="{{ $menu->thumb }}" style="height:100px;" >
+                                                    <img src="{{ $menu->thumb }}" style="height:100px;">
                                                 </a>
                                             </td>
                                             <td>{!! \App\Helpers\Helper::active($menu->active) !!}</td>
 
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal">
+                                                    <button type="button" class="btn btn-outline-secondary"
+                                                        data-bs-toggle="modal">
                                                         <a class="btn btn-primary btn-sm"
-                                                        href="{{ route('banners.edit', ['menu'=> $menu->id ]) }}">
-                                                        <i class="icofont-edit text-success"></i>
+                                                            href="{{ route('banners.edit', ['menu' => $menu->id]) }}">
+                                                            <i class="icofont-edit text-success"></i>
                                                         </a>
                                                     </button>
                                                 </div>

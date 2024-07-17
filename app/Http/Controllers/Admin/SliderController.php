@@ -19,7 +19,7 @@ class SliderController extends Controller
     public function create()
     {
         return view('admin.slider.add', [
-           'title' => 'Thêm SLider mới'
+            'title' => 'Thêm SLider mới'
         ]);
     }
 
@@ -81,6 +81,6 @@ class SliderController extends Controller
             ]);
         }
 
-        return response()->json([ 'error' => true ]);
+        return response()->json(['error' => true]);
     }
 }

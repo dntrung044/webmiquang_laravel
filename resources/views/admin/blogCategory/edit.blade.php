@@ -15,37 +15,36 @@
 
             <div class="modal-body">
                 <div class="deadline-form">
-                    action="{{ route('post_categories.update',   $postcategory->id ) }}" method="POST"
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label class="form-label">Tên tiêu đề</label>
-                                <input type="text" name="title" class="form-control" value="{{ $postcategory->name }}">
-                            </div>
+                    action="{{ route('post_categories.update', $postcategory->id) }}" method="POST"
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">Tên tiêu đề</label>
+                            <input type="text" name="title" class="form-control" value="{{ $postcategory->name }}">
+                        </div>
 
-                            <div class="mb-3">
-                                <label class="form-label">Kích hoạt</label>
-                                <div>
-                                    <input type="radio" id="active" value="1" name="active"
-                                    {{ $postcategory->active == 1 ? 'checked="' : ''}}>
-                                    <label for="active">Có</label>
-                                </div>
-                                <div>
-                                    <input type="radio" id="no_active" value="0" name="active"
-                                    {{ $postcategory->active == 0 ? 'checked="' : ''}}>
-                                    <label for="no_active">Không</label>
-                                </div>
+                        <div class="mb-3">
+                            <label class="form-label">Kích hoạt</label>
+                            <div>
+                                <input type="radio" id="active" value="1" name="active"
+                                    {{ $postcategory->active == 1 ? 'checked="' : '' }}>
+                                <label for="active">Có</label>
                             </div>
+                            <div>
+                                <input type="radio" id="no_active" value="0" name="active"
+                                    {{ $postcategory->active == 0 ? 'checked="' : '' }}>
+                                <label for="no_active">Không</label>
+                            </div>
+                        </div>
 
-                            <div class="modal-footer">
-                                <a href="/admin/postcategories/list"><button type="button" class="btn btn-secondary">Hủy</button></a>
-                                <button type="submit" class="btn btn-primary">Sửa</button>
-                            </div>
-                            @csrf
-                    </form>
+                        <div class="modal-footer">
+                            <a href="/admin/postcategories/list"><button type="button"
+                                    class="btn btn-secondary">Hủy</button></a>
+                            <button type="submit" class="btn btn-primary">Sửa</button>
+                        </div>
+                        @csrf
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-@endsection
-
+    @endsection

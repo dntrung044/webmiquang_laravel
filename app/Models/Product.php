@@ -27,9 +27,9 @@ class Product extends Model
         'price',
     ];
 
-    public function productCategory() {
+    public function productCategory()
+    {
         return $this->hasOne(ProductCategory::class, 'id', 'cat_id')
-        ->withDefault(['name' => '']);
+            ->withDefault(['name' => '']);
     }
 }
-

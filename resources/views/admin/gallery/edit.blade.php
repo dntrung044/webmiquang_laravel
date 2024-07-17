@@ -13,7 +13,7 @@
                 </div>
             </div>
 
-            <!-- Add Tickit-->
+            <!-- Add-->
             <div class="modal-body">
                 <div class="deadline-form">
                     <form action="" method="POST">
@@ -44,7 +44,8 @@
                         </div>
 
                         <div class="modal-footer">
-                            <a href="{{ route('galleries.index') }}"><button type="button" class="btn btn-secondary">Hủy</button></a>
+                            <a href="{{ route('galleries.index') }}"><button type="button"
+                                    class="btn btn-secondary">Hủy</button></a>
                             <button type="submit" class="btn btn-primary">Cập nhật hình ảnh</button>
                         </div>
                         @csrf
@@ -53,5 +54,4 @@
             </div>
         </div>
     </div>
-
 @endsection

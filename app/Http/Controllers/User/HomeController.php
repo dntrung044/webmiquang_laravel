@@ -18,8 +18,8 @@ class HomeController extends Controller
         $slider = Slider::where('active', 1)->orderBy('sort_by')->get();
         $menu = Menu::select('name', 'link', 'thumb', 'description')->orderbyDesc('id')->get();
         $posts = Post::where('active', 1)->OrderBy('id', 'desc')->limit('3')->get();
-        $abouthome =Aboutus::select('thumb', 'linkYT', 'description')->firstOrFail();
-        $minprice =Product::min('price_sale');
+        $abouthome = Aboutus::select('thumb', 'linkYT', 'description')->firstOrFail();
+        $minprice = Product::min('price_sale');
         $cat1Product = Product::where('cat_id', 7)->limit(4)->get();
         $cat2Product = Product::where('cat_id', 5)->limit(4)->get();
         return view('User.index', [
@@ -54,7 +54,7 @@ class HomeController extends Controller
                     $age = round($product->total_number / $product->total_rating, 2);
                     for ($i = 0; $i < 5; $i++) {
                         $output_icon_star .=
-                        '<i class="icon_star '. $age <= $i ? 'voted' : '' .'  "></i>';
+                            '<i class="icon_star ' . $age <= $i ? 'voted' : '' . '  "></i>';
                     }
                 }
                 $last_id = $product->id;

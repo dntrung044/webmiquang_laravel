@@ -8,7 +8,6 @@
     </div>
 @endif
 
-
 @if (Session::has('error'))
     <div class="alert alert-danger">
         {{ Session::get('error') }}
@@ -21,12 +20,11 @@
     </div>
 @endif
 
-@if ($errors->has('confirmation') > 0 )
+@if ($errors->has('confirmation') > 0)
     <div class="alert alert-danger" role="alert">
         {!! $errors->first('confirmation') !!}
     </div>
 @endif
-
 
 @if (Session::has('success'))
     <div class="alert alert-success">

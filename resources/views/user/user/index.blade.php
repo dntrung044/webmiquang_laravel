@@ -1,15 +1,5 @@
 @section('head')
-
     <style type="text/css">
-        /*body {
-            background: #89909f;
-            padding: 3rem 0 0 3rem;
-            font-size: 12px;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-            }*/
-
         .site-wrap {
             display: grid;
             grid-template-columns: 280px 1fr;
@@ -174,13 +164,14 @@
             position: relative;
             text-decoration: none;
         }
-        /* .tab.after-slide::after {
-            transform: translateX(100%);
-        }
 
-        .tab.before-slide::after {
-            transform: translateX(-100%);
-        } */
+        /* .tab.after-slide::after {
+                    transform: translateX(100%);
+                }
+
+                .tab.before-slide::after {
+                    transform: translateX(-100%);
+                } */
 
         .nav-tabs a.active {
             color: #101620;
@@ -221,7 +212,8 @@
 @extends('User.layout.main')
 @section('content')
     <main>
-        <div class="hero_single inner_pagesuser background-image" data-background="url({{asset('teamplate/img/tintuc.jpg')}})">
+        <div class="hero_single inner_pagesuser background-image"
+            data-background="url({{ asset('teamplate/img/tintuc.jpg') }})">
             <div class="opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.6)">
                 <div class="container" style="margin-top: 10em">
                     <div class="row justify-content-center">
@@ -283,18 +275,13 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                    <!-- /row -->
                 </div>
             </div>
-            {{-- <div class="frame white"></div> --}}
         </div>
-        <!-- /hero_single -->
 
         <div class="site-wrap pattern_2" data-cue="slideInUp">
-
-            <nav class="site-nav" >
+            <nav class="site-nav">
                 <div class="name">
                     Tên người dùng
                     <svg width="24" height="24" viewBox="0 0 24 24">
@@ -307,7 +294,8 @@
                 <ul>
                     <li class="active">
                         <a href="#0">
-                            <img style="width: 23px; float: left; margin-right: 2px;" src="https://cf.shopee.vn/file/ba61750a46794d8847c3f463c5e71cc4" alt="">
+                            <img style="width: 23px; float: left; margin-right: 2px;"
+                                src="https://cf.shopee.vn/file/ba61750a46794d8847c3f463c5e71cc4" alt="">
                             <p>Tài khoản của tôi</p>
                         </a>
                         <ul>
@@ -319,101 +307,34 @@
                     <li><a href="#0">Đơn mua</a></li>
                     <li><a href="#0">Mã giảm giá</a></li>
                 </ul>
-
-                {{-- <div class="note">
-                    <h3>Your Monthly Report</h3>
-                    <p>Get the info about all your deals, pros, cons. And build your roadmap.</p>
-                </div> --}}
             </nav>
 
             <div class="main-dashboard">
-
                 <header>
                     <ul class="nav-tabs" id="nav-tabs" role="tablist">
-                        {{-- <li id="tab" class="nav-item "> --}}
-                            <a class="active" href="#pane-1" data-toggle="tab" role="tab">
-                                Tất cả
-                                <span>14</span>
-                            </a>
-                        {{-- </li>
-
-
-                        <li class="nav-item "> --}}
-                            <a href="#pane-2" data-toggle="tab" role="tab">
-                                Đang chuẩn bị
-                                <span>24</span>
-                            </a>
-                        {{-- </li>
-
-                        <li>  --}}
-                            <a href="#pane-3" data-toggle="tab" role="tab">
-                                Đang giao
-                            </a>
-                        {{-- </li> --}}
-
-                        {{-- <a href="#0">
-                            Đã giao
+                        <a class="active" href="#pane-1" data-toggle="tab" role="tab">
+                            Tất cả
+                            <span>14</span>
+                        </a>
+                        <a href="#pane-2" data-toggle="tab" role="tab">
+                            Đang chuẩn bị
                             <span>24</span>
+                        </a>
+                        <a href="#pane-3" data-toggle="tab" role="tab">
+                            Đang giao
+                        </a>
+                        Đã giao
+                        <span>24</span>
                         </a>
                         <a href="#0">
                             Đã hủy
                             <span>24</span>
-                        </a> --}}
+                        </a>
                     </ul>
                 </header>
 
                 <div class="tab-content" role="tablist">
-                    {{-- <div id="pane-A" class="card tab-pane fade show active" role="tabpanel" aria-labelledby="tab-A">
-                        <div id="collapse-A" class="collapse" role="tabpanel" aria-labelledby="heading-A">
-                            <div class="card-body">
-                                <div class="banner lazy" data-bg="url(img/banner_bg_2.jpg)">
-                                    <div class="wrapper d-flex align-items-center justify-content-between opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.6)">
-                                        <div>
-                                           <small>Starters Special Offer</small>
-                                            <h3>Mix Starters Menu $18 only</h3>
-                                            <p>Hamburgher, Chips, Mix Sausages, Beer, Muffin</p>
-                                            <a href="reservations.html" class="btn_1">Reserve now</a>
-                                        </div>
-                                        <figure class="d-none d-lg-block"><img src="img/banner.svg" alt="" width="200" height="200" class="img-fluid"></figure>
-                                    </div>
-                                    <!-- /wrapper -->
-                                </div>
-                                <!-- /banner -->
-                                <div class="row magnific-gallery add_top_30">
-                                    <div class="col-lg-6">
-                                        <div class="menu_item">
-                                            <figure>
-                                                <a href="img/menu_items/large/1.jpg" title="Soft shell crab" data-effect="mfp-zoom-in">
-                                                    <img src="img/menu_items/menu_items_placeholder.png" data-src="img/menu_items/1.jpg" class="lazy" alt="">
-                                                </a>
-                                            </figure>
-                                            <div class="menu_title">
-                                                <h3>Soft shell crab</h3><em>$14</em>
-                                            </div>
-                                            <p>Chicken, Potato, Salad</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="menu_item">
-                                            <figure>
-                                                <a href="img/menu_items/large/2.jpg" title="Marinated Grilled" data-effect="mfp-zoom-in">
-                                                    <img src="img/menu_items/menu_items_placeholder.png" data-src="img/menu_items/2.jpg" class="lazy" alt="">
-                                                </a>
-                                            </figure>
-                                            <div class="menu_title">
-                                                <h3>Marinated Grilled Shrimp</h3><em>$11</em>
-                                            </div>
-                                            <p>Fresh Shrimp, Oive Oil, Tomato Sauce</p>
-                                        </div>
-                                    </div>
 
-                                </div>
-                                <!-- /row -->
-                            </div>
-                            content-columns
-                            <!-- /card-body -->
-                        </div>
-                    </div> --}}
                     <!-- /tab -->
                     <div id="pane-1" class="card tab-pane show active" role="tabpanel" aria-labelledby="tab-1">
                         aaaa
@@ -426,16 +347,7 @@
                     <div id="pane-3" class="card tab-pane show" role="tabpanel" aria-labelledby="tab-3">
                         cccccc
                     </div>
-                    {{-- <div class="col">
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                    </div> --}}
+
                 </div>
             </div>
         </div>
@@ -446,15 +358,14 @@
     @include('sweetalert::alert')
 @endsection
 @section('script')
-<script src="teamplate/js/RangeSlider/jQuery.UI.js" type="text/javascript"></script>
-<script>
-    jQuery('.tab').on('click', function() {
-    jQuery('.tab, .subnav').removeClass('selected');
-    jQuery(this).addClass('selected');
-    if( jQuery(this).hasClass('tab-subnav') ) {
-        jQuery(this).find('.subnav').addClass('selected');
-    }
-    });
-
-</script>
+    <script src="teamplate/js/RangeSlider/jQuery.UI.js" type="text/javascript"></script>
+    <script>
+        jQuery('.tab').on('click', function() {
+            jQuery('.tab, .subnav').removeClass('selected');
+            jQuery(this).addClass('selected');
+            if (jQuery(this).hasClass('tab-subnav')) {
+                jQuery(this).find('.subnav').addClass('selected');
+            }
+        });
+    </script>
 @endsection

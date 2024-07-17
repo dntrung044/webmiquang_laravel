@@ -17,7 +17,8 @@ class PermissionCategory extends Model
         'parent_id',
     ];
 
-    public function functions() {
+    public function functions()
+    {
         return $this->hasMany(PermissionCategory::class, 'parent_id', 'id');
     }
 }

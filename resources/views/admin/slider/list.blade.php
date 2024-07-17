@@ -58,12 +58,11 @@
                                             </td>
                                             <td>{!! \App\Helpers\Helper::active($slider->active) !!}</td>
                                             <td>
-                                                <div class="btn-group" role="group"
-                                                    aria-label="Basic outlined example">
+                                                <div class="btn-group" role="group" aria-label="Basic outlined example">
                                                     <button type="button" class="btn btn-outline-secondary"
                                                         data-bs-toggle="modal">
                                                         <a class="btn btn-primary btn-sm"
-                                                            href="{{ route('sliders.edit',  $slider->id) }}">
+                                                            href="{{ route('sliders.edit', $slider->id) }}">
                                                             <i class="icofont-edit text-success"></i>
                                                         </a>
                                                     </button>
@@ -86,5 +85,4 @@
             </div>
         </div>
     </div>
-
 @endsection

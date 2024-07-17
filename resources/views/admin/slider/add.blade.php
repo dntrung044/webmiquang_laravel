@@ -13,7 +13,7 @@
                 </div>
             </div>
 
-            <!-- Add Tickit-->
+            <!-- Add-->
             <div class="modal-body">
                 <div class="deadline-form">
                     <form action="{{ route('sliders.store') }}" method="POST">
@@ -25,8 +25,7 @@
 
                             <div class="col-md-6">
                                 <label class="form-label">Mô tả</label>
-                                <textarea class="form-control" name="description"
-                                placeholder="Nội dung mô tả"> {{ old('description') }} </textarea>
+                                <textarea class="form-control" name="description" placeholder="Nội dung mô tả"> {{ old('description') }} </textarea>
                             </div>
                         </div>
 
@@ -44,7 +43,8 @@
 
                         <div class="col-md-6">
                             <label for="menu" class="form-label"> Ảnh Slider</label>
-                            <input class="form-control" type="file" id="upload" name="file" multiple="" required="">
+                            <input class="form-control" type="file" id="upload" name="file" multiple=""
+                                required="">
 
                             <div id="image_show">
                             </div>
@@ -53,24 +53,25 @@
 
                         <div class="mb-3">
                             <label class="form-label">Sắp xếp</label>
-                            <input type="number" name="sort_by" value="1" class="form-control" >
+                            <input type="number" name="sort_by" value="1" class="form-control">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Kích hoạt</label>
                             <div>
                                 <input type="radio" id="active" value="1" name="active" checked="">
-                                <label for="active" {{ (old('available') == '1') ? 'checked' : ''}}>Có</label>
+                                <label for="active" {{ old('available') == '1' ? 'checked' : '' }}>Có</label>
                             </div>
                             <div>
                                 <input type="radio" id="no_active" value="0" name="active">
-                                <label for="no_active" {{ (old('available') == '0') ? 'checked' : ''}}>Không</label>
+                                <label for="no_active" {{ old('available') == '0' ? 'checked' : '' }}>Không</label>
                             </div>
                         </div>
 
                         <div class="modal-footer">
-                            <a href="{{ route('sliders.index') }}"><button type="button" class="btn btn-secondary">Hủy</button></a>
-                            <button type="submit" class="btn btn-primary" >Thêm Slider</button>
+                            <a href="{{ route('sliders.index') }}"><button type="button"
+                                    class="btn btn-secondary">Hủy</button></a>
+                            <button type="submit" class="btn btn-primary">Thêm Slider</button>
                         </div>
                         @csrf
                     </form>
@@ -78,5 +79,4 @@
             </div>
         </div>
     </div>
-
 @endsection

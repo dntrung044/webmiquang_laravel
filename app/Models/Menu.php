@@ -16,5 +16,4 @@ class Menu extends Model
         'thumb',
         'active'
     ];
-
 }

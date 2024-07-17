@@ -28,9 +28,9 @@ class ProductController1 extends Controller
 
         $productId = array_keys($carts);
         return Product::select('id', 'name', 'price', 'price_sale', 'thumb')
-                        ->where('active', 1)
-                        ->whereIn('id', $productId)
-                        ->get();
+            ->where('active', 1)
+            ->whereIn('id', $productId)
+            ->get();
     }
     // Danh sách sp
     public function index(Request $request)
@@ -48,10 +48,7 @@ class ProductController1 extends Controller
     public function category($categoryName, Request $request)
     {
         $categories = ProductCategory::all();
-
         $categories = ProductCategory::where('active', 1)->get();
-
-
         $products = ProductCategory::where('name', $categoryName)->first()->products->toQuery();
 
         return view('User.products.list', compact('products', 'categories'));
@@ -61,14 +58,12 @@ class ProductController1 extends Controller
     public function details($id = '', $slug = '')
     {
         $product = $this->productService->showdetail($id);
-        // $productsMore = $this->productService->more($id);
         $cmts = $this->productService->showRating();
         $productcmt = ProductComment::where('product_id', '=', $id)->get();
 
         return view('User.products.details', [
             'title' => $product->name,
             'product' => $product,
-            // 'products' => $productsMore,
             'repproduct' => $this->productService->relatedProduct($id),
             'cmts' => $cmts,
             'productcmt' => $productcmt
@@ -77,13 +72,13 @@ class ProductController1 extends Controller
     //Gửi Bình luận
     public function postComment(Request $request, $id)
     {
-       $result = $this->productService->insertComment($request, $id);
-       if ($result) {
+        $result = $this->productService->insertComment($request, $id);
+        if ($result) {
             return redirect()->route('menus.index');
-            alert('Đánh giá thành công','Quản trị sẽ phê duyệt bình luận của bạn trong thời gian sớm nhất!', 'success');
-       } else {
+            alert('Đánh giá thành công', 'Quản trị sẽ phê duyệt bình luận của bạn trong thời gian sớm nhất!', 'success');
+        } else {
             return redirect()->back()->with('success', 'Đăng bình luận sản phẩm thành công!');
-       }
+        }
     }
 
     public function add_to_cart(Request $request)

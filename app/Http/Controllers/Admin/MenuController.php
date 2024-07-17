@@ -7,7 +7,8 @@ use App\Http\Requests\Menu\CreateFormRequest;
 use App\Http\Services\Menu\MenuService;
 use App\Models\Menu;
 
-class MenuController extends Controller {
+class MenuController extends Controller
+{
     protected $menuService;
 
     public function __construct(MenuService $menuService)

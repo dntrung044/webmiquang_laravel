@@ -5,12 +5,12 @@
         <div class="container-xxl">
             <div class="row align-items-center">
                 <div class="border-0 mb-4">
-                    <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+                    <div
+                        class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                         <h3 class="fw-bold mb-0"> {{ $title }}</h3>
                     </div>
                 </div>
             </div>
-            <!-- Row end  -->
             {{-- List --}}
             <div class="row">
                 <div class="col-sm-12">
@@ -48,19 +48,20 @@
                                             </td>
                                             <td>{{ $transaction->created_at }}</td>
                                             <td>
-                                                @if ($transaction->status == "DEFAULT")
-                                                <a href="{{ route('transactions.active', $transaction->id) }}" class="btn btn-outline-secondary">
-                                                    <span class="badge bg-danger text-primary">Chưa giao hàng</span>
-                                                </a>
-                                                <a href="{{ route('transactions.cancel', $transaction->id) }}" class="btn btn-outline-secondary">
-                                                    <span class="badge bg-danger text-warning">Hủy đơn</span>
-                                                </a>
-                                                @elseif ($transaction->status == "DELIVERING")
-                                                   <span class="badge bg-warning">Đang giao hàng</span>
-
-                                                @elseif ($transaction->status == "DONE")
-                                                   <span class="badge bg-success">Đã thành công</span>
-                                                @elseif ($transaction->status == "CANCELLED")
+                                                @if ($transaction->status == 'DEFAULT')
+                                                    <a href="{{ route('transactions.active', $transaction->id) }}"
+                                                        class="btn btn-outline-secondary">
+                                                        <span class="badge bg-danger text-primary">Chưa giao hàng</span>
+                                                    </a>
+                                                    <a href="{{ route('transactions.cancel', $transaction->id) }}"
+                                                        class="btn btn-outline-secondary">
+                                                        <span class="badge bg-danger text-warning">Hủy đơn</span>
+                                                    </a>
+                                                @elseif ($transaction->status == 'DELIVERING')
+                                                    <span class="badge bg-warning">Đang giao hàng</span>
+                                                @elseif ($transaction->status == 'DONE')
+                                                    <span class="badge bg-success">Đã thành công</span>
+                                                @elseif ($transaction->status == 'CANCELLED')
                                                     <span class="badge bg-success text-danger">Đã hủy!!!</span>
                                                     <a href="" class="btn btn-outline-secondary">
                                                         <span class="badge bg-danger">chi tiết</span>

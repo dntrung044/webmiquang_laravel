@@ -1,7 +1,6 @@
 @extends('User.layout.main')
 @section('content')
     <main>
-        <!--/slider-->
         <div id="carousel-home">
             <div class="owl-carousel owl-theme">
                 @foreach ($sliders as $slider)
@@ -26,13 +25,9 @@
                         </div>
                     </div>
                 @endforeach
-                <!--/owl-slide-->
             </div>
             <div id="icon_drag_mobile"></div>
         </div>
-        <!--/End slider-->
-
-        <!-- menu banner-->
         <ul class="clearfix" id="banners_grid">
             @foreach ($menus as $menu)
                 <li>
@@ -48,9 +43,6 @@
                 </li>
             @endforeach
         </ul>
-        <!--/ end menu banner-->
-
-        <!--/phần 2-->
         <div class="pattern_2">
             <div class="container margin_120_100 home_intro">
                 <div class="row justify-content-center d-flex align-items-center">
@@ -79,13 +71,8 @@
                         </p>
                     </div>
                 </div>
-                <!--/row -->
             </div>
-            <!--/container -->
         </div>
-        <!--/phần 2-->
-
-        <!--/phần 3-->
         <div class="bg_gray">
             <div class="container margin_120_100" data-cue="slideInUp">
                 <div class="main_title center mb-5">
@@ -108,7 +95,6 @@
                             <a href="/dat-ban" class="btn_1">Đặt chổ ngay</a>
                         </div>
                     </div>
-                    <!-- /wrapper -->
                 </div>
                 <!-- /banner -->
                 <div class="container">
@@ -122,7 +108,6 @@
                             <div class="row small-gutters" id="list-latest-product">
                             </div>
                         </div>
-                        {{-- category mi Quang --}}
                         <div class="container">
                             <div class="main_title">
                                 <span><em></em></span>
@@ -139,7 +124,8 @@
                                     <div class="col-6 col-md-4 col-xl-3" data-cue="slideInUp">
                                         <div class="grid_item">
                                             <figure>
-                                                <a href="/thuc-don/{{ $product->id }}-{{ \Str::slug($product->name, '-') }}">
+                                                <a
+                                                    href="/thuc-don/{{ $product->id }}-{{ \Str::slug($product->name, '-') }}">
                                                     <img class="img-fluid lazy" src="{{ $product->thumb }}"
                                                         data-src="{{ $product->thumb }}" alt="loihinh">
                                                     <div class="add_cart" style="right: 0;">
@@ -156,8 +142,7 @@
 
                                                 <em>{{ $product->total_rating }} Đánh giá</em>
                                             </div>
-                                            <a
-                                                href="/thuc-don/{{ $product->id }}-{{ \Str::slug($product->name, '-') }}">
+                                            <a href="/thuc-don/{{ $product->id }}-{{ \Str::slug($product->name, '-') }}">
                                                 <h3>{{ $product->name }}</h3>
                                             </a>
                                             <div class="price_box">
@@ -226,12 +211,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- /row -->
             </div>
-            <!-- /container -->
         </div>
-        <!--/phần 3-->
-
         <!--==================== -bài viết mới nhất- ====================-->
         <div class="pattern_2">
             <div class="container">
@@ -259,29 +240,18 @@
                                                         href="{{ 'blog/' . $post->id }}-{{ \Str::slug($post->title, '-') }}.html">{{ $post->title }}</a>
                                                 </h2>
                                                 <p>{{ $post->description }}</p>
-                                                {{-- <ul>
-                                                <li>
-                                                    <div class="thumb"><img src="img/avatar.jpg" alt=""></div> Admin
-                                                </li>
-                                                <li><i class="icon_comment_alt"></i>20</li>
-                                            </ul> --}}
                                             </div>
                                         </article>
-                                        <!-- /article -->
                                     </div>
                                 @endforeach
                             </div>
-                            <!-- /row -->
                         </div>
                     </div>
                 </div>
-                <!-- /row -->
             </div>
         </div>
-        <!--==================== -End bài viết mới nhất- ====================-->
     </main>
 @endsection
-
 @section('script')
     <script>
         load_latest_product();

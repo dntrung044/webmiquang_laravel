@@ -12,8 +12,7 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Add Tickit-->
+            <!-- Add -->
             <div class="modal-body">
                 <div class="deadline-form">
                     <form action="{{ route('categories.store') }}" method="POST">
@@ -45,6 +44,4 @@
             </div>
         </div>
     </div>
-
 @endsection
-

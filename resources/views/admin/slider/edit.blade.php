@@ -14,7 +14,7 @@
             </div>
             <div class="modal-body">
                 <div class="deadline-form">
-                    <form action="{{ route('sliders.update', ['slider'=> $slider->id]) }}" method="POST">
+                    <form action="{{ route('sliders.update', ['slider' => $slider->id]) }}" method="POST">
                         <div class="row">
                             <div class="col-md-6">
                                 <label class="form-label">Tiều đề</label>
@@ -23,8 +23,7 @@
 
                             <div class="col-md-6">
                                 <label class="form-label">Mô tả</label>
-                                <textarea class="form-control" name="description"
-                                    placeholder="Nội dung mô tả"> {{ $slider->description }} </textarea>
+                                <textarea class="form-control" name="description" placeholder="Nội dung mô tả"> {{ $slider->description }} </textarea>
                             </div>
                         </div>
 
@@ -71,7 +70,8 @@
                         </div>
 
                         <div class="modal-footer">
-                            <a href="{{ route('sliders.index') }}"><button type="button" class="btn btn-secondary">Hủy</button></a>
+                            <a href="{{ route('sliders.index') }}"><button type="button"
+                                    class="btn btn-secondary">Hủy</button></a>
                             <button type="submit" class="btn btn-primary">Cập nhật</button>
                         </div>
                         @csrf

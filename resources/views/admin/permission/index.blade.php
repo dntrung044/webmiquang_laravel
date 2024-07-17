@@ -9,10 +9,12 @@
                         class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                         <h3 class="fw-bold mb-0"> {{ $title }}</h3>
                         <div class="col-auto d-flex w-sm-100">
-                            <button type="button" class="btn btn-dark btn-set-task w-sm-100" data-bs-toggle="modal" data-bs-target="#add_modal">
+                            <button type="button" class="btn btn-dark btn-set-task w-sm-100" data-bs-toggle="modal"
+                                data-bs-target="#add_modal">
                                 <i class="icofont-plus-circle me-2 fs-6"></i> Thêm quyền mới
                             </button>
-                            <button type="button" class="btn btn-outline-secondary ml-2" data-bs-toggle="modal" data-bs-target="#add_function_modal">
+                            <button type="button" class="btn btn-outline-secondary ml-2" data-bs-toggle="modal"
+                                data-bs-target="#add_function_modal">
                                 <i class="icofont-plus-circle me-2 fs-6"></i>Thêm danh mục
                             </button>
                         </div>
@@ -35,24 +37,26 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($permissions as $key => $permissionItem)
-                                    <tr>
-                                        <td class="fw-bold text-secondary">
-                                            <label class="fancy-checkbox">
-                                                <span>{{  $permissionItem->id }}</span>
-                                            </label>
-                                        </td>
-                                        <td>{{ $permissionItem->name }} ( {{ $permissionItem->description  }} )</td>
-                                        <td>{{  $permissionItem->key_code }}</td>
-                                        <td>
-                                            <button type="button" value="{{  $permissionItem->id }}" class="btn btn-outline-secondary btn_edit">
-                                                <i class="icofont-edit text-success"></i>
-                                            </button>
+                                        <tr>
+                                            <td class="fw-bold text-secondary">
+                                                <label class="fancy-checkbox">
+                                                    <span>{{ $permissionItem->id }}</span>
+                                                </label>
+                                            </td>
+                                            <td>{{ $permissionItem->name }} ( {{ $permissionItem->description }} )</td>
+                                            <td>{{ $permissionItem->key_code }}</td>
+                                            <td>
+                                                <button type="button" value="{{ $permissionItem->id }}"
+                                                    class="btn btn-outline-secondary btn_edit">
+                                                    <i class="icofont-edit text-success"></i>
+                                                </button>
 
-                                            <button type="button" value="{{  $permissionItem->id }}" class="btn btn-outline-secondary btn_delete">
-                                                <i class="icofont-ui-delete text-danger"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                                <button type="button" value="{{ $permissionItem->id }}"
+                                                    class="btn btn-outline-secondary btn_delete">
+                                                    <i class="icofont-ui-delete text-danger"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>

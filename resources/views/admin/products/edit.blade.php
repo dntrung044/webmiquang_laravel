@@ -18,11 +18,12 @@
 
             <div class="modal-body">
                 <div class="deadline-form">
-                    <form action="{{ route('products.update', ['product'=> $product->id]) }}" method="POST">
+                    <form action="{{ route('products.update', ['product' => $product->id]) }}" method="POST">
                         <div class="row">
                             <div class="col-md-6">
                                 <label class="form-label">Tên sản phẩm</label>
-                                <input type="text" name="name" value="{{ $product->name }}"class="form-control" placeholder="Nhập tên sản phẩm">
+                                <input type="text" name="name" value="{{ $product->name }}"class="form-control"
+                                    placeholder="Nhập tên sản phẩm">
                             </div>
 
                             <div class="col-md-6">
@@ -30,7 +31,9 @@
                                 <select class="form-select" name="cat_id">
                                     <option value="0"> Danh Mục Cha </option>
                                     @foreach ($product_categories as $category)
-                                        <option value="{{ $category->id }}" {{ $product->cat_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                        <option value="{{ $category->id }}"
+                                            {{ $product->cat_id == $category->id ? 'selected' : '' }}>{{ $category->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -39,25 +42,25 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label class="form-label">Giá gốc</label>
-                                <input type="number" name="price" value="{{ $product->price }}" class="form-control price">
+                                <input type="number" name="price" value="{{ $product->price }}"
+                                    class="form-control price">
                             </div>
 
                             <div class="col-md-6">
                                 <label class="form-label">Giá giảm</label>
-                                <input type="number" name="price_sale" value="{{ $product->price_sale }}" class="form-control price">
+                                <input type="number" name="price_sale" value="{{ $product->price_sale }}"
+                                    class="form-control price">
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Mô tả</label>
-                            <textarea class="form-control" name="description"
-                            placeholder="Nội dung mô tả"> {{ $product->description }} </textarea>
+                            <textarea class="form-control" name="description" placeholder="Nội dung mô tả"> {{ $product->description }} </textarea>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Mô tả chi tiết</label>
-                            <textarea class="form-control" name="content" id="content" rows="3"
-                                placeholder="Nội dung mô tả chi tiết"> {{ $product->content }} </textarea>
+                            <textarea class="form-control" name="content" id="content" rows="3" placeholder="Nội dung mô tả chi tiết"> {{ $product->content }} </textarea>
                         </div>
 
                         <div class="col-md-6">
@@ -69,26 +72,26 @@
                                     <img src="{{ $product->thumb }}" width="100px">
                                 </a>
                             </div>
-                            <input type="hidden" name="thumb" value="{{ $product->thumb}}"  id="thumb">
+                            <input type="hidden" name="thumb" value="{{ $product->thumb }}" id="thumb">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Kích hoạt</label>
                             <div>
                                 <input type="radio" id="active" value="1" name="active"
-                                {{ $product->active == 1 ? 'checked="' : ''}}>
+                                    {{ $product->active == 1 ? 'checked="' : '' }}>
                                 <label for="active">Có</label>
                             </div>
                             <div>
                                 <input type="radio" id="no_active" value="0" name="active"
-                                {{ $product->active == 0 ? 'checked="' : ''}}>
+                                    {{ $product->active == 0 ? 'checked="' : '' }}>
                                 <label for="no_active">Không</label>
                             </div>
                         </div>
 
                         <div class="modal-footer">
-                           <a href="{{ route('products.index') }}"class="btn btn-secondary">Hủy </a>
-                            <button type="submit" class="btn btn-primary" >Cập nhật sản phẩm</button>
+                            <a href="{{ route('products.index') }}"class="btn btn-secondary">Hủy </a>
+                            <button type="submit" class="btn btn-primary">Cập nhật sản phẩm</button>
                         </div>
                         @csrf
                     </form>
@@ -96,7 +99,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 @section('script')
@@ -107,13 +109,13 @@
     <script src="{{ asset('/teamplate/js/jquery.priceformat.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-           $('.price').priceFormat({
-             prefix: '', // Tiền tố (nếu có)
-             centsSeparator: ',', // Dấu ngăn cách phần thập phân
-             thousandsSeparator: '.', // Dấu ngăn cách hàng nghìn
-             centsLimit: 0, // Số chữ số thập phân
-             allowNegative: false // Cho phép giá trị âm hay không
-           });
-         });
-     </script>
+            $('.price').priceFormat({
+                prefix: '', // Tiền tố (nếu có)
+                centsSeparator: ',', // Dấu ngăn cách phần thập phân
+                thousandsSeparator: '.', // Dấu ngăn cách hàng nghìn
+                centsLimit: 0, // Số chữ số thập phân
+                allowNegative: false // Cho phép giá trị âm hay không
+            });
+        });
+    </script>
 @endsection

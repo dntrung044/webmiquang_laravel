@@ -12,7 +12,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Add Tickit-->
             <div class="modal-body">
                 <div class="deadline-form">
@@ -45,6 +44,4 @@
             </div>
         </div>
     </div>
-
 @endsection
-

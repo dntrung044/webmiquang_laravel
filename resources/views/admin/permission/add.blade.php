@@ -7,12 +7,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
                 <ul id="save_msgList"></ul>
                 <div class="row">
                     <div class="col-md-6">
                         <label class="form-label">Tên</label>
-                        <input type="text" name="name" value="{{ old('name') }}"class="form-control name_add"  placeholder="Nhập tên quyền">
+                        <input type="text" name="name" value="{{ old('name') }}"class="form-control name_add"
+                            placeholder="Nhập tên quyền">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Mô tả tên quyền</label>
@@ -23,7 +23,7 @@
                     <div class="form-group">
                         <label class="form-label">Chức năng</label>
                         <div class="row">
-                            @foreach( config('permissions.module_childrent') as $permissionCatItem )
+                            @foreach (config('permissions.module_childrent') as $permissionCatItem)
                             <div class="col-md-3 parent_id" name="parent_id" id="parent_id">
                                 <label class="fancy-checkbox">
                                     <input type="checkbox" class="checkbox_functions" name="checkbox_functions[]" value="{{ $permissionCatItem }}">
@@ -44,7 +44,6 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
                 <button type="button" class="btn btn-primary" id="add_data">Tạo</button>
             </div>
-
         </div>
     </div>
 </div>

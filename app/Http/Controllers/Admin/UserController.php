@@ -36,15 +36,14 @@ class UserController extends Controller
 
         if ($result) {
             return response()->json([
-                'status'=>200,
-                'message'=>'Cập nhập người dùng thành công!',
+                'status' => 200,
+                'message' => 'Cập nhập người dùng thành công!',
                 Session::flash('success', 'Cập nhật thành công')
             ]);
-
         } else {
             return response()->json([
                 'error' => true,
-                'message'=>'Không tìm thấy người dùng!',
+                'message' => 'Không tìm thấy người dùng!',
                 Session::flash('error', 'Cập nhật thành công')
             ]);
         }
@@ -54,21 +53,18 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        if($user)
-        {
+        if ($user) {
             User::where('id', $user)->delete();
             $user->delete();
 
             return response()->json([
-                'status'=>200,
+                'status' => 200,
                 Session::flash('success', 'Xóa người dùng thành công!')
             ]);
-        }
-        else
-        {
+        } else {
             return response()->json([
                 'error' => true,
-                'message'=>'Không tìm thấy người dùng!',
+                'message' => 'Không tìm thấy người dùng!',
                 Session::flash('error', 'Cập nhật thành công')
             ]);
         }

@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 
 class FeeshipController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         // dd($requset->all());die();
         $feeships = Feeship::get();
         return response()->json([
@@ -20,7 +21,8 @@ class FeeshipController extends Controller
         ]);
     }
 
-    public function getDistrict(){
+    public function getDistrict()
+    {
         $districts = District::get();
         return response()->json([
             'success' => 1,
@@ -29,7 +31,8 @@ class FeeshipController extends Controller
         ]);
     }
 
-    public function getWard(){
+    public function getWard()
+    {
         $wards = Ward::get();
         return response()->json([
             'success' => 1,
@@ -38,10 +41,11 @@ class FeeshipController extends Controller
         ]);
     }
 
-    public function getWardbyDistrict($district_id){
+    public function getWardbyDistrict($district_id)
+    {
         $wards = Ward::where('district_id', $district_id)->get();
 
-        if ($wards){
+        if ($wards) {
             return response()->json([
                 'success' => 1,
                 'message' => 'Succeed',
@@ -51,5 +55,4 @@ class FeeshipController extends Controller
             return $this->error('Failed to load ward by district');
         }
     }
-
 }

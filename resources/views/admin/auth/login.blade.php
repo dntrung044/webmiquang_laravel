@@ -217,8 +217,6 @@
         <div class="starfourth"></div>
         <div class="starfifth"></div>
     </div>
-    <!--Dust particle end--->
-
     <div class="container text-center text-dark mt-5">
         <div class="row">
             <div class="col-lg-4 d-block mx-auto mt-5">
