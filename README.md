@@ -1,13 +1,16 @@
  
 # Giới thiệu
 ![Cover](docs/images/Cover.png)
+##DEMO: 
+*VIDEO: https://youtu.be/X7CEoBDfQoU
+*Database, report, images, Source code** If error: https://s.net.vn/M7qj
 ## Công cụ sử dụng:
 * Backend: PHP(Laravel)
 * Frontend: HTML, CSS, JS(Ajax jQuery)
 * Database: MySQL
 ## Cơ sở dữ liệu
 ![Database 4](docs/images/Database_4.png)
-**##Database, report, video demo, Source code** if error: https://s.net.vn/M7qj
+
 ## Hướng dẫn cài đặt và sửa lỗi
 * Lỗi hình ảnh
   * Xóa `public->storage`
