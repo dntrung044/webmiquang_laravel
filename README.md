@@ -1,90 +1,92 @@
  
-# Giới thiệu
+# Introduce
 ![Cover](docs/images/Cover.png)
-##DEMO: 
-*VIDEO: https://youtu.be/X7CEoBDfQoU
-*Database, report, images, Source code** If error: https://s.net.vn/M7qj
-## Công cụ sử dụng:
+## DEMO: 
+* Video demo: https://youtu.be/X7CEoBDfQoU
+* Images, Database, report, Source code
+   * If error: https://s.net.vn/M7qj
+## Technology used:
 * Backend: PHP(Laravel)
 * Frontend: HTML, CSS, JS(Ajax jQuery)
 * Database: MySQL
-## Cơ sở dữ liệu
+## Database
 ![Database 4](docs/images/Database_4.png)
 
-## Hướng dẫn cài đặt và sửa lỗi
-* Lỗi hình ảnh
-  * Xóa `public->storage`
-  * Chạy Terminal: `php artisan storage:link`
-## Sơ đồ Trang web
+## Instructions for installation and error correction
+* `composer update`
+* Fix no image error:
+  * Download the missing image file: https://s.net.vn/M7qj
+  * Delete folder `public->storage`
+  * Run Terminal: `php artisan storage:link`
+## Site Map
 ![sitemap](docs/images/sitemap.png)
-# Các chức năng
-## Trang Người dùng
-* Đăng nhập, Đăng ký (Mạng xã hội)
-  * Xác thực tài khoản email
-* Quên mật khẩu
-  * Xác thực tài khoản email
-* Sửa thông tin người dùng
-  * Địa chỉ 
-    * API của tỉnh Đà Nẵng chỉnh sửa lại và tính phí vận chuyển Ajax
-* Trạng thái đơn hàng
-* Xem Đánh giá, Mã giảm giá đã thực hiện.
+# Functions and Pages:
+## User Page
+* Login, Register (Social Network)
+  * Verify email account
+* Forgot password
+  * Verify email account
+* Edit user information
+  * Address
+    * Da Nang province's API revises and calculates Ajax shipping fees
+* Order status
+* View Reviews, Discount Codes implemented.
 
-## Trang chủ/ Trang thông tin về cửa hàng
-* Xem các thông tin về nhà hàng
-* Thông tin
+## Home page/About us
+* Information about the restaurant
 * Slider
 * Banner
-* Hình nhà hàng
+* image gallery
 
-## Thực đơn
-* Xem sản phẩm 
-  * theo tab
-* Đánh giá
-  * số sao (5 sao)
-* Thêm món bằng Ajax
-* Xem chi tiết món ăn
+## Menu
+* View products
+  * by tab
+* Add product using Ajax
+* View product details
+  * Rating (5 stars)
 
-## Giỏ hàng (AJAX)
-* Thêm, sửa, xóa bằng Ajax Jquery
-* Tính toán điều kiện giá tiền khi: Thêm, Sửa, Xóa, Áp mã giảm giá, Phí vận chuyển
-## Thanh toán
-* Gửi email thông tin đơn hàng
+## Cart (AJAX)
+* Add, edit, and delete with Ajax JQuery.
+* Calculate price conditions when: Add, Edit, Delete, Apply discount code, Shipping fee.
+## Pay
+* Update order status
+* Email order information to customers
 ## Blog
-* Xem danh sách, danh mục, chi tiết bài viết
-* Tìm kiếm ajax (từ khóa gợi ý)
-* Bình luận (AJAX)
-  * Thêm bình luận
-  * Sắp xếp 
-    * mới nhất hoặc nổi bật
-  * Thích/ không thích
-  * Báo cáo (Người dùng), Ẩn bình luận (Quản trị)
-  * Xem thêm
-## Đặt bàn
-* Thêm vào DB và gửi mail
-## Quản trị viên
+* View list, categories, article details
+* Search (suggested keywords)
+* Comment (AJAX)
+  * Add comments
+  * Arrange
+    * newest or most prominent.
+  * Like/dislike
+  * Report (User), Hide comments (Admin)
+  * Load more comments
+## Reservation
+* Add to DB and send a confirmation email.
+## Administrators
 ![Admin Home Page](docs/images/admin.png)
-### Quản lý thông tin nhà hàng
-  * Bài viết giới thiệu
-  * Thư viện hình ảnh
-  * Slider
-  * Banner
-### Quản lý thực đơn
-  * Món ăn
-  * Loại món ăn
-  * Bình luận 
-### Quản lý Blog
-  * Bài viết
-  * Danh mục  
-  * Bình luận 
-### Quản lý Đơn Hàng
-  * Mã giảm giá
-  * Phí Vận Chuyển (load API tỉnh, quận ĐN)
-  * Đơn hàng
-    * Duyệt các trạng thái đơn hàng
-    * Xem chi tiết(In hóa đơn, gửi mail thông báo)
-### Phân quyền hệ thống (gate và policy)
-  * Tài khoản người dùng
-  * Quản lý vai trò
-  * Quyền xử lý
-# Hết
+### Restaurant information management.
+  * Introductory article
+  * Image galleries
+  * Sliders
+  * Banners
+### Menu management
+  * Products
+  * Categories
+  * Reviews
+### Blog Management
+  * Posts
+  * Categories
+  * Comments
+### Order Management
+  * Discount code
+  * Shipping Fee (API province, Da Nang district)
+  * Order
+    * Browse order status
+    * View details (Print invoice, send notification email)
+### Decentralization (gate and policy)
+  * Users account
+  * Roles management
+  * Processing rights
+#                                         Thank you for scrolling this far!!
 ![Database 4](docs/images/thank_you.png)
