@@ -89,7 +89,7 @@
                                 class="img-fluid">
                         </figure>
                         <div>
-                            <small>ƯU ĐÃI ĐẶC BIỆT</small>
+                            <small style="color: #f8da45">ƯU ĐÃI ĐẶC BIỆT</small>
                             <h3>Thưởng Thức Mì Quảng chỉ với giá {{ number_format($product, 0, '', '.') }}đ</h3>
                             <p>- Quý khách nên đặt chỗ trước 4 giờ để được phục vụ tốt nhất -</p>
                             <a href="/dat-ban" class="btn_1">Đặt chổ ngay</a>
@@ -103,7 +103,7 @@
                         <div class="container">
                             <div class="main_title">
                                 <span><em></em></span>
-                                <h2>Thực đơn mới nhất</h2>
+                                <h2>Món mới</h2>
                             </div>
                             <div class="row small-gutters" id="list-latest-product">
                             </div>
@@ -111,7 +111,7 @@
                         <div class="container">
                             <div class="main_title">
                                 <span><em></em></span>
-                                <h2>Mỳ Quảng các loại</h2>
+                                <h2>Mỳ Quảng</h2>
                             </div>
                             <div class="row small-gutters">
                                 @foreach ($productcat2 as $key => $product)
@@ -160,7 +160,7 @@
                         <div class="container">
                             <div class="main_title">
                                 <span><em></em></span>
-                                <h2>Bánh tráng thịt heo các loại</h2>
+                                <h2>Bánh tráng thịt heo</h2>
                             </div>
                             <div class="row small-gutters">
                                 @foreach ($productcat1 as $key => $product)
@@ -229,7 +229,7 @@
                                         <article class="blog">
                                             <figure>
                                                 <a
-                                                    href="{{ 'blog/' . $post->id }}-{{ \Str::slug($post->title, '-') }}.html">
+                                                    href="{{ 'blog/' . $post->id }}-{{ \Str::slug($post->name, '-') }}.html">
                                                     <img src="{{ $post->thumb }}" alt="">
                                                     <div class="preview"><span>Đọc thêm</span></div>
                                                 </a>
@@ -237,7 +237,7 @@
                                             <div class="post_info">
                                                 <small>{{ date('d-m-Y', strtotime($post->created_at)) }}</small>
                                                 <h2><a
-                                                        href="{{ 'blog/' . $post->id }}-{{ \Str::slug($post->title, '-') }}.html">{{ $post->title }}</a>
+                                                        href="{{ 'blog/' . $post->id }}-{{ \Str::slug($post->name, '-') }}.html">{{ $post->name }}</a>
                                                 </h2>
                                                 <p>{{ $post->description }}</p>
                                             </div>

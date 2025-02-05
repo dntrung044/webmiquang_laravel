@@ -148,7 +148,6 @@ body {
     font-size: 14px;
     font-size: 0.875rem;
     line-height: 1.7;
-    /* font-family: "Poppins", Helvetica, sans-serif; */
     font-family: 'Roboto Slab', serif;
     color: #444;
 }
@@ -219,14 +218,14 @@ a:focus {
 a.btn_1,
 .btn_1 {
     border: none;
-    background: var(--primary-color);
+    background: var(--main-color);
     outline: none;
     cursor: pointer;
     display: inline-block;
     text-decoration: none;
     padding: 8px 25px;
     font-weight: 500;
-    color: #fff;
+    color: #000000;
     text-align: center;
     font-size: 14px;
     font-size: 0.875rem;
@@ -2070,7 +2069,7 @@ ul#banners_grid li a.img_container .short_info p {
     max-width: inherit;
     font-size: 34px;
     font-size: 2.125rem;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 @media (max-width: 767px) {
