@@ -1,10 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@800&family=Bungee+Inline&family=Cuprum&family=Faustina&family=Noto+Sans:wght@700&family=Roboto+Slab:wght@600&family=Roboto:wght@700&family=Sansita+Swashed:wght@700&display=swap');
 
 :root {
-    --main-color: #f8da45;
-    --primary-color: #9d770f;
-    --secondary-color: #b70100;
-    --background-color: #f7f6f0;
+    --primary-color: #f8da45;
+    --secondary-color: #9d770f;
+    --background-color: #fbd652;
 }
 
 
@@ -35,7 +34,7 @@ html * {
 }
 
 body {
-    background: #f8da45;
+    background: var(--background-color);
     font-weight: 400;
     font-size: 16px;
     line-height: 1.6;
@@ -60,6 +59,7 @@ h6 {
 }
 
 p {
+    font-family: 'Roboto', sans-serif;
     margin-bottom: 20px;
 }
 
@@ -109,17 +109,17 @@ a:focus {
 a.btn_1,
 .btn_1 {
     border: none;
-    background: var(--main-color);
+    background: var(--primary-color);
     outline: none;
     cursor: pointer;
     display: inline-block;
     text-decoration: none;
     padding: 8px 25px;
     font-weight: 500;
-    color: #000000;
+    color: #fbfbfb;
     text-align: center;
-    font-size: 14px;
-    font-size: 0.875rem;
+    font-size: 16px;
+    font-size: 1rem;
     -moz-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
     -webkit-transition: all 0.3s ease-in-out;
@@ -140,7 +140,7 @@ a.btn_1,
     display: inline-block;
     text-decoration: none;
     padding: 8px 25px;
-    color: var(--primary-color);
+    color: var(--secondary-color);
     font-weight: 500;
     text-align: center;
     font-size: 14px;
@@ -228,16 +228,17 @@ a.btn_1.medium,
 
 a.btn_1.outline,
 .btn_1.outline {
-    border: 2px solid #000000;
-    color: #111;
+    border: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
     padding: 6px 15px;
     background: none;
 }
 
 a.btn_1.outline:hover,
 .btn_1.outline:hover {
-    border-color: var(--primary-color);
-    color: #111 !important;
+    border-color: var(--secondary-color);
+    color: #efefef !important;
+    background: var(--secondary-color);
 }
 
 a.btn_1.outline:focus,
@@ -1394,8 +1395,14 @@ span .botspan {
 @media (max-width: 767px) {
     .slide-text h2,
     .slide-text h3 {
-        font-size: 42px;
-        font-size: 2.625rem;
+        font-size: 22px; 
+    }
+    .slide-text p {
+        font-size: 14px; 
+    }
+    .slide-text .a.btn_1, .btn_1 {
+        font-size: 12px !important; 
+        padding: 4px 8px !important; 
     }
 }
 
@@ -1768,9 +1775,9 @@ ul#banners_grid li a.img_container .short_info p {
 
 .main_title p {
     max-width: 600px;
-    /* font-size: 18px; */
+    font-size: 18px;
     font-size: 1.125rem;
-    /* font-weight: 300; */
+    font-weight: 300;
 }
 
 .main_title a {
@@ -1856,13 +1863,27 @@ ul#banners_grid li a.img_container .short_info p {
     .banner .wrapper {
         padding: 30px;
     }
+    .banner .wrapper small {
+        font-size: 1.75rem !important;
+    }
+    .banner .wrapper p {
+        margin-bottom: 10px;
+    }
+    .banner .wrapper h3 span.price {
+        font-size: 2rem !important;
+    }
+    .sm-voucher {
+        margin: -0.75rem !important;
+    }
 }
 
 .banner .wrapper small {
     text-transform: uppercase;
-    font-size: 14px;
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, #ffd041, #f4ff2b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .banner .wrapper h3 {
@@ -1870,6 +1891,13 @@ ul#banners_grid li a.img_container .short_info p {
     font-size: 36px;
     font-size: 2.25rem;
     margin: 0;
+}
+
+.banner .wrapper h3 span.price {
+    font-size: 2.5rem; 
+    font-weight: 700; 
+    color: var(--primary-color);
+    text-shadow: 0px 0px 5px rgba(255, 231, 136, 0.902);
 }
 
 .banner .wrapper p {
@@ -3376,7 +3404,7 @@ iframe.map_contact {
 
 footer {
     border-top: solid 1px #ebebeb;
-    background-color: var(--background-color);
+    background-color: var(--primary-color);
     padding: 60px 0 0 0;
     color: rgba(0, 0, 0, 0.6);
     position: relative;
@@ -4351,13 +4379,13 @@ footer .copy {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--primary-color);
+    color: var(--secondary-color);
     font-size: 2rem;
     cursor: pointer;
     transition: .5s ease-in-out;
 }
 .cart-btn:hover {
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     color: var(--white);
     border-radius: 1rem;
 }
@@ -4387,10 +4415,10 @@ section {
     padding: 9rem 0;
 }
 .primary-color {
-    color: var(--primary-color);
+    color: var(--secondary-color);
 }
 .food-menu {
-    padding: 2rem;
+    padding: 0.4rem;
     background-color: var(--white);
     border-radius: 2rem;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -4408,9 +4436,9 @@ section {
     padding: .5rem 2.5rem;
     margin: 0 1rem;
     outline: none;
-    border: 1px solid var(--primary-color);
+    border: 1px solid var(--secondary-color);
     background-color: transparent;
-    color: var(--primary-color);
+    color: var(--secondary-color);
     font-weight: 600;
     border-radius: 1rem;
     cursor: pointer;
@@ -4418,7 +4446,7 @@ section {
 }
 .food-category button:hover,
 .food-category button.active {
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     color: var(--white);
 }
 .food-item-wrap {
@@ -4592,7 +4620,7 @@ footer .mid-footer .content-contact span.list_footer {
 }
 
 footer .mid-footer .content-contact span.list_footer a {
-    color: var(--main-color);
+    color: var(--secondary-color);
     font-weight: 600;
     font-size: 16px
 }
@@ -4605,7 +4633,7 @@ footer .mid-footer .title-menu {
     font-size: 18px;
     margin-bottom: 15px;
     position: relative;
-    color: var(--main-color);
+    color: var(--secondary-color);
     font-weight: 700;
     text-transform: uppercase;
 }
@@ -4628,11 +4656,11 @@ footer .mid-footer .list-menu li a {
 }
 
 footer .mid-footer .list-menu li a:hover {
-    color: var(--primary-color);
+    color: var(--secondary-color);
 }
 
 footer .mid-footer .list-menu span {
-    color: var(--main-color);
+    color: var(--secondary-color);
     font-weight: 600;
     font-size: 16px
 }
@@ -4666,7 +4694,7 @@ footer .mid-footer .social-footer .social a {
 
 footer .mid-footer .ft-info .see-store {
     color: #fff;
-    background-color: var(--main-color);
+    background-color: var(--secondary-color);
     display: inline-block;
     padding: 10px 15px;
     font-size: 14px;
@@ -4675,6 +4703,7 @@ footer .mid-footer .ft-info .see-store {
     margin-bottom: 20px;
 }
 footer .mid-footer .ft-info .see-store:hover {
+    color: var(--secondary-color);
     background-color: var(--primary-color);
 }
 
@@ -4765,7 +4794,6 @@ footer .mid-footer .thanhtoan li img {
     width: auto
 }
 
-
 @media (max-width: 767px) {
     footer .mid-footer .footer-click .title-menu:before,
     footer .mid-footer .footer-click .title-menu:after {
@@ -4775,7 +4803,7 @@ footer .mid-footer .thanhtoan li img {
         right: 0;
         -webkit-transform: translate(-50%, -50%) rotate(-90deg);
         transform: translate(-50%, -50%) rotate(-90deg);
-        background-color: var(--main-color);
+        background-color: var(--secondary-color);
         -webkit-transition: opacity 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out;
         transition: opacity 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out;
         transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
@@ -4804,7 +4832,7 @@ footer .copyright {
     color: #fff;
     border-top: 1px solid #fff;
     text-align: center;
-    background-color: var(--main-color)
+    background-color: var(--secondary-color)
 }
 
 footer .copyright .copy-right {
@@ -4824,7 +4852,6 @@ footer .copyright .copy-right b {
 @media (max-width: 991px) {
     footer .copyright {
         text-align: center;
-        margin-bottom: 50px
     }
 }
 
@@ -4895,7 +4922,7 @@ footer .copyright a:hover {
 .fixed-bottom-mobile ul li a .compareCount,.fixed-bottom-mobile ul li a .js-wishlist-count,.fixed-bottom-mobile ul li a .count_item_pr,.fixed-bottom-mobile ul li a .count_store {
     font-size: 9px;
     text-decoration: none;
-    background-color: var(--main-color);
+    background-color: var(--primary-color);
     border-radius: 50%;
     -webkit-border-radius: 50%;
     color: #fff;
@@ -5060,7 +5087,7 @@ footer .gotop .border-circle .phone-circle .ext-link {
 
     .gotop_icon {
         width: 40px;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
     }
 }
 
@@ -5076,7 +5103,7 @@ footer .gotop .border-circle .phone-circle .ext-link {
 }
 
 .navbar-custom {
-    background: var(--main-color);
+    background: var(--primary-color);
     padding: 15px 15px 15px 40px;
     border-radius: 50px;
     align-items: center;
@@ -5106,7 +5133,7 @@ footer .gotop .border-circle .phone-circle .ext-link {
     position: absolute;
     width: 0;
     height: 2px;
-    background: rgb(0, 0, 0);
+    background: var(--secondary-color);
     left: 0px;
     bottom: 0px;
     transition: all 0.3s;
@@ -5134,7 +5161,7 @@ footer .gotop .border-circle .phone-circle .ext-link {
 }
 
 .navbar-nav .dropdown-menu {
-    background: var(--main-color);
+    background: var(--primary-color);
 }
 
 .dropdown-item {
@@ -5178,13 +5205,11 @@ footer .gotop .border-circle .phone-circle .ext-link {
 }
 
 .navbar-toggler {
-    padding: 0.55rem 1rem;
+    padding: 1px 6px;
 }
 
 .navbar-brand {
     display: inline-block;
-    padding-top: .3125rem;
-    padding-bottom: .3125rem;
     margin-right: 1rem;
     font-size: 1.25rem;
     line-height: inherit;
@@ -5252,7 +5277,7 @@ footer .gotop .border-circle .phone-circle .ext-link {
 }
 
 .sticky .last-menu-bg span a:hover {
-    color: var(--main-color) !important;
+    color: var(--primary-color) !important;
 }
 
 /* color nav before */
@@ -5274,14 +5299,13 @@ footer .gotop .border-circle .phone-circle .ext-link {
         height: 35px;
         float: left;
         margin-left: 1em;
-        margin-top: 0.5em;
-        margin-bottom: 0.5em;
+        margin-top: 0.4em;
     }
     .navbar-light .navbar-toggler {
         float: left;
         margin-left: 1em;
-        margin-top: 0.5em;
-        margin-bottom: 0.5em;
+        margin-top: 0.4em;
+        margin-bottom: 0.4em;
     }
 
 }

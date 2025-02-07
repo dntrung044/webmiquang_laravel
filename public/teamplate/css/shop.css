@@ -1,7 +1,9 @@
 /* Shop */
 
 :root {
-    --border: #f8da45;
+    --primary-color: #f8da45;
+    --secondary-color: #9d770f;
+    --background-color: #fbd652;
 }
 
 .sort_select {
@@ -292,26 +294,12 @@ a.open_filters.btn_filters {
 }
 
 .grid_item {
-    margin-bottom: 25px;
     text-align: center;
     position: relative;
     cursor: pointer;
-    margin-right: 1em;
-    margin-left: 1em;
-    border-top-width: 3px;
-    border-right-width: 3px;
-    border-bottom-width: 3px;
-    border-left-width: 3px;
-    /* padding-top: 1em; */
-    border-left-color: var(--border);
-    border-left-style: solid;
-    border-right-color: var(--border);
-    border-right-style: solid;
-    border-top-color: var(--border);
-    border-top-style: solid;
-    border-bottom-color: var(--border);
-    border-bottom-style: solid;
+    border: 3px solid var(--secondary-color);
 }
+
 
 .grid_item .ribbon {
     position: absolute;
@@ -396,8 +384,7 @@ a.open_filters.btn_filters {
 }
 
 .grid_item a h3 {
-    font-size: 14px;
-    font-size: 1rem;
+    font-size: 1.2rem;
     margin: 3px 0 0 0;
     color: #444;
     font-weight: 500;
@@ -405,7 +392,7 @@ a.open_filters.btn_filters {
 }
 
 .grid_item a h3:hover {
-    color: #e7c100;
+    color: var(--secondary-color);
 }
 
 .grid_item .price_box {
@@ -554,7 +541,7 @@ a.open_filters.btn_filters {
 }
 
 .rating {
-    color: rgb(127 96 0);
+    color: var(--primary-color);
     margin-bottom: 15px;
     display: inline-block;
 }

@@ -114,10 +114,10 @@ article.blog figure img:hover {
 }
 
 article.blog .post_info {
-    padding: 20px 30px 30px 30px;
+    padding: 20px 30px 5px 30px;
     position: relative;
     box-sizing: border-box;
-    height: 17em;
+    height: 13em;
 }
 
 article.blog .post_info small {
