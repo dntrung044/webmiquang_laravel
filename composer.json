@@ -8,7 +8,7 @@
         "php": "^7.3|^8.0",
         "barryvdh/laravel-dompdf": "^2.0",
         "beyondcode/laravel-confirm-email": "^2.1",
-        "dompdf/dompdf": "^2.0.4",
+        "dompdf/dompdf": "^2.0.7",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.65",
         "laravel/sanctum": "^2.11",
