@@ -167,9 +167,9 @@ return [
         // Other service providers... SweetAlert
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         //PDF
-        Barryvdh\DomPDF\ServiceProvider::class, 
+        // Barryvdh\DomPDF\ServiceProvider::class, 
         //debugbar
-        Barryvdh\Debugbar\ServiceProvider::class,
+        // Barryvdh\Debugbar\ServiceProvider::class,
 
         Yoeunes\Toastr\ToastrServiceProvider::class,
         //datatables
@@ -250,8 +250,8 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         //sweetalert alert
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
-        'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
+        // 'PDF' => Barryvdh\DomPDF\Facade::class,
+        // 'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
     ],
 
