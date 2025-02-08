@@ -59,14 +59,14 @@ class HomeController extends Controller
                 }
                 $last_id = $product->id;
                 $output_latest_product .=
-                    '<div class="col-6 col-md-4 col-xl-3"">
+                    '<div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"">
                         <div class="grid_item">
                             <figure>
                                 <a href="">
                                     <img class="img-fluid lazy" src="' . $product->thumb . '"
                                         data-src="' . $product->thumb . '" alt="loihinh">
                                     <div class="add_cart" style="right: 0;">
-                                        <span class="btn_1">
+                                        <span class="btn_1c">
                                             Thêm vô giỏ hàng
                                         </span>
                                     </div>

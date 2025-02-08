@@ -1,5 +1,5 @@
 <header>
-    <div class="header py-1">
+    <div class="header py-lg-2 py-0">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light px-0 py-0">
                 <div class="d-flex flex-wrap-nowrap">
@@ -34,7 +34,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
-                    <i class="icofont-navigation-menu"></i>
+                    <i class="icon_menu"></i>
                 </button>
             </nav>
         </div>
