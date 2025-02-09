@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostcategoriesTable extends Migration
+class CreateFeesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreatePostcategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('postcategories', function (Blueprint $table) {
+        Schema::create('fees', function (Blueprint $table) {
             $table->id();
-
-            $table->string('title', 100);
-            $table->integer('active');
-
+            $table->integer('district_id');
+            $table->integer('ward_id');
+            $table->string('feeship', 50);
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreatePostcategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('postcategories');
+        Schema::dropIfExists('fees');
     }
 }

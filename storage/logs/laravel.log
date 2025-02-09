@@ -2878,3 +2878,114 @@
 #17 /Users/trungchodie/Documents/WEB/Laravel/untitled folder/webmiquang_laravel/artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #18 {main}
 "} 
+[2025-02-09 22:09:42] local.ERROR: Command "migration" is not defined.
+
+Did you mean one of these?
+    make:migration
+    migrate
+    migrate:fresh
+    migrate:install
+    migrate:refresh
+    migrate:reset
+    migrate:rollback
+    migrate:status {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"migration\" is not defined.
+
+Did you mean one of these?
+    make:migration
+    migrate
+    migrate:fresh
+    migrate:install
+    migrate:refresh
+    migrate:reset
+    migrate:rollback
+    migrate:status at /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/symfony/console/Application.php:720)
+[stacktrace]
+#0 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/symfony/console/Application.php(259): Symfony\\Component\\Console\\Application->find('migration')
+#1 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/symfony/console/Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#2 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Console/Application.php(94): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 {main}
+"} 
+[2025-02-09 22:09:54] local.ERROR: SQLSTATE[HY000]: General error: 1005 Can't create table `nhap_1`.`carts` (errno: 150 "Foreign key constraint is incorrectly formed") (SQL: alter table `carts` add constraint `carts_transaction_id_foreign` foreign key (`transaction_id`) references `transactions` (`id`) on delete cascade) {"exception":"[object] (Illuminate\\Database\\QueryException(code: HY000): SQLSTATE[HY000]: General error: 1005 Can't create table `nhap_1`.`carts` (errno: 150 \"Foreign key constraint is incorrectly formed\") (SQL: alter table `carts` add constraint `carts_transaction_id_foreign` foreign key (`transaction_id`) references `transactions` (`id`) on delete cascade) at /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Connection.php:712)
+[stacktrace]
+#0 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Connection.php(672): Illuminate\\Database\\Connection->runQueryCallback('alter table `ca...', Array, Object(Closure))
+#1 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Connection.php(490): Illuminate\\Database\\Connection->run('alter table `ca...', Array, Object(Closure))
+#2 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Schema/Blueprint.php(109): Illuminate\\Database\\Connection->statement('alter table `ca...')
+#3 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(364): Illuminate\\Database\\Schema\\Blueprint->build(Object(Illuminate\\Database\\MySqlConnection), Object(Illuminate\\Database\\Schema\\Grammars\\MySqlGrammar))
+#4 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(223): Illuminate\\Database\\Schema\\Builder->build(Object(Illuminate\\Database\\Schema\\Blueprint))
+#5 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(261): Illuminate\\Database\\Schema\\Builder->create('carts', Object(Closure))
+#6 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/database/migrations/2021_11_22_155548_create_carts_table.php(16): Illuminate\\Support\\Facades\\Facade::__callStatic('create', Array)
+#7 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(472): CreateCartsTable->up()
+#8 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(394): Illuminate\\Database\\Migrations\\Migrator->runMethod(Object(Illuminate\\Database\\MySqlConnection), Object(CreateCartsTable), 'up')
+#9 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(403): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#10 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(202): Illuminate\\Database\\Migrations\\Migrator->runMigration(Object(CreateCartsTable), 'up')
+#11 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(167): Illuminate\\Database\\Migrations\\Migrator->runUp('/Users/trungcho...', 1, false)
+#12 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(112): Illuminate\\Database\\Migrations\\Migrator->runPending(Array, Array)
+#13 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(84): Illuminate\\Database\\Migrations\\Migrator->run(Array, Array)
+#14 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(606): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->Illuminate\\Database\\Console\\Migrations\\{closure}()
+#15 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(77): Illuminate\\Database\\Migrations\\Migrator->usingConnection(NULL, Object(Closure))
+#16 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#17 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Container/Util.php(40): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#18 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#19 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#20 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Container/Container.php(653): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#21 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Console/Command.php(136): Illuminate\\Container\\Container->call(Array)
+#22 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/symfony/console/Command/Command.php(298): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#23 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Console/Command.php(120): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#24 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/symfony/console/Application.php(1040): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#25 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/symfony/console/Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#26 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/symfony/console/Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#27 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Console/Application.php(94): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#28 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#29 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#30 {main}
+
+[previous exception] [object] (PDOException(code: HY000): SQLSTATE[HY000]: General error: 1005 Can't create table `nhap_1`.`carts` (errno: 150 \"Foreign key constraint is incorrectly formed\") at /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Connection.php:501)
+[stacktrace]
+#0 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Connection.php(501): PDOStatement->execute()
+#1 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Connection.php(705): Illuminate\\Database\\Connection->Illuminate\\Database\\{closure}('alter table `ca...', Array)
+#2 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Connection.php(672): Illuminate\\Database\\Connection->runQueryCallback('alter table `ca...', Array, Object(Closure))
+#3 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Connection.php(490): Illuminate\\Database\\Connection->run('alter table `ca...', Array, Object(Closure))
+#4 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Schema/Blueprint.php(109): Illuminate\\Database\\Connection->statement('alter table `ca...')
+#5 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(364): Illuminate\\Database\\Schema\\Blueprint->build(Object(Illuminate\\Database\\MySqlConnection), Object(Illuminate\\Database\\Schema\\Grammars\\MySqlGrammar))
+#6 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(223): Illuminate\\Database\\Schema\\Builder->build(Object(Illuminate\\Database\\Schema\\Blueprint))
+#7 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(261): Illuminate\\Database\\Schema\\Builder->create('carts', Object(Closure))
+#8 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/database/migrations/2021_11_22_155548_create_carts_table.php(16): Illuminate\\Support\\Facades\\Facade::__callStatic('create', Array)
+#9 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(472): CreateCartsTable->up()
+#10 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(394): Illuminate\\Database\\Migrations\\Migrator->runMethod(Object(Illuminate\\Database\\MySqlConnection), Object(CreateCartsTable), 'up')
+#11 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(403): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#12 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(202): Illuminate\\Database\\Migrations\\Migrator->runMigration(Object(CreateCartsTable), 'up')
+#13 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(167): Illuminate\\Database\\Migrations\\Migrator->runUp('/Users/trungcho...', 1, false)
+#14 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(112): Illuminate\\Database\\Migrations\\Migrator->runPending(Array, Array)
+#15 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(84): Illuminate\\Database\\Migrations\\Migrator->run(Array, Array)
+#16 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(606): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->Illuminate\\Database\\Console\\Migrations\\{closure}()
+#17 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(77): Illuminate\\Database\\Migrations\\Migrator->usingConnection(NULL, Object(Closure))
+#18 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#19 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Container/Util.php(40): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#20 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#21 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#22 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Container/Container.php(653): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#23 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Console/Command.php(136): Illuminate\\Container\\Container->call(Array)
+#24 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/symfony/console/Command/Command.php(298): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#25 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Console/Command.php(120): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#26 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/symfony/console/Application.php(1040): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#27 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/symfony/console/Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#28 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/symfony/console/Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#29 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Console/Application.php(94): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#30 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#31 /Users/trungchodie/Documents/WEB/Laravel/webmiquang/artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#32 {main}
+"} 
+[2025-02-09 22:11:36] local.ERROR: Cannot declare class CreateBlogCommentTable, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class CreateBlogCommentTable, because the name is already in use at /Users/trungchodie/Documents/WEB/Laravel/webmiquang/database/migrations/2022_07_03_220737_create_post_comment_table.php:7)
+[stacktrace]
+#0 {main}
+"} 
+[2025-02-09 22:14:02] local.ERROR: Cannot declare class CreateBlogCommentRepliesTable, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class CreateBlogCommentRepliesTable, because the name is already in use at /Users/trungchodie/Documents/WEB/Laravel/webmiquang/database/migrations/2022_09_23_094923_create_post_comment_replies_table.php:7)
+[stacktrace]
+#0 {main}
+"} 
+[2025-02-09 22:18:24] local.ERROR: Cannot declare class CreateReplyUserTable, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class CreateReplyUserTable, because the name is already in use at /Users/trungchodie/Documents/WEB/Laravel/webmiquang/database/migrations/2025_02_09_220259_create_post_reply_user_table.php:7)
+[stacktrace]
+#0 {main}
+"} 

@@ -15,7 +15,6 @@ class CreateAboutusTable extends Migration
     {
         Schema::create('aboutus', function (Blueprint $table) {
             $table->id();
-
             $table->longText('description', 100);
             $table->string('address', 100);
             $table->string('email', 100);
@@ -24,7 +23,6 @@ class CreateAboutusTable extends Migration
             $table->string('thumb', 255);
             $table->string('map', 255);
             $table->string('linkYT', 255);
-
             $table->timestamps();
         });
     }

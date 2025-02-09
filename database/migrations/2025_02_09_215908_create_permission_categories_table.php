@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBlogCommentRepliesTable extends Migration
+class CreatePermissionCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateBlogCommentRepliesTable extends Migration
      */
     public function up()
     {
-        Schema::create('blog_comment_replies', function (Blueprint $table) {
+        Schema::create('permission_categories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('post_id');
-            $table->text('message');
+            $table->string('name', 100);
+            $table->string('description', 50);
+            $table->integer('parent_id');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateBlogCommentRepliesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blog_comment_replies');
+        Schema::dropIfExists('permission_categories');
     }
 }

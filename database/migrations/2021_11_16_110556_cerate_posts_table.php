@@ -15,15 +15,16 @@ class CeratePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-
-            $table->string('title');
+            $table->string('name');
             $table->text('description');
             $table->longText('content');
-            $table->integer('id_category')->unsigned();
+            $table->unsignedBigInteger('category_id');
             $table->integer('active');
             $table->string('thumb');
-            
             $table->timestamps();
+            $table->integer('view');
+
+            $table->foreign('category_id')->references('id')->on('post_categories')->onDelete('cascade');
         });
     }
 

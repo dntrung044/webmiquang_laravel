@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTimestampsToYourTableName extends Migration
+class CreatePostcategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,10 @@ class AddTimestampsToYourTableName extends Migration
      */
     public function up()
     {
-        Schema::table('permissions', function (Blueprint $table) {
+        Schema::create('post_categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('name', 100);
+            $table->integer('active');
             $table->timestamps();
         });
     }
@@ -25,8 +28,6 @@ class AddTimestampsToYourTableName extends Migration
      */
     public function down()
     {
-        Schema::table('permissions', function (Blueprint $table) {
-            $table->dropTimestamps();
-        });
+        Schema::dropIfExists('post_categories');
     }
 }

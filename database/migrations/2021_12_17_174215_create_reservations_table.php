@@ -23,7 +23,6 @@ class CreateReservationsTable extends Migration
             $table->integer('phone');
             $table->text('content');
             $table->integer('status');
-
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCustomersTable extends Migration
+class CreateCouponsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,16 @@ class CreateCustomersTable extends Migration
      */
     public function up()
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('coupons', function (Blueprint $table) {
             $table->id();
-
-            $table->string('name', 255);
-            $table->string('phone', 255);
-            $table->string('address', 255);
-            $table->string('email', 255);
-            $table->text('content');
-            $table->string('payment_type', 255);
+            $table->string('name', 50);
+            $table->date('date_start');
+            $table->date('date_end');
+            $table->string('code', 50)->unique();
+            $table->integer('amount');
+            $table->integer('number');
+            $table->integer('condition');
             $table->integer('status');
-
             $table->timestamps();
         });
     }
@@ -35,6 +34,6 @@ class CreateCustomersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('coupons');
     }
 }
