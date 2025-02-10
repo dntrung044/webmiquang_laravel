@@ -51,13 +51,13 @@ class UserController extends Controller
             'listComments'     => $listComments,
         ];
 
-        return view('User.user.index', $viewdata,);
+        return view('user.user.index', $viewdata,);
     }
 
 
     public function changeInfor(User $user)
     {
-        return view('User.user.editInformation', [
+        return view('user.user.editInformation', [
             'title' => 'Thay đổi thông tin người dùng',
             'users' => $user,
             'districts' => District::orderby('id', 'ASC')->get(),
@@ -89,7 +89,7 @@ class UserController extends Controller
 
     public function changePassword(User $user)
     {
-        return view('User.user.editPassword', [
+        return view('user.user.editPassword', [
             'title' => 'Thay đổi mật khẩu người dùng',
             'users' => $user
         ]);

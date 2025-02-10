@@ -22,7 +22,7 @@ class HomeController extends Controller
         $minprice = Product::min('price_sale');
         $cat1Product = Product::where('cat_id', 7)->limit(4)->get();
         $cat2Product = Product::where('cat_id', 5)->limit(4)->get();
-        return view('User.index', [
+        return view('user.index', [
             'title' => 'Trang chủ - Mì Quảng Bà Mua',
             'sliders' => $slider,
             'menus' => $menu,

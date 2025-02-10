@@ -60,7 +60,7 @@ class ProductController extends Controller
 
         $products = ProductCategory::where('name', $categoryName)->first()->where('active', 1)->products->toQuery();
 
-        return view('User.products.list', compact('products', 'categories'));
+        return view('user.products.list', compact('products', 'categories'));
     }
 
     // Chi tiết sp
@@ -71,7 +71,7 @@ class ProductController extends Controller
         $cmts = $this->productService->showRating();
         $productcmt = ProductComment::where('product_id', '=', $id)->get();
 
-        return view('User.products.details', [
+        return view('user.products.details', [
             'title' => $product->name,
             'product' => $product,
             // 'products' => $productsMore,
