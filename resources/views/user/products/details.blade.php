@@ -39,7 +39,7 @@
         }
     </style>
 @endsection
-@extends('User.layout.main')
+@extends('user.layout.main')
 @section('content')
     <main class="pattern_2">
         <div class="hero_single inner_pages background-image" data-background="url({{ $product->thumb }})">

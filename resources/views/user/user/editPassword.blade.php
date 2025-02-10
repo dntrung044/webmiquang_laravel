@@ -1,4 +1,4 @@
-@extends('User.layout.main')
+@extends('user.layout.main')
 @section('content')
     <main class="pattern_2" style="transform: none;">
         <div class="container margin_60_40" style="transform: none;">

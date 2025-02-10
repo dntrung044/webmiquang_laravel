@@ -209,7 +209,7 @@
         }
     </style>
 @endsection
-@extends('User.layout.main')
+@extends('user.layout.main')
 @section('content')
     <main>
         <div class="hero_single inner_pagesuser background-image"

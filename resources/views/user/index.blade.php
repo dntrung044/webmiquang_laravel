@@ -1,4 +1,4 @@
-@extends('User.layout.main')
+@extends('user.layout.main')
 @section('content')
     <main>
         <div id="carousel-home">
