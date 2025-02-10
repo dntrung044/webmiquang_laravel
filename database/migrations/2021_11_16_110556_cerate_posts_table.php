@@ -18,7 +18,7 @@ class CeratePostsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->longText('content');
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('category_id')->nullable(); 
             $table->integer('active');
             $table->string('thumb');
             $table->timestamps();

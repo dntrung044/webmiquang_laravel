@@ -12,7 +12,6 @@ class CreateDBSeeder extends Seeder
     {
         // Insert About Us Information
         DB::table('aboutus')->insert([
-            'id'          => 1,
             'description' => "<h1>MỲ QUẢNG BÀ MUA - <strong>Niềm Tự Hào Xứ Quảng</strong></h1>...",
             'address'     => '✩40 Ngũ Hành Sơn, TP. Đà Nẵng (đầu cầu Trần Thị Lý)',
             'email'       => 'theduongbamua1@gmail.com',
@@ -27,14 +26,14 @@ class CreateDBSeeder extends Seeder
 
         // Insert Gallery Images
         $galleries = [
-            ['id' => 1, 'thumb' => '/storage/uploads/2022/01/11/117950931-733146313923989-1517350468444567382-n-640x360.jpg', 'active' => 0],
-            ['id' => 3, 'thumb' => '/storage/uploads/2022/01/11/3.jpg', 'active' => 1],
-            ['id' => 4, 'thumb' => '/storage/uploads/2022/01/11/5.jpg', 'active' => 0],
-            ['id' => 5, 'thumb' => '/storage/uploads/2022/01/11/7.jpg', 'active' => 1],
-            ['id' => 6, 'thumb' => '/storage/uploads/2022/01/11/8.jpg', 'active' => 1],
-            ['id' => 7, 'thumb' => '/storage/uploads/2022/01/11/9.jpg', 'active' => 0],
-            ['id' => 10, 'thumb' => '/storage/uploads/2022/01/11/10.jpg', 'active' => 1],
-            ['id' => 11, 'thumb' => '/storage/uploads/2022/01/11/11.jpg', 'active' => 1],
+            ['thumb' => '/storage/uploads/2022/01/11/117950931-733146313923989-1517350468444567382-n-640x360.jpg', 'active' => 0],
+            ['thumb' => '/storage/uploads/2022/01/11/3.jpg', 'active' => 1],
+            ['thumb' => '/storage/uploads/2022/01/11/5.jpg', 'active' => 0],
+            ['thumb' => '/storage/uploads/2022/01/11/7.jpg', 'active' => 1],
+            ['thumb' => '/storage/uploads/2022/01/11/8.jpg', 'active' => 1],
+            ['thumb' => '/storage/uploads/2022/01/11/9.jpg', 'active' => 0],
+            ['thumb' => '/storage/uploads/2022/01/11/10.jpg', 'active' => 1],
+            ['thumb' => '/storage/uploads/2022/01/11/11.jpg', 'active' => 1],
         ];
 
         foreach ($galleries as &$gallery) {
@@ -45,7 +44,6 @@ class CreateDBSeeder extends Seeder
 
         DB::table('sliders')->insert([
             [
-                'id' => 2,
                 'name' => 'Chào mừng bạn<br> đến với mì Quảng - Bà Mua',
                 'url' => '/gioi-thieu',
                 'thumb' => '/storage/uploads/2022/01/09/9.jpg',
@@ -61,7 +59,6 @@ class CreateDBSeeder extends Seeder
                 'updated_at' => '2022-01-09 11:51:38',
             ],
             [
-                'id' => 3,
                 'name' => 'Mỳ Quảng - Ẩm thực -<br> Đặc sản món Quảng',
                 'url' => '/thuc-don',
                 'thumb' => '/storage/uploads/2022/01/03/photo3-4.jpg',
@@ -75,7 +72,6 @@ class CreateDBSeeder extends Seeder
                 'updated_at' => '2022-01-03 09:06:47',
             ],
             [
-                'id' => 4,
                 'name' => 'dsadsa',
                 'url' => 'dsad',
                 'thumb' => '/storage/uploads/2021/12/22/backhome.jpg',
@@ -87,7 +83,6 @@ class CreateDBSeeder extends Seeder
                 'updated_at' => '2022-06-16 08:23:43',
             ],
             [
-                'id' => 5,
                 'name' => 'Mỳ Quảng Bà Mua <br> Niềm Tự Hào Xứ Quảng',
                 'url' => '/dat-ban',
                 'thumb' => '/storage/uploads/2021/12/22/hom1.jpg',
@@ -103,9 +98,9 @@ class CreateDBSeeder extends Seeder
 
         // Insert Menus
         $menus = [
-            ['id' => 1, 'name' => 'Về chúng tôi', 'description' => 'Xem thông tin chi tiết...', 'link' => '/gioi-thieu'],
-            ['id' => 2, 'name' => 'Đặt bàn ngay', 'description' => 'Để có được chỗ ngồi...', 'link' => '/dat-ban'],
-            ['id' => 3, 'name' => 'Liên hệ với chúng tôi', 'description' => 'Nếu có bất kỳ thắc mắc...', 'link' => '/lien-he'],
+            ['name' => 'Về chúng tôi', 'description' => 'Xem thông tin chi tiết...', 'link' => '/gioi-thieu'],
+            ['name' => 'Đặt bàn ngay', 'description' => 'Để có được chỗ ngồi...', 'link' => '/dat-ban'],
+            ['name' => 'Liên hệ với chúng tôi', 'description' => 'Nếu có bất kỳ thắc mắc...', 'link' => '/lien-he'],
         ];
 
         foreach ($menus as &$menu) {
@@ -118,7 +113,6 @@ class CreateDBSeeder extends Seeder
 
         DB::table('reservations')->insert([
             [
-                'id' => 6,
                 'date' => '2021-12-24', // Định dạng chuẩn YYYY-MM-DD
                 'time' => '19:00',
                 'people' => 2,
@@ -131,7 +125,6 @@ class CreateDBSeeder extends Seeder
                 'status' => 1,
             ],
             [
-                'id' => 37,
                 'date' => '2024-03-20',
                 'time' => '19:00',
                 'people' => 3,
@@ -144,7 +137,6 @@ class CreateDBSeeder extends Seeder
                 'status' => 0,
             ],
             [
-                'id' => 38,
                 'date' => '2024-06-11',
                 'time' => '19:00',
                 'people' => 3,
@@ -158,33 +150,9 @@ class CreateDBSeeder extends Seeder
             ],
         ]);
 
-
-
-        // DB::table('post_reply_user')->insert([
-        //     [
-        //         'user_id' => 1,
-        //         'reply_id' => 81,
-        //         'created_at' => '2024-03-21 10:57:03',
-        //         'updated_at' => '2024-03-21 10:57:03',
-        //     ],
-        //     [
-        //         'user_id' => 1,
-        //         'reply_id' => 45,
-        //         'created_at' => '2024-03-21 11:00:22',
-        //         'updated_at' => '2024-03-21 11:00:22',
-        //     ],
-        //     [
-        //         'user_id' => 1,
-        //         'reply_id' => 50,
-        //         'created_at' => '2024-03-25 09:12:20',
-        //         'updated_at' => '2024-03-25 09:12:20',
-        //     ],
-        // ]);
-
         // Insert Roles
         DB::table('users')->insert([
             [
-                'id' => 0,
                 'avatar' => 'đ',
                 'name' => 'testlevel',
                 'email' => 'testlevel@vku.udn.vn',
@@ -205,7 +173,6 @@ class CreateDBSeeder extends Seeder
                 'deleted_at' => NULL,
             ],
             [
-                'id' => 1,
                 'avatar' => 'https://static.vecteezy.com/system/resources/previews/002/002/297/large_2x/beautiful-woman-avatar-character-icon-free-vector.jpg',
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
@@ -226,7 +193,6 @@ class CreateDBSeeder extends Seeder
                 'deleted_at' => NULL,
             ],
             [
-                'id' => 2,
                 'avatar' => 'https://lh3.googleusercontent.com/a-/AOh14GjWznZwPJ21Ps0QnfiGhrSwhB6GeKOdjdKMgl17=s96-c',
                 'name' => 'Đào Nhật Trung',
                 'email' => 'dntrung.20it6@vku.udn.vn',
@@ -247,7 +213,6 @@ class CreateDBSeeder extends Seeder
                 'deleted_at' => NULL,
             ],
             [
-                'id' => 4,
                 'avatar' => NULL,
                 'name' => 'Trung Dao',
                 'email' => 'dntrung.20it7@vku.udn.vn',
@@ -268,7 +233,6 @@ class CreateDBSeeder extends Seeder
                 'deleted_at' => NULL,
             ],
             [
-                'id' => 100,
                 'avatar' => NULL,
                 'name' => '120',
                 'email' => 'trungdao10a1@gmail.com',
@@ -289,7 +253,6 @@ class CreateDBSeeder extends Seeder
                 'deleted_at' => NULL,
             ],
             [
-                'id' => 101,
                 'avatar' => 'https://lh3.googleusercontent.com/a/AAcHTtdamTCXKjv4SlTWPq9G-TTyFPacCJua6qvD4Pb2=s96-c',
                 'name' => 'bảo Trần',
                 'email' => 'phongzboy.26@gmail.com',
@@ -311,38 +274,32 @@ class CreateDBSeeder extends Seeder
             ],
         ]);
 
-
         DB::table('roles')->insert([
             [
-                'id' => 1,
                 'name' => 'admin',
                 'description' => 'Quản trị hệ thống',
                 'created_at' => null,
                 'updated_at' => '2023-06-30 07:37:04',
             ],
             [
-                'id' => 2,
                 'name' => 'guest',
                 'description' => 'Khách hàng',
                 'created_at' => null,
                 'updated_at' => null,
             ],
             [
-                'id' => 3,
                 'name' => 'developer d',
                 'description' => 'Phát triển hệ thống d',
                 'created_at' => null,
                 'updated_at' => '2024-03-10 03:46:49',
             ],
             [
-                'id' => 4,
                 'name' => 'content',
                 'description' => 'Chỉnh sửa nội dung',
                 'created_at' => null,
                 'updated_at' => null,
             ],
             [
-                'id' => 36,
                 'name' => 'tên vai trò',
                 'description' => 'mô tả',
                 'created_at' => '2024-03-10 10:34:30',
@@ -350,105 +307,69 @@ class CreateDBSeeder extends Seeder
             ],
         ]);
 
-        DB::table('role_user')->insert([
-            [
-                'id' => 1,
-                'user_id' => 1,
-                'role_id' => 1,
-                'created_at' => '2023-06-30 06:30:34',
-                'updated_at' => null,
-            ],
-            [
-                'id' => 22,
-                'user_id' => 101,
-                'role_id' => 2,
-                'created_at' => '2024-03-10 10:41:14',
-                'updated_at' => null,
-            ],
-            [
-                'id' => 24,
-                'user_id' => 104,
-                'role_id' => 1,
-                'created_at' => '2024-03-11 07:03:37',
-                'updated_at' => null,
-            ],
-        ]);
-
-
-
-
         // Insert Districts
         $districts = [
-            ['id' => 1, 'name' => 'Quận Liên Chiểu', 'type' => 'Quận'],
-            ['id' => 2, 'name' => 'Quận Thanh Khê', 'type' => 'Quận'],
-            ['id' => 3, 'name' => 'Quận Hải Châu', 'type' => 'Quận'],
-            ['id' => 4, 'name' => 'Quận Sơn Trà', 'type' => 'Quận'],
-            ['id' => 5, 'name' => 'Quận Ngũ Hành Sơn', 'type' => 'Quận'],
-            ['id' => 6, 'name' => 'Quận Cẩm Lệ', 'type' => 'Quận'],
-            ['id' => 7, 'name' => 'Huyện Hòa Vang', 'type' => 'Huyện'],
-            ['id' => 8, 'name' => 'Huyện Hoàng Sa', 'type' => 'Huyện'],
+            ['name' => 'Quận Liên Chiểu', 'type' => 'Quận'],
+            ['name' => 'Quận Thanh Khê', 'type' => 'Quận'],
+            ['name' => 'Quận Hải Châu', 'type' => 'Quận'],
+            ['name' => 'Quận Sơn Trà', 'type' => 'Quận'],
+            ['name' => 'Quận Ngũ Hành Sơn', 'type' => 'Quận'],
+            ['name' => 'Quận Cẩm Lệ', 'type' => 'Quận'],
+            ['name' => 'Huyện Hòa Vang', 'type' => 'Huyện'],
+            ['name' => 'Huyện Hoàng Sa', 'type' => 'Huyện'],
         ];
         DB::table('district_dn')->insert($districts);
 
         // Insert Wards
         $wards = [
-            ['id' => 1, 'name' => 'Phường Hòa Hiệp Bắc', 'district_id' => 1],
-            ['id' => 2, 'name' => 'Phường Hòa Hiệp Nam', 'district_id' => 1],
-            ['id' => 3, 'name' => 'Phường Hòa Khánh Bắc', 'district_id' => 1],
-            ['id' => 4, 'name' => 'Phường Hòa Khánh Nam', 'district_id' => 1],
-            ['id' => 5, 'name' => 'Phường Hòa Minh', 'district_id' => 1],
-            ['id' => 6, 'name' => 'Phường Tam Thuận', 'district_id' => 2],
-            ['id' => 7, 'name' => 'Phường Thanh Khê Tây', 'district_id' => 2],
-            ['id' => 8, 'name' => 'Phường Thanh Khê Đông', 'district_id' => 2],
-            ['id' => 9, 'name' => 'Phường Xuân Hà', 'district_id' => 2],
-            ['id' => 10, 'name' => 'Phường Tân Chính', 'district_id' => 2],
+            ['name' => 'Phường Hòa Hiệp Bắc', 'district_id' => 1],
+            ['name' => 'Phường Hòa Hiệp Nam', 'district_id' => 1],
+            ['name' => 'Phường Hòa Khánh Bắc', 'district_id' => 1],
+            ['name' => 'Phường Hòa Khánh Nam', 'district_id' => 1],
+            ['name' => 'Phường Hòa Minh', 'district_id' => 1],
+            ['name' => 'Phường Tam Thuận', 'district_id' => 2],
+            ['name' => 'Phường Thanh Khê Tây', 'district_id' => 2],
+            ['name' => 'Phường Thanh Khê Đông', 'district_id' => 2],
+            ['name' => 'Phường Xuân Hà', 'district_id' => 2],
+            ['name' => 'Phường Tân Chính', 'district_id' => 2],
         ];
         foreach ($wards as &$ward) {
             $ward['type'] = 'Phường';
         }
         DB::table('ward_dn')->insert($wards);
-
-
-
         //PRODUCT
         DB::table('productcategories')->insert([
             [
-                'id' => 5,
                 'name' => 'Mì Quảng',
                 'active' => 1,
                 'created_at' => Carbon::parse('2021-12-14 13:11:49'),
                 'updated_at' => Carbon::parse('2021-12-14 13:20:34'),
             ],
             [
-                'id' => 7,
                 'name' => 'Bánh tráng thịt heo',
                 'active' => 1,
                 'created_at' => Carbon::parse('2021-12-14 13:12:12'),
                 'updated_at' => Carbon::parse('2021-12-14 13:12:12'),
             ],
             [
-                'id' => 8,
                 'name' => 'Thức uống',
                 'active' => 1,
                 'created_at' => Carbon::parse('2021-12-14 13:12:28'),
                 'updated_at' => Carbon::parse('2021-12-14 13:12:28'),
             ],
             [
-                'id' => 11,
                 'name' => 'Món ăn dân dã',
                 'active' => 1,
                 'created_at' => Carbon::parse('2021-12-28 03:12:25'),
                 'updated_at' => Carbon::parse('2021-12-28 03:12:25'),
             ],
             [
-                'id' => 12,
                 'name' => 'Bánh Xèo',
                 'active' => 1,
                 'created_at' => Carbon::parse('2021-12-28 03:12:49'),
                 'updated_at' => Carbon::parse('2021-12-31 08:57:21'),
             ],
             [
-                'id' => 16,
                 'name' => 'Đào Nhật Trunggg',
                 'active' => 0,
                 'created_at' => Carbon::parse('2024-03-14 10:02:22'),
@@ -585,79 +506,48 @@ class CreateDBSeeder extends Seeder
             ],
         ]);
 
-        //POST
-
-        //orders
-
-
-        DB::table('transactions')->insert([
+        //POST 
+        DB::table('posts')->insert([
             [
-                'id' => 103,
-                'name' => '0',
-                'email' => '',
-                'phone' => 0,
-                'user_id' => 28,
-                'content' => NULL,
-                'total_price' => 189999,
-                'total_item' => 3,
-                'payment_type' => 'pay_later',
-                'created_at' => '2022-06-07 13:46:39',
-                'updated_at' => '2022-06-08 07:28:39',
-                'status' => 'CANCELLED',
-                'method' => 'Giao hàng tận nơi',
-                'time' => '',
-                'day' => '',
+                'name' => 'Cách nấu mỳ Quảng chay tuyệt ngon',
+                'description' => 'Sau chuyến đi Đà Nẵng, mình có được ít củ nén và quyết định làm mì Quảng vì theo lời cô, món này phải có củ nén mới đúng vị.',
+                'content' => '<p>Nguyên liệu cần chuẩn bị:</p><ul><li>200g mì Quảng</li><li>1 bìa đậu hũ</li><li>1 lá tàu hủ ky</li><li>100g nấm rơm</li><li>100g giá sống</li><li>1 thìa cà phê boa-rô băm nhỏ</li><li>1 thìa cà phê dầu điều</li><li>1 thìa súp lạc rang</li><li>300ml nước dùng chay</li><li>1 thìa cà phê muối tiêu</li><li>Bánh đa mì</li><li>Rau ăn kèm: xà lách, rau thơm, hoa chuối, bắp cải cắt sợi, húng lủi</li><li>Dầu để chiên</li></ul>',
+                'active' => 1,
+                'thumb' => '/storage/uploads/2021/12/14/my-quang-ba-mua-2.jpg',
+                'created_at' => '2021-12-14 10:55:49',
+                'updated_at' => '2024-05-30 06:51:41',
+                'view' => 8
             ],
             [
-                'id' => 104,
-                'name' => '0',
-                'email' => '',
-                'phone' => 0,
-                'user_id' => 28,
-                'content' => NULL,
-                'total_price' => 160000,
-                'total_item' => 2,
-                'payment_type' => 'pay_later',
-                'created_at' => '2022-06-07 13:49:15',
-                'updated_at' => '2022-06-13 13:28:37',
-                'status' => 'CANCELLED',
-                'method' => 'Giao hàng tận nơi',
-                'time' => '',
-                'day' => '',
+                'name' => 'Cách chế biến Mỳ Quảng gà ngon miệng',
+                'description' => 'Mỗi lần thưởng thức tô mỳ quảng gà, hương vị để lại trong bạn là sự hòa quyện tuyệt vời của các thành phần.',
+                'content' => '<p style="text-align:start">Mỗi lần thưởng thức tô mỳ quảng gà, bạn sẽ cảm nhận được sự hòa quyện của các nguyên liệu đơn giản, mang đến hương vị đặc biệt. Mì phải có độ dẻo và được làm từ loại gạo đặc biệt. Không thể không nhắc đến nước dùng, thịt gà và các loại rau ăn kèm. Mỗi người có cách thưởng thức riêng nhưng đều cảm nhận được sự tinh tế trong cách chế biến <a href="https://monquang.com.vn/chi-tiet-tin/cach-lam-mi-quang-ga-ngon">Mỳ Quảng Gà</a>. Bạn có thể tìm hiểu cách nấu món này để đãi gia đình và bạn bè trong các dịp đặc biệt.</span></p>',
+               
+                'active' => 1,
+                'thumb' => '/storage/uploads/2021/12/14/my-quang-ba-mua.jpg',
+                'created_at' => '2021-12-12 04:50:15',
+                'updated_at' => '2025-02-04 13:53:31',
+                'view' => 8
             ],
             [
-                'id' => 105,
-                'name' => '0',
-                'email' => '',
-                'phone' => 0,
-                'user_id' => 28,
-                'content' => NULL,
-                'total_price' => 80000,
-                'total_item' => 1,
-                'payment_type' => 'pay_later',
-                'created_at' => '2022-06-07 13:58:29',
-                'updated_at' => '2022-06-13 13:28:32',
-                'status' => 'CANCELLED',
-                'method' => 'Giao hàng tận nơi',
-                'time' => '',
-                'day' => '',
+                'name' => 'Du lịch Đà Nẵng đẹp, thú vị và nổi tiếng check-in siêu đẹp',
+                'description' => 'Đà Nẵng là thành phố đã phát triển về du lịch từ lâu, với số lượng khách du lịch hàng năm lên đến con số vài triệu người',
+                'content' => '<p style="text-align:start">Mỗi lần thưởng thức tô mỳ quảng gà, bạn sẽ cảm nhận được sự hòa quyện của các nguyên liệu đơn giản, mang đến hương vị đặc biệt. Mì phải có độ dẻo và được làm từ loại gạo đặc biệt. Không thể không nhắc đến nước dùng, thịt gà và các loại rau ăn kèm. Mỗi người có cách thưởng thức riêng nhưng đều cảm nhận được sự tinh tế trong cách chế biến <a href="https://monquang.com.vn/chi-tiet-tin/cach-lam-mi-quang-ga-ngon">Mỳ Quảng Gà</a>. Bạn có thể tìm hiểu cách nấu món này để đãi gia đình và bạn bè trong các dịp đặc biệt.</span></p>',
+                'active' => 1,
+                'thumb' => '/storage/uploads/2021/12/14/my-quang-ba-mua.jpg',
+                'created_at' => '2021-12-12 04:50:15',
+                'updated_at' => '2025-02-04 13:53:31',
+                'view' => 8
             ],
             [
-                'id' => 126,
-                'name' => '0',
-                'email' => '',
-                'phone' => 0,
-                'user_id' => 28,
-                'content' => 'rr',
-                'total_price' => 638997,
-                'total_item' => 12,
-                'payment_type' => 'pay_later',
-                'created_at' => '2022-06-15 05:23:40',
-                'updated_at' => '2022-06-15 05:24:15',
-                'status' => 'DONE',
-                'method' => 'Mua hàng mang về',
-                'time' => '',
-                'day' => '',
+                'name' => 'Cách chế biến Mỳ Quảng gà ngon miệng',
+                'description' => 'Mỗi lần thưởng thức tô mỳ quảng gà, hương vị để lại trong bạn là sự hòa quyện tuyệt vời của các thành phần.',
+                'content' => '<p style="text-align:start">Mỗi lần thưởng thức tô mỳ quảng gà, bạn sẽ cảm nhận được sự hòa quyện của các nguyên liệu đơn giản, mang đến hương vị đặc biệt. Mì phải có độ dẻo và được làm từ loại gạo đặc biệt. Không thể không nhắc đến nước dùng, thịt gà và các loại rau ăn kèm. Mỗi người có cách thưởng thức riêng nhưng đều cảm nhận được sự tinh tế trong cách chế biến <a href="https://monquang.com.vn/chi-tiet-tin/cach-lam-mi-quang-ga-ngon">Mỳ Quảng Gà</a>. Bạn có thể tìm hiểu cách nấu món này để đãi gia đình và bạn bè trong các dịp đặc biệt.</span></p>',
+                'active' => 1,
+                'thumb' => '/storage/uploads/2021/12/14/my-quang-ba-mua.jpg',
+                'created_at' => '2021-12-12 04:50:15',
+                'updated_at' => '2025-02-04 13:53:31',
+                'view' => 8
             ],
         ]);
     }
