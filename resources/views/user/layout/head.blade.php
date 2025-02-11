@@ -10,15 +10,14 @@
 <!-- GOOGLE WEB FONT -->
 <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 <!-- Bootstrap CSS -->
-<link href="{{ asset('teamplate/css/bootstrap.css') }}" rel="stylesheet">
-<link href="{{ asset('teamplate/css/bootstrap.min.css') }}" rel="stylesheet">
+<link href="{{ url('teamplate/css/bootstrap.css') }}" rel="stylesheet">
+<link href="{{ url('teamplate/css/bootstrap.min.css') }}" rel="stylesheet"> 
 <!-- Bootstrap Icon -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 <!-- BASE CSS -->
 <link href="{{ asset('teamplate/css/vendors.min.css') }}" rel="stylesheet">
 <link href="{{ asset('teamplate/css/style.css') }}" rel="stylesheet">
 <!--==================== -Main css- ====================-->
-<link href="{{ asset('teamplate/css/custom.css') }}" rel="stylesheet">
 <!-- Blog CSS -->
 <link href="{{ asset('teamplate/css/blog.css') }}" rel="stylesheet">
 <!-- Shop CSS -->

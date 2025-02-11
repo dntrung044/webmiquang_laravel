@@ -48,7 +48,7 @@ class ProductController extends Controller
         $carts = Session::get('carts');
 
         return view(
-            'User.products.list',
+            'user.products.list',
             compact('products', 'categories', 'title', 'productsInCart', 'carts', 'price', 'quantity', 'quantity_total', 'subtotal', 'total_cart')
         );
     }
