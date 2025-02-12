@@ -1,0 +1,200 @@
+
+
+.inner {
+    padding: 36px 30px 48px;
+    border-radius: 15px;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .inner {
+        border-radius: 0;
+    }
+}
+
+.inner .title {
+    text-transform: uppercase;
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #333;
+    letter-spacing: 2px;
+}
+
+/* input */
+.form-control {
+    border: 1px solid #ccc;
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 0 29px;
+    border-radius: 20px;
+    background: none;
+}
+
+.form-control:focus {
+    border: 1px solid #6c757d;
+}
+
+.form-control.is-invalid {
+    border: 2px solid #dc3545 !important;
+    background-color: #ffe6e6;
+}
+.form-group .btn-outline-secondary {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+
+
+.input_field {
+    border-radius: 20px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    color: #008bfc
+}
+.input_field:focus {
+    border: 1px solid #6c757d;
+}
+.input_field.is-invalid {
+    border: 2px solid #dc3545 !important;
+    background-color: #ffe6e6;
+}
+
+.no_border {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: 100%
+}
+/* input */
+
+/* login with */
+.bordert {
+    border-top: 1px solid #aaa;
+    position: relative
+}
+
+.bordert:after {
+    content: "Hoặc đăng nhập bằng";
+    position: absolute;
+    top: -13px;
+    left: 36%;
+    background-color: #fff;
+    padding: 0px 8px
+}
+
+.icon_social {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    position: relative
+}
+/* login with */
+
+/* button auth*/
+.btn.btn-primary.bt_auth {
+    margin-top: 20px;
+    border-radius: 15px
+}
+
+/* button auth*/
+
+/* checkbox */
+.custom-control {
+    position: relative;
+    display: block;
+    min-height: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.custom-control.overflow-checkbox .overflow-control-input {
+    display: none;
+}
+
+.custom-control.overflow-checkbox .overflow-control-input:checked~.overflow-control-indicator::after {
+    -webkit-transform: rotateZ(45deg) scale(1);
+    -ms-transform: rotate(45deg) scale(1);
+    transform: rotateZ(45deg) scale(1);
+    top: -6px;
+    left: 5px;
+}
+
+.custom-control.overflow-checkbox .overflow-control-input:checked~.overflow-control-indicator::before {
+    opacity: 1;
+}
+
+.custom-control.overflow-checkbox .overflow-control-input:disabled~.overflow-control-indicator {
+    opacity: .5;
+    border: 2px solid #ccc;
+}
+
+.custom-control.overflow-checkbox .overflow-control-input:disabled~.overflow-control-indicator:after {
+    border-bottom: 4px solid #ccc;
+    border-right: 4px solid #ccc;
+}
+
+.custom-control.overflow-checkbox .overflow-control-indicator {
+    border-radius: 3px;
+    display: inline-block;
+    position: absolute;
+    top: 4px;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #444;
+}
+
+.custom-control.overflow-checkbox input:invalid+.overflow-control-indicator {
+    border: 2px solid #dc3545 !important;
+}
+
+.custom-control.overflow-checkbox .overflow-control-indicator::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+    -webkit-transform: rotateZ(90deg) scale(0);
+    -ms-transform: rotate(90deg) scale(0);
+    transform: rotateZ(90deg) scale(0);
+    width: 10px;
+    border-bottom: 4px solid #ffe100;
+    border-right: 4px solid #ffe100;
+    border-radius: 3px;
+    top: -2px;
+    left: 2px;
+}
+
+.custom-control.overflow-checkbox .overflow-control-indicator::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+    width: 10px;
+    border-right: 7px solid #fff;
+    border-radius: 3px;
+    -webkit-transform: rotateZ(45deg) scale(1);
+    -ms-transform: rotate(45deg) scale(1);
+    transform: rotateZ(45deg) scale(1);
+    top: -4px;
+    left: 5px;
+    opacity: 0;
+}
+
+.custom-control a {
+    text-decoration: underline #fbd652;
+    color: #333;
+}
+/* checkbox */

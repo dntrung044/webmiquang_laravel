@@ -1,14 +1,12 @@
 @section('head')
-    <!--Font-Awesome cdn -->
-    <link rel="stylesheet"
-        href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
-    <!-- Tailwind -->
-    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
+    <link href="{{ asset('teamplate/css/auth.css') }}" rel="stylesheet">   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 @endsection
 @extends('user.layout.main')
 @section('content')
     <main>
-        <div class="hero_single inner_pages background-image" data-background="url(teamplate/img/tintuc.jpg)">
+        <div class="hero_single inner_pages background-image d-none d-md-block"
+            data-background="url(teamplate/img/tintuc.jpg)">
             <div class="opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.6)">
                 <div class="container">
                     <div class="row justify-content-center">
@@ -37,138 +35,164 @@
             <div class="frame white"></div>
         </div>
 
-        <section class="bg-blueGray-500 pattern_2">
-            <div class="w-full lg:w-6/12 px-4 mx-auto pt-6">
-                <div
-                    class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-yellow-300 border-0">
-                    <div class="rounded-t mb-0 px-6 py-6">
-                        <div class="text-center mb-3">
-                            <h6 class="text-blueGray-500 text-lg font-bold">
-                                Đăng ký với
-                            </h6>
+        <div class="container-fluid inner col-md-6 mb-5">
+            <form id="registerForm" class="pt-3 mt-md-0 pb-4" action="#" method="POST"
+                onsubmit="return validateForm(event)">
+                @csrf
+                <div class="text-center mb-3">
+                    <h3 class="title">Đăng ký tài khoản</h3>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="ml-3">Tên</label>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Nhập Họ và Tên">
+                </div>
+                <div class="form-group">
+                    <label for="email" class="ml-3">Email</label>
+                    <input type="email" class="form-control" name="email" id="email"
+                        placeholder="Nhập Địa chỉ Email">
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="ml-3">Số điện thoại</label>
+                    <input type="text" class="form-control" name="phone" id="phone"
+                        placeholder="Nhập Số điện thoại liên hệ">
+                </div>
+                <div class="form-group">
+                    <label for="password" class="ml-3">Mật khẩu</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" name="password" id="password"
+                            placeholder="Nhập Mật khẩu tối thiểu 6 kí tự">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" onclick="togglePassword('password')">
+                                <span class="far fa-eye-slash"></span>
+                            </button>
                         </div>
-                        <div class="btn-wrapper text-center">
-                            <a href="{{ route('login.google') }}"
-                                class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                                type="button">
-                                <img alt="..." class="w-5 mr-1" src="/teamplate/img/Google__G__Logo.svg">
-                                Google
-                            </a>
-                            <a href="{{ route('login.facebook') }}"
-                                class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150">
-                                <img alt="..." class="w-5 mr-1" src="/teamplate/img/icons8-facebook.svg">
-                                Facebok
-                            </a>
-                        </div>
-                        <hr class="mt-6 border-b-1 border-blueGray-300">
-                    </div>
-
-                    <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-                        <div class="text-white-400 text-center mb-3 font-bold">
-                            <p class="text-lg">Hoặc đăng ký bằng thông tin đăng nhập</p>
-                        </div>
-
-                        <form action="#" method="POST">
-                            @csrf
-                            <div class="relative w-full mb-3">
-                                <label class="block uppercase text-blueGray-600 text-base font-bold mb-2"
-                                    htmlfor="grid-password">
-                                    Tên
-                                </label>
-                                <input type="text" name="name" required="required" value="{{ old('name') }}"
-                                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                    placeholder="Họ và Tên của bạn.">
-                            </div>
-
-                            <div class="relative w-full mb-3">
-                                <label class="block uppercase text-blueGray-600 text-base font-bold mb-2"
-                                    htmlfor="grid-password">
-                                    Email
-                                </label>
-                                <input type="email" name="email" required="required" value="{{ old('email') }}"
-                                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                    placeholder="Địa chỉ Email">
-                            </div>
-                            <div class="relative w-full mb-3">
-                                <label class="block uppercase text-blueGray-600 text-base font-bold mb-2"
-                                    htmlfor="grid-password">
-                                    Số điện thoại
-                                </label>
-                                <input type="number" name="phone" required="required" value="{{ old('phone') }}"
-                                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                    placeholder="Số điện thoại liên hệ.">
-                            </div>
-
-                            <div class="relative w-full mb-3">
-                                <label class="block uppercase text-blueGray-600 text-base font-bold mb-2"
-                                    htmlfor="grid-password">
-                                    Mật khẩu
-                                </label>
-                                <input type="password" name="password" required="required" id="password"
-                                    value="{{ old('password') }}"
-                                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                    placeholder="Mật khẩu tối thiểu 6 kí tự.">
-                            </div>
-                            <div class="relative w-full mb-3">
-                                <label class="block uppercase text-blueGray-600 text-base font-bold mb-2"
-                                    htmlfor="grid-password">
-                                    Nhập lại Mật khẩu
-                                </label>
-                                <input type="password" name="password_confirm" required="required" id="confirm_password"
-                                    value="{{ old('confirm_password') }}" oninput="check(this)"
-                                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                    placeholder="Mật khẩu vừa nhập.">
-                            </div>
-                            <div>
-                                <label class="inline-flex items-center cursor-pointer">
-                                    <input id="customCheckLogin" type="checkbox" required="required"
-                                        class="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150">
-                                    <span class="ml-2 text-sm font-semibold text-blueGray-600">
-                                        Đồng ý với
-                                        <a href="javascript:void(0)" class="text-yellow-800">
-                                            Chính sách bảo mật
-                                        </a>
-                                    </span>
-                                </label>
-                            </div>
-
-                            <div class="text-center mt-6">
-                                <button
-                                    class="bg-yellow-500 text-white active:bg-yellow-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                                    type="submit">
-                                    Tạo tài khoản
-                                </button>
-                            </div>
-                        </form>
-                        @include('admin.alert')
-                        <p class="flex flex-col items-center justify-center mt-10 text-center">
-                            <span class="text-blueGray-800 font-bold">Bạn đã có tài khoản?</span> <br>
-                            <a href="/dang-ky"
-                                class=" px-3 py-2 text-lg font-semibold text-yellow-500 transition-colors duration-300 bg-white rounded-md shadow hover:bg-white-600 focus:outline-none focus:ring-white-200 focus:ring-4">
-                                Quay lại đăng nhập!
-                            </a>
-                        </p>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="confirmPassword" class="ml-3">Nhập lại Mật khẩu</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" name="password_confirm" id="confirmPassword"
+                            placeholder="Nhập Mật khẩu vừa nhập">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" onclick="togglePassword('confirmPassword')">
+                                <span class="far fa-eye-slash"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-inline ml-3">
+                    <label class="custom-control overflow-checkbox">
+                        <input type="checkbox" class="overflow-control-input" id="customCheckLogin">
+                        <span class="overflow-control-indicator"></span>
+                        <span class="ml-1">Đồng ý với
+                            <a href="#"> điều khoản</a>
+                        </span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary bt_auth btn-block mt-4">Tạo tài khoản</button>
+            </form>
+
+            <div class="pt-3 bordert">
+                <div class="text-center">
+                    <a href="{{ route('login.google') }}" class="px-2">
+                        <img class="icon_social" src="teamplate/img/Google__G__Logo.svg" style="width: 32px; height: 32px;"
+                            alt="">
+                    </a>
+                    <a href="{{ route('login.facebook') }}" class="px-2">
+                        <img class="icon_social" src="teamplate/img/icons8-facebook.svg" alt="">
+                    </a>
+                </div>
             </div>
-        </section>
+        </div>
     </main>
 @endsection
 
 @section('script')
-    <script type="text/javascript">
-        var password = document.getElementById("password"),
-            confirm_password = document.getElementById("confirm_password");
+    <script>
+        function validateForm(event) {
+            event.preventDefault();
 
-        function validatePassword() {
-            if (password.value != confirm_password.value) {
-                confirm_password.setCustomValidity("Mật khẩu không khớp");
+            let valid = true;
+
+            let name = document.getElementById("name");
+            let email = document.getElementById("email");
+            let phone = document.getElementById("phone");
+            let password = document.getElementById("password");
+            let confirmPassword = document.getElementById("confirmPassword");
+            let checkbox = document.getElementById("customCheckLogin");
+
+            resetValidation(name);
+            resetValidation(email);
+            resetValidation(phone);
+            resetValidation(password);
+            resetValidation(confirmPassword);
+
+            if (name.value.trim() === "") {
+                showError(name);
+                valid = false;
+            }
+
+            if (email.value.trim() === "" || !validateEmail(email.value)) {
+                showError(email);
+                valid = false;
+            }
+
+            if (phone.value.trim() === "") {
+                showError(phone);
+                valid = false;
+            }
+
+            if (password.value.length < 6) {
+                showError(password);
+                valid = false;
+            }
+
+            if (confirmPassword.value !== password.value) {
+                showError(confirmPassword);
+                valid = false;
+            }
+
+            if (!checkbox.checked) {
+                checkbox.nextElementSibling.style.border = "2px solid #dc3545";
+                valid = false;
             } else {
-                confirm_password.setCustomValidity('');
+                checkbox.nextElementSibling.style.border = "2px solid #fbd652";
+            }
+
+            if (valid) {
+                document.getElementById("registerForm").submit();
             }
         }
 
-        password.onchange = validatePassword;
-        confirm_password.onkeyup = validatePassword;
+        function showError(input) {
+            input.classList.add("is-invalid");
+        }
+
+        function resetValidation(input) {
+            input.classList.remove("is-invalid");
+        }
+
+        function validateEmail(email) {
+            let re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return re.test(email);
+        }
+
+        // Ẩn / Hiện mật khẩu với icon
+        function togglePassword(fieldId) {
+        let input = document.getElementById(fieldId);
+        let button = input.nextElementSibling.querySelector("span");
+
+        if (input.type === "password") {
+            input.type = "text";
+            button.classList.remove("fa-eye-slash");
+            button.classList.add("fa-eye");
+        } else {
+            input.type = "password";
+            button.classList.remove("fa-eye");
+            button.classList.add("fa-eye-slash");
+        }
+    }
     </script>
 @endsection
